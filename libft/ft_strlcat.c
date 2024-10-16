@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 16:03:23 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/16 17:15:53 by pamallet         ###   ########.fr       */
+/*   Created: 2024/10/16 17:48:08 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/16 18:18:36 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,34 @@
 #include <bsd/string.h>
 #include "libft.h"
 
-size_t	ft_strlcpy(char *s1, const char *s2, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	i;
-	size_t	s1_len;
+	size_t	dst_len;
 
 	i = 0;
-	s1_len = ft_strlen(s1);
-	while (s2[i] && i < (size - 1))
+	dst_len = ft_strlen(dst);
+	if (size > dst_len)
 	{
-		s1[s1_len + i] = s2[i];
-		i++;
+		while (src[i] && i < (size - dst_len - 1))
+		{
+			dst[dst_len + i] = src[i];
+			i++;
+		}
+		dst[dst_len + i] = '\0';
+		return (dst_len + ft_strlen(src));
 	}
-	s1[s1_len + i] = '\0';
-	return (ft_strlen(s2));
+	return (size + ft_strlen(src));
 }
 /*
 int	main(void)
 {
-	char	s1[50] = "test";
-	const char	s2[] = "de test";
+	char	dest[50] = "test"; //4
+	char	src[] = " de test"; //8
 
-	printf("%zu\n", ft_strlcpy(s1, s2, 5));
-	//printf("%ld\n", strlcpy(s1, s2, 5));
-	printf("%s\n", s1);
+	printf("%zu\n", ft_strlcat(dest, src, 0));
+	//printf("%zu\n", strlcat(dest, src, 0));
+	printf("%s\n", dest);
 	return (0);
 }
 */

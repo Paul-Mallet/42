@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 14:19:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/16 17:47:38 by pamallet         ###   ########.fr       */
+/*   Created: 2024/10/16 18:57:01 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/16 19:21:44 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <strings.h>
+#include <string.h>
+#include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+char	*ft_strrchr(const char *s, int c)
 {
-	size_t	i;
-	char	*str;
+	int			i;
+	char		*str;
 
-	str = (void *)s;
-	i = 0;
-	while (i < n)
-		str[i++] = '\0';
-	return ;
+	str = "\0";
+	if (c == '\0')
+		return (str);
+	str = (char *)s;
+	i = ft_strlen(str) - 1;
+	while (i >= 0)
+	{
+		if (str[i] == c)
+			return (&str[i]);
+		i--;
+	}
+	return (NULL);
 }
 /*
 int	main(void)
 {
-	char buff[5] = "test";
-
-	ft_bzero(buff, 2); //cast void* to int* at the begin
-	//bzero(buff, 2);
-	printf("%s\n", buff);
+	printf("%s\n", ft_strrchr("test", 'a'));
+	printf("%s\n", strrchr("test", 'a'));
 	return (0);
 }
 */
