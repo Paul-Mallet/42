@@ -6,26 +6,27 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:19:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/15 14:48:51 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/16 13:05:28 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(const char *s)
 {
-	int		i;
+	size_t		i;
 
 	i = 0;
-	while (str[i])
+	while (s[i])
 		i++;
 	return (i);
 }
 /*
 int	main(void)
 {
-	printf("%d\n", ft_strlen("test"));
+	printf("%zu\n", ft_strlen("test"));
 	printf("%lu\n", strlen("test"));
 	return (0);
-}*/
+}
+*/

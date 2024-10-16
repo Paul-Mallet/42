@@ -6,14 +6,14 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 11:59:14 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/16 12:12:16 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/16 13:02:45 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
 
-int	ft_strncmp(char *s1, char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 
