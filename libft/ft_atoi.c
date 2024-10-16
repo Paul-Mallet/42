@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 14:19:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/15 14:28:11 by pamallet         ###   ########.fr       */
+/*   Created: 2024/10/16 12:12:36 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/16 12:30:49 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <ctype.h>
+#include <stdlib.h>
 
-int	ft_isalnum(int c)
+int	ft_atoi(int *nptr)
 {
-	if ((c >= 65 && c <= 90)
-		|| (c >= 97 && c <= 122)
-		|| (c >= 48 && c <= 57))
-		return (8);
-	return (0);
+	int	res;
+	int	sign;
+
+	res = 0;
+	sign = 1;
+	while (*nptr == ' ' || (*nptr >= 9 && *nptr <= 13))
+		nptr++;
+	if (*nptr == '-')
+		sign *= -1;
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		res *= 10;
+		res += (*nptr - 48);
+		nptr++;
+	}
+	return (sign * res);
 }
-/*
+
 int	main(void)
 {
-	printf("%d\n", ft_isalnum('A'));
-	printf("%d\n", isalnum('b'));
+	printf("%d\n", ft_atoi("   -1234pld"));
+	printf("%d\n", atoi("   -1234pld"));
 	return (0);
 }
-*/

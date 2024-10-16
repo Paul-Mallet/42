@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:19:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/15 14:28:11 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:30:59 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <ctype.h>
+#include <strings.h>
 
-int	ft_isalnum(int c)
+void	ft_bzero(void *dst, int n)
 {
-	if ((c >= 65 && c <= 90)
-		|| (c >= 97 && c <= 122)
-		|| (c >= 48 && c <= 57))
-		return (8);
-	return (0);
+	int		i;
+	char	*str;
+
+	str = (void *)dst;
+	i = 0;
+	while (i < n)
+		str[i++] = '\0';
+	return ;
 }
 /*
 int	main(void)
 {
-	printf("%d\n", ft_isalnum('A'));
-	printf("%d\n", isalnum('b'));
+	char buff[5] = "test";
+
+	ft_bzero(buff, 2); //cast void* to int* at the begin
+	//bzero(buff, 2);
+	printf("%s\n", buff);
 	return (0);
 }
 */

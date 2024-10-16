@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 14:19:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/15 14:28:11 by pamallet         ###   ########.fr       */
+/*   Created: 2024/10/15 13:44:08 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/15 14:09:52 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <ctype.h>
 
-int	ft_isalnum(int c)
+int	ft_isdigit(int c)
 {
-	if ((c >= 65 && c <= 90)
-		|| (c >= 97 && c <= 122)
-		|| (c >= 48 && c <= 57))
-		return (8);
+	if (c >= 48 && c <= 57)
+		return (1);
 	return (0);
 }
 /*
 int	main(void)
 {
-	printf("%d\n", ft_isalnum('A'));
-	printf("%d\n", isalnum('b'));
+	ft_isdigit(48);
 	return (0);
 }
 */

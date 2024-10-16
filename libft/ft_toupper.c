@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 14:19:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/15 14:28:11 by pamallet         ###   ########.fr       */
+/*   Created: 2024/10/16 11:24:26 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/16 12:07:59 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <ctype.h>
 
-int	ft_isalnum(int c)
+int	ft_toupper(int c)
 {
-	if ((c >= 65 && c <= 90)
-		|| (c >= 97 && c <= 122)
-		|| (c >= 48 && c <= 57))
-		return (8);
-	return (0);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }
 /*
-int	main(void)
+int main(void)
 {
-	printf("%d\n", ft_isalnum('A'));
-	printf("%d\n", isalnum('b'));
-	return (0);
+  printf("%c\n", ft_toupper('a'));
+  return (0);
 }
 */
