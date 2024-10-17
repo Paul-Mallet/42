@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/17 11:44:48 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/17 12:01:09 by pamallet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,8 +17,8 @@
 
 char	*ft_strdup(const char *s)
 {
-	int	i;
-	int	s_len;
+	int		i;
+	int		s_len;
 	char	*str;
 
 	s_len = ft_strlen(s);
@@ -16,7 +26,7 @@ char	*ft_strdup(const char *s)
 	if (str == NULL)
 		return (NULL);
 	i = 0;
-	while (s[i]) //s[i++]?
+	while (s[i])
 	{
 		str[i] = s[i];
 		i++;
@@ -24,7 +34,7 @@ char	*ft_strdup(const char *s)
 	str[i] = '\0';
 	return (str);
 }
-
+/*
 int	main(void)
 {
 	const char	*s = "test";
@@ -33,4 +43,4 @@ int	main(void)
 	printf("%s\n", strdup(s));
 	return (0);
 }
-
+*/
