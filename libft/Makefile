@@ -24,6 +24,8 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	ar -rcs $(NAME) $(OBJECTS)
 
+#bonus: (add bonus functions)
+
 clean:
 	rm -f $(OBJECTS)
 

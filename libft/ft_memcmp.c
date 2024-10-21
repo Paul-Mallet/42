@@ -27,16 +27,17 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	{
 		if (s_1[i] != s_2[i])
 			return (s_1[i] - s_2[i]);
+		i++;
 	}
 	return (0);
 }
 
 int	main(int ac, char **av)
 {
-	if (ac == 2)
+	if (ac == 4)
 	{
-		printf("%d\n", ft_memcmp(av[1], av[2], 3));
-		printf("%d\n", memcmp(av[1], av[2], 3));
+		printf("%d\n", ft_memcmp(av[1], av[2], ft_atoi(av[3])));
+		printf("%d\n", memcmp(av[1], av[2], ft_atoi(av[3])));
 	}
 	return (0);
 }
