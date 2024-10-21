@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 16:11:07 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/18 16:15:20 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/21 17:23:40 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		dst[i] = (unsigned char)sc[i];
 		i++;
 	}
-	while (sc[i])
-		i++;
-	dst[i] = '\0';
 	return (dst);
 }
 /*

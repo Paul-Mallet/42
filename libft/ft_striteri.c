@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 10:39:04 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/21 10:44:03 by pamallet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,8 +24,8 @@ static char	ft_to_upper(unsigned int i, char *s)
 */
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	char	*str;
-	unsigned int i;
+	char			*str;
+	unsigned int	i;
 
 	i = ft_strlen(s);
 	str = (char *)malloc((i + 1) * sizeof(char));

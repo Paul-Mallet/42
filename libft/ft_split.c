@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 10:23:13 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/21 10:27:01 by pamallet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,10 +21,10 @@ static int	ft_is_delim(char const s_c, char c)
 	return (0);
 }
 
-static size_t	count_words(char const *s, char c)
+static unsigned int	count_words(char const *s, char c)
 {
-	size_t	i;
-	size_t	cnt;
+	unsigned int	i;
+	unsigned int	cnt;
 
 	i = 0;
 	cnt = 0;
@@ -31,10 +42,10 @@ static size_t	count_words(char const *s, char c)
 	return (cnt);
 }
 
-char	*ft_strdup_split(char const *s, char c)
+static char	*ft_strdup_split(char const *s, char c)
 {
-	char	*str;
-	size_t	i;
+	char			*str;
+	unsigned int	i;
 
 	i = 0;
 	while (!ft_is_delim(s[i], c) && s[i])
@@ -54,10 +65,10 @@ char	*ft_strdup_split(char const *s, char c)
 
 char	**ft_split(char const *s, char c)
 {
-	char	**arr;
-	size_t	words;
-	size_t	i;
-	size_t	j;
+	char			**arr;
+	unsigned int	words;
+	unsigned int	i;
+	unsigned int	j;
 
 	words = count_words(s, c);
 	arr = (char **)malloc((words + 1) * sizeof(char *));
@@ -85,7 +96,7 @@ int	main(int ac, char **av)
 	char	**arr;
 	int	i;
 
-	if (ac == 3 && ft_strlen(av[2]) == 1)
+	if (ac == 3)
 	{
 		arr = ft_split(av[1], av[2][0]);
 		i = 0;

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 10:45:11 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/21 10:45:35 by pamallet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -5,10 +16,10 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char		*sub_s;
+	char			*sub_s;
 	unsigned int	i;
 
-	sub_s = (char *)malloc(len * sizeof(char)); //+1?, size_t = mem
+	sub_s = (char *)malloc(len * sizeof(char));
 	if (sub_s == NULL)
 		return (NULL);
 	i = 0;

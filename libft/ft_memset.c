@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:02:32 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/17 15:47:56 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:24:50 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@
 void	*ft_memset(void *s, int c, size_t n)
 {
 	size_t			i;
-	unsigned char	*ptr;
+	unsigned char	*str;
+	unsigned char	ch;
 
 	i = 0;
-	ptr = s;
+	str = (unsigned char *)s;
+	ch = (unsigned char)c;
 	while (i < n)
-		ptr[i++] = c;
-	return (ptr);
+		str[i++] = ch;
+	return (str);
 }
 /*
 void static	ft_printArr(int *arr, int n)
@@ -46,8 +48,8 @@ int	main(void)
 
 	//memset(s + 4, '.', n * sizeof(char));
 	//ft_memset(s + 4, '.', n * sizeof(char));
-	ft_memset(arr, 1, n * sizeof(int)); //works with char too
-	//ft_memset(arr, 0, n * sizeof(int));
+	//ft_memset(arr, 1, n * sizeof(int)); //works with char too
+	memset(arr, 1, n * sizeof(int));
 
 	//printf("after: %s\n", s);
 	ft_printArr(arr, n);

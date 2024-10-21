@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 10:38:42 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/21 10:38:51 by pamallet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
@@ -11,7 +22,7 @@ void	ft_putstr_fd(char *s, int fd)
 	while (s[i])
 		write(fd, &s[i++], 1);
 }
-
+/*
 int	main(int ac, char **av)
 {
 	if (ac == 3)
@@ -20,3 +31,4 @@ int	main(int ac, char **av)
 		printf("Must have 2 valid arguments!");
 	return (0);
 }
+*/

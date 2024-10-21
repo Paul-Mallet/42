@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 10:33:53 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/21 15:10:48 by pamallet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,7 +50,7 @@ static char	*ft_handle_min_int(char *s, int n, unsigned int n_len)
 
 char	*ft_itoa(int n)
 {
-	char		*s;
+	char			*s;
 	unsigned int	n_len;
 	unsigned int	i;
 
