@@ -16,17 +16,13 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char	*str;
-	unsigned char	ch;
-	unsigned char	i;
+	size_t		i;
 
-	str = (unsigned char *)s;
-	ch = (unsigned char)c;
 	i = 0;
-	while (str[i] && i < n)
+	while (((unsigned char *)s)[i] && i < n)
 	{
-		if (str[i] == ch)
-			return (&str[i]);
+		if (((unsigned char *)s)[i] == (unsigned char)c)
+			return (&((unsigned char *)s)[i]);
 		i++;
 	}
 	return (NULL);
@@ -36,10 +32,10 @@ int	main(int ac, char **av)
 {
 	unsigned char	*res;
 
-	if (ac == 2)
+	if (ac == 3)
 	{
-		res = (unsigned char *)ft_memchr(av[1], 'e', 2 * sizeof(char));
-		//res = (unsigned char *)memchr(av[1], 'e', 2 * sizeof(char));
+		res = (unsigned char *)ft_memchr(av[1], av[2][0], 2 * sizeof(char));
+		//res = (unsigned char *)memchr(av[1], av[2][0], 2 * sizeof(char));
 		printf("res: %s\nres - str: %ld\n", res, res - (unsigned char *)av[1]);
 	}
 	return (0);

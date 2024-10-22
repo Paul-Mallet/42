@@ -16,17 +16,17 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	if (!c)
-		return (NULL);
 	while (*s)
 	{
-		if (*s == c)
+		if (*s == (char)c)
 			return ((char *)s);
 		s++;
 	}
+	if (*s == (char)c)
+		return ((char *)s);
 	return (NULL);
 }
-
+/*
 int	main(int ac, char **av)
 {
 	if (ac == 3)
@@ -38,4 +38,4 @@ int	main(int ac, char **av)
 		printf("Need valid arguments!");
 	return (0);
 }
-
+*/

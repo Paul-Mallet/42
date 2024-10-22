@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 18:57:01 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/16 19:21:44 by pamallet         ###   ########.fr       */
+/*   Created: 2024/10/16 18:21:12 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/16 18:56:55 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,28 @@
 #include <string.h>
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	int			i;
-	char		*str;
-
-	str = (char *)s;
-	i = ft_strlen(str);
-	if (str[i] == (char)c)
-		return (&str[i]);
-	i--;
-	while (i >= 0)
+	if (c == '\0')
+		return (NULL);
+	while (*s)
 	{
-		if (str[i] == (char)c)
-			return (&str[i]);
-		i--;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
 	return (NULL);
 }
-/*
-int	main(void)
+
+int	main(int ac, char **av)
 {
-	printf("%s\n", ft_strrchr("test", 'a'));
-	printf("%s\n", strrchr("test", 'a'));
+	if (ac == 3)
+	{
+		printf("%s\n", ft_strchr(av[1], av[2][0]));
+		//printf("%s\n", strchr(av[1], (int)av[2][0]));
+	}
+	else
+		printf("Need valid arguments!");
 	return (0);
 }
-*/
+
