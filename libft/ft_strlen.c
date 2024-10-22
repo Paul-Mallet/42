@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "libft.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -25,7 +26,7 @@ size_t	ft_strlen(const char *s)
 /*
 int	main(void)
 {
-	printf("%zu\n", ft_strlen("test"));
+	printf("%lu\n", ft_strlen("test"));
 	printf("%lu\n", strlen("test"));
 	return (0);
 }

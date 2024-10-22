@@ -31,7 +31,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
-
+/*
 int	main(int ac, char **av)
 {
 	if (ac == 4)
@@ -41,4 +41,4 @@ int	main(int ac, char **av)
 	}
 	return (0);
 }
-
+*/

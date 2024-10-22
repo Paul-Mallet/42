@@ -14,30 +14,37 @@
 #include <bsd/string.h>
 #include "libft.h"
 
-size_t	ft_strlcpy(char *s1, const char *s2, size_t size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t	i;
-	size_t	s1_len;
+	size_t			i;
+	unsigned int	dst_len;
 
 	i = 0;
-	s1_len = ft_strlen(s1);
-	while (s2[i] && i < (size - 1))
+	dst_len = ft_strlen(dst);
+	if (size > 0)
 	{
-		s1[s1_len + i] = s2[i];
-		i++;
+		while (src[i] && i < (size - 1))
+		{
+			dst[dst_len + i] = src[i];
+			i++;
+		}
 	}
-	s1[s1_len + i] = '\0';
-	return (ft_strlen(s2));
+	dst[dst_len + i] = '\0';
+	while (src[i])
+		i++;
+	return (i);
 }
 /*
-int	main(void)
+int	main(int ac, char **av)
 {
-	char	s1[50] = "test";
-	const char	s2[] = "de test";
-
-	printf("%zu\n", ft_strlcpy(s1, s2, 5));
-	//printf("%ld\n", strlcpy(s1, s2, 5));
-	printf("%s\n", s1);
+	if (ac == 4)
+	{
+		printf("%ld\n", ft_strlcpy(av[1], av[2], ft_atoi(av[3])));
+		//printf("%ld\n", strlcpy(av[1], av[2], ft_atoi(av[3])));
+		printf("%s\n", av[1]);
+	}
+	else
+		printf("Need valid arguments!");
 	return (0);
 }
 */

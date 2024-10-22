@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/15 14:12:36 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/16 17:43:38 by pamallet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +24,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	ft_bzero(arr, nmemb);
 	return (arr);
 }
-
+/*
 int	main(int ac, char **av)
 {
 	char	*cpy;
@@ -37,3 +48,4 @@ int	main(int ac, char **av)
 		printf("Need valid arguments!");
 	return (0);
 }
+*/

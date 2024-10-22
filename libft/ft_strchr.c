@@ -16,27 +16,26 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int		i;
-	char	*str;
-
-	str = "\0";
-	if (c == '\0')
-		return (str);
-	i = 0;
-	str = (char *)s;
-	while (s[i])
+	if (!c)
+		return (NULL);
+	while (*s)
 	{
-		if (s[i] == c)
-			return (&str[i]);
-		i++;
+		if (*s == c)
+			return ((char *)s);
+		s++;
 	}
 	return (NULL);
 }
-/*
-int	main(void)
+
+int	main(int ac, char **av)
 {
-	printf("%s\n", ft_strchr("test", 's'));
-	printf("%s\n", strchr("test", 's'));
+	if (ac == 3)
+	{
+		printf("%s\n", ft_strchr(av[1], av[2][0]));
+		//printf("%s\n", strchr(av[1], (int)av[2][0]));
+	}
+	else
+		printf("Need valid arguments!");
 	return (0);
 }
-*/
+

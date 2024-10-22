@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include "libft.h"
 
 int	ft_isprint(int c)
 {
@@ -19,10 +20,11 @@ int	ft_isprint(int c)
 		return (16384);
 	return (0);
 }
-
+/*
 int	main(void)
 {
 	printf("%d\n", ft_isprint(' '));
 	printf("%d\n", isprint(' '));
 	return (0);
 }
+*/
