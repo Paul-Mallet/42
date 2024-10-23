@@ -21,7 +21,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	arr = (unsigned char *)malloc(nmemb * size);
 	if (arr == NULL)
 		return (NULL);
-	ft_bzero(arr, nmemb);
+	ft_bzero(arr, nmemb * size);
 	return (arr);
 }
 /*

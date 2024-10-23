@@ -30,31 +30,33 @@ static int	ft_is_set(char const *set, char const c)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*s1_cp;
+	char	*trim;
 	size_t	low;
 	size_t	high;
 	size_t	i;
 
 	low = 0;
-	while (ft_is_set(set, s1[low]))
+	while (ft_is_set(set, s1[low]) && s1[low])
 		low++;
+	if (s1[low] == '\0')
+		return ((char *)s1);
 	high = ft_strlen(s1) - 1;
 	while (ft_is_set(set, s1[high]))
 		high--;
-	s1_cp = (char *)malloc((((high + 1) - low) + 1) * sizeof(char));
-	if (s1_cp == NULL)
+	trim = (char *)malloc((((high + 1) - low) + 1) * sizeof(char));
+	if (trim == NULL)
 		return (NULL);
 	i = 0;
 	while (low <= high)
 	{
-		s1_cp[i] = (char)s1[low];
+		trim[i] = (char)s1[low];
 		low++;
 		i++;
 	}
-	s1_cp[i] = '\0';
-	return (s1_cp);
+	trim[i] = '\0';
+	return (trim);
 }
-/*
+
 int	main(int ac, char **av)
 {
 	if (ac == 3)
@@ -63,4 +65,3 @@ int	main(int ac, char **av)
 		printf("Must have 2 arguments!");
 	return (0);
 }
-*/
