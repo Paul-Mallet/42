@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 16:03:23 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/16 17:15:53 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:55:50 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,19 @@
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t			i;
-	unsigned int	dst_len;
 
 	i = 0;
-	dst_len = ft_strlen(dst);
 	if (size > 0)
 	{
 		while (src[i] && i < (size - 1))
 		{
-			dst[dst_len + i] = src[i];
+			dst[i] = src[i];
 			i++;
 		}
 	}
-	dst[dst_len + i] = '\0';
-	while (src[i])
-		i++;
-	return (i);
+	if(i < size)
+		dst[i] = '\0';
+	return (ft_strlen(src));
 }
 /*
 int	main(int ac, char **av)

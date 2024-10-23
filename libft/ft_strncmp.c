@@ -6,12 +6,13 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 11:59:14 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/16 13:02:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/23 10:13:16 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
+#include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -21,16 +22,21 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	while ((s1[i] || s2[i]) && i < n)
 	{
 		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
 	return (0);
 }
 /*
-int	main(void)
+int	main(int ac, char **av)
 {
-	printf("%d\n", ft_strncmp("test", "tesz", 3));
-	printf("%d\n", strncmp("test", "tesz", 3));
+	if (ac == 4)
+	{
+		printf("%d\n", ft_strncmp(av[1], av[2], ft_atoi(av[3])));
+		printf("%d\n", strncmp(av[1], av[2], ft_atoi(av[3])));
+	}
+	else
+		printf("Need valid arguments!\n");
 	return (0);
 }
 */

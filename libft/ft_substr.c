@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:45:11 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/21 10:45:35 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:16:19 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,27 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*sub_s;
-	unsigned int	i;
+	char	*sub_s;
+	size_t	i;
 
-	sub_s = (char *)malloc(len * sizeof(char));
+	if (start >= ft_strlen(s))
+	{
+		sub_s = (char *)malloc(1 * sizeof(char));
+		if (sub_s == NULL)
+			return (NULL);
+		sub_s[0] = '\0';
+		return (sub_s);
+	}
+	i = 0;
+	while (s[start + i] && i < len)
+		i++;
+	sub_s = (char *)malloc((i + 1) * sizeof(char));
 	if (sub_s == NULL)
 		return (NULL);
 	i = 0;
-	while (i < len && s[i])
+	while (s[start + i] && i < len)
 	{
-		sub_s[i] = (char)s[start];
-		start++;
+		sub_s[i] = (char)s[start + i];
 		i++;
 	}
 	sub_s[i] = '\0';
@@ -35,7 +45,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 /*
 int	main(int ac, char **av)
 {
-	if (ac == 4 && ft_atoi(av[2]) >= 0 && ft_atoi(av[3]) >= 0)
+	if (ac == 4)
 		printf("%s\n", ft_substr(av[1], ft_atoi(av[2]), ft_atoi(av[3])));
 	else
 		printf("Must have 3 valid arguments!");
