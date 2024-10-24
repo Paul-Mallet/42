@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:28:59 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/24 12:43:52 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:16:44 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define LIBFT_H
 
 # include <string.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
 
 typedef struct s_list
 {
