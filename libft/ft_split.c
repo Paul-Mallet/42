@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:23:13 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/21 10:27:01 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/24 12:42:25 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static unsigned int	count_words(char const *s, char c)
 	{
 		if (!ft_is_delim(s[i], c))
 		{
-			while (!ft_is_delim(s[i], c))
+			while (!ft_is_delim(s[i], c) && s[i])
 				i++;
 			cnt++;
 		}
@@ -91,19 +91,19 @@ char	**ft_split(char const *s, char c)
 	return (arr);
 }
 /*
-int	main(int ac, char **av)
+int	main(void)
 {
 	char	**arr;
 	int	i;
 
-	if (ac == 3)
-	{
-		arr = ft_split(av[1], av[2][0]);
+	//if (ac == 3)
+	//{
+		arr = ft_split("xxxxxxxxhello!", 'x');
 		i = 0;
 		while (arr[i] != NULL)
 			printf("%s\n", arr[i++]);
-	}
-	else
+	//}
+	//else
 		printf("Must have 2 valid arguments!");
 	return (0);
 }

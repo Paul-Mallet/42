@@ -5,23 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 10:39:51 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/21 10:40:32 by pamallet         ###   ########.fr       */
+/*   Created: 2024/10/24 12:00:59 by pamallet          #+#    #+#             */
+/*   Updated: 2024/10/24 12:22:42 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
-static int	ft_is_set(char const *set, char const c)
+static int	ft_is_set(char const c, char const *set)
 {
 	int	i;
 
 	i = 0;
 	while (set[i])
 	{
-		if (c == set[i])
+		if (set[i] == c)
 			return (1);
 		i++;
 	}
@@ -31,37 +30,25 @@ static int	ft_is_set(char const *set, char const c)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*trim;
-	size_t	low;
-	size_t	high;
-	size_t	i;
+	int		low;
+	int		high;
 
 	low = 0;
-	while (ft_is_set(set, s1[low]) && s1[low])
+	while (ft_is_set(s1[low], set))
 		low++;
-	if (s1[low] == '\0')
-		return ((char *)s1);
 	high = ft_strlen(s1) - 1;
-	while (ft_is_set(set, s1[high]))
+	while (ft_is_set(s1[high], set))
 		high--;
-	trim = (char *)malloc((((high + 1) - low) + 1) * sizeof(char));
-	if (trim == NULL)
-		return (NULL);
-	i = 0;
-	while (low <= high)
-	{
-		trim[i] = (char)s1[low];
-		low++;
-		i++;
-	}
-	trim[i] = '\0';
+	trim = ft_substr(s1, low, (high - low) + 1);
 	return (trim);
 }
-
+/*
 int	main(int ac, char **av)
 {
 	if (ac == 3)
 		printf("%s\n", ft_strtrim(av[1], av[2]));
 	else
-		printf("Must have 2 arguments!");
+		printf("Need valid arguments!");
 	return (0);
 }
+*/
