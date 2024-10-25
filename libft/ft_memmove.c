@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:30:37 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/23 18:33:04 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/25 21:33:41 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	unsigned char	*dst;
 	unsigned char	*sc;
 
-	if (!dest && !src)
+	if (dest == NULL && src == NULL)
 		return (dest);
 	dst = (unsigned char *)dest;
 	sc = (unsigned char *)src;
