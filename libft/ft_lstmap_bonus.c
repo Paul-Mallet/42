@@ -11,17 +11,19 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
-void	*ft_to_upper(void *content) //strdup + toupper
+/*
+static void	*ft_to_upper(void *content)
 {
 	unsigned char	*str;
-	unsigned char	*c;
+	const char	*c;
 	int				i;
+	size_t		c_len;
 
-	str = (unsigned char *)malloc((ft_strlen((const char *)content) + 1) * sizeof(unsigned char));
+	c = (const char *)content;
+	c_len = ft_strlen(c);
+	str = (unsigned char *)malloc((c_len + 1) * sizeof(unsigned char));
 	if (str == NULL)
 		return (NULL);
-	c = (unsigned char *)content;
 	i = 0;
 	while (c[i])
 	{
@@ -31,40 +33,38 @@ void	*ft_to_upper(void *content) //strdup + toupper
 	}
 	return (str);
 }
-/*
-static void	ft_lstfree(t_list *lst)
-{
-	//free all nodes
-}
-*/
+
 static void	ft_lstdel(void *content)
 {
 	free(content);
 }
-
+*/
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*nlst;
-	t_list	*temp;
+	t_list	*curr;
 
-	nlst = (t_list *)malloc(sizeof(t_list));
+	/*nlst = (t_list *)malloc(sizeof(t_list));
 	if (nlst == NULL)
-		return (NULL);
+		return (NULL);*/
+	nlst = NULL;
 	if (lst != NULL && (*f) != NULL && (*del) != NULL)
 	{
-		//if lst have only 1 node(head) head->mid->tail
-		temp = lst;
-		while (temp != NULL)
+		while (lst != NULL)
 		{
-			temp = temp->next;
-			nlst->content = (*f)(lst->content); //if (nlst->content == NULL)
-			nlst->next = lst->next;
-			lst = temp;
+			curr = ft_lstnew((*f)(lst->content));
+			if (curr == NULL)
+			{
+				ft_lstclear(&nlst, del);
+				return (NULL);
+			}
+			ft_lstadd_back(&nlst, curr);
+			lst = lst->next;
 		}
 	}
 	return (nlst);
 }
-
+/*
 int	main(int ac, char **av)
 {
 	t_list	*head;
@@ -72,24 +72,23 @@ int	main(int ac, char **av)
 	t_list	*tail;
 	t_list	*newhead;
 
-	head = ft_lstnew(av[1]);
-	mid = ft_lstnew(av[2]);
-	tail = ft_lstnew(av[3]);
+	(void)av;
+	head = ft_lstnew(NULL);
+	mid = ft_lstnew(NULL);
+	tail = ft_lstnew(NULL);
 	ft_lstadd_back(&head, mid);
 	ft_lstadd_back(&head, tail);
 	newhead = ft_lstmap(head, ft_to_upper, ft_lstdel);
 	if (ac == 4)
 	{
-		while (newhead != NULL) //newhead
+		while (newhead != NULL)
 		{
 			printf("%s\n", (unsigned char *)newhead->content);
-			//printf("%s\n", (unsigned char *)head->content);
 			newhead = newhead->next;
-			//head = head->next;
 		}
-		//...
 	}
 	else
 		printf("Invalid arguments!");
 	return (0);
 }
+*/
