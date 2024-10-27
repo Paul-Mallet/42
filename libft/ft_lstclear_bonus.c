@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:44:08 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/24 14:44:32 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/27 14:26:42 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+/*
+static void	ft_lstdel(void *content)
+{
+	free(content);
+}
+*/
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*curr;
 	t_list	*temp;
 
-	curr = *lst;
-	while (curr != NULL)
+	if (lst != NULL && del != NULL)
 	{
-		temp = curr->next;
-		ft_lstdelone(curr, del);
-		curr = temp;
+		temp = *lst;
+		while (temp != NULL)
+		{
+			temp = temp->next;
+			ft_lstdelone(*lst, (*del));
+			*lst = temp;
+		}
 	}
-	curr = NULL;
 }
 /*
 int	main(int ac, char **av)
@@ -38,9 +44,17 @@ int	main(int ac, char **av)
 	tail = ft_lstnew(av[3]);
 	ft_lstadd_back(&head, mid);
 	ft_lstadd_back(&head, tail); //head->mid->tail
-	ft_lstclear(&head, ft_lstdel); //head->null
+	ft_lstclear(&tail, ft_lstdel); //head->null
 	if (ac == 4)
-		printf("%s\n", (char *)ft_lstlast(head)->content);
+	{
+		//if (tail == NULL)
+		//	printf("Head deleted successfully!\n");
+		while (head != NULL)
+		{
+			printf("%s\n", (char *)head->content);
+			head = head->next;
+		}
+	}
 	else
 		printf("Invalid arguments!");
 	return (0);
