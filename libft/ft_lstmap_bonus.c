@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:44:55 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/27 19:00:44 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/28 12:54:09 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	*ft_to_upper(void *content)
 
 	c = (const char *)content;
 	c_len = ft_strlen(c);
-	str = (unsigned char *)malloc((c_len + 1) * sizeof(unsigned char));
+	str = (unsigned char *)malloc((c_len + 1) * sizeof(unsigned char)); //free?
 	if (str == NULL)
 		return (NULL);
 	i = 0;
@@ -44,10 +44,12 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*nlst;
 	t_list	*curr;
 
-	/*nlst = (t_list *)malloc(sizeof(t_list));
+	nlst = (t_list *)malloc(sizeof(t_list));
 	if (nlst == NULL)
-		return (NULL);*/
-	nlst = NULL;
+	{
+		ft_lstdelone(nlst, del); //
+		return (NULL);
+	}
 	if (lst != NULL && (*f) != NULL && (*del) != NULL)
 	{
 		while (lst != NULL)
@@ -55,6 +57,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 			curr = ft_lstnew((*f)(lst->content));
 			if (curr == NULL)
 			{
+				//if (nlst == NULL)
+				//	ft_lstdelone(curr, del);
 				ft_lstclear(&nlst, del);
 				return (NULL);
 			}
@@ -73,9 +77,9 @@ int	main(int ac, char **av)
 	t_list	*newhead;
 
 	(void)av;
-	head = ft_lstnew(NULL);
-	mid = ft_lstnew(NULL);
-	tail = ft_lstnew(NULL);
+	head = ft_lstnew(av[1]);
+	mid = ft_lstnew(av[2]);
+	tail = ft_lstnew(av[3]);
 	ft_lstadd_back(&head, mid);
 	ft_lstadd_back(&head, tail);
 	newhead = ft_lstmap(head, ft_to_upper, ft_lstdel);
@@ -91,4 +95,9 @@ int	main(int ac, char **av)
 		printf("Invalid arguments!");
 	return (0);
 }
+*/
+/*
+nlst = (t_list *)malloc(sizeof(t_list));
+if (nlst == NULL)
+	return (NULL);
 */

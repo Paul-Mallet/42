@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:23:13 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/24 12:42:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:45:40 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,24 @@ static char	*ft_strdup_split(char const *s, char c)
 	return (str);
 }
 
+static void	*ft_arrclear(char **arr)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+	return (NULL);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char			**arr;
-	unsigned int	words;
 	unsigned int	i;
 	unsigned int	j;
 
-	words = count_words(s, c);
-	arr = (char **)malloc((words + 1) * sizeof(char *));
+	arr = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
 	if (arr == NULL)
 		return (NULL);
 	i = 0;
@@ -83,6 +92,8 @@ char	**ft_split(char const *s, char c)
 		if (s[j] == '\0')
 			break ;
 		arr[i] = ft_strdup_split(&s[j], c);
+		if (arr[i] == NULL)
+			return (ft_arrclear(arr));
 		while (!ft_is_delim(s[j], c) && s[j])
 			j++;
 		i++;
