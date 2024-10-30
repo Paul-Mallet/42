@@ -50,11 +50,11 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		while (lst != NULL)
 		{
 			curr = ft_lstnew((*f)(lst->content));
-			if (curr == NULL)
+			/*if (curr == NULL)
 			{
 				ft_lstclear(&nlst, del);
 				return (NULL);
-			}
+			}*/
 			ft_lstadd_back(&nlst, curr);
 			lst = lst->next;
 		}
