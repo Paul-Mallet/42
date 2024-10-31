@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:44:55 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/31 11:07:43 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 18:04:12 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	*ft_to_upper(void *content)
 		str[i] -= 32;
 		i++;
 	}
+	str[i] = '\0';
 	return (str);
 }
 
@@ -50,8 +51,11 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		while (lst != NULL)
 		{
 			curr = ft_lstnew((*f)(lst->content));
-			if (curr == NULL)
+			if (!nlst && !curr)
+				return (NULL);
+			if (!curr)
 			{
+				free(curr->content);
 				ft_lstclear(&nlst, del);
 				return (NULL);
 			}
@@ -68,24 +72,29 @@ int	main(int ac, char **av)
 	t_list	*mid;
 	t_list	*tail;
 	t_list	*newhead;
+	t_list	*n_list;
 
-	(void)av;
-	head = ft_lstnew(av[1]);
-	mid = ft_lstnew(av[2]);
-	tail = ft_lstnew(av[3]);
+	head = ft_lstnew(ft_strdup(av[1])); //1 free
+	mid = ft_lstnew(ft_strdup(av[2]));
+	tail = ft_lstnew(ft_strdup(av[3]));
 	ft_lstadd_back(&head, mid);
 	ft_lstadd_back(&head, tail);
 	newhead = ft_lstmap(head, ft_to_upper, ft_lstdel);
 	if (ac == 4)
 	{
-		while (newhead != NULL)
+		n_list = newhead;
+		while (n_list != NULL)
 		{
-			printf("%s\n", (unsigned char *)newhead->content);
-			newhead = newhead->next;
+			printf("%s\n", (unsigned char *)n_list->content);
+			n_list = n_list->next;
 		}
 	}
 	else
 		printf("Invalid arguments!");
+	printf("%s\n", (char *)head->content);
+	printf("%s\n", (char *)newhead->content);
+	ft_lstclear(&head, ft_lstdel);
+	ft_lstclear(&newhead, ft_lstdel);
 	return (0);
 }
 */

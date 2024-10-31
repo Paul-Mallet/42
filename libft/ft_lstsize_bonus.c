@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:41:58 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/31 11:09:01 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:50:14 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	main(int ac, char **av)
 	t_list	*lst;
 	t_list	*l2;
 
-	lst = ft_lstnew("1");
-	l2 = ft_lstnew("2");
+	lst = ft_lstnew(ft_strdup("1"));
+	l2 = ft_lstnew(ft_strdup("2"));
 
 	ft_lstadd_front(&lst, l2);
 	(void)ac;

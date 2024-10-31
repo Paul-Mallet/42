@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:44:08 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/31 11:03:49 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:52:37 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ int	main(int ac, char **av)
 	t_list	*mid;
 	t_list	*tail;
 
-	head = ft_lstnew(av[1]);
-	mid = ft_lstnew(av[2]);
-	tail = ft_lstnew(av[3]);
+	head = ft_lstnew(ft_strdup(av[1])); //malloc->content
+	mid = ft_lstnew(ft_strdup(av[2]));
+	tail = ft_lstnew(ft_strdup(av[3]));
 	ft_lstadd_back(&head, mid);
 	ft_lstadd_back(&head, tail); //head->mid->tail
-	ft_lstclear(&tail, ft_lstdel); //head->null
+	ft_lstclear(&head, ft_lstdel); //head->mid->null
 	if (ac == 4)
 	{
-		//if (tail == NULL)
+		//if (head == NULL)
 		//	printf("Head deleted successfully!\n");
 		while (head != NULL)
 		{

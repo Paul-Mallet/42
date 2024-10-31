@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:41:41 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/31 11:03:10 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:46:21 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	main(int ac, char **av)
 	t_list	*lst;
 	t_list	*new;
 
-	lst = ft_lstnew("old");
-	new = ft_lstnew("new");
+	lst = ft_lstnew(ft_strdup("old"));
+	new = ft_lstnew(ft_strdup("new"));
 	(void)ac;
 	(void)av;
 	//if (ac == 2)

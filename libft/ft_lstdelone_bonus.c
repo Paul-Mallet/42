@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:43:53 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/31 11:05:03 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:49:41 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	main(int ac, char **av)
 	t_list	*mid;
 	t_list	*tail;
 
-	head = ft_lstnew(av[1]);
-	mid = ft_lstnew(av[2]);
-	tail = ft_lstnew(av[3]);
+	head = ft_lstnew(ft_strdup(av[1]));
+	mid = ft_lstnew(ft_strdup(av[2]));
+	tail = ft_lstnew(ft_strdup(av[3]));
 	ft_lstadd_back(&head, mid);
 	ft_lstadd_back(&head, tail);
 	ft_lstdelone(tail, ft_lstdel);
