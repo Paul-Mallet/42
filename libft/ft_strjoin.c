@@ -6,12 +6,10 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:45:55 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/21 10:45:59 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:25:46 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)

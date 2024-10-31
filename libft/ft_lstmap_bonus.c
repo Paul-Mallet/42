@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:44:55 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/28 12:54:09 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:07:43 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		while (lst != NULL)
 		{
 			curr = ft_lstnew((*f)(lst->content));
-			/*if (curr == NULL)
+			if (curr == NULL)
 			{
 				ft_lstclear(&nlst, del);
 				return (NULL);
-			}*/
+			}
 			ft_lstadd_back(&nlst, curr);
 			lst = lst->next;
 		}

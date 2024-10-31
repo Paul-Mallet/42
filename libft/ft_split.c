@@ -6,12 +6,10 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:23:13 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/28 11:45:40 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:23:04 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
 static int	ft_is_delim(char const s_c, char c)

@@ -6,12 +6,10 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:32:35 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/17 11:43:48 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:31:18 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <bsd/string.h>
 #include "libft.h"
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)

@@ -6,13 +6,10 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:44:48 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/17 12:01:09 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:24:17 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "libft.h"
 
 char	*ft_strdup(const char *s)

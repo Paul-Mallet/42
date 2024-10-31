@@ -6,12 +6,10 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 16:03:23 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/24 09:56:09 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:29:06 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <bsd/string.h>
 #include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)

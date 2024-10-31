@@ -6,12 +6,10 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 13:44:08 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/15 14:09:52 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 10:57:49 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <ctype.h>
 #include "libft.h"
 
 int	ft_isdigit(int c)

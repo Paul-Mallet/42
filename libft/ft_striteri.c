@@ -6,12 +6,10 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:39:04 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/21 10:44:03 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:24:57 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 /*
 static void	ft_to_upper(unsigned int i, char *s)

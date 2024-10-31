@@ -6,11 +6,10 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:00:59 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/24 12:22:42 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:32:46 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
 static int	ft_is_set(char const c, char const *set)

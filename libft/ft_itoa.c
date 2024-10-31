@@ -6,12 +6,10 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:33:53 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/21 15:10:48 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:01:41 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "libft.h"
 
 static int	ft_nbrlen(int n)

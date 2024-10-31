@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:41:58 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/25 12:35:50 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:09:01 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	main(int ac, char **av)
 	ft_lstadd_front(&lst, l2);
 	(void)ac;
 	(void)av;
-	//if (ac == 2)
-	//{
+	if (ac == 2)
+	{
 		printf("%d\n", ft_lstsize(lst));
-	//}
-	//else
-	//	printf("Need valid arguments!");
+	}
+	else
+		printf("Need valid arguments!");
 	return (0);
 }
 */
