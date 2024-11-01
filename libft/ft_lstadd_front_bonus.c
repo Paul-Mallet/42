@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:41:41 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/31 12:46:21 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/01 17:40:05 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (new != NULL)
+	if (lst != NULL && new != NULL)
 	{
 		new->next = *lst;
 		*lst = new;
