@@ -13,22 +13,60 @@
 #include "ftprintf.h"
 #include "libft/libft.h"
 
-/* static void	*ft_type(); */
+static int	ft_is_specifier(const char c);
+{
+	const char	*s = "cspdiuxX%";
 
-/* int	ft_printf(const char *s, ...) */
-/* { */
-/* 	va_list		args; */
-/* 	void		*cnt; */
+	while (*s)
+	{
+		if (*s == c)
+			return (c); //cast to int
+	}
 
-/* 	va_start(args, s); */
+	return (0);
+}
 
-/* 	while (cnt) */
-/* 	{ */
-/* 		cnt = va_arg(args, void *); */
-/* 	} */
+int	ft_printf(const char *s, ...)
+{
+	va_list		ap;		//arg_list
+	void		*arg;	//to cast
+	char		c;
+	int			cnt;
 
-/* 	va_end(args); */
-/* } */
+	va_start(ap, s);
+
+	while (*s)
+	{
+		if (*s == '%' && ft_is_specifier(*s + 1)) //check '%d'
+		{
+			c = ft_is_specifier(*s + 1); //return 'd'(100 in b10) or 0
+			if (c == 'd' || c == 'i')    //ft?
+			{
+				(int)arg = va_arg(ap, int);
+				if (!arg)				 //necessary?
+					return (-1);
+				ft_putnbr_fd((int)arg, 1);
+				//cnt = ft_
+			}
+			if (c == 'c' || c == '%')
+			{
+				(char)arg = va_arg(ap, char);
+				if (!arg)
+					return (-1);
+				ft_putchar_fd((char)arg, 1);
+			}
+			//...
+		}
+		else if (*s != '%' && ft_isascii(*s))
+			ft_putchar((int)*s);
+		else
+			return (-1); //errors
+		s++;
+	}
+
+	va_end(ap);
+	return (cnt); //counter
+}
 
 int	main(int ac, char **av)
 {
@@ -36,6 +74,7 @@ int	main(int ac, char **av)
 	{
 		/* ft_printf("c: %c, s: %s, p: %p, d: %d, i: %i, u: %u, x: %x, X: %X, %: %%\n", av[1], ft_atoi(av[1])); //char *, int */
 		printf("c: %c, s: %s, p: %p, d: %d, i: %i, u: %u, x: %x, X: %X, prct: %%, w: %3d\n", av[1][0], av[1], av[1]+1, ft_atoi(av[1]), ft_atoi(av[1]), ft_atoi(av[1]), 0x28, 0x28, ft_atoi(av[1]));
+		printf("test de %", 42);
 	}
 	else
 	{
