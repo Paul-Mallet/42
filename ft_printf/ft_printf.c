@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 14:18:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/04 15:24:24 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/04 19:36:00 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,45 +21,70 @@ static int	ft_is_specifier(const char c)
 	{
 		if (*s == c)
 			return (c);
+		s++;
 	}
 	return (0);
+}
+
+static int	ft_printarg(va_list ap, int c)
+{
+	if (c == 'd' || c == 'i')
+		return (ft_printb10(ap));
+	/* else if (c == 's' || c == 'p') */
+	/* 	return (ft_printptr(ap)); */
+	/* else if (c == 'c' || c == '%') */
+	/* 	return (ft_printchar(ap)); */
+	/* else if (c == 'x' || c == 'X') */
+	/* 	return (ft_printhex(ap); */
+	/* else if (c == 'u') */
+	/* 	return (ft_printub10(ap)); */
 }
 
 int	ft_printf(const char *s, ...)
 {
 	va_list		ap;
-	int		ch;
+	int		c;
+	int		argi;
 	int		cnt;
+	int		i;
 
 	va_start(ap, s);
 	cnt = 0;
-	while (*s)
+	i = 0;
+	while (s[i])
 	{
-		if (*s == '%' && ft_is_specifier(*s + 1)) //check '%d'
+		if (s[i] == '%' && ft_is_specifier(s[i + 1])) //check '%d'
 		{
-			ch = ft_is_specifier(*s + 1);	//return 'd'(100 in b10) or 0
-			if (ch == 'd' || ch == 'i')
+			c = ft_is_specifier(s[i + 1]);	//return 'd'(100 in b10) or 0
+			if (ft_printarg(ap, c))
+				return (-1);
+			//see if it prints
+			/* if (c == 'd' || c == 'i') */
+			/* { */
+			/* 	argi = va_arg(ap, int); */
+			/* 	if (!argi) */
+			/* 		return (-1); */
+			/* 	ft_putnbr_fd(argi, 1); */
+			/* 	cnt += ft_strlen((const char *)ft_itoa(argi)); */
+			/* } */
+			if (c == 'c' || c == '%')
 			{
-				if (!va_arg(ap, int))
+				argi = va_arg(ap, int);
+				if (!argi)
 					return (-1);
-				ft_putnbr_fd(va_arg(ap, int), 1);
-				cnt += ft_strlen((const char *)ft_itoa(va_arg(ap, int)));
-				printf("cnt: %d\n", cnt);
-			}
-			if (ch == 'c' || ch == '%')
-			{
-				if (!va_arg(ap, int))
-					return (-1);
-				ft_putchar_fd((char)va_arg(ap, int), 1);
+				ft_putchar_fd((char)argi, 1);
 				cnt++;
 			}
-			s++;
+			i += 2;
 		}
-		else if (*s != '%' && ft_isascii(*s))
-			ft_putchar_fd((int)*s, 1);
+		if (s[i] != '%' && ft_isascii(s[i]))
+		{
+			ft_putchar_fd((int)s[i], 1);
+			cnt++;
+		}
 		else
-			return (-1); //errors
-		s++;
+			return (-1);
+		i++;
 	}
 	va_end(ap);
 	return (cnt);
@@ -69,10 +94,9 @@ int	main(int ac, char **av)
 {
 	if (ac == 2)
 	{
-		ft_printf("%c\n", av[1][0]);
-		printf("ft_printf len: %d\n", ft_printf("%c\n", av[1][0]));
+		printf("ft_printf len: %d\n", ft_printf("d: %d\n", 42));
+		printf("printf len: %d\n", printf("d: %d\n", 42));
 		//printf("c: %c, s: %s, p: %p, d: %d, i: %i, u: %u, x: %x, X: %X, prct: %%, w: %3d\n", av[1][0], av[1], av[1]+1, ft_atoi(av[1]), ft_atoi(av[1]), ft_atoi(av[1]), 0x28, 0x28, ft_atoi(av[1]));
-		//printf("test de %", 42);
 	}
 	else
 	{

@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftprintf.h                                         :+:      :+:    :+:   */
+/*   ft_printub10.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/03 14:22:40 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/04 19:29:50 by pamallet         ###   ########.fr       */
+/*   Created: 2024/11/04 19:28:01 by pamallet          #+#    #+#             */
+/*   Updated: 2024/11/04 19:31:11 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FTPRINTF_H
-# define FTPRINTF_H
+#include "ftprintf.h"
+#include "libft/libft.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
+unsigned int	ft_printub10(va_list ap)
+{
+	unsigned int	argui;
 
-int		ft_printf(const char *, ...);
-int		ft_printb10(va_list);
-unsigned int	ft_printub10(va_list);
-
-#endif
+	if (c == 'u')
+	{
+		argui = va_arg(ap, unsigned int);
+		if (!argui)
+			return (0);
+		ft_putunbr_fd(argui, 1);
+		return ((unsigned int)ft_strlen((const char *)ft_itoa(argui)));
+	}
+}
