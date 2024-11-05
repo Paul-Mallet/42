@@ -38,14 +38,16 @@ static int	ft_printarg(va_list ap, int c)
 	/* 	return (ft_printhex(ap); */
 	/* else if (c == 'u') */
 	/* 	return (ft_printub10(ap)); */
+	else
+		return (0);
 }
 
 int	ft_printf(const char *s, ...)
 {
 	va_list		ap;
-	int		c;
-	int		argi;
+	int		arg_len;
 	int		cnt;
+	int		c;
 	int		i;
 
 	va_start(ap, s);
@@ -55,26 +57,19 @@ int	ft_printf(const char *s, ...)
 	{
 		if (s[i] == '%' && ft_is_specifier(s[i + 1])) //check '%d'
 		{
-			c = ft_is_specifier(s[i + 1]);	//return 'd'(100 in b10) or 0
-			if (ft_printarg(ap, c))
+			c = ft_is_specifier(s[i + 1]);
+			arg_len = ft_printarg(ap, c);
+			if (!arg_len)
 				return (-1);
-			//see if it prints
-			/* if (c == 'd' || c == 'i') */
+			cnt += arg_len;
+			/* if (c == 'c' || c == '%') */
 			/* { */
 			/* 	argi = va_arg(ap, int); */
 			/* 	if (!argi) */
 			/* 		return (-1); */
-			/* 	ft_putnbr_fd(argi, 1); */
-			/* 	cnt += ft_strlen((const char *)ft_itoa(argi)); */
+			/* 	ft_putchar_fd((char)argi, 1); */
+			/* 	cnt++; */
 			/* } */
-			if (c == 'c' || c == '%')
-			{
-				argi = va_arg(ap, int);
-				if (!argi)
-					return (-1);
-				ft_putchar_fd((char)argi, 1);
-				cnt++;
-			}
 			i += 2;
 		}
 		if (s[i] != '%' && ft_isascii(s[i]))
@@ -92,10 +87,11 @@ int	ft_printf(const char *s, ...)
 
 int	main(int ac, char **av)
 {
+	(void)av;
 	if (ac == 2)
 	{
 		printf("ft_printf len: %d\n", ft_printf("d: %d\n", 42));
-		printf("printf len: %d\n", printf("d: %d\n", 42));
+		//printf("printf len: %d\n", printf("d: %d\n", 42));
 		//printf("c: %c, s: %s, p: %p, d: %d, i: %i, u: %u, x: %x, X: %X, prct: %%, w: %3d\n", av[1][0], av[1], av[1]+1, ft_atoi(av[1]), ft_atoi(av[1]), ft_atoi(av[1]), 0x28, 0x28, ft_atoi(av[1]));
 	}
 	else

@@ -15,14 +15,16 @@
 
 int	ft_printb10(va_list ap)
 {
-	int	argi;
+	int		argi;
+	int		argi_len;
+	char	*s;
 
-	if (c == 'd' || c == 'i')
-	{
-		argi = va_arg(ap, int);
-		if (!argi)
-			return (0);
-		ft_putnbr_fd(argi, 1);
-		return ((int)ft_strlen((const char *)ft_itoa(argi))); //free itoa?
-	}
+	argi = va_arg(ap, int);
+	if (!argi)
+		return (0);
+	ft_putnbr_fd(argi, 1);
+	s = (char *)ft_itoa(argi);
+	argi_len = (int)ft_strlen(s);
+	free(s);
+	return (argi_len);
 }
