@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 10:34:17 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/05 13:54:32 by pamallet         ###   ########.fr       */
+/*   Created: 2024/11/03 14:22:40 by pamallet          #+#    #+#             */
+/*   Updated: 2024/11/05 12:52:32 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-void	ft_putchar_fd(char c, int fd)
-{
-	/* printf("%c\n", c); */
-	write(fd, &c, 1);
-}
-/*
-int	main(int ac, char **av)
-{
-	if (ac == 3)
-		ft_putchar_fd(av[1][0], ft_atoi(av[2]));
-	else
-		printf("Must have 2 valid arguments!");
-	return (0);
-}
-*/
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdarg.h>
+
+int		ft_printf(const char *, ...);
+int		ft_printb10(va_list);
+unsigned int	ft_printub10(va_list);
+int		ft_printchar(va_list);
+
+#endif

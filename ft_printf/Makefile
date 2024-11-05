@@ -1,29 +1,31 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = ft_printf.c \
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
+SRCS = ft_printf.c ft_printb10.c \
+       ft_printchar.c \
+#LIBFT_DIR = ./libft
+LIBFT = ./libft/libft.a
 OBJS = $(SRCS:.c=.o)
+OBJSLIBFT = $(addsuffix /libft)
 NAME = libftprintf.a
 
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -C libft
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-$(NAME): $(OBJS) $(LIBFT)
-	ar -rcs $(OBJS) $(LIBFT) $(NAME)
+$(NAME): $(OBJS)
+	ar -rcs $(NAME) $^
 
 clean:
 	rm -f $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C ./libft clean
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C ./libft fclean
 
 re: fclean all
 

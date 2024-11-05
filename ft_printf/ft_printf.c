@@ -6,11 +6,11 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 14:18:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/04 19:36:00 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:53:04 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ftprintf.h"
+#include "ft_printf.h"
 #include "libft/libft.h"
 
 static int	ft_is_specifier(const char c)
@@ -32,8 +32,8 @@ static int	ft_printarg(va_list ap, int c)
 		return (ft_printb10(ap));
 	/* else if (c == 's' || c == 'p') */
 	/* 	return (ft_printptr(ap)); */
-	/* else if (c == 'c' || c == '%') */
-	/* 	return (ft_printchar(ap)); */
+	else if (c == 'c' || c == '%')
+		return (ft_printchar(ap));
 	/* else if (c == 'x' || c == 'X') */
 	/* 	return (ft_printhex(ap); */
 	/* else if (c == 'u') */
@@ -55,26 +55,18 @@ int	ft_printf(const char *s, ...)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == '%' && ft_is_specifier(s[i + 1])) //check '%d'
+		if (s[i] == '%' && ft_is_specifier(s[i + 1]))
 		{
 			c = ft_is_specifier(s[i + 1]);
 			arg_len = ft_printarg(ap, c);
 			if (!arg_len)
 				return (-1);
 			cnt += arg_len;
-			/* if (c == 'c' || c == '%') */
-			/* { */
-			/* 	argi = va_arg(ap, int); */
-			/* 	if (!argi) */
-			/* 		return (-1); */
-			/* 	ft_putchar_fd((char)argi, 1); */
-			/* 	cnt++; */
-			/* } */
-			i += 2;
+			i++;
 		}
-		if (s[i] != '%' && ft_isascii(s[i]))
+		else if (s[i] != '%' && ft_isascii(s[i]))
 		{
-			ft_putchar_fd((int)s[i], 1);
+			ft_putchar_fd((char)s[i], 1);
 			cnt++;
 		}
 		else
@@ -88,10 +80,12 @@ int	ft_printf(const char *s, ...)
 int	main(int ac, char **av)
 {
 	(void)av;
+	/* char	c = '%'; */
 	if (ac == 2)
 	{
-		printf("ft_printf len: %d\n", ft_printf("d: %d\n", 42));
-		//printf("printf len: %d\n", printf("d: %d\n", 42));
+		printf("ft_printf len: %d\n", ft_printf("d: %d, c: %c, %%\n", 42, 'A'));
+		printf("printf len: %d\n", printf("d: %d, c: %c, %%\n", 42, 'A'));
+		//write(1, &c, 1);
 		//printf("c: %c, s: %s, p: %p, d: %d, i: %i, u: %u, x: %x, X: %X, prct: %%, w: %3d\n", av[1][0], av[1], av[1]+1, ft_atoi(av[1]), ft_atoi(av[1]), ft_atoi(av[1]), 0x28, 0x28, ft_atoi(av[1]));
 	}
 	else
