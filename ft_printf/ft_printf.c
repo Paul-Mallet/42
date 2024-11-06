@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 14:18:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/05 13:53:04 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:33:36 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ static int	ft_printarg(va_list ap, int c)
 {
 	if (c == 'd' || c == 'i')
 		return (ft_printb10(ap));
-	/* else if (c == 's' || c == 'p') */
-	/* 	return (ft_printptr(ap)); */
+	else if (c == 's' || c == 'p')
+		return (ft_printptr(ap));
 	else if (c == 'c' || c == '%')
-		return (ft_printchar(ap));
-	/* else if (c == 'x' || c == 'X') */
-	/* 	return (ft_printhex(ap); */
-	/* else if (c == 'u') */
-	/* 	return (ft_printub10(ap)); */
+		return (ft_printchar(ap, c));
+	else if (c == 'x' || c == 'X')
+		return (ft_printhex(ap, c));
+	else if (c == 'u')
+		return (ft_printub10(ap));
 	else
 		return (0);
 }
@@ -59,8 +59,6 @@ int	ft_printf(const char *s, ...)
 		{
 			c = ft_is_specifier(s[i + 1]);
 			arg_len = ft_printarg(ap, c);
-			if (!arg_len)
-				return (-1);
 			cnt += arg_len;
 			i++;
 		}
@@ -77,22 +75,16 @@ int	ft_printf(const char *s, ...)
 	return (cnt);
 }
 
-int	main(int ac, char **av)
-{
-	(void)av;
-	/* char	c = '%'; */
-	if (ac == 2)
-	{
-		printf("ft_printf len: %d\n", ft_printf("d: %d, c: %c, %%\n", 42, 'A'));
-		printf("printf len: %d\n", printf("d: %d, c: %c, %%\n", 42, 'A'));
-		//write(1, &c, 1);
-		//printf("c: %c, s: %s, p: %p, d: %d, i: %i, u: %u, x: %x, X: %X, prct: %%, w: %3d\n", av[1][0], av[1], av[1]+1, ft_atoi(av[1]), ft_atoi(av[1]), ft_atoi(av[1]), 0x28, 0x28, ft_atoi(av[1]));
-	}
-	else
-	{
-		/* ft_printf("Invalid arguments!"); */
-		printf("Invalid arguments!");
-	}
-	return(0);
-}
-//handle '\0' as arg -> cnt=1, so x5 -> cnt=5!
+/* int	main(int ac, char **av) */
+/* { */
+/* 	(void)av; */
+
+/* 	if (ac == 2) */
+/* 	{ */
+/* 		printf("ft_printf len: %d\n", ft_printf("u: %u\n", -42)); */
+/* 		printf("printf len: %d\n", printf("u: %u\n", -42)); */
+/* 	} */
+/* 	else */
+/* 		printf("Invalid arguments!"); */
+/* 	return(0); */
+/* } */

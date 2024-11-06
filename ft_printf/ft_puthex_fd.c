@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printb10.c                                      :+:      :+:    :+:   */
+/*   ft_puthex_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 19:13:54 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/06 11:15:37 by pamallet         ###   ########.fr       */
+/*   Created: 2024/11/06 17:00:11 by pamallet          #+#    #+#             */
+/*   Updated: 2024/11/06 17:22:50 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int	ft_printb10(va_list ap)
+void	ft_puthex_fd(int n, char *shex, int fd)
 {
-	int	argi;
-	int	argi_len;
-	char	*s;
-
-	argi = va_arg(ap, int);
-	ft_putnbr_fd(argi, 1);
-	s = (char *)ft_itoa(argi);
-	argi_len = (int)ft_strlen(s);
-	free(s);
-	return (argi_len);
+	if (n == -2147483648)
+		ft_puthex_fd(n / 16, shex, fd);
+	else if (n < 0)
+	{
+		write(fd, "-", 1);
+		ft_puthex_fd(-n, shex, fd);
+	}
+	else if (n >= 0 && n <= 15)
+		write(fd, &shex[n % 16], 1);
+	else
+	{
+		ft_puthex_fd(n / 16, shex, fd);
+		ft_puthex_fd(n % 16, shex, fd);
+	}
 }

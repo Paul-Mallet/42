@@ -2,22 +2,28 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRCS = ft_printf.c \
        ft_printchar.c \
-       ft_printb10.c
+       ft_printb10.c \
+       ft_printptr.c \
+       ft_printhex.c \
+       ft_printub10.c \
+       ft_putunbr_fd.c \
+       ft_uitoa.c \
+       ft_puthex_fd.c
 OBJS = $(SRCS:.c=.o)
-LIBFT = libft/libft.a
-OBJS_LIBFT = $(shell find . -name "*.o")
+LIBFT = ./libft/libft.a
 NAME = libftprintf.a
 
 all: $(LIBFT) $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C libft
+	$(MAKE) -C ./libft
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	ar -rcs $(NAME) $(OBJS_LIBFT) $(OBJ)
+	cp $(LIBFT) $(NAME)
+	ar -rcs $(NAME) $(OBJS)
 
 clean:
 	rm -f $(OBJS)

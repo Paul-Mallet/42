@@ -1,28 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printb10.c                                      :+:      :+:    :+:   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 19:13:54 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/06 11:15:37 by pamallet         ###   ########.fr       */
+/*   Created: 2024/11/06 17:27:54 by pamallet          #+#    #+#             */
+/*   Updated: 2024/11/06 17:41:20 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int	ft_printb10(va_list ap)
+static int	ft_nbrlen(unsigned int n)
 {
-	int	argi;
-	int	argi_len;
-	char	*s;
+	int	n_len;
 
-	argi = va_arg(ap, int);
-	ft_putnbr_fd(argi, 1);
-	s = (char *)ft_itoa(argi);
-	argi_len = (int)ft_strlen(s);
-	free(s);
-	return (argi_len);
+	n_len = 1;
+	while (n > 9)
+	{
+		n /= 10;
+		n_len++;
+	}
+	return (n_len);
+}
+
+char	*ft_uitoa(unsigned int n)
+{
+	char		*s;
+	int		n_len;
+	unsigned int	i;
+
+	n_len = ft_nbrlen(n);
+	s = (char *)malloc((n_len + 1) * sizeof(char));
+	if (s == NULL)
+		return (NULL);
+	i = n_len - 1;
+	while (n > 9)
+	{
+		s[i] = (n % 10) + 48;
+		n /= 10;
+		i--;
+	}
+	s[i] = (n % 10) + 48;
+	s[n_len] = '\0';
+	return (s);
 }

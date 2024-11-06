@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printb10.c                                      :+:      :+:    :+:   */
+/*   ft_itohex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 19:13:54 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/06 11:15:37 by pamallet         ###   ########.fr       */
+/*   Created: 2024/11/06 10:47:09 by pamallet          #+#    #+#             */
+/*   Updated: 2024/11/06 16:59:49 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int	ft_printb10(va_list ap)
+static int	ft_nbrlen(int n)
 {
-	int	argi;
-	int	argi_len;
-	char	*s;
+	int	n_len;
 
-	argi = va_arg(ap, int);
-	ft_putnbr_fd(argi, 1);
-	s = (char *)ft_itoa(argi);
-	argi_len = (int)ft_strlen(s);
-	free(s);
-	return (argi_len);
+	n_len = 1;
+	while (n > 9)
+	{
+		n /= 10;
+		n_len++;
+	}
+	return (n_len);
+}
+
+char	*ft_itohex(int n)
+{
+	//
 }
