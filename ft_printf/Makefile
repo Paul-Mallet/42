@@ -8,7 +8,7 @@ SRCS = ft_printf.c \
        ft_printub10.c \
        ft_putunbr_fd.c \
        ft_uitoa.c \
-       ft_itohex.c \
+       ft_ltohex.c \
        ft_puthex_fd.c
 OBJS = $(SRCS:.c=.o)
 LIBFT = ./libft/libft.a

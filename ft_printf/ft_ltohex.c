@@ -6,14 +6,13 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 10:47:09 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/06 18:57:30 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/07 00:20:41 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
 
-static int	ft_nbrhlen(unsigned int n)
+static int	ft_nbrhlen(long n)
 {
 	int	n_len;
 
@@ -26,7 +25,7 @@ static int	ft_nbrhlen(unsigned int n)
 	return (n_len);
 }
 
-char	*ft_itohex(unsigned int n)
+char	*ft_ltohex(long n)
 {
 	char	*s;
 	int	n_len;

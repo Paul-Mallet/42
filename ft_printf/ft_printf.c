@@ -6,12 +6,11 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 14:18:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/06 18:59:56 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/07 00:23:06 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
 
 static int	ft_is_specifier(const char c)
 {
@@ -31,7 +30,7 @@ static int	ft_printarg(va_list ap, int c)
 	if (c == 'd' || c == 'i')
 		return (ft_printb10(ap));
 	else if (c == 's' || c == 'p')
-		return (ft_printptr(ap));
+		return (ft_printptr(ap, c));
 	else if (c == 'c' || c == '%')
 		return (ft_printchar(ap, c));
 	else if (c == 'x' || c == 'X')
@@ -77,12 +76,15 @@ int	ft_printf(const char *s, ...)
 
 /* int	main(int ac, char **av) */
 /* { */
-/* 	(void)av; */
+/* 	int	value = 0; */
+/* 	int	*p; */
 
+/* 	p = &value; */
+/* 	(void)av; */
 /* 	if (ac == 2) */
 /* 	{ */
-/* 		printf("ft_printf len: %d\n", ft_printf("x: %x\n", -1)); */
-/* 		printf("printf len: %d\n", printf("x: %x\n", -1)); */
+/* 		printf("ft_printf len: %d\n", ft_printf("p: %p\n", p)); */
+/* 		printf("printf len: %d\n", printf("p: %p\n", p)); */
 /* 	} */
 /* 	else */
 /* 		printf("Invalid arguments!"); */

@@ -6,12 +6,11 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:28:01 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/06 17:35:51 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/06 22:52:04 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
 
 unsigned int	ft_printub10(va_list ap)
 {

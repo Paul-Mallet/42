@@ -6,12 +6,11 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:27:54 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/06 17:41:20 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/06 22:52:16 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
 
 static int	ft_nbrlen(unsigned int n)
 {

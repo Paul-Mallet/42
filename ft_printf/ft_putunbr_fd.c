@@ -6,16 +6,15 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 10:31:33 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/06 10:34:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/06 22:52:12 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
 
 void	ft_putunbr_fd(unsigned int n, int fd)
 {
-	if (n >= 0 && n <= 9)
+	if (n > 0 && n <= 9)
 	{
 		n += 48;
 		write(fd, &n, 1);
