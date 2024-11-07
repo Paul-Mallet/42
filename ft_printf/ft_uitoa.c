@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:27:54 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/06 22:52:16 by paul_mall        ###   ########.fr       */
+/*   Updated: 2024/11/07 12:06:03 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int	ft_nbrlen(unsigned int n)
 
 char	*ft_uitoa(unsigned int n)
 {
-	char		*s;
-	int		n_len;
 	unsigned int	i;
+	char			*s;
+	int				n_len;
 
 	n_len = ft_nbrlen(n);
 	s = (char *)malloc((n_len + 1) * sizeof(char));

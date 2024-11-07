@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 10:14:48 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/07 11:32:23 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:13:07 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static int	ft_putnull(int c)
 int	ft_printptr(va_list ap, int c)
 {
 	void			*argp;
-	int			argp_len;
+	int				argp_len;
 	char			*s;
-	
+
 	argp = va_arg(ap, void *);
 	if (argp == NULL)
 		return (ft_putnull(c));

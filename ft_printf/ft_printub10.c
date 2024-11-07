@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:28:01 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/07 11:35:29 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:08:58 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ unsigned int	ft_printub10(va_list ap)
 {
 	unsigned int	argui;
 	unsigned int	argui_len;
-	char		*s;
+	char			*s;
 
 	argui = va_arg(ap, unsigned int);
 	ft_putunbr_fd(argui, 1);

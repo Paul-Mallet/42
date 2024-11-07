@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 14:18:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/07 11:41:11 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:17:38 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,8 @@ static int	ft_printarg(va_list ap, int c)
 int	ft_printf(const char *s, ...)
 {
 	va_list		ap;
-	int		arg_len;
-	int		cnt;
-	int		c;
-	int		i;
+	int			cnt;
+	int			i;
 
 	va_start(ap, s);
 	cnt = 0;
@@ -56,9 +54,7 @@ int	ft_printf(const char *s, ...)
 	{
 		if (s[i] == '%' && ft_is_specifier(s[i + 1]))
 		{
-			c = ft_is_specifier(s[i + 1]);
-			arg_len = ft_printarg(ap, c);
-			cnt += arg_len;
+			cnt += ft_printarg(ap, ft_is_specifier(s[i + 1]));
 			i++;
 		}
 		else if (s[i] != '%' && ft_isascii(s[i]))

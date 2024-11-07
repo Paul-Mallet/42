@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:13:54 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/06 22:51:35 by paul_mall        ###   ########.fr       */
+/*   Updated: 2024/11/07 12:19:49 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_printb10(va_list ap)
 {
-	int	argi;
-	int	argi_len;
 	char	*s;
+	int		argi;
+	int		argi_len;
 
 	argi = va_arg(ap, int);
 	ft_putnbr_fd(argi, 1);

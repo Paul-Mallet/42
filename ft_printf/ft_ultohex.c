@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 10:47:09 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/07 11:21:04 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/07 12:07:45 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static int	ft_nbrhlen(unsigned long n)
 char	*ft_ultohex(unsigned long n)
 {
 	char	*s;
-	int	n_len;
-	int	i;
+	int		n_len;
+	int		i;
 
 	n_len = ft_nbrhlen(n);
 	s = (char *)malloc((n_len + 1) * sizeof(char));
