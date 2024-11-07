@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 14:18:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/07 12:17:38 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/07 13:43:23 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,7 @@ int	ft_printf(const char *s, ...)
 /* 	int	*p; */
 
 /* 	p = &value; */
-/* 	(void)av; */
-/* 	if (ac == 2) */
-/* 	{ */
-/* 		printf("ft_printf len: %d\n", ft_printf("u: %u\n", 2000000000)); */
-/* 		printf("printf len: %d\n", printf("p: %u\n", 2000000000)); */
-/* 	} */
-/* 	else */
-/* 		printf("Invalid arguments!"); */
+/* 	printf("ft_printf len: %d\n", ft_printf("u: %u\n", 2000000000)); */
+/* 	printf("printf len: %d\n", printf("p: %u\n", 2000000000)); */
 /* 	return(0); */
 /* } */
