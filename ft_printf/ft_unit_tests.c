@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:36:23 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/07 16:16:17 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:28:52 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 /* 	printf("i: %i\n", 42); */
 /* 	ft_printf("u: %u\n", 4294967295u); */
 /* 	printf("u: %u\n", 4294967295u); */
-/* 	ft_printf("x: %x\n", 255); */
-/* 	printf("x: %x\n", 255); */
+/* 	ft_printf("x: %x\n", -1); */
+/* 	printf("x: %x\n", -1); */
 /* 	ft_printf("X: %X\n", 255); */
 /* 	printf("X: %X\n", 255); */
-/* 	ft_printf("%: %%\n"); */
-/* 	printf("%: %%\n"); */
+/* 	ft_printf("prct: %%\n"); */
+/* 	printf("prct: %%\n"); */
 /* 	return (0); */
 /* } */
