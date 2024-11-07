@@ -1,27 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putunbr_fd.c                                    :+:      :+:    :+:   */
+/*   ft_ltohex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 10:31:33 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/07 11:40:46 by pamallet         ###   ########.fr       */
+/*   Created: 2024/11/06 10:47:09 by pamallet          #+#    #+#             */
+/*   Updated: 2024/11/07 10:53:50 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putunbr_fd(unsigned int n, int fd)
+static int	ft_nbrhlen(unsigned int n)
 {
-	if (n >= 0 && n <= 9)
+	int	n_len;
+
+	n_len = 1;
+	while (n > 15)
 	{
-		n += 48;
-		write(fd, &n, 1);
+		n /= 16;
+		n_len++;
 	}
-	else
+	return (n_len);
+}
+
+char	*ft_uitohex(unsigned int n)
+{
+	char	*s;
+	int	n_len;
+	int	i;
+
+	n_len = ft_nbrhlen(n);
+	s = (char *)malloc((n_len + 1) * sizeof(char));
+	if (!s)
+		return (NULL);
+	i = n_len - 1;
+	while (n > 15)
 	{
-		ft_putunbr_fd(n / 10, fd);
-		ft_putunbr_fd(n % 10, fd);
+		s[i] = (n % 16) + 48;
+		n /= 16;
+		i--;
 	}
+	s[i] = (n % 16) + 48;
+	s[n_len] = '\0';
+	return (s);
 }

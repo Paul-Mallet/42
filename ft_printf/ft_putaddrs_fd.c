@@ -1,48 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*   ft_putaddrs_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 10:47:09 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/07 00:20:41 by paul_mall        ###   ########.fr       */
+/*   Created: 2024/11/06 17:00:11 by pamallet          #+#    #+#             */
+/*   Updated: 2024/11/07 11:23:56 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_nbrhlen(long n)
+void	ft_putaddrs_fd(unsigned long n, char *shex, int fd)
 {
-	int	n_len;
-
-	n_len = 1;
-	while (n > 15)
+	if (n >= 0 && n <= 15)
+		write(fd, &shex[n % 16], 1);
+	else
 	{
-		n /= 16;
-		n_len++;
+		ft_putaddrs_fd(n / 16, shex, fd);
+		ft_putaddrs_fd(n % 16, shex, fd);
 	}
-	return (n_len);
-}
-
-char	*ft_ltohex(long n)
-{
-	char	*s;
-	int	n_len;
-	int	i;
-
-	n_len = ft_nbrhlen(n);
-	s = (char *)malloc((n_len + 1) * sizeof(char));
-	if (!s)
-		return (NULL);
-	i = n_len - 1;
-	while (n > 15)
-	{
-		s[i] = (n % 16) + 48;
-		n /= 16;
-		i--;
-	}
-	s[i] = (n % 16) + 48;
-	s[n_len] = '\0';
-	return (s);
 }

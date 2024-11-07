@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 14:22:40 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/07 00:20:53 by paul_mall        ###   ########.fr       */
+/*   Updated: 2024/11/07 11:30:28 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ int		ft_printchar(va_list ap, int c);
 int		ft_printptr(va_list ap, int c);
 int		ft_printhex(va_list ap, int c);
 char		*ft_uitoa(unsigned int n);
-char		*ft_ltohex(long n);
+char		*ft_uitohex(unsigned int n);
+char		*ft_ultohex(unsigned long n);
 void		ft_putunbr_fd(unsigned int n, int fd);
-void		ft_puthex_fd(long n, char *shex, int fd);
+void		ft_puthex_fd(unsigned int n, char *shex, int fd);
+void		ft_putaddrs_fd(unsigned long n, char *shex, int fd);
 
 #endif
