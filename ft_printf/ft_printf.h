@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 14:22:40 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/07 12:04:00 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:06:16 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
+# include <limits.h>
 # include "libft/libft.h"
 
 unsigned int	ft_printub10(va_list ap);

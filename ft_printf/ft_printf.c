@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 14:18:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/07 13:43:23 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/08 15:00:08 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,8 @@ int	ft_printf(const char *s, ...)
 			ft_putchar_fd((char)s[i], 1);
 			cnt++;
 		}
-		else
-			return (-1);
 		i++;
 	}
 	va_end(ap);
 	return (cnt);
 }
-
-/* int	main(int ac, char **av) */
-/* { */
-/* 	int	value = 0; */
-/* 	int	*p; */
-
-/* 	p = &value; */
-/* 	printf("ft_printf len: %d\n", ft_printf("u: %u\n", 2000000000)); */
-/* 	printf("printf len: %d\n", printf("p: %u\n", 2000000000)); */
-/* 	return(0); */
-/* } */
