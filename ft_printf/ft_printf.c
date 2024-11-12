@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 14:18:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/11/08 15:00:08 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/11/12 13:58:18 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_printf(const char *s, ...)
 			cnt += ft_printarg(ap, ft_is_specifier(s[i + 1]));
 			i++;
 		}
-		else if (s[i] != '%' && ft_isascii(s[i]))
+		else
 		{
 			ft_putchar_fd((char)s[i], 1);
 			cnt++;
