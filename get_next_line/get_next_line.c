@@ -6,15 +6,19 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:58:59 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/03 13:30:50 by paul_mall        ###   ########.fr       */
+/*   Updated: 2024/12/04 16:39:59 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*next_line(char *buf)//,len?
+char	*next_line(char *buf)
 {
-	//implement strchr(), strjoin()
+	char	*tst;
+
+	tst = ft_strchr(buf, '\n');
+	printf("strchr:%s|\n", tst);
+	return (buf);
 }
 
 char	*read_line(int fd, char *buf)
@@ -29,19 +33,16 @@ char	*read_line(int fd, char *buf)
 		return (NULL);
 	}
 	buf[size] = '\0';
-	printf("%s\n", buf);
-	//buf = "My\nfirst\0"[8 + 1]
-	//line = "My\n"
-	line = next_line(buf);//len = 3, buf = 8 + 1
-	return (line); //line
+	line = next_line(buf);
+	return (line);
 }
-//free buf OK, not line...
+
 char	*get_next_line(int fd)
 {
 	static char	*buf;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE < 0) //here + B_S < 1?
+	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
 	//if (buf)
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
@@ -55,7 +56,7 @@ int	main(int ac, char **av)
 {
 	int		fd;
 	int		cl;
-	char	*line;
+	char		*line;
 
 	(void)ac;
 	if (av[1])
@@ -70,7 +71,7 @@ int	main(int ac, char **av)
 			printf("(null)");
 			break ;
 		}
-		printf("%s", line);
+		//printf("%s", line);
 		free(line);
 		line = NULL;
 	}
