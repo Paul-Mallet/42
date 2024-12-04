@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:58:59 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/04 16:39:59 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:42:30 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,21 @@ char	*read_line(int fd, char *buf)
 	char		*line;
 	ssize_t		size;
 
-	size = read(fd, buf, BUFFER_SIZE);
-	if (size <= 0)
+	size = 1;
+	while (size > 0)
 	{
-		free(buf);
-		return (NULL);
+		size = read(fd, buf, BUFFER_SIZE); //B_S = 2
+		if (size < 0)
+		{
+			free(buf);
+			return (NULL);
+		}
+		buf[size] = '\0';
+		line = next_line(buf);
+		buf = ft_strchr(buf, '\n'); //"all after line" or NULL
+		if (buf) //stop read loop, return line
+			break ;
 	}
-	buf[size] = '\0';
-	line = next_line(buf);
 	return (line);
 }
 
