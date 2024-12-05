@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:26:38 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/04 16:44:42 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:06:30 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ int	ft_strlen(const char *str)
 	return (len);
 }
 
+int	ft_includes(const char *buf, int c)
+{
+	while (*buf)
+	{
+		if (*buf == (char)c)
+			return (1);
+		buf++;
+	}
+	return (0);
+}
+
 char	*ft_strchr(const char *s, int c)
 {
 	while (*s)
@@ -33,25 +44,6 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(char *str)
-{
-	char	*dup;
-	int	i;
-
-	i = ft_strlen(str);
-	dup = (char *)malloc((i + 1) * sizeof(char));
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (str[i])
-	{
-		dup[i] = str[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*s;
@@ -61,16 +53,16 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s)
 		return (NULL);
 	i = 0;
-	while (s1[i++])
+	while (s1[i])
 	{
-		printf("%d\n", i);
 		s[i] = s1[i];
+		i++;
 	}
 	i = 0;
-	while (s2[i++])
+	while (s2[i])
 	{
-		printf("%d\n", i);
 		s[ft_strlen(s1) + i] = s2[i];
+		i++;
 	}
 	s[ft_strlen(s1) + i] = '\0';
 	return (s);

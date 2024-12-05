@@ -6,19 +6,19 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:58:59 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/04 17:42:30 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:16:13 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*next_line(char *buf)
+char	*next_line(char *line, char *buf)
 {
-	char	*tst;
+	char	*tmp;
 
-	tst = ft_strchr(buf, '\n');
-	printf("strchr:%s|\n", tst);
-	return (buf);
+	tmp = ft_strjoin(line, buf);
+	free(line);
+	return (tmp);
 }
 
 char	*read_line(int fd, char *buf)
@@ -26,6 +26,7 @@ char	*read_line(int fd, char *buf)
 	char		*line;
 	ssize_t		size;
 
+	line = "";
 	size = 1;
 	while (size > 0)
 	{
@@ -36,10 +37,12 @@ char	*read_line(int fd, char *buf)
 			return (NULL);
 		}
 		buf[size] = '\0';
-		line = next_line(buf);
-		buf = ft_strchr(buf, '\n'); //"all after line" or NULL
-		if (buf) //stop read loop, return line
+		line = next_line(line, buf);
+		if (ft_includes(buf, '\n'))
+		{
+			buf = ft_strchr(buf, '\n'); //case if buf = "word\n", jump over nothing?
 			break ;
+		}
 	}
 	return (line);
 }
@@ -51,7 +54,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	//if (buf)
+	//buf never ! after 1rst call, "\nr", will start over with strchr at "r..."
 	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
 		return (NULL);
