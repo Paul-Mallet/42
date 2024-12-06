@@ -6,19 +6,44 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:58:59 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/06 11:25:36 by paul_mall        ###   ########.fr       */
+/*   Updated: 2024/12/06 17:30:37 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*extract_line(char *buf)
+{
+	char	*line;
+	int	i;
+
+	line = (char *)malloc((ft_line_size(buf) + 1 ) * sizeof(char));
+	i = 0;
+	while (buf[i] && buf[i] != '\n')
+	{
+		line[i] = buf[i];
+		i++;
+	}
+	if (buf[i] == '\n')
+	{
+		line[i] = '\n';
+		i++;
+	}
+	line[i] = '\0';
+	printf("line extracted: %s\n", line);
+	return (line);
+}
+
 char	*next_line(char *line, char *buf)
 {
-	char	*tmp;
+	char	*tmp_line;
+	char	*tmp_buf;
 
-	tmp = ft_strjoin(line, buf); //not more than '\n'
-	free(line);
-	return (tmp);
+	tmp_buf = extract_line(buf);
+	tmp_line = ft_strjoin(line, tmp_buf); //include '\n'
+	free(line); //?
+	free(tmp_buf);
+	return (tmp_line);
 }
 
 char	*read_line(int fd, char *buf)
@@ -26,21 +51,24 @@ char	*read_line(int fd, char *buf)
 	char		*line;
 	ssize_t		size;
 
-	line = "";
+	line = NULL;
 	size = 1;
-	while (size > 0)
+	while (size > 0) //?
 	{
-		size = read(fd, buf, BUFFER_SIZE); //B_S = 2
+		size = read(fd, buf, BUFFER_SIZE);
 		if (size < 0)
 		{
 			free(buf);
 			return (NULL);
 		}
 		buf[size] = '\0';
+		/* printf("size: %zd\n", size); */
+		/* printf("buf: %s\n", buf); */
 		line = next_line(line, buf);
 		if (ft_includes(buf, '\n'))
 		{
 			buf = ft_strchr(buf, '\n');
+			printf("buf after strchr: %s\n", buf);
 			break ;
 		}
 	}
@@ -54,8 +82,11 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	//buf never ! after 1rst call, "\nr", will start over with strchr at "r..."
-	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buf)
+	{
+		printf("1rst alloc");
+		buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	}
 	if (!buf)
 		return (NULL);
 	line = read_line(fd, buf);
@@ -65,11 +96,12 @@ char	*get_next_line(int fd)
 int	main(int ac, char **av)
 {
 	int		fd;
+	//int		fd[ac - 1]; (bonus)
 	int		cl;
 	char		*line;
 
-	(void)ac;
-	if (av[1])
+	(void)av;
+	if (ac > 1)
 		fd = open(av[1], O_RDONLY);
 	else
 		fd = 0;
@@ -79,9 +111,10 @@ int	main(int ac, char **av)
 		if (!line)
 		{
 			printf("(null)");
+			free(line);
 			break ;
 		}
-		//printf("%s", line);
+		//printf("line: %s\n", line);
 		free(line);
 		line = NULL;
 	}

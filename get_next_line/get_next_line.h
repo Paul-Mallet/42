@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 17:43:54 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/05 19:06:57 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:40:37 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 char	*get_next_line(int fd);
 int	ft_strlen(const char *str);
 int	ft_includes(const char *buf, int c);
+int	ft_line_size(char *buf);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 
