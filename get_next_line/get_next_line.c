@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:58:59 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/05 19:16:13 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:25:36 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*next_line(char *line, char *buf)
 {
 	char	*tmp;
 
-	tmp = ft_strjoin(line, buf);
+	tmp = ft_strjoin(line, buf); //not more than '\n'
 	free(line);
 	return (tmp);
 }
@@ -40,7 +40,7 @@ char	*read_line(int fd, char *buf)
 		line = next_line(line, buf);
 		if (ft_includes(buf, '\n'))
 		{
-			buf = ft_strchr(buf, '\n'); //case if buf = "word\n", jump over nothing?
+			buf = ft_strchr(buf, '\n');
 			break ;
 		}
 	}
