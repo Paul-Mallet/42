@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:01:47 by paul_mall         #+#    #+#             */
-/*   Updated: 2024/12/09 11:40:39 by paul_mall        ###   ########.fr       */
+/*   Updated: 2024/12/09 15:48:11 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*concat_bufs(char *buf, char *tmp_buf)
 {
 	char	*tmp_line;
 
+	if (!buf)
+		buf = ft_calloc(1, 1);
 	tmp_line = ft_strjoin(buf, tmp_buf);
 	free(buf);
 	return (tmp_line);
@@ -26,8 +28,6 @@ char	*read_file(char *buf, int fd)
 	char	*tmp_buf;
 	int		size;
 
-	if (!buf)
-		buf = ft_calloc(1, 1);
 	tmp_buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!tmp_buf)
 		return (NULL);
@@ -37,6 +37,7 @@ char	*read_file(char *buf, int fd)
 		size = read(fd, tmp_buf, BUFFER_SIZE);
 		if (size < 0)
 		{
+			free(buf);
 			free(tmp_buf);
 			return (NULL);
 		}
@@ -55,7 +56,7 @@ char	*extract_line(char *buf)
 	int		len;
 
 	len = 0;
-	if (!buf[len]) //?
+	if (!buf[len])
 		return (NULL);
 	while (buf[len] && buf[len] != '\n')
 		len++;
@@ -105,13 +106,16 @@ char	*get_next_line(int fd)
 	static char	*buf;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE < 1) //?
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	buf = read_file(buf, fd);
-	if (!buf)
-		return (NULL);
-	line = extract_line(buf);
-	buf = buffer_rest(buf);
+	else
+	{
+		buf = read_file(buf, fd);
+		if (!buf)
+			return (NULL);
+		line = extract_line(buf);
+		buf = buffer_rest(buf);
+	}
 	return (line);
 }
 

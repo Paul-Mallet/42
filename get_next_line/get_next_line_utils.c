@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:26:38 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/07 18:38:43 by paul_mall        ###   ########.fr       */
+/*   Updated: 2024/12/09 15:55:32 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ char	*ft_strchr(const char *s, int c)
 
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned char	*str;
-	size_t			i;
+	char	*str;
+	size_t	i;
 
-	str = (unsigned char *)s;
+	str = (char *)s;
 	i = 0;
 	while (i < n)
 		str[i++] = '\0';
@@ -46,9 +46,9 @@ void	ft_bzero(void *s, size_t n)
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	unsigned char	*arr;
+	char	*arr;
 
-	arr = (unsigned char *)malloc(nmemb * size);
+	arr = (char *)malloc(nmemb * size);
 	if (!arr)
 		return (NULL);
 	ft_bzero(arr, nmemb * size);

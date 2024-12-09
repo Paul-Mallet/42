@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:01:47 by paul_mall         #+#    #+#             */
-/*   Updated: 2024/12/09 11:41:00 by paul_mall        ###   ########.fr       */
+/*   Updated: 2024/12/09 15:58:19 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*concat_bufs(char *buf, char *tmp_buf)
 {
 	char	*tmp_line;
 
+	if (!buf)
+		buf = ft_calloc(1, 1);
 	tmp_line = ft_strjoin(buf, tmp_buf);
 	free(buf);
 	return (tmp_line);
@@ -26,8 +28,6 @@ char	*read_file(char *buf, int fd)
 	char	*tmp_buf;
 	int		size;
 
-	if (!buf)
-		buf = ft_calloc(1, 1);
 	tmp_buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!tmp_buf)
 		return (NULL);
@@ -37,6 +37,7 @@ char	*read_file(char *buf, int fd)
 		size = read(fd, tmp_buf, BUFFER_SIZE);
 		if (size < 0)
 		{
+			free(buf);
 			free(tmp_buf);
 			return (NULL);
 		}
@@ -55,7 +56,7 @@ char	*extract_line(char *buf)
 	int		len;
 
 	len = 0;
-	if (!buf[len]) //?
+	if (!buf[len])
 		return (NULL);
 	while (buf[len] && buf[len] != '\n')
 		len++;
@@ -105,63 +106,44 @@ char	*get_next_line(int fd)
 	static char	*buf;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE < 1) //?
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	buf = read_file(buf, fd);
-	if (!buf)
-		return (NULL);
-	line = extract_line(buf);
-	buf = buffer_rest(buf);
+	else
+	{
+		buf = read_file(buf, fd);
+		if (!buf)
+			return (NULL);
+		line = extract_line(buf);
+		buf = buffer_rest(buf);
+	}
 	return (line);
 }
 
-int	main(int ac, char **av)
-{
-	int		i;
-	int		*fds;
-	char	**lines;
+/* int	main(int ac, char **av) */
+/* { */
+/* 	int		fd; */
+/* 	char	*line; */
 
-	fds = (int *)malloc(((ac - 1) + 1) * sizeof(int));
-	lines = (char **)malloc(((ac - 1) + 1) * sizeof(char *));
-	if (ac > 1)
-	{
-		i = -1;
-		while (++i < (ac - 1)) //i = 0, ac = 2...
-		{
-			fds[i] = open(av[i + 1], O_RDONLY); //av[1]...
-			if (fds[i] < 0)
-				printf("Fd:%d not opened!", fds[i]);
-		}
-		fds[i] = -2;
-	}
-	else
-	{
-		fds[0] = 0;
-		if (fds[0] < 0)
-			printf("File not opened!");
-	}
-	while (1)
-	{
-		i = -1;
-		while (++i < (ac - 1)) //?
-		{
-			lines[i] = get_next_line(fds[i]);
-			if (!lines[i])
-			{
-				printf("(null)");
-				free(lines[i]);
-				break ;
-			}
-			printf("%s", lines[i]);
-			free(lines[i]);
-			lines[i] = NULL;
-		}
-	}
-	i = -1;
-	while (++i < (ac - 1))
-	{
-		if (close(fds[i]) == 0)
-			printf("Fd:%d closed successfully.", fds[i]);
-	}
-	return (0);
-}
+/* 	if (ac > 1) */
+/* 		fd = open(av[1], O_RDONLY); */
+/* 	else */
+/* 		fd = 0; */
+/* 	if (fd < 0) */
+/* 		printf("File not opened!"); */
+/* 	while (1) */
+/* 	{ */
+/* 		line = get_next_line(fd); */
+/* 		if (!line) */
+/* 		{ */
+/* 			printf("(null)"); */
+/* 			free(line); */
+/* 			break ; */
+/* 		} */
+/* 		printf("%s", line); */
+/* 		free(line); */
+/* 		line = NULL; */
+/* 	} */
+/* 	if (close(fd) == 0) */
+/* 		printf("Fd:%d closed successfully.", fd); */
+/* 	return (0); */
+/* } */
