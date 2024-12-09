@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:01:47 by paul_mall         #+#    #+#             */
-/*   Updated: 2024/12/07 19:06:19 by paul_mall        ###   ########.fr       */
+/*   Updated: 2024/12/07 23:58:20 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,31 +115,53 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/* int	main(int ac, char **av) */
-/* { */
-/* 	int		fd; */
-/* 	char	*line; */
+int	main(int ac, char **av)
+{
+	int		i;
+	int		*fds;
+	char	**lines;
 
-/* 	if (ac > 1) */
-/* 		fd = open(av[1], O_RDONLY); */
-/* 	else */
-/* 		fd = 0; */
-/* 	if (fd < 0) */
-/* 		printf("File not opened!"); */
-/* 	while (1) */
-/* 	{ */
-/* 		line = get_next_line(fd); */
-/* 		if (!line) */
-/* 		{ */
-/* 			printf("(null)"); */
-/* 			free(line); */
-/* 			break ; */
-/* 		} */
-/* 		printf("%s", line); */
-/* 		free(line); */
-/* 		line = NULL; */
-/* 	} */
-/* 	if (close(fd) == 0) */
-/* 		printf("Fd:%d closed successfully.", fd); */
-/* 	return (0); */
-/* } */
+	fds = (int *)malloc(((ac - 1) + 1) * sizeof(int));
+	lines = (char **)malloc(((ac - 1) + 1) * sizeof(char *));
+	if (ac > 1)
+	{
+		i = -1;
+		while (++i < (ac - 1)) //i = 0, ac = 2...
+		{
+			fds[i] = open(av[i + 1], O_RDONLY); //av[1]...
+			if (fds[i] < 0)
+				printf("Fd:%d not opened!", fds[i]);
+		}
+		fds[i] = -2;
+	}
+	else
+	{
+		fds[0] = 0;
+		if (fds[0] < 0)
+			printf("File not opened!");
+	}
+	while (1)
+	{
+		i = -1;
+		while (++i < (ac - 1)) //?
+		{
+			lines[i] = get_next_line(fds[i]);
+			if (!lines[i])
+			{
+				printf("(null)");
+				free(lines[i]);
+				break ;
+			}
+			printf("%s", lines[i]);
+			free(lines[i]);
+			lines[i] = NULL;
+		}
+	}
+	i = -1;
+	while (++i < (ac - 1))
+	{
+		if (close(fds[i]) == 0)
+			printf("Fd:%d closed successfully.", fds[i]);
+	}
+	return (0);
+}

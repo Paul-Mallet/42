@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 17:43:54 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/07 18:37:33 by paul_mall        ###   ########.fr       */
+/*   Created: 2024/12/07 11:51:17 by paul_mall         #+#    #+#             */
+/*   Updated: 2024/12/07 12:45:52 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef FT_LIBFT_H
+# define FT_LIBFT_H
 
 # include <unistd.h>
-# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 13
-# endif
+typedef struct	s_list
+{
+	void			*content;
+	struct s_list	*next;
+}				t_list;
 
-char	*get_next_line(int fd);
 int		ft_strlen(const char *str);
-char	*ft_strchr(const char *s, int c);
-void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t nmemb, size_t size);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup(const char *str);
+t_list	*ft_lstnew(void *content);
+void	ft_lstadd_front(t_list **lst, t_list *new);
 
 #endif
