@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:01:47 by paul_mall         #+#    #+#             */
-/*   Updated: 2024/12/07 23:58:20 by paul_mall        ###   ########.fr       */
+/*   Updated: 2024/12/09 11:41:00 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char	*get_next_line(int fd)
 	static char	*buf;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0) //?
+	if (fd < 0 || BUFFER_SIZE < 1) //?
 		return (NULL);
 	buf = read_file(buf, fd);
 	if (!buf)
