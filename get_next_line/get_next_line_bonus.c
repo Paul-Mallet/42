@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:01:47 by paul_mall         #+#    #+#             */
-/*   Updated: 2024/12/10 13:41:38 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:48:58 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,35 +119,39 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	main(int ac, char **av)
+int	main(void)
 {
 	int		fd1;
 	int		fd2;
-	int		i;
+	int		saw1;
+	int		saw2;
 	char	*linefd1;
 	char	*linefd2;
 
-	(void)av;
-	if (ac > 1)
-	{
-		fd1 = open("line.txt", O_RDONLY);
-		fd2 = open("noline.txt", O_RDONLY);
-	}
-	else
-	{
-		fd1 = 0;
-		(void)fd2;
-	}
+	fd1 = open("line.txt", O_RDONLY);
+	fd2 = open("noline.txt", O_RDONLY);
+	/* fd1 = 0; */
+	/* (void)fd2; */
+	saw1 = 0;
+	saw2 = 0;
 	while (1)
 	{
 		linefd1 = get_next_line(fd1);
 		linefd2 = get_next_line(fd2);
-		if (!linefd1 && !linefd2)
+		if (!linefd1 && !saw1)
 		{
-			printf("(null)");
-			free(line);
-			break ;
+			printf("(null)\n");
+			free(linefd1);
+			saw1 = 1;
 		}
+		if (!linefd2 && !saw2)
+		{
+			printf("(null)\n");
+			free(linefd2);
+			saw2 = 1;
+		}
+		if (!linefd1 && !linefd2)
+			break ;
 		printf("fd1: %s", linefd1);
 		printf("fd2: %s", linefd2);
 		free(linefd1);
@@ -156,6 +160,6 @@ int	main(int ac, char **av)
 		linefd2 = NULL;
 	}
 	if (close(fd1) == 0 && close(fd2) == 0)
-		printf("Fds closed successfully.", fd);
+		printf("Fds closed successfully.\n");
 	return (0);
 }
