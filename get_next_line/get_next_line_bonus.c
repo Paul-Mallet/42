@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:01:47 by paul_mall         #+#    #+#             */
-/*   Updated: 2024/12/09 15:58:19 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:41:38 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,47 +103,59 @@ char	*buffer_rest(char *buf)
 
 char	*get_next_line(int fd)
 {
-	static char	*buf;
+	static char	*buf[1024];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	else
 	{
-		buf = read_file(buf, fd);
-		if (!buf)
+		buf[fd] = read_file(buf[fd], fd);
+		if (!buf[fd])
 			return (NULL);
-		line = extract_line(buf);
-		buf = buffer_rest(buf);
+		line = extract_line(buf[fd]);
+		buf[fd] = buffer_rest(buf[fd]);
 	}
 	return (line);
 }
 
-/* int	main(int ac, char **av) */
-/* { */
-/* 	int		fd; */
-/* 	char	*line; */
+int	main(int ac, char **av)
+{
+	int		fd1;
+	int		fd2;
+	int		i;
+	char	*linefd1;
+	char	*linefd2;
 
-/* 	if (ac > 1) */
-/* 		fd = open(av[1], O_RDONLY); */
-/* 	else */
-/* 		fd = 0; */
-/* 	if (fd < 0) */
-/* 		printf("File not opened!"); */
-/* 	while (1) */
-/* 	{ */
-/* 		line = get_next_line(fd); */
-/* 		if (!line) */
-/* 		{ */
-/* 			printf("(null)"); */
-/* 			free(line); */
-/* 			break ; */
-/* 		} */
-/* 		printf("%s", line); */
-/* 		free(line); */
-/* 		line = NULL; */
-/* 	} */
-/* 	if (close(fd) == 0) */
-/* 		printf("Fd:%d closed successfully.", fd); */
-/* 	return (0); */
-/* } */
+	(void)av;
+	if (ac > 1)
+	{
+		fd1 = open("line.txt", O_RDONLY);
+		fd2 = open("noline.txt", O_RDONLY);
+	}
+	else
+	{
+		fd1 = 0;
+		(void)fd2;
+	}
+	while (1)
+	{
+		linefd1 = get_next_line(fd1);
+		linefd2 = get_next_line(fd2);
+		if (!linefd1 && !linefd2)
+		{
+			printf("(null)");
+			free(line);
+			break ;
+		}
+		printf("fd1: %s", linefd1);
+		printf("fd2: %s", linefd2);
+		free(linefd1);
+		free(linefd2);
+		linefd1 = NULL;
+		linefd2 = NULL;
+	}
+	if (close(fd1) == 0 && close(fd2) == 0)
+		printf("Fds closed successfully.", fd);
+	return (0);
+}

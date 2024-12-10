@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 16:01:47 by paul_mall         #+#    #+#             */
-/*   Updated: 2024/12/09 15:48:11 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:16:33 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,10 @@ char	*get_next_line(int fd)
 	{
 		buf = read_file(buf, fd);
 		if (!buf)
+		{
+			free(buf);
 			return (NULL);
+		}
 		line = extract_line(buf);
 		buf = buffer_rest(buf);
 	}
