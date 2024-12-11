@@ -6,11 +6,11 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:26:38 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/09 15:58:26 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:35:23 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_strlen(const char *str)
 {
