@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/20 17:30:17 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:41:20 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <mlx.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 typedef struct	s_data
 {
@@ -25,7 +26,7 @@ typedef struct	s_data
 	int	endian;
 }		t_data;
 
-# define W_WIDTH 1280
-# define W_HEIGHT 720
+# define W_WIDTH 194
+# define W_HEIGHT 259
 
 #endif
