@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/20 18:44:34 by pamallet         ###   ########.fr       */
+/*   Updated: 2024/12/23 15:28:46 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 
 	dst = img->addr + (y * img->line_len + x * (img->bits_per_pxl / 8));
 	*(unsigned int *)dst = color;
+}
+
+int	close(int keycode, void *mlx, void *mlx_win)
+{
+	mlx_destroy_window(mlx, mlx_win);
+	return (0);
 }
 
 int	main(void)
@@ -69,3 +75,11 @@ int	main(void)
 	mlx_loop(mlx);
 	return (0);
 }
+/*
+ * Mouse wheel zooms in/out
+ * Mouse position on screen
+ * Change Julia sets via params
+ * Few colors, show fractal's depth
+ * ESC close window + quit prog in clean way
+ * Click on cross on inside window close window + quit prog
+ */
