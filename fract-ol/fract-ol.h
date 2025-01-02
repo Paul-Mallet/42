@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/02 16:11:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/02 17:52:22 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FRACT_OL_H
 
 # include <mlx.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <stdlib.h>
 # include <stdio.h>
 
@@ -32,7 +34,7 @@ typedef struct	s_vars
 	void	*mlx_win;
 }		t_vars;
 
-# define W_WIDTH 194
-# define W_HEIGHT 259
+# define W_WIDTH 1280
+# define W_HEIGHT 720
 
 #endif
