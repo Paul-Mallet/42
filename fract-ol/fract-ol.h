@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/20 18:41:20 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:11:45 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ typedef struct	s_data
 	int	line_len;
 	int	endian;
 }		t_data;
+
+typedef struct	s_vars
+{
+	void	*mlx;
+	void	*mlx_win;
+}		t_vars;
 
 # define W_WIDTH 194
 # define W_HEIGHT 259

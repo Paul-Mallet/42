@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2024/12/23 15:28:46 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:26:31 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,42 +20,42 @@ void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	close(int keycode, void *mlx, void *mlx_win)
+int	close(t_vars *vars) //int keycode? ESC?
 {
-	mlx_destroy_window(mlx, mlx_win);
+	//if (keycode == 27)
+		mlx_destroy_window(vars->mlx, vars->mlx_win);
 	return (0);
 }
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
+	t_vars	vars;
 	/* t_data	img; */
 	void	*img_load;
 	char	*img_load_path;
-	int	img_load_width;
-	int	img_load_height;
+	/* int	img_load_width; */
+	/* int	img_load_height; */
 
 	img_load_path = "./davidou.xpm";
-	mlx = mlx_init();
-	if (!mlx)
+	vars.mlx = mlx_init();
+	if (!vars.mlx)
 	{
 		printf("Mlx init error!");
 		return (0);
 	}
-	mlx_win = mlx_new_window(mlx, W_WIDTH, W_HEIGHT, "fract-ol");
-	if (!mlx_win)
+	vars.mlx_win = mlx_new_window(vars.mlx, W_WIDTH, W_HEIGHT, "fract-ol");
+	if (!vars.mlx_win)
 	{
-		free(mlx_win);
+		free(vars.mlx_win);
 		printf("Mlx window error!");
 		return (0);
 	}
-	img_load = mlx_xpm_file_to_image(mlx, img_load_path, &img_load_width, &img_load_height);
-	if (!img_load)
-	{
-		printf("Image load error!");
-		return (0);
-	}
+	/* img_load = mlx_xpm_file_to_image(vars.mlx, img_load_path, &img_load_width, &img_load_height); */
+	/* if (!img_load) */
+	/* { */
+	/* 	printf("Image load error!"); */
+	/* 	return (0); */
+	/* } */
 	/* img.img = mlx_new_image(mlx, W_WIDTH, W_HEIGHT); */
 	/* if (!img.img) */
 	/* { */
@@ -71,8 +71,9 @@ int	main(void)
 	/* } */
 	/* my_mlx_pixel_put(&img, 5, 50, 0x00FF0000); */
 	/* mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0); */
-	mlx_put_image_to_window(mlx, mlx_win, img_load, 0, 0);
-	mlx_loop(mlx);
+	//mlx_put_image_to_window(vars.mlx, vars.mlx_win, img_load, 0, 0);
+	mlx_hook(vars.mlx_win, 2, 1L<<0, close, &vars);
+	mlx_loop(vars.mlx);
 	return (0);
 }
 /*
