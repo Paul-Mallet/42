@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/02 17:56:41 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:29:22 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,39 @@ int	handle_no_event(void *data)
 	return (0);
 }
 
-int	close_press(int keysym, t_vars *vars)
+int	close_key_press(int key_sym, t_vars *vars)
 {
-	if (keysym == XK_Escape)
+	if (key_sym == XK_Escape)
 		mlx_destroy_window(vars->mlx, vars->mlx_win);
-	printf("Keypress: %d\n", keysym);
+	printf("Key pressed: %d\n", key_sym);
+	return (0);
+}
+
+int	close_button_press(int button, t_vars *vars)
+{
+	if (button == Button1)
+		mlx_destroy_window(vars->mlx, vars->mlx_win);
+	printf("Button pressed: %d\n", button);
+	return (0);
+}
+
+int	close_red_cross(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->mlx_win);
+	printf("Red cross pressed\n");
 	return (0);
 }
 
 int	main(void)
 {
 	t_vars	vars;
-	/* t_data	img; */
+	t_data	img;
 	/* void	*img_load; */
 	/* char	*img_load_path; */
 	/* int	img_load_width; */
 	/* int	img_load_height; */
-
 	/* img_load_path = "./davidou.xpm"; */
+
 	vars.mlx = mlx_init();
 	if (!vars.mlx)
 	{
@@ -63,26 +78,26 @@ int	main(void)
 	/* 	printf("Image load error!"); */
 	/* 	return (0); */
 	/* } */
-	/* img.img = mlx_new_image(mlx, W_WIDTH, W_HEIGHT); */
-	/* if (!img.img) */
-	/* { */
-	/* 	free(img.img); */
-	/* 	printf("Image error!"); */
-	/* 	return (0); */
-	/* } */
-	/* img.addr = mlx_get_data_addr(img.img, &img.bits_per_pxl, &img.line_len, &img.endian); */
-	/* if (!img.addr) */
-	/* { */
-	/* 	printf("Image address error!"); */
-	/* 	return (0); */
-	/* } */
-	/* my_mlx_pixel_put(&img, 5, 50, 0x00FF0000); */
-	/* mlx_put_image_to_window(vars.mlx, vars.mlx_win, img.img, 0, 0); */
+	img.img = mlx_new_image(vars.mlx, W_WIDTH, W_HEIGHT);
+	if (!img.img)
+	{
+		free(img.img);
+		printf("Image error!");
+		return (0);
+	}
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pxl, &img.line_len, &img.endian);
+	if (!img.addr)
+	{
+		printf("Image address error!");
+		return (0);
+	}
+	my_mlx_pixel_put(&img, 5, 50, 0x0000FF00);
+	mlx_put_image_to_window(vars.mlx, vars.mlx_win, img.img, 0, 0);
 	/* mlx_put_image_to_window(vars.mlx, vars.mlx_win, img_load, 0, 0); */
-	/* mlx_hook(vars.mlx_win, KeyRelease, KeyReleaseMask, &close_release, &vars); */
 
 	mlx_loop_hook(vars.mlx, &handle_no_event, &vars);
-	mlx_hook(vars.mlx_win, KeyPress, KeyPressMask, &close_press, &vars);
+	mlx_hook(vars.mlx_win, KeyPress, KeyPressMask, &close_key_press, &vars);
+	mlx_hook(vars.mlx_win, DestroyNotify, 0, &close_red_cross, &vars);
 
 	mlx_loop(vars.mlx);
 
@@ -90,11 +105,22 @@ int	main(void)
 	free(vars.mlx);
 	return (0);
 }
+
 /*
- * Mouse wheel zooms in/out
+ * Window resized
  * Mouse position on screen
+ * Mouse wheel zooms in/out
+ * Draw shapes -> loop until reach pixels nb(mlx_pixel_put())
+ * Implement Mandelbrot's Set*, Julia's Set**
  * Change Julia sets via params
  * Few colors, show fractal's depth
- * ESC close window + quit prog in clean way
- * Click on cross on inside window close window + quit prog
+ *
+ *
+ * KeySyms -> offer consistent key's action/symbol accross platforms
+ * Mandelbrot's Set
+ * pixel coord = complex nb(i)
+ * color according to Mandelbrot or not
+ * 2 approaches:
+ * 	4 pxls des 4 coins de l'img, interpolate in-between pxls
+ * But same problem for both!
  */

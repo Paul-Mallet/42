@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/02 17:52:22 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:30:16 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <mlx.h>
 # include <X11/X.h>
+# include <X11/Xlib.h>
 # include <X11/keysym.h>
 # include <stdlib.h>
 # include <stdio.h>
