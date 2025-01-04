@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/04 15:38:24 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/04 16:06:41 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	close_cross_hook(t_vars *vars)
 	return (0);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_vars	vars;
 	t_data	img;
@@ -74,55 +74,61 @@ int	main(void)
 	/* } */
 
 	/* mlx_put_image_to_window(vars.mlx, vars.mlx_win, img_ld, 0, 0); */
-
-	vars.mlx = mlx_init();
-	if (!vars.mlx)
+	if (ac > 1)
 	{
-		printf("Mlx init error!");
-		return (1);
-	}
-	vars.mlx_win = mlx_new_window(vars.mlx, W_WIDTH, W_HEIGHT, "fract-ol");
-	if (!vars.mlx_win)
-	{
-		free(vars.mlx_win);
-		printf("Mlx window error!");
-		return (1);
-	}
-	img.img = mlx_new_image(vars.mlx, W_WIDTH, W_HEIGHT);
-	if (!img.img)
-	{
-		free(img.img);
-		printf("Image error!");
-		return (0);
-	}
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pxl, &img.line_len, &img.endian);
-	if (!img.addr)
-	{
-		printf("Image address error!");
-		return (0);
-	}
-	my_mlx_pixel_put(&img, 5, 50, 0x0000FF00);
-	mlx_put_image_to_window(vars.mlx, vars.mlx_win, img.img, 0, 0);
+		vars.mlx = mlx_init();
+		if (!vars.mlx)
+		{
+			printf("Mlx init error!");
+			return (1);
+		}
+		vars.mlx_win = mlx_new_window(vars.mlx, W_WIDTH, W_HEIGHT, "fract-ol");
+		if (!vars.mlx_win)
+		{
+			free(vars.mlx_win);
+			printf("Mlx window error!");
+			return (1);
+		}
+		img.img = mlx_new_image(vars.mlx, W_WIDTH, W_HEIGHT);
+		if (!img.img)
+		{
+			free(img.img);
+			printf("Image error!");
+			return (0);
+		}
+		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pxl, &img.line_len, &img.endian);
+		if (!img.addr)
+		{
+			printf("Image address error!");
+			return (0);
+		}
+		//Sets
+		(void)av;
+		/* fractal_set(av[1], av[2], av[3]); //(set, C, i) */
+		my_mlx_pixel_put(&img, 5, 50, 0x0000FF00);
 
-	mlx_loop_hook(vars.mlx, &handle_no_event, &vars);
-	mlx_hook(vars.mlx_win, MotionNotify, PointerMotionMask, &pointer_hook, &vars);
-	mlx_hook(vars.mlx_win, KeyPress, KeyPressMask, &close_esc_hook, &vars);
-	mlx_hook(vars.mlx_win, DestroyNotify, 0, &close_cross_hook, &vars);
-	mlx_mouse_hook(vars.mlx_win, &zoom_hook, &vars);
+		mlx_put_image_to_window(vars.mlx, vars.mlx_win, img.img, 0, 0);
 
-	mlx_loop(vars.mlx);
+		mlx_loop_hook(vars.mlx, &handle_no_event, &vars);
+		mlx_hook(vars.mlx_win, MotionNotify, PointerMotionMask, &pointer_hook, &vars);
+		mlx_hook(vars.mlx_win, KeyPress, KeyPressMask, &close_esc_hook, &vars);
+		mlx_hook(vars.mlx_win, DestroyNotify, 0, &close_cross_hook, &vars);
+		mlx_mouse_hook(vars.mlx_win, &zoom_hook, &vars);
 
-	mlx_destroy_display(vars.mlx);
-	free(vars.mlx);
+		mlx_loop(vars.mlx);
+
+		mlx_destroy_display(vars.mlx);
+		free(vars.mlx);
+	}
+	else
+		printf("Invalid params!\n\nExamples :\n$>./fractol \"mandelbrot\" \"2\" \"0.5\"\n$>./fractol \"julia\" \"1.95\" \"1\"\n");
 	return (0);
 }
 
 /*
- * Mouse wheel zooms in/out
- * Draw shapes -> loop until reach pixels nb(mlx_pixel_put())
  * Implement Mandelbrot's Set*, Julia's Set**
- * Change Julia sets via params
- * Few colors, show fractal's depth
+ * Implement fractal_set(char *set, )Change Julia sets via params
+ * Few colors, show fractal's depth(psychedelic effect)
  *
  *
  * KeySyms -> offer consistent key's action/symbol accross platforms
