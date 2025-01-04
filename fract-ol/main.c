@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/04 15:35:15 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/04 15:38:24 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,20 @@ int	main(void)
 {
 	t_vars	vars;
 	t_data	img;
-	/* void	*img_load; */
-	/* char	*img_load_path; */
-	/* int	img_load_width; */
-	/* int	img_load_height; */
-	/* img_load_path = "./davidou.xpm"; */
+	/* void	*img_ld; */
+	/* char	*img_ld_path; */
+	/* int	img_ld_w; */
+	/* int	img_ld_h; */
+	/* img_ld_path = "./davidou.xpm"; */
+
+	/* img_ld = mlx_xpm_file_to_image(vars.mlx, img_ld_path, &img_ld_w, &img_ld_h); */
+	/* if (!img_ld) */
+	/* { */
+	/* 	printf("Image load error!"); */
+	/* 	return (0); */
+	/* } */
+
+	/* mlx_put_image_to_window(vars.mlx, vars.mlx_win, img_ld, 0, 0); */
 
 	vars.mlx = mlx_init();
 	if (!vars.mlx)
@@ -79,12 +88,6 @@ int	main(void)
 		printf("Mlx window error!");
 		return (1);
 	}
-	/* img_load = mlx_xpm_file_to_image(vars.mlx, img_load_path, &img_load_width, &img_load_height); */
-	/* if (!img_load) */
-	/* { */
-	/* 	printf("Image load error!"); */
-	/* 	return (0); */
-	/* } */
 	img.img = mlx_new_image(vars.mlx, W_WIDTH, W_HEIGHT);
 	if (!img.img)
 	{
@@ -100,13 +103,12 @@ int	main(void)
 	}
 	my_mlx_pixel_put(&img, 5, 50, 0x0000FF00);
 	mlx_put_image_to_window(vars.mlx, vars.mlx_win, img.img, 0, 0);
-	/* mlx_put_image_to_window(vars.mlx, vars.mlx_win, img_load, 0, 0); */
 
 	mlx_loop_hook(vars.mlx, &handle_no_event, &vars);
 	mlx_hook(vars.mlx_win, MotionNotify, PointerMotionMask, &pointer_hook, &vars);
 	mlx_hook(vars.mlx_win, KeyPress, KeyPressMask, &close_esc_hook, &vars);
-	mlx_mouse_hook(vars.mlx_win, &zoom_hook, &vars);
 	mlx_hook(vars.mlx_win, DestroyNotify, 0, &close_cross_hook, &vars);
+	mlx_mouse_hook(vars.mlx_win, &zoom_hook, &vars);
 
 	mlx_loop(vars.mlx);
 
