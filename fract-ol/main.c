@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/03 18:29:22 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/04 15:35:15 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,33 @@ int	handle_no_event(void *data)
 	return (0);
 }
 
-int	close_key_press(int key_sym, t_vars *vars)
+int	pointer_hook(int x, int y)
+{
+	printf("Pointer position: (%d,%d)\n", x, y);
+	return (0);
+}
+
+int	close_esc_hook(int key_sym, t_vars *vars)
 {
 	if (key_sym == XK_Escape)
 		mlx_destroy_window(vars->mlx, vars->mlx_win);
-	printf("Key pressed: %d\n", key_sym);
+	printf("ESC key pressed: %d\n", key_sym);
 	return (0);
 }
 
-int	close_button_press(int button, t_vars *vars)
+int	zoom_hook(int button)
 {
-	if (button == Button1)
-		mlx_destroy_window(vars->mlx, vars->mlx_win);
-	printf("Button pressed: %d\n", button);
+	if (button == Button4)
+		printf("Zoom in: %d\n", button);
+	else if (button == Button5)
+		printf("Zoom out: %d\n", button);
 	return (0);
 }
 
-int	close_red_cross(t_vars *vars)
+int	close_cross_hook(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->mlx_win);
-	printf("Red cross pressed\n");
+	printf("Cross clicked\n");
 	return (0);
 }
 
@@ -96,8 +103,10 @@ int	main(void)
 	/* mlx_put_image_to_window(vars.mlx, vars.mlx_win, img_load, 0, 0); */
 
 	mlx_loop_hook(vars.mlx, &handle_no_event, &vars);
-	mlx_hook(vars.mlx_win, KeyPress, KeyPressMask, &close_key_press, &vars);
-	mlx_hook(vars.mlx_win, DestroyNotify, 0, &close_red_cross, &vars);
+	mlx_hook(vars.mlx_win, MotionNotify, PointerMotionMask, &pointer_hook, &vars);
+	mlx_hook(vars.mlx_win, KeyPress, KeyPressMask, &close_esc_hook, &vars);
+	mlx_mouse_hook(vars.mlx_win, &zoom_hook, &vars);
+	mlx_hook(vars.mlx_win, DestroyNotify, 0, &close_cross_hook, &vars);
 
 	mlx_loop(vars.mlx);
 
@@ -107,8 +116,6 @@ int	main(void)
 }
 
 /*
- * Window resized
- * Mouse position on screen
  * Mouse wheel zooms in/out
  * Draw shapes -> loop until reach pixels nb(mlx_pixel_put())
  * Implement Mandelbrot's Set*, Julia's Set**
