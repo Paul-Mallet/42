@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/04 16:54:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/06 19:07:05 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,8 @@ int	pointer_hook(int x, int y);
 int	close_esc_hook(int key_sym, t_vars *vars);
 int	zoom_hook(int button);
 int	close_cross_hook(t_vars *vars);
+
+int	is_valid_set(char *set);
+int	ft_strcmp(char *s1, char *s2);
 
 #endif

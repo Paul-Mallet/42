@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/06 18:47:49 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/06 19:03:38 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,39 +20,44 @@ void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	fractol_set(char *sets, unsigned int w, unsigned int h)
+void	fractol_sets(char *set, void *img, unsigned int w, unsigned int h)
 {
 	unsigned int	x;
 	unsigned int	y;
-	double		re_min = -2.0;
-	double		re_max = 1.0;
-	double		im_min = -1.2;
-	double		im_max = im_min + (re_max - re_min) * h/w;
+	double		re_min; 
+	double		re_max;
+	double		im_min;
+	double		im_max;
 	double		c_re;
 	double		c_im;
 	double		z_re;
 	double		z_im;
 	double		z_re2;
 	double		z_im2;
-	unsigned int	max_i;
 	unsigned int	is_in;
+	int	max_i;
 
+	if (is_valid_set(set))
+	{
+		printf("Invalid params!\n\nExamples :\n$>./fractol \"mandelbrot\" \"2\" \"0.5\"\n$>./fractol \"julia\" \"1.95\" \"1\"\n");
+		return ;
+	}
 	re_min = -2.0;
 	re_max = 1.0;
 	im_min = -1.2;
 	im_max = im_min + (re_max - re_min) * h/w;
 	y = 0;
-	while (y < height)
+	while (y < h)
 	{
 		x = 0;
 		c_im = im_max - (y * ((im_max - im_min) / (h - 1)));
-		while (x < width)
+		while (x < w)
 		{
 			c_re = re_min + (x * ((re_max - re_min) / (w - 1)));
 			z_re = c_re;
 			z_im = c_im;
 			is_in = 1;
-			while (0 < max_i)
+			while (0 < max_i) //?
 			{
 				z_re2 = z_re * z_re;
 				z_im2 = z_im * z_im;
@@ -63,10 +68,10 @@ void	fractol_set(char *sets, unsigned int w, unsigned int h)
 				}
 				z_re = (z_re2 - z_im2) + c_re;
 				z_im = (2 * z_re * z_im) + c_im;
-				i--;
+				max_i--;
 			}
 			if (is_in)
-				my_mlx_pixel_put(&img, x, y, 0x0000FF00);
+				my_mlx_pixel_put(img, x, y, 0x0000FF00);
 			x++;
 		}
 		y++;
@@ -76,7 +81,7 @@ void	fractol_set(char *sets, unsigned int w, unsigned int h)
 int	main(int ac, char **av)
 {
 	t_vars	vars;
-	t_data	img;
+	t_data	img; //t_img
 
 	if (ac > 1)
 	{
@@ -107,7 +112,7 @@ int	main(int ac, char **av)
 			return (0);
 		}
 
-		fractol_sets(av[1], W_WIDTH, W_HEIGHT);
+		fractol_sets(av[1], img.img, W_WIDTH, W_HEIGHT);
 
 		mlx_put_image_to_window(vars.mlx, vars.mlx_win, img.img, 0, 0);
 
