@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fract-ol.h                                         :+:      :+:    :+:   */
+/*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/03 18:30:16 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/04 16:54:45 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACT_OL_H
-# define FRACT_OL_H
+#ifndef FRACTOL_H
+# define FRACTOL_H
 
 # include <mlx.h>
 # include <X11/X.h>
@@ -37,5 +37,11 @@ typedef struct	s_vars
 
 # define W_WIDTH 1280
 # define W_HEIGHT 720
+
+int	handle_no_event(void *data);
+int	pointer_hook(int x, int y);
+int	close_esc_hook(int key_sym, t_vars *vars);
+int	zoom_hook(int button);
+int	close_cross_hook(t_vars *vars);
 
 #endif

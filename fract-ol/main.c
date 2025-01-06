@@ -6,11 +6,11 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/04 16:06:41 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/06 18:47:49 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract-ol.h"
+#include "fractol.h"
 
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 {
@@ -20,60 +20,64 @@ void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	handle_no_event(void *data)
+void	fractol_set(char *sets, unsigned int w, unsigned int h)
 {
-	(void)data;
-	return (0);
-}
+	unsigned int	x;
+	unsigned int	y;
+	double		re_min = -2.0;
+	double		re_max = 1.0;
+	double		im_min = -1.2;
+	double		im_max = im_min + (re_max - re_min) * h/w;
+	double		c_re;
+	double		c_im;
+	double		z_re;
+	double		z_im;
+	double		z_re2;
+	double		z_im2;
+	unsigned int	max_i;
+	unsigned int	is_in;
 
-int	pointer_hook(int x, int y)
-{
-	printf("Pointer position: (%d,%d)\n", x, y);
-	return (0);
-}
-
-int	close_esc_hook(int key_sym, t_vars *vars)
-{
-	if (key_sym == XK_Escape)
-		mlx_destroy_window(vars->mlx, vars->mlx_win);
-	printf("ESC key pressed: %d\n", key_sym);
-	return (0);
-}
-
-int	zoom_hook(int button)
-{
-	if (button == Button4)
-		printf("Zoom in: %d\n", button);
-	else if (button == Button5)
-		printf("Zoom out: %d\n", button);
-	return (0);
-}
-
-int	close_cross_hook(t_vars *vars)
-{
-	mlx_destroy_window(vars->mlx, vars->mlx_win);
-	printf("Cross clicked\n");
-	return (0);
+	re_min = -2.0;
+	re_max = 1.0;
+	im_min = -1.2;
+	im_max = im_min + (re_max - re_min) * h/w;
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		c_im = im_max - (y * ((im_max - im_min) / (h - 1)));
+		while (x < width)
+		{
+			c_re = re_min + (x * ((re_max - re_min) / (w - 1)));
+			z_re = c_re;
+			z_im = c_im;
+			is_in = 1;
+			while (0 < max_i)
+			{
+				z_re2 = z_re * z_re;
+				z_im2 = z_im * z_im;
+				if (z_re2 + z_im2 > 4)
+				{
+					is_in = 0;
+					break ;
+				}
+				z_re = (z_re2 - z_im2) + c_re;
+				z_im = (2 * z_re * z_im) + c_im;
+				i--;
+			}
+			if (is_in)
+				my_mlx_pixel_put(&img, x, y, 0x0000FF00);
+			x++;
+		}
+		y++;
+	}
 }
 
 int	main(int ac, char **av)
 {
 	t_vars	vars;
 	t_data	img;
-	/* void	*img_ld; */
-	/* char	*img_ld_path; */
-	/* int	img_ld_w; */
-	/* int	img_ld_h; */
-	/* img_ld_path = "./davidou.xpm"; */
 
-	/* img_ld = mlx_xpm_file_to_image(vars.mlx, img_ld_path, &img_ld_w, &img_ld_h); */
-	/* if (!img_ld) */
-	/* { */
-	/* 	printf("Image load error!"); */
-	/* 	return (0); */
-	/* } */
-
-	/* mlx_put_image_to_window(vars.mlx, vars.mlx_win, img_ld, 0, 0); */
 	if (ac > 1)
 	{
 		vars.mlx = mlx_init();
@@ -102,10 +106,8 @@ int	main(int ac, char **av)
 			printf("Image address error!");
 			return (0);
 		}
-		//Sets
-		(void)av;
-		/* fractal_set(av[1], av[2], av[3]); //(set, C, i) */
-		my_mlx_pixel_put(&img, 5, 50, 0x0000FF00);
+
+		fractol_sets(av[1], W_WIDTH, W_HEIGHT);
 
 		mlx_put_image_to_window(vars.mlx, vars.mlx_win, img.img, 0, 0);
 
@@ -138,4 +140,18 @@ int	main(int ac, char **av)
  * 2 approaches:
  * 	4 pxls des 4 coins de l'img, interpolate in-between pxls
  * But same problem for both!
+ *
+ *
+ * void	*img_ld;
+ * char	*img_ld_path;
+ * int	img_ld_w;
+ * int	img_ld_h;
+ * img_ld_path = "./davidou.xpm";
+ * img_ld = mlx_xpm_file_to_image(vars.mlx, img_ld_path, &img_ld_w, &img_ld_h);
+ * if (!img_ld)
+ * {
+ * 	printf("Image load error!");
+ * 	return (0);
+ * }
+ * mlx_put_image_to_window(vars.mlx, vars.mlx_win, img_ld, 0, 0);
  */
