@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:03:50 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/06 19:06:12 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:46:56 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-int	is_valid_set(char *set)
+int	is_valid_set(char *strset)
 {
-	if (!ft_strcmp(set, "mandelbrot"))
-		return (1);
-	return (0);
+	return (ft_strcmp(strset, "mandelbrot"));
 }

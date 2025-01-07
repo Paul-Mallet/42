@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:42:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/04 16:54:18 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:39:15 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	pointer_hook(int x, int y)
 	return (0);
 }
 
-int	close_esc_hook(int key_sym, t_vars *vars)
+int	close_esc_hook(int key_sym, t_mlx *mlx)
 {
 	if (key_sym == XK_Escape)
-		mlx_destroy_window(vars->mlx, vars->mlx_win);
-	printf("ESC key pressed: %d\n", key_sym);
+		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+	printf("Key pressed: %d\n", key_sym);
 	return (0);
 }
 
@@ -41,9 +41,9 @@ int	zoom_hook(int button)
 	return (0);
 }
 
-int	close_cross_hook(t_vars *vars)
+int	close_cross_hook(t_mlx *mlx)
 {
-	mlx_destroy_window(vars->mlx, vars->mlx_win);
+	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
 	printf("Cross clicked\n");
 	return (0);
 }
