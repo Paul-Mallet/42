@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/07 17:59:44 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/07 18:51:55 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,24 @@ void	my_mlx_pixel_put(t_img *img, unsigned int x, unsigned int y, int color)
 /*
  * Color gradients
  *
- * Black -> red: [0, 30/2 - 1] -> [0x00000000, 0x00FF0000]; +(12 * 15) * 2
- * Red -> white: [30/2, 30 - 1] -> [0x00FF0000, 0x00FFFFFF]; +(12 * 15) * 4
+ * Black -> red: [0, 32/2 - 1] -> [0x00000000, 0x00FF0000];
+ * Red -> white: [32/2, 32 - 1] -> [0x00FF0000, 0x00FFFFFF];
  * 
  * "FFFFFF" -> "000000" (hex conv int) 16777215 -> 0
+ * char *color1, char *color2;
+ * 	conv
+ * int	color1, int color2;
+ * if (int1 > int2)
+ * i = 0;
+ * while (i < 16)
+ * {
+ * 	/(16 * i)
+ * 	i++;
+ * }
  * "0123456789ABCDEF"
  * 16*16 = 256 = FF
- * 0x00 + FF + 0000
+ * 0x00 + FF0000
+ * ft_strjoin()
  */
 
 void	fractol_sets(t_img img, unsigned int w, unsigned int h)
@@ -56,7 +67,7 @@ void	fractol_sets(t_img img, unsigned int w, unsigned int h)
 			set.z_im = set.c_im;
 			is_in = 1;
 			i = 0;
-			while (i < 30)
+			while (i < 32)
 			{
 				set.z_re2 = set.z_re * set.z_re;
 				set.z_im2 = set.z_im * set.z_im;
@@ -71,7 +82,7 @@ void	fractol_sets(t_img img, unsigned int w, unsigned int h)
 				i++;
 			}
 			if (is_in)
-				my_mlx_pixel_put(&img, x, y, 0x00000000);
+				my_mlx_pixel_put(&img, x, y, 0x00FFFFFF);
 			x++;
 		}
 		y++;
