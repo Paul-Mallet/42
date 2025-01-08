@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/07 16:08:28 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/08 18:18:30 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,35 @@ typedef struct	s_mlx
 
 typedef struct	s_set
 {
-	double	re_min;
-	double	re_max;
-	double	im_min;
-	double	im_max;
-	double	c_re;
-	double	c_im;
-	double	z_re;
-	double	z_im;
-	double	z_re2;
-	double	z_im2;
+	double		re_min;
+	double		re_max;
+	double		im_min;
+	double		im_max;
+	double		c_re;
+	double		c_im;
+	double		z_re;
+	double		z_im;
+	double		z_re2;
+	double		z_im2;
+	unsigned int	x;
+	unsigned int	y;
 }		t_set;
 
-# define W_WIDTH 1280
-# define W_HEIGHT 720
+# define W_W 1280
+# define W_H 720
+
+# ifndef MAX_IT
+#  define MAX_IT 32
+# endif
+# ifndef COLOR1
+#  define COLOR1 "#FF0000"
+# endif
+# ifndef COLOR2
+#  define COLOR2 "#FFFFFF"
+# endif
+# ifndef COLOR3
+#  define COLOR3 "#000000"
+# endif
 
 int	handle_no_event(void *data);
 int	pointer_hook(int x, int y);
