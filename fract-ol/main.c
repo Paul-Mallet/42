@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/08 19:24:44 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/09 18:26:36 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,31 +67,32 @@ void	pixel_put_gradient(t_img img, unsigned int it, unsigned int x, unsigned int
 	int	clr1_i;
 	int	clr2_i;
 
-	i = ft_strlen(COLOR1) + 1;
+	i = ft_strlen(COLOR1);
 	j = 0;
 	clr1_i = 0;
 	clr2_i = 0;
 	if (it < (MAX_IT / 2)) //COLOR3(black) to COLOR1(red)
 	{
-		while (--i > 0)
+		while (--i >= 0)
 		{
+			/* printf(); */
 			clr1_i += ft_hextoi(COLOR1[i], "0123456789ABCDEF") * ft_power(16, j);
 			clr2_i += ft_hextoi(COLOR3[i], "0123456789ABCDEF") * ft_power(16, j);
 			j++;
 		}
 		//clr1_i = 16 711 680 = FF0000;
 		//clr2_i = 0 = 000000;
-		clr1_i = (((clr1_i + clr2_i) / 2) / (MAX_IT / 2)) * it;
+		clr1_i = (((clr1_i + clr2_i)) / (MAX_IT / 2)) * (it + 1);
 	}
 	else if ((it >= MAX_IT / 2) && (it <= MAX_IT - 1)) //COLOR1(red) to COLOR2(white)
 	{
-		while (--i > 0)
+		while (--i >= 0)
 		{
 			clr1_i += ft_hextoi(COLOR1[i], "0123456789ABCDEF") * ft_power(16, j);
 			clr2_i += ft_hextoi(COLOR2[i], "0123456789ABCDEF") * ft_power(16, j);
 			j++;
 		}
-		clr1_i = (((clr1_i + clr2_i) / 2) / (MAX_IT / 2)) * it; //it++ or it--(order)
+		clr1_i = (((clr1_i + clr2_i)) / (MAX_IT / 2)) * (it + 1); //it++ or it--(order)
 	}
 	else //COLOR3(black dft)
 	{

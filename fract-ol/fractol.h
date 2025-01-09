@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/08 19:19:26 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:23:15 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ typedef struct	s_set
 #  define MAX_IT 32
 # endif
 # ifndef COLOR1
-#  define COLOR1 "#FF0000"
+#  define COLOR1 "FF0000"
 # endif
 # ifndef COLOR2
-#  define COLOR2 "#FFFFFF"
+#  define COLOR2 "FFFFFF"
 # endif
 # ifndef COLOR3
-#  define COLOR3 "#000000"
+#  define COLOR3 "000000"
 # endif
 
 int	handle_no_event(void *data);
