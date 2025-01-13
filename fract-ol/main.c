@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/09 18:26:36 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/13 19:04:32 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,46 +64,47 @@ void	pixel_put_gradient(t_img img, unsigned int it, unsigned int x, unsigned int
 {
 	int	i;
 	int	j;
-	int	clr1_i;
-	int	clr2_i;
+	int	clr_from;
+	int	clr_to;
 
-	i = ft_strlen(COLOR1);
+	i = ft_strlen(COLOR1); //6
 	j = 0;
-	clr1_i = 0;
-	clr2_i = 0;
-	if (it < (MAX_IT / 2)) //COLOR3(black) to COLOR1(red)
+	clr_from = 0;
+	clr_to = 0;
+	if (it < (MAX_IT / 2)) //COLOR3(black - 0) to COLOR1(red - 16 770 000)
 	{
-		while (--i >= 0)
+		while (--i >= 0) //5
 		{
-			/* printf(); */
-			clr1_i += ft_hextoi(COLOR1[i], "0123456789ABCDEF") * ft_power(16, j);
-			clr2_i += ft_hextoi(COLOR3[i], "0123456789ABCDEF") * ft_power(16, j);
+			clr_from += ft_hextoi(COLOR3[i], "0123456789ABCDEF") * ft_power(16, j);
+			clr_to += ft_hextoi(COLOR1[i], "0123456789ABCDEF") * ft_power(16, j);
 			j++;
 		}
-		//clr1_i = 16 711 680 = FF0000;
-		//clr2_i = 0 = 000000;
-		clr1_i = (((clr1_i + clr2_i)) / (MAX_IT / 2)) * (it + 1);
+		clr_from = clr_from + ((((clr_from - clr_to)) / ((MAX_IT / 2) - 1)) * (it));
+		if (clr_from < 0)
+			clr_from *= -1;
+		printf("%d\n", clr_from);
 	}
 	else if ((it >= MAX_IT / 2) && (it <= MAX_IT - 1)) //COLOR1(red) to COLOR2(white)
 	{
 		while (--i >= 0)
 		{
-			clr1_i += ft_hextoi(COLOR1[i], "0123456789ABCDEF") * ft_power(16, j);
-			clr2_i += ft_hextoi(COLOR2[i], "0123456789ABCDEF") * ft_power(16, j);
+			clr_from += ft_hextoi(COLOR1[i], "0123456789ABCDEF") * ft_power(16, j);
+			clr_to += ft_hextoi(COLOR2[i], "0123456789ABCDEF") * ft_power(16, j);
 			j++;
 		}
-		clr1_i = (((clr1_i + clr2_i)) / (MAX_IT / 2)) * (it + 1); //it++ or it--(order)
+		clr_from = clr_from - ((((clr_from - clr_to)) / (MAX_IT / 2)) * (it + 1));
+		/* printf("%d\n", clr_from); */
+		
 	}
 	else //COLOR3(black dft)
 	{
 		while (--i > 0)
 		{
-			clr1_i += ft_hextoi(COLOR3[i], "0123456789ABCDEF") * ft_power(16, j);
+			clr_from += ft_hextoi(COLOR3[i], "0123456789ABCDEF") * ft_power(16, j);
 			j++;
 		}
 	}
-	//printf("%d\n", clr1_i);
-	my_mlx_pixel_put(&img, x, y, clr1_i);
+	my_mlx_pixel_put(&img, x, y, 1044480);
 }
 
 void	fractol_sets(t_img img)
@@ -144,7 +145,6 @@ void	fractol_sets(t_img img)
 			}
 			if (is_in)
 				pixel_put_gradient(img, i, s.x, s.y); //black by dft
-				//my_mlx_pixel_put(&img, s.x, s.y, 16777215);//white
 			s.x++;
 		}
 		s.y++;
