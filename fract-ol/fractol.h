@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/09 17:23:15 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/14 18:14:41 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_set
 	double		re_max;
 	double		im_min;
 	double		im_max;
+	double		zoom;
 	double		c_re;
 	double		c_im;
 	double		z_re;
@@ -51,14 +52,16 @@ typedef struct	s_set
 	unsigned int	y;
 }		t_set;
 
+
+
 # define W_W 1280
 # define W_H 720
 
 # ifndef MAX_IT
-#  define MAX_IT 32
+#  define MAX_IT 30
 # endif
 # ifndef COLOR1
-#  define COLOR1 "FF0000"
+#  define COLOR1 "00FF00"
 # endif
 # ifndef COLOR2
 #  define COLOR2 "FFFFFF"
@@ -70,9 +73,10 @@ typedef struct	s_set
 int	handle_no_event(void *data);
 int	pointer_hook(int x, int y);
 int	close_esc_hook(int key_sym, t_mlx *mlx);
-int	zoom_hook(int button);
+int	zoom_hook(int button, t_set set);
 int	close_cross_hook(t_mlx *mlx);
 
+t_set	init_set(t_set set);
 int	is_valid_set(char *set);
 int	ft_strcmp(char *s1, char *s2);
 

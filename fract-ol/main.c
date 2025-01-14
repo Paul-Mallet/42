@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/13 19:18:48 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:13:58 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	pixel_put_gradient(t_img img, unsigned int it, unsigned int x, unsigned int
 			clr_to += ft_hextoi(COLOR1[i], "0123456789ABCDEF") * ft_power(16, j);
 			j++;
 		}
-		clr_from = clr_from + ((((clr_from - clr_to)) / ((MAX_IT / 2) - 1)) * it);
+		clr_from = clr_from + ((((clr_from - clr_to)) / (MAX_IT / 2)) * it);
 		if (clr_from < 0)
 			clr_from *= -1;
 	}
@@ -91,7 +91,7 @@ void	pixel_put_gradient(t_img img, unsigned int it, unsigned int x, unsigned int
 			clr_to += ft_hextoi(COLOR2[i], "0123456789ABCDEF") * ft_power(16, j);
 			j++;
 		}
-		clr_from = clr_from + ((((clr_from - clr_to)) / ((MAX_IT / 2) - 1)) * it);
+		clr_from = clr_from + ((((clr_from - clr_to)) / (MAX_IT / 2)) * it);
 		if (clr_from < 0)
 			clr_from *= -1;
 	}
@@ -106,24 +106,32 @@ void	pixel_put_gradient(t_img img, unsigned int it, unsigned int x, unsigned int
 	my_mlx_pixel_put(&img, x, y, clr_from);
 }
 
-void	fractol_sets(t_img img)
+//static !if in same file
+t_set	init_set(t_set set)
+{
+	set.re_min = -3.2;
+	set.re_max = 1.0;
+	set.im_min = -1.2;
+	set.im_max = set.im_min + (set.re_max - set.re_min) * W_H/W_W;
+	set.zoom = 1.0;
+	return (set);
+}
+
+void	fractol_sets(t_img img) //t_set s
 {
 	t_set		s;
 	unsigned int	is_in;
 	unsigned int	i;
 
-	s.re_min = -3.2;
-	s.re_max = 1.0;
-	s.im_min = -1.2;
-	s.im_max = s.im_min + (s.re_max - s.re_min) * W_H/W_W;
+	s = init_set(s);
 	s.y = 0;
 	while (s.y < W_H)
 	{
 		s.x = 0;
-		s.c_im = s.im_max - (s.y * ((s.im_max - s.im_min) / (W_H - 1)));
+		s.c_im = s.im_max - (s.y * s.zoom * ((s.im_max - s.im_min) / (W_H - 1)));
 		while (s.x < W_W)
 		{
-			s.c_re = s.re_min + (s.x * ((s.re_max - s.re_min) / (W_W - 1)));
+			s.c_re = s.re_min + (s.x * s.zoom * ((s.re_max - s.re_min) / (W_W - 1)));
 			s.z_re = s.c_re;
 			s.z_im = s.c_im;
 			is_in = 1;
@@ -155,47 +163,28 @@ int	main(int ac, char **av)
 	t_mlx	mlx;
 	t_img	img;
 
-	if (ac == 2 && !is_valid_set(av[1])) //is_valid_color()?
+	if (ac == 2 && !is_valid_set(av[1]))
 	{
 		mlx.mlx = mlx_init();
-		if (!mlx.mlx)
-		{
-			printf("Mlx init error!");
-			return (1);
-		}
 		mlx.mlx_win = mlx_new_window(mlx.mlx, W_W, W_H, "fract-ol");
-		if (!mlx.mlx_win)
-		{
-			free(mlx.mlx_win);
-			printf("Mlx window error!");
-			return (1);
-		}
 		img.img = mlx_new_image(mlx.mlx, W_W, W_H);
-		if (!img.img)
-		{
-			free(img.img);
-			printf("Image error!");
-			return (0);
-		}
 		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pxl, &img.line_len, &img.endian);
-		if (!img.addr)
-		{
-			printf("Image address error!");
-			return (0);
-		}
+		
 		fractol_sets(img);
 		mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, img.img, 0, 0);
 		mlx_loop_hook(mlx.mlx, &handle_no_event, &mlx);
+
 		mlx_hook(mlx.mlx_win, MotionNotify, PointerMotionMask, &pointer_hook, &mlx);
 		mlx_hook(mlx.mlx_win, KeyPress, KeyPressMask, &close_esc_hook, &mlx);
 		mlx_hook(mlx.mlx_win, DestroyNotify, 0, &close_cross_hook, &mlx);
 		mlx_mouse_hook(mlx.mlx_win, &zoom_hook, &mlx);
+
 		mlx_loop(mlx.mlx);
 		mlx_destroy_display(mlx.mlx);
 		free(mlx.mlx);
 	}
 	else
-		printf("Invalid params!\n\nExamples :\n$>./fractol \"mandelbrot\" \"COLOR1=#FF0000\" \"COLOR2=#FFFFFF\"\n$>./fractol \"julia\" \"COLOR1=#00FFFF\" \"COLOR2=#FFFFFF\"\n");
+		printf("Invalid params!\n\nExamples :\n$>./fractol \"mandelbrot\"\n$>./fractol \"julia\" <r> <i>\n");
 	return (0);
 }
 
@@ -226,4 +215,19 @@ int	main(int ac, char **av)
  * 	return (0);
  * }
  * mlx_put_image_to_window(vars.mlx, vars.mlx_win, img_ld, 0, 0);
+ *
+ *
+ * Max value of double is 10^308, 10^15
+ * Calculations requiring precision beyond 14-15 digits are rounded, intro rounding errors
+ * set_init()->zoom
+ *
+ *
+ * Events(mlx_hook() only)
+ * mouse_hook = Pointer(x, y) + Zoom(Button4 + Button5)
+ * keyboard_hook = ESC(XK_Escape) + (UP(XK_Up), DOWN(XK_Down), RIGHT(XK_Right), LEFT(XK_Left))
+ * 
+ * Mandelbrot Set (Iteration: 30, Re: [-4.0, 1.4], Im: [-2.0, 2.0])
+ * Julia's Set (Iteration: 400, Re: -1.768 778 833, Im: -0.001 738 996)
+ *
+ * Colors(see oceano video)
  */

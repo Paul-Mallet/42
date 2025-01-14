@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:42:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/07 16:39:15 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/14 18:18:01 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,18 @@ int	close_esc_hook(int key_sym, t_mlx *mlx)
 	return (0);
 }
 
-int	zoom_hook(int button)
+int	zoom_hook(int button, t_set set)
 {
 	if (button == Button4)
-		printf("Zoom in: %d\n", button);
+	{
+		set.zoom *= 0.95;
+		printf("Zoom in: %d(%f)\n", button, set.zoom);
+	}
 	else if (button == Button5)
-		printf("Zoom out: %d\n", button);
+	{
+		set.zoom *= 1.05;
+		printf("Zoom out: %d(%f)\n", button, set.zoom);
+	}
 	return (0);
 }
 
