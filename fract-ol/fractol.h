@@ -6,78 +6,57 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/14 18:14:41 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:46:05 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include <mlx.h>
-# include <X11/X.h>
-# include <X11/Xlib.h>
-# include <X11/keysym.h>
-# include <stdlib.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include "minilibx-linux/mlx.h"
+
+# define WIDTH 800
+# define HEIGHT 800
+
+# define OUT_VALUE 4
 
 typedef struct	s_img
 {
-	void	*img;
+	void	*img_ptr;
 	char	*addr;
-	int	bits_per_pxl;
+	int	bpp;
 	int	line_len;
 	int	endian;
 }		t_img;
 
 typedef struct	s_mlx
 {
-	void	*mlx;
+	void	*mlx_ptr;
 	void	*mlx_win;
 }		t_mlx;
 
-typedef struct	s_set
+typedef struct	s_complex
 {
-	double		re_min;
-	double		re_max;
-	double		im_min;
-	double		im_max;
-	double		zoom;
-	double		c_re;
-	double		c_im;
-	double		z_re;
-	double		z_im;
-	double		z_re2;
-	double		z_im2;
-	unsigned int	x;
-	unsigned int	y;
-}		t_set;
+	double	x; //re
+	double	y; //im
+}		t_complex;
 
+typedef struct	s_fractal
+{
+	char	*name;
+	int	iterations; //30, 200, 400(julia)
+	double	shift_x;
+	double	shift_y;
+	double	zoom;
+}		t_fractal;
 
+void	handle_hooks(t_mlx *mlx, t_fractal *fractal);
 
-# define W_W 1280
-# define W_H 720
-
-# ifndef MAX_IT
-#  define MAX_IT 30
-# endif
-# ifndef COLOR1
-#  define COLOR1 "00FF00"
-# endif
-# ifndef COLOR2
-#  define COLOR2 "FFFFFF"
-# endif
-# ifndef COLOR3
-#  define COLOR3 "000000"
-# endif
-
-int	handle_no_event(void *data);
-int	pointer_hook(int x, int y);
-int	close_esc_hook(int key_sym, t_mlx *mlx);
-int	zoom_hook(int button, t_set set);
-int	close_cross_hook(t_mlx *mlx);
-
-t_set	init_set(t_set set);
-int	is_valid_set(char *set);
-int	ft_strcmp(char *s1, char *s2);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+double	ft_atodbl(char *str);
 
 #endif

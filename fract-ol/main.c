@@ -3,159 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/14 19:13:58 by pamallet         ###   ########.fr       */
+/*   Created: 2025/01/15 16:07:41 by paul_mall         #+#    #+#             */
+/*   Updated: 2025/01/15 16:48:14 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	my_mlx_pixel_put(t_img *img, unsigned int x, unsigned int y, int color)
+static void	handle_error(void)
 {
-	char	*dst;
-
-	dst = img->addr + (y * img->line_len + x * (img->bits_per_pxl / 8));
-	*(unsigned int *)dst = color;
+	ft_printf("Invalid params!\n\nExamples :\n$>./fractol \"mandelbrot\"\n$>./fractol \"julia\" <r> <i>\n");
 }
 
-int	ft_hextoi(char c, char *hex)
+static void	init(t_mlx *mlx, t_img *img)
 {
-	int	i;
-
-	i = -1;
-	while (hex[++i])
-	{
-		if (hex[i] == c)
-			return (i);
-	}
-	return (0);
-}
-
-int	ft_power(int nb, int power)
-{
-	int	i;
-	int	res;
-
-	if (power < 0)
-		return (0);
-	i = 0;
-	res = 1;
-	while (i < power)
-	{
-		res *= nb;
-		i++;
-	}
-	return (res);
-}
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	pixel_put_gradient(t_img img, unsigned int it, unsigned int x, unsigned int y)
-{
-	int	i;
-	int	j;
-	int	clr_from;
-	int	clr_to;
-
-	i = ft_strlen(COLOR1);
-	j = 0;
-	clr_from = 0;
-	clr_to = 0;
-	if (it < (MAX_IT / 2))
-	{
-		while (--i >= 0)
-		{
-			clr_from += ft_hextoi(COLOR3[i], "0123456789ABCDEF") * ft_power(16, j);
-			clr_to += ft_hextoi(COLOR1[i], "0123456789ABCDEF") * ft_power(16, j);
-			j++;
-		}
-		clr_from = clr_from + ((((clr_from - clr_to)) / (MAX_IT / 2)) * it);
-		if (clr_from < 0)
-			clr_from *= -1;
-	}
-	else if ((it >= MAX_IT / 2) && (it <= MAX_IT - 1))
-	{
-		while (--i >= 0)
-		{
-			clr_from += ft_hextoi(COLOR1[i], "0123456789ABCDEF") * ft_power(16, j);
-			clr_to += ft_hextoi(COLOR2[i], "0123456789ABCDEF") * ft_power(16, j);
-			j++;
-		}
-		clr_from = clr_from + ((((clr_from - clr_to)) / (MAX_IT / 2)) * it);
-		if (clr_from < 0)
-			clr_from *= -1;
-	}
-	else
-	{
-		while (--i > 0)
-		{
-			clr_from += ft_hextoi(COLOR3[i], "0123456789ABCDEF") * ft_power(16, j);
-			j++;
-		}
-	}
-	my_mlx_pixel_put(&img, x, y, clr_from);
-}
-
-//static !if in same file
-t_set	init_set(t_set set)
-{
-	set.re_min = -3.2;
-	set.re_max = 1.0;
-	set.im_min = -1.2;
-	set.im_max = set.im_min + (set.re_max - set.re_min) * W_H/W_W;
-	set.zoom = 1.0;
-	return (set);
-}
-
-void	fractol_sets(t_img img) //t_set s
-{
-	t_set		s;
-	unsigned int	is_in;
-	unsigned int	i;
-
-	s = init_set(s);
-	s.y = 0;
-	while (s.y < W_H)
-	{
-		s.x = 0;
-		s.c_im = s.im_max - (s.y * s.zoom * ((s.im_max - s.im_min) / (W_H - 1)));
-		while (s.x < W_W)
-		{
-			s.c_re = s.re_min + (s.x * s.zoom * ((s.re_max - s.re_min) / (W_W - 1)));
-			s.z_re = s.c_re;
-			s.z_im = s.c_im;
-			is_in = 1;
-			i = 0;
-			while (i < MAX_IT)
-			{
-				s.z_re2 = s.z_re * s.z_re;
-				s.z_im2 = s.z_im * s.z_im;
-				if (s.z_re2 + s.z_im2 > 4)
-				{
-					is_in = 0;
-					break ;
-				}
-				s.z_im = (2*s.z_re*s.z_im) + s.c_im;
-				s.z_re = (s.z_re2 - s.z_im2) + s.c_re;
-				pixel_put_gradient(img, i, s.x, s.y);
-				i++;
-			}
-			if (is_in)
-				pixel_put_gradient(img, i, s.x, s.y); //black by dft
-			s.x++;
-		}
-		s.y++;
-	}
+	//init, new_window, new_img, events, fractal_init(data)(see 1rst part video)
+	//implement fractal_render() at home
 }
 
 int	main(int ac, char **av)
@@ -163,71 +28,14 @@ int	main(int ac, char **av)
 	t_mlx	mlx;
 	t_img	img;
 
-	if (ac == 2 && !is_valid_set(av[1]))
+	if ((ac == 2 && !strncmp(av[1], "mandelbrot", 10))
+		|| ac == 4 && !strncmp(av[1], "julia", 5))
 	{
-		mlx.mlx = mlx_init();
-		mlx.mlx_win = mlx_new_window(mlx.mlx, W_W, W_H, "fract-ol");
-		img.img = mlx_new_image(mlx.mlx, W_W, W_H);
-		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pxl, &img.line_len, &img.endian);
-		
-		fractol_sets(img);
-		mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, img.img, 0, 0);
-		mlx_loop_hook(mlx.mlx, &handle_no_event, &mlx);
-
-		mlx_hook(mlx.mlx_win, MotionNotify, PointerMotionMask, &pointer_hook, &mlx);
-		mlx_hook(mlx.mlx_win, KeyPress, KeyPressMask, &close_esc_hook, &mlx);
-		mlx_hook(mlx.mlx_win, DestroyNotify, 0, &close_cross_hook, &mlx);
-		mlx_mouse_hook(mlx.mlx_win, &zoom_hook, &mlx);
-
-		mlx_loop(mlx.mlx);
-		mlx_destroy_display(mlx.mlx);
-		free(mlx.mlx);
+		init(&mlx, &img);
+		//fractal_render(); //frct.name
+		mlx_loop(mlx.mlx_ptr);
 	}
 	else
-		printf("Invalid params!\n\nExamples :\n$>./fractol \"mandelbrot\"\n$>./fractol \"julia\" <r> <i>\n");
+		handle_error();
 	return (0);
 }
-
-/*
- * Implement Mandelbrot's Set*, Julia's Set**
- * Implement fractal_set(char *set, )Change Julia sets via params
- * Few colors, show fractal's depth(psychedelic effect)
- *
- *
- * KeySyms -> offer consistent key's action/symbol accross platforms
- * Mandelbrot's Set
- * pixel coord = complex nb(i)
- * color according to Mandelbrot or not
- * 2 approaches:
- * 	4 pxls des 4 coins de l'img, interpolate in-between pxls
- * But same problem for both!
- *
- *
- * void	*img_ld;
- * char	*img_ld_path;
- * int	img_ld_w;
- * int	img_ld_h;
- * img_ld_path = "./davidou.xpm";
- * img_ld = mlx_xpm_file_to_image(vars.mlx, img_ld_path, &img_ld_w, &img_ld_h);
- * if (!img_ld)
- * {
- * 	printf("Image load error!");
- * 	return (0);
- * }
- * mlx_put_image_to_window(vars.mlx, vars.mlx_win, img_ld, 0, 0);
- *
- *
- * Max value of double is 10^308, 10^15
- * Calculations requiring precision beyond 14-15 digits are rounded, intro rounding errors
- * set_init()->zoom
- *
- *
- * Events(mlx_hook() only)
- * mouse_hook = Pointer(x, y) + Zoom(Button4 + Button5)
- * keyboard_hook = ESC(XK_Escape) + (UP(XK_Up), DOWN(XK_Down), RIGHT(XK_Right), LEFT(XK_Left))
- * 
- * Mandelbrot Set (Iteration: 30, Re: [-4.0, 1.4], Im: [-2.0, 2.0])
- * Julia's Set (Iteration: 400, Re: -1.768 778 833, Im: -0.001 738 996)
- *
- * Colors(see oceano video)
- */
