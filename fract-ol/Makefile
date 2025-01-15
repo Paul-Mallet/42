@@ -1,7 +1,7 @@
 CC= gcc
 CFLAGS= -Wall -Wextra -Werror
 SRC= main.c \
-     hooks.c \
+     events.c \
      utils.c
 OBJ= $(SRC:.c=.o)
 NAME= fractol

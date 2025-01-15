@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/15 16:46:05 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/15 18:29:42 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
-# include "minilibx-linux/mlx.h"
+# include "mlx.h"
 
 # define WIDTH 800
 # define HEIGHT 800
@@ -54,7 +54,7 @@ typedef struct	s_fractal
 	double	zoom;
 }		t_fractal;
 
-void	handle_hooks(t_mlx *mlx, t_fractal *fractal);
+void	handle_events(t_mlx *mlx, t_fractal *fractal);
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 double	ft_atodbl(char *str);
