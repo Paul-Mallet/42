@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/16 13:00:16 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/16 19:09:20 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,11 @@ typedef struct	s_set
 # endif
 
 void	init(t_set *set);
+void	hooks(t_set *set);
 void	render(t_set *set);
 
-int	pointer_hook(int x, int y);
-int	close_esc_hook(int key_sym, t_set *set);
-int	zoom_hook(int button, t_set *set);
-int	close_cross_hook(t_set *set);
+int	handle_close(t_set *set);
+int	handle_keys(int key_sym, t_set *set);
 
 double	map(double uns_num, double n_min, double n_max, double o_min, double o_max);
 t_complex	sum_complex(t_complex c1, t_complex c2);

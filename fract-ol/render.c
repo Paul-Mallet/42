@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:23:32 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/16 13:01:15 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/16 17:26:25 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,23 @@ void	draw_pixel(t_set *set, int x, int y)
 {
 	int	i;
 	int	color;
+	t_complex	z;
+	t_complex	c;
 
 	i = 0;
-	set->z.x = ((map(x, -2, 2, 0, WIDTH)) * set->zoom) + set->shift_x;
-	set->z.y = ((map(y, 2, -2, 0, HEIGHT)) * set->zoom) + set->shift_y;
-
+	z.x = 0.0;
+	z.y = 0.0;
+	c.x = map(x, -2, 2, 0, WIDTH);
+	c.y = map(y, 2, -2, 0, HEIGHT);
+	/* printf("z.x: %f\nz.y: %f\n", set->z.x, set->z.y); */
 	while (i < set->iterations)
 	{
-		set->z = sum_complex(square_complex(set->z), set->c);
-		if ((set->z.x * set->z.x) + (set->z.y * set->z.y) > set->out_value)
+		z = sum_complex(square_complex(z), c);
+		if ((z.x * z.x) + (z.y * z.y) > set->out_value)
 		{
-			gradient(set, i, x, y);
+			/* gradient(set, i, x, y); */
+			color = map(i, 0x000000, 0xFF0000, 0, set->iterations);
+			my_mlx_pixel_put(set, x, y, 0x00FF00);
 			return ;
 		}
 		i++;
@@ -105,6 +111,6 @@ void	render(t_set *set)
 		y++;
 	}
 	mlx_put_image_to_window(set->mlx.mlx_co,
-							set->mlx.mlx_win,
-							set->img.img_ptr, 0, 0);
+				set->mlx.mlx_win,
+				set->img.img_ptr, 0, 0);
 }
