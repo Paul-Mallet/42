@@ -1,7 +1,7 @@
 CC= gcc
 CFLAGS= -Wall -Wextra -Werror
 SRC= main.c \
-     events.c \
+     hooks.c \
      utils.c
 OBJ= $(SRC:.c=.o)
 NAME= fractol
@@ -9,10 +9,10 @@ NAME= fractol
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I/usr/include -Iminilibx-linux -O3 -g -c $< -o $@
+	$(CC) $(CFLAGS) -I/usr/include -Iminilibx-linux -g -c $< -o $@ #-O3
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lminilibx-linux -lmlx_Linux -L/usr/lib -Iminilibx-linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(OBJ) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -o $(NAME) #-L/usr/lib -Iminilibx-linux -lm -lz
 
 clean:
 	rm -f $(OBJ)
