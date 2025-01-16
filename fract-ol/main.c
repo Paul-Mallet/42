@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/16 23:44:31 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/17 00:10:05 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	init(t_set *set)
 	set->mlx.mlx_co = mlx_init();
 	if (!set->mlx.mlx_co)
 		handle_error();
-	set->mlx.mlx_win = mlx_new_window(set->mlx.mlx_co, WIDTH, HEIGHT, set->name);
+	set->mlx.mlx_win = mlx_new_window(set->mlx.mlx_co,
+			WIDTH, HEIGHT, set->name);
 	if (!set->mlx.mlx_win)
 	{
 		mlx_destroy_display(set->mlx.mlx_co);
@@ -49,9 +50,7 @@ void	init(t_set *set)
 		handle_error();
 	}
 	set->img.addr = mlx_get_data_addr(set->img.img_ptr,
-									 &set->img.bpp,
-									 &set->img.line_len,
-									 &set->img.endian);
+			&set->img.bpp, &set->img.line_len, &set->img.endian);
 	init_set(set);
 }
 
@@ -61,7 +60,7 @@ int	main(int ac, char **av)
 
 	if ((ac == 2 && !ft_strncmp(av[1], "mandelbrot", 10))
 		|| (ac == 4 && !ft_strncmp(av[1], "julia", 5)))
-	{	
+	{
 		set.name = av[1];
 		if (!ft_strncmp(set.name, "julia", 5))
 		{
@@ -71,16 +70,15 @@ int	main(int ac, char **av)
 		}
 		init(&set);
 		mlx_hook(set.mlx.mlx_win,
-				 DestroyNotify,
-				 StructureNotifyMask,
-				 &handle_close,
-				 &set);
-		mlx_hook(set.mlx.mlx_win, KeyPress, KeyPressMask, &handle_keys, &set);
-		mlx_hook(set.mlx.mlx_win, ButtonPress, ButtonPressMask, &handle_mouse, &set);
+			DestroyNotify, StructureNotifyMask, &handle_close, &set);
+		mlx_hook(set.mlx.mlx_win, KeyPress, KeyPressMask, &handle_keys,
+			&set);
+		mlx_hook(set.mlx.mlx_win, ButtonPress, ButtonPressMask, &handle_mouse,
+			&set);
 		render(&set);
 		mlx_loop(set.mlx.mlx_co);
 	}
 	else
-		printf("Invalid params!\n\nExamples :\n$>./fractol \"mandelbrot\"\n$>./fractol \"julia\" <r> <i>\n");
+		printf("Ex:\n$>./fractol mandelbrot\n$>./fractol julia <r> <i>\n"); //!
 	return (0);
 }

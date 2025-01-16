@@ -1,39 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:03:50 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/16 23:26:24 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/17 00:24:10 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-double	map(double uns_num, double n_min, double n_max, double o_min, double o_max)
-{
-	return ((n_max - n_min) * (uns_num - o_min) / (o_max - o_min) + n_min);
-}
-
-t_complex	sum_complex(t_complex c1, t_complex c2)
-{
-	t_complex	res;
-
-	res.x = c1.x + c2.x;
-	res.y = c1.y + c2.y;
-	return (res);
-}
-
-t_complex	square_complex(t_complex c)
-{
-	t_complex	res;
-
-	res.x = (c.x * c.x) - (c.y * c.y);
-	res.y = 2 * c.x * c.y;
-	return (res);
-}
 
 int	ft_hextoi(char c, char *hex)
 {
@@ -80,7 +57,7 @@ int	ft_strncmp(char *s1, char *s2, int n)
 	int	i;
 
 	i = 0;
-	while (s1[i] || s2[i] && i < n)
+	while ((s1[i] || s2[i]) && i < n)
 	{
 		if (s1[i] != s2[i])
 			return (s1[i] - s2[i]);
