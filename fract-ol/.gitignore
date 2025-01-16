@@ -2,3 +2,4 @@ minilibx-linux
 fractol
 *.o
 *.txt
+.*
