@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 19:03:50 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/16 13:00:00 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/16 23:26:24 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 double	map(double uns_num, double n_min, double n_max, double o_min, double o_max)
 {
-	return ((n_max - n_min) * (((uns_num - o_min) / (o_max - o_min)) + n_min));
+	return ((n_max - n_min) * (uns_num - o_min) / (o_max - o_min) + n_min);
 }
 
 t_complex	sum_complex(t_complex c1, t_complex c2)
@@ -87,4 +87,34 @@ int	ft_strncmp(char *s1, char *s2, int n)
 		i++;
 	}
 	return (0);
+}
+
+double	ft_atodbl(char *s)
+{
+	double	bef;
+	double	aft;
+	double	pow;
+	int		sign;
+
+	bef = 0.0;
+	aft = 0.0;
+	pow = 1;
+	sign = 1;
+	while (*s == ' ' || (*s >= 9 && *s <= 13))
+		s++;
+	while (*s == '+' || *s == '-')
+	{
+		if (*s == '-')
+			sign *= -1;
+		s++;
+	}
+	while (*s >= '0' && *s <= '9' && *s != '.')
+		bef = (bef * 10) + (*s++ - 48);
+	s++;
+	while (*s >= '0' && *s <= '9')
+	{
+		pow /= 10;
+		aft = aft + (*s++ - 48) * pow;
+	}
+	return ((bef + aft) * sign);
 }

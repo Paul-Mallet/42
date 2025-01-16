@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/16 19:12:36 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/16 23:44:31 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 static void	handle_error(void)
 {
 	perror("Malloc error!");
-	exit(1); //EXIT_FAILURE
+	exit(1);
 }
 
 static void	init_set(t_set *set)
 {
-	set->iterations = 30;
+	if (!ft_strncmp(set->name, "mandelbrot", 10))
+		set->iterations = 30;
 	set->out_value = 4;
 	set->shift_x = 0.0;
 	set->shift_y = 0.0;
@@ -54,12 +55,6 @@ void	init(t_set *set)
 	init_set(set);
 }
 
-void	hooks(t_set *set)
-{
-	mlx_hook(set->mlx.mlx_win, DestroyNotify, 0, &handle_close, &set);
-	mlx_hook(set->mlx.mlx_win, KeyPress, KeyPressMask, &handle_keys, &set);
-}
-
 int	main(int ac, char **av)
 {
 	t_set	set;
@@ -68,12 +63,21 @@ int	main(int ac, char **av)
 		|| (ac == 4 && !ft_strncmp(av[1], "julia", 5)))
 	{	
 		set.name = av[1];
+		if (!ft_strncmp(set.name, "julia", 5))
+		{
+			set.iterations = 200;
+			set.julia_x = ft_atodbl(av[2]);
+			set.julia_y = ft_atodbl(av[3]);
+		}
 		init(&set);
+		mlx_hook(set.mlx.mlx_win,
+				 DestroyNotify,
+				 StructureNotifyMask,
+				 &handle_close,
+				 &set);
+		mlx_hook(set.mlx.mlx_win, KeyPress, KeyPressMask, &handle_keys, &set);
+		mlx_hook(set.mlx.mlx_win, ButtonPress, ButtonPressMask, &handle_mouse, &set);
 		render(&set);
-		hooks(&set);
-
-		/* mlx_hook(set.mlx.mlx_win, DestroyNotify, 0, &handle_close, &set); */
-		/* mlx_hook(set.mlx.mlx_win, KeyPress, KeyPressMask, &handle_keys, &set); */
 		mlx_loop(set.mlx.mlx_co);
 	}
 	else

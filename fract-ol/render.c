@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:23:32 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/16 17:26:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/16 23:12:13 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	gradient(t_set *set, unsigned int it, unsigned int x, unsigned int y
 			clr_to += ft_hextoi(COLOR1[i], "0123456789ABCDEF") * ft_power(16, j);
 			j++;
 		}
-		clr_from = clr_from + ((((clr_from - clr_to)) / (set->iterations / 2)) * it);
+		clr_from = clr_from + (((clr_from - clr_to) / 15) * it);
 		if (clr_from < 0)
 			clr_from *= -1;
 	}
@@ -51,42 +51,45 @@ static void	gradient(t_set *set, unsigned int it, unsigned int x, unsigned int y
 			clr_to += ft_hextoi(COLOR2[i], "0123456789ABCDEF") * ft_power(16, j);
 			j++;
 		}
-		clr_from = clr_from + ((((clr_from - clr_to)) / (set->iterations / 2)) * it);
+		clr_from = clr_from + ((((clr_from - clr_to)) / (15)) * it);
 		if (clr_from < 0)
 			clr_from *= -1;
 	}
-	/* else */
-	/* { */
-	/* 	while (--i > 0) */
-	/* 	{ */
-	/* 		clr_from += ft_hextoi(COLOR3[i], "0123456789ABCDEF") * ft_power(16, j); */
-	/* 		j++; */
-	/* 	} */
-	/* } */
 	my_mlx_pixel_put(set, x, y, clr_from);
 }
 
-void	draw_pixel(t_set *set, int x, int y)
+static void	choose_set(t_set *set)
+{	
+	if (!ft_strncmp(set->name, "julia", 5))
+	{
+		set->c.x = set->julia_x;
+		set->c.y = set->julia_y;
+	}
+	else
+	{
+		set->c.x = set->z.x;
+		set->c.y = set->z.y;
+	}
+}
+
+static void	draw_pixel(t_set *set, int x, int y)
 {
 	int	i;
 	int	color;
-	t_complex	z;
-	t_complex	c;
 
 	i = 0;
-	z.x = 0.0;
-	z.y = 0.0;
-	c.x = map(x, -2, 2, 0, WIDTH);
-	c.y = map(y, 2, -2, 0, HEIGHT);
-	/* printf("z.x: %f\nz.y: %f\n", set->z.x, set->z.y); */
+	set->z.x = (map(x, -2, 2, 0, WIDTH) * set->zoom) + set->shift_x;
+	set->z.y = (map(y, 2, -2, 0, HEIGHT) * set->zoom) + set->shift_y;
+
+	choose_set(set);
+
 	while (i < set->iterations)
 	{
-		z = sum_complex(square_complex(z), c);
-		if ((z.x * z.x) + (z.y * z.y) > set->out_value)
+		set->z = sum_complex(square_complex(set->z), set->c);
+		
+		if ((set->z.x * set->z.x) + (set->z.y * set->z.y) > set->out_value)
 		{
-			/* gradient(set, i, x, y); */
-			color = map(i, 0x000000, 0xFF0000, 0, set->iterations);
-			my_mlx_pixel_put(set, x, y, 0x00FF00);
+			gradient(set, i, x, y);
 			return ;
 		}
 		i++;

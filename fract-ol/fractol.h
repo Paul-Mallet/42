@@ -6,14 +6,14 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/16 19:09:20 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/16 23:48:21 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "minilibx-linux/mlx.h" //<mlx.h>
+# include "minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
@@ -37,8 +37,8 @@ typedef struct	s_mlx
 
 typedef struct	s_complex
 {
-	double	x; //re
-	double	y; //im
+	double	x;
+	double	y;
 }		t_complex;
 
 typedef struct	s_set
@@ -53,6 +53,8 @@ typedef struct	s_set
 	double		shift_x;
 	double		shift_y;
 	double		zoom;
+	double		julia_x;
+	double		julia_y;
 }		t_set;
 
 
@@ -76,6 +78,7 @@ void	render(t_set *set);
 
 int	handle_close(t_set *set);
 int	handle_keys(int key_sym, t_set *set);
+int	handle_mouse(int button, int x, int y, t_set *set);
 
 double	map(double uns_num, double n_min, double n_max, double o_min, double o_max);
 t_complex	sum_complex(t_complex c1, t_complex c2);
@@ -84,5 +87,6 @@ int	ft_hextoi(char c, char *hex);
 int	ft_power(int nb, int power);
 int	ft_strlen(char *str);
 int	ft_strncmp(char *s1, char *s2, int n);
+double	ft_atodbl(char *s);
 
 #endif
