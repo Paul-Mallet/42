@@ -1,6 +1,7 @@
 CC= gcc
 CFLAGS= -Wall -Wextra -Werror
 SRC= main.c \
+	 init.c \
      hooks.c \
 	 render.c \
      utils1.c \
@@ -11,10 +12,10 @@ NAME= fractol
 all: $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I/usr/include -Iminilibx-linux -O3 -g -c $< -o $@ #-O3
+	$(CC) $(CFLAGS) -I/usr/include -Iminilibx-linux -O3 -g -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -o $(NAME) #-L/usr/lib -Iminilibx-linux -lm -lz
+	$(CC) $(OBJ) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -o $(NAME)
 
 clean:
 	rm -f $(OBJ)

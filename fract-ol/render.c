@@ -6,56 +6,41 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:23:32 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/17 00:23:08 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/17 12:23:08 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	my_mlx_pixel_put(t_set *set, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = set->img.addr + (y * set->img.line_len + x * (set->img.bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
-static void	gradient(t_set *set, int it, unsigned int x, unsigned int y) //!
+static int	*from_to_values(t_set *set, char *clr_1, char *clr_2)
 {
 	int	i;
 	int	j;
-	int	from;
-	int	to;
 
-	i = ft_strlen(COLOR1);
+	i = ft_strlen(CLR_1);
 	j = 0;
-	from = 0;
-	to = 0;
+	set->from_to[0] = 0;
+	set->from_to[1] = 0;
+	while (--i >= 0)
+	{
+		set->from_to[0] += ft_hextoi(clr_1[i], HEXA_STR) * ft_power(16, j);
+		set->from_to[1] += ft_hextoi(clr_2[i], HEXA_STR) * ft_power(16, j++);
+	}
+	return (set->from_to);
+}
+
+static void	gradient(t_set *set, int it, int x, int y)
+{
+	int	color;
+
 	if (it < (set->iterations / 2))
-	{
-		while (--i >= 0)
-		{
-			from += ft_hextoi(COLOR3[i], "0123456789ABCDEF") * ft_power(16, j);
-			to += ft_hextoi(COLOR1[i], "0123456789ABCDEF") * ft_power(16, j);
-			j++;
-		}
-		from = from + (((from - to) / 15) * it);
-		if (from < 0)
-			from *= -1;
-	}
-	else if ((it >= set->iterations / 2) && (it <= set->iterations - 1))
-	{
-		while (--i >= 0)
-		{
-			from += ft_hextoi(COLOR1[i], "0123456789ABCDEF") * ft_power(16, j);
-			to += ft_hextoi(COLOR2[i], "0123456789ABCDEF") * ft_power(16, j);
-			j++;
-		}
-		from = from + ((((from - to)) / (15)) * it);
-		if (from < 0)
-			from *= -1;
-	}
-	my_mlx_pixel_put(set, x, y, from);
+		set->from_to = from_to_values(set, CLR_3, CLR_1);
+	else
+		set->from_to = from_to_values(set, CLR_1, CLR_2);
+	color = set->from_to[0] + (((set->from_to[0] - set->from_to[1]) / 15) * it);
+	if (color < 0)
+		color *= -1;
+	my_mlx_pixel_put(set, x, y, color);
 }
 
 static void	choose_set(t_set *set)
@@ -77,8 +62,8 @@ static void	draw_pixel(t_set *set, int x, int y)
 	int	i;
 
 	i = 0;
-	set->z.x = (map(x, -2, 2, 0, WIDTH) * set->zoom) + set->shift_x; //!
-	set->z.y = (map(y, 2, -2, 0, HEIGHT) * set->zoom) + set->shift_y;
+	set->z.x = (resize(x, -2, 2, WIDTH) * set->zoom) + set->shift_x;
+	set->z.y = (resize(y, 2, -2, HEIGHT) * set->zoom) + set->shift_y;
 	choose_set(set);
 	while (i < set->iterations)
 	{
@@ -90,7 +75,7 @@ static void	draw_pixel(t_set *set, int x, int y)
 		}
 		i++;
 	}
-	my_mlx_pixel_put(set, x, y, 0x000000);
+	my_mlx_pixel_put(set, x, y, CLR_NOT_IN_SET);
 }
 
 void	render(t_set *set)

@@ -3,95 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 19:03:50 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/17 00:24:10 by paul_mall        ###   ########.fr       */
+/*   Created: 2025/01/17 00:17:03 by paul_mall         #+#    #+#             */
+/*   Updated: 2025/01/17 12:26:48 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	ft_hextoi(char c, char *hex)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int	i;
+	unsigned char	*arr;
+	size_t			i;
 
-	i = -1;
-	while (hex[++i])
-	{
-		if (hex[i] == c)
-			return (i);
-	}
-	return (0);
+	arr = (unsigned char *)malloc(nmemb * size);
+	if (arr == NULL)
+		return (NULL);
+	i = 0;
+	while (i < size)
+		arr[i++] = '\0';
+	return (arr);
 }
 
-int	ft_power(int nb, int power)
+void	my_mlx_pixel_put(t_set *set, int x, int y, int color)
 {
-	int	i;
-	int	res;
+	char	*dst;
 
-	if (power < 0)
-		return (0);
-	i = 0;
-	res = 1;
-	while (i < power)
-	{
-		res *= nb;
-		i++;
-	}
+	dst = set->img.addr + (y * set->img.line_len + x * (set->img.bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
+double	resize(double unsc_n, double n_min, double n_max, double prv_max)
+{
+	double	prv_min;
+
+	prv_min = 0;
+	return ((n_max - n_min) * (unsc_n - prv_min) / (prv_max - prv_min) + n_min);
+}
+
+t_complex	sum_complex(t_complex c1, t_complex c2)
+{
+	t_complex	res;
+
+	res.x = c1.x + c2.x;
+	res.y = c1.y + c2.y;
 	return (res);
 }
 
-int	ft_strlen(char *str)
+t_complex	square_complex(t_complex c)
 {
-	int	i;
+	t_complex	res;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	ft_strncmp(char *s1, char *s2, int n)
-{
-	int	i;
-
-	i = 0;
-	while ((s1[i] || s2[i]) && i < n)
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	return (0);
-}
-
-double	ft_atodbl(char *s)
-{
-	double	bef;
-	double	aft;
-	double	pow;
-	int		sign;
-
-	bef = 0.0;
-	aft = 0.0;
-	pow = 1;
-	sign = 1;
-	while (*s == ' ' || (*s >= 9 && *s <= 13))
-		s++;
-	while (*s == '+' || *s == '-')
-	{
-		if (*s == '-')
-			sign *= -1;
-		s++;
-	}
-	while (*s >= '0' && *s <= '9' && *s != '.')
-		bef = (bef * 10) + (*s++ - 48);
-	s++;
-	while (*s >= '0' && *s <= '9')
-	{
-		pow /= 10;
-		aft = aft + (*s++ - 48) * pow;
-	}
-	return ((bef + aft) * sign);
+	res.x = (c.x * c.x) - (c.y * c.y);
+	res.y = 2 * c.x * c.y;
+	return (res);
 }
