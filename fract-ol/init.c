@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:36:24 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/17 12:23:27 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/17 12:28:56 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ static void	init_set(t_set *set)
 	{
 		set->from_to = (int *)ft_calloc(2, 2 * sizeof(int));
 		if (!set->from_to)
-		{
-			perror("Calloc error.");
-			exit (1);
-		}
+			handle_error("Calloc error.");
 	}
 	set->shift_x = 0.0;
 	set->shift_y = 0.0;
