@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/17 11:47:36 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/17 12:35:34 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	handle_err(char *str)
 {
 	perror(str);
-	exit(1);
+	exit(EXIT_FAILURE);
 }
 
 int	main(int ac, char **av)

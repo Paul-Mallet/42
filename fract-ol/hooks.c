@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 16:42:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/17 12:07:24 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/17 12:36:26 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	handle_close(t_set *set)
 	mlx_destroy_display(set->mlx.mlx_co);
 	free(set->from_to);
 	free(set->mlx.mlx_co);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 int	handle_keys(int key_sym, t_set *set)
