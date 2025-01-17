@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/17 12:35:34 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/17 19:05:19 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	main(int ac, char **av)
 {
 	t_set	set;
 
-	if ((ac == 2 && !ft_strncmp(av[1], "mandelbrot", 10))
-		|| (ac == 4 && !ft_strncmp(av[1], "julia", 5)))
+	if ((ac == 2 && !ft_strcmp(av[1], "mandelbrot"))
+		|| (ac == 4 && !ft_strcmp(av[1], "julia")))
 	{
 		set.name = av[1];
-		if (!ft_strncmp(set.name, "julia", 5))
+		if (!ft_strcmp(set.name, "julia"))
 		{
 			set.iterations = 200;
 			set.julia_x = ft_atodbl(av[2]);

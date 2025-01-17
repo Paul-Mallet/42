@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:36:24 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/17 12:35:46 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/17 19:07:11 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	handle_err(char *str)
 
 static void	init_set(t_set *set)
 {
-	if (!ft_strncmp(set->name, "mandelbrot", 10))
+	if (!ft_strcmp(set->name, "mandelbrot"))
 		set->iterations = 30;
 	set->out_value = 4;
 	set->from_to = NULL;

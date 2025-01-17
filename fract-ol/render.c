@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 12:23:32 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/17 12:23:08 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/17 19:07:28 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	gradient(t_set *set, int it, int x, int y)
 
 static void	choose_set(t_set *set)
 {
-	if (!ft_strncmp(set->name, "julia", 5))
+	if (!ft_strcmp(set->name, "julia"))
 	{
 		set->c.x = set->julia_x;
 		set->c.y = set->julia_y;
