@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:44:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/17 19:05:19 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:47:10 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 	t_set	set;
 
 	if ((ac == 2 && !ft_strcmp(av[1], "mandelbrot"))
-		|| (ac == 4 && !ft_strcmp(av[1], "julia")))
+		|| (ac == 4 && is_valid_julia(av[1], av[2], av[3])))
 	{
 		set.name = av[1];
 		if (!ft_strcmp(set.name, "julia"))

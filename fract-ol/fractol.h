@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/18 12:17:45 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/18 12:46:55 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,10 @@ t_complex	square_complex(t_complex c);
 
 int			ft_hextoi(char c, char *hex);
 int			ft_power(int nb, int power);
+double		ft_atodbl(char *s);
+
 int			ft_strlen(char *str);
 int			ft_strcmp(char *s1, char *s2);
-double		ft_atodbl(char *s);
+int			is_valid_julia(char *name, char *re, char *im);
 
 #endif
