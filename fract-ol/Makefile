@@ -5,7 +5,8 @@ SRC= main.c \
      hooks.c \
 	 render.c \
      utils1.c \
-	 utils2.c
+	 utils2.c \
+	 utils3.c
 OBJ= $(SRC:.c=.o)
 NAME= fractol
 

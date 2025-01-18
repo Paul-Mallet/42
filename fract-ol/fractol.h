@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:06:06 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/17 19:04:28 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:17:45 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,14 @@ typedef struct s_set
 	double		julia_x;
 	double		julia_y;
 }		t_set;
+
+typedef struct s_double
+{
+	double	bef;
+	double	aft;
+	double	pow;
+	int		sign;
+}		t_double;
 
 void		init(t_set *set);
 void		render(t_set *set);
