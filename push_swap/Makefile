@@ -1,7 +1,8 @@
 CC=cc
 FLAGS=-Wall -Wextra -Werror
 SRCS=main.c \
-	 utils1.c
+	 utils1.c \
+	 utils2.c
 OBJS=$(SRCS:.c=.o)
 LIB=libpush_swap.a
 NAME=push_swap
