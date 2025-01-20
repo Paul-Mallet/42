@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:34:23 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/19 11:46:23 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/20 12:29:14 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@ int	main(int ac, char **av)
 {
 	(void)ac;
 	ft_putstr(av[1]);
+	printf("%d\n", ft_median_pivot([7, 10, 4, 3, 20, 15], 3));
 	return (0);
 }
