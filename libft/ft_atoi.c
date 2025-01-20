@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:12:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/31 10:53:30 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/20 23:29:05 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@ int	ft_atoi(const char *nptr)
 	}
 	return (sign * res);
 }
-/*
-int	main(void)
-{
-	printf("%d\n", ft_atoi("   +1234pld"));
-	printf("%d\n", atoi("   +1234pld"));
-	return (0);
-}
-*/
+
+/* int	main(void) */
+/* { */
+/* 	printf("%d\n", ft_atoi("   +123400000000pld")); */
+/* 	printf("%d\n", atoi("   +123400000000pld")); */
+/* 	return (0); */
+/* } */
