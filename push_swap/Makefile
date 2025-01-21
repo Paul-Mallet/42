@@ -1,6 +1,7 @@
 CC=cc
 FLAGS=-Wall -Wextra -Werror
 SRCS=main.c \
+	 init.c \
 	 utils1.c \
 	 utils2.c
 OBJS=$(SRCS:.c=.o)

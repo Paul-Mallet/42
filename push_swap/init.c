@@ -1,59 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils1.c                                           :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/19 11:46:52 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/21 11:44:04 by paul_mall        ###   ########.fr       */
+/*   Created: 2025/01/21 11:28:37 by paul_mall         #+#    #+#             */
+/*   Updated: 2025/01/21 12:24:30 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	handle_error(const char *s)
+static int	count_digits(char *s)
 {
-	while (*s)
-		write(2, &*s++, 1);
-	exit(1);
-}
+	int	count;
 
-int	is_space(const char c)
-{
-	return (c == ' ' || (c >= 9 && c <= 13));
-}
-
-int	is_digit(const char c)
-{
-	return (c >= '0' && c <= '9');
-}
-
-int	ft_strlen(const char *s)
-{
-	int	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
-}
-
-int	is_valid_input(char *s)
-{
-	if (!ft_strlen(s))
-		handle_error(ERROR_MSG);
+	count = 0;
 	while (*s)
 	{
 		while (is_space(*s))
 			s++;
 		if (*s == '-')
 			s++;
-		if (!is_digit(*s) || (*s == '0' && is_digit(*(s + 1))))
-			handle_error(ERROR_MSG);
-		//conv with atoi() [min, max]
 		while (is_digit(*s))
 			s++;
+		count++;
 	}
-	return (1);
+	return (count);
+}
+
+void	init_stack(t_stack *stk, char **av)
+{
+	int	i;
+
+	i = 0;
+	stk->arr = NULL;
+	stk->len = 0;
+	while (av[++i])
+		stk->len += count_digits(av[i]);
+	stk->arr = (int *)malloc(stk->len * sizeof(int)); //free
+	if (!stk->arr)
+		handle_error(ERROR_MSG);
+	i = -1;
+	while (++i < stk->len)
+	{
+		if (!is_duplicate(stk, ft_atoi(av[i + 1])))
+			stk->arr[i] = ft_atoi(av[i + 1]); //not working on "42 ...", TODO
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/21 00:19:44 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/21 12:18:30 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdio.h>
+# include <limits.h>
 # include <stdlib.h>
 
 # define ERROR_MSG "Error\n"
@@ -26,7 +27,10 @@ typedef struct s_stack
 	int	len;
 }		t_stack;
 
+void	init_stack(t_stack *stk, char **av);
+
 int	ft_atoi(char *s);
+int	is_duplicate(t_stack *stk, int n);
 
 void	handle_error(const char *s);
 int	ft_strlen(const char *s);
