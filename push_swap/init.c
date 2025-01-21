@@ -6,13 +6,13 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:28:37 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/21 17:11:17 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:12:14 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	count_digits(char *s)
+static int	count_ints(char *s)
 {
 	int	count;
 
@@ -33,20 +33,30 @@ static int	count_digits(char *s)
 void	init_stack(t_stack *stk, char **av)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	stk->arr = NULL;
 	stk->len = 0;
 	while (av[++i])
-		stk->len += count_digits(av[i]);
+		stk->len += count_ints(av[i]);
 	stk->arr = (int *)malloc(stk->len * sizeof(int)); //free
 	if (!stk->arr)
 		handle_error(ERROR_MSG);
-	i = -1;
-	while (++i < stk->len)
+	i = 0;
+	while (i < stk->len)
 	{
-		if (!is_overflow(av[i + 1])
-			&& !is_duplicate(stk, ft_atoi(av[i + 1])))
-			stk->arr[i] = ft_atoi(av[i + 1]); //not working on "42 ..."
+		j = 0;
+		while (av[i + 1][j])
+		{
+			while (is_space(av[i + 1][j]))
+				j++;
+			if (!is_overflow(&(av[i + 1])[j]) 
+			&& !is_duplicate(stk, ft_atoi(&(av[i + 1])[j])))
+				stk->arr[i] = ft_atoi(&(av[i + 1])[j]);
+			while (is_digit(av[i + 1][j]))
+				j++;
+		}
+		i++;
 	}
 }
