@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/21 12:18:30 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/21 17:10:28 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_stack
 
 void	init_stack(t_stack *stk, char **av);
 
+int	is_overflow(char *s);
 int	ft_atoi(char *s);
 int	is_duplicate(t_stack *stk, int n);
 

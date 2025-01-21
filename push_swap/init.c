@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:28:37 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/21 12:24:30 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/21 17:11:17 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	init_stack(t_stack *stk, char **av)
 	i = -1;
 	while (++i < stk->len)
 	{
-		if (!is_duplicate(stk, ft_atoi(av[i + 1])))
-			stk->arr[i] = ft_atoi(av[i + 1]); //not working on "42 ...", TODO
+		if (!is_overflow(av[i + 1])
+			&& !is_duplicate(stk, ft_atoi(av[i + 1])))
+			stk->arr[i] = ft_atoi(av[i + 1]); //not working on "42 ..."
 	}
 }
