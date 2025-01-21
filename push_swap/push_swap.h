@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/21 17:10:28 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/21 22:30:42 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,16 @@ typedef struct s_stack
 
 void	init_stack(t_stack *stk, char **av);
 
-int	is_overflow(char *s);
-int	ft_atoi(char *s);
-int	is_duplicate(t_stack *stk, int n);
+void	*ft_calloc(size_t nmemb, size_t size);
+int		is_overflow(char *s);
+int		ft_atoi(char *s);
+int		is_duplicate(t_stack *stk, int n);
 
 void	handle_error(const char *s);
-int	ft_strlen(const char *s);
-int	is_space(const char c);
-int	is_digit(const char c);
-int	is_valid_input(char *s);
+int		ft_strlen(const char *s);
+int		is_space(const char c);
+int		is_digit(const char c);
+int		is_valid_input(char *s);
 
 /* int		ft_quick_select(int *arr, int left, int right, int k); */
 /* int		ft_partition(int *arr, int low, int high); */
