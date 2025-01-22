@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/22 18:54:06 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/22 23:08:37 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	init_stack(t_stack *stk, char **av, int option);
 
 void	swap(t_stack stk);
 void	swap_ops(t_data *data, int option);
-void	push(t_data *data);
+void	push(t_data *data, int option);
 void	push_ops(t_data *data, int option);
 
 void	*ft_calloc(size_t nmemb, size_t size);

@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:28:37 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/22 18:58:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/22 22:10:45 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ void	init_stack(t_stack *stk, char **av, int option)
 	stk->len = 0;
 	stk->arr = NULL;
 	while (av[++i])
-		stk->len += count_ints(av[i]); //capacity?
-	/* stk->len = stk->capacity; //let b->len = 0! */
+		stk->capacity += count_ints(av[i]);
+	if (option == 0)
+		stk->len = stk->capacity;
 	stk->arr = (int *)ft_calloc(stk->len, sizeof(int)); //free
 	if (!stk->arr)
 		handle_error(ERROR_MSG);

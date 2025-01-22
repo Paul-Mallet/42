@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:34:23 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/22 18:53:36 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/22 23:08:06 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int	main(int ac, char **av)
 			is_valid_input(av[i]);
 		init_stack(&data.a, av, 0);
 		init_stack(&data.b, av, 1);
-		swap_ops(&data, 0);
+		/* swap_ops(&data, 0); */
 		push_ops(&data, 1);
+		push_ops(&data, 0);
 		print_stack(&data.a);
 		print_stack(&data.b);
 	}
