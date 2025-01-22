@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/21 22:30:42 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/22 11:20:10 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_stack(t_stack *stk, char **av);
 void	*ft_calloc(size_t nmemb, size_t size);
 int		is_overflow(char *s);
 int		ft_atoi(char *s);
-int		is_duplicate(t_stack *stk, int n);
+int		is_duplicate(t_stack *stk, int k, int n);
 
 void	handle_error(const char *s);
 int		ft_strlen(const char *s);

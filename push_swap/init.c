@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:28:37 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/21 22:26:10 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/22 11:19:11 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ static void	fill_stack(t_stack *stk, char **av)
 		{
 			while (is_space(av[i + 1][j]))
 				j++;
-			if (!is_overflow(&(av[i + 1])[j]) 
-			&& !is_duplicate(stk, ft_atoi(&(av[i + 1])[j])))
+			if (av[i + 1][j]
+			&& !is_overflow(&(av[i + 1])[j]) 
+			&& !is_duplicate(stk, k, ft_atoi(&(av[i + 1])[j])))
 				stk->arr[k] = ft_atoi(&(av[i + 1])[j]);
 			if (av[i + 1][j] == '-')
 				j++;
@@ -67,7 +68,7 @@ void	init_stack(t_stack *stk, char **av)
 	stk->arr = NULL;
 	while (av[++i])
 		stk->len += count_ints(av[i]);
-	stk->arr = (int *)ft_calloc(stk->len, sizeof(int)); //calloc, free
+	stk->arr = (int *)ft_calloc(stk->len, sizeof(int)); //free
 	if (!stk->arr)
 		handle_error(ERROR_MSG);
 	fill_stack(stk, av);
