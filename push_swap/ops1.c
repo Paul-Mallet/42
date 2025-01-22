@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:21:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/22 23:07:47 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/22 23:20:05 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 //rotate, reverse rotate = circular buffer
 
-void	push(t_data *data, int option)
+void	push_a(t_data *data)
 {
 	int	i;
 
-	if (option == 0)
+	if (data->b.len)
 	{
-		if (data->b.len)
-		{
-			data->a.len += 1; //auto handle > capacity
-			i = data->a.len;
-			while (--i > 0)
-				data->a.arr[i] = data->a.arr[i - 1];
-			data->a.arr[0] = data->b.arr[0];
-			i = -1;
-			while (++i < data->b.len - 1)
-				data->b.arr[i] = data->b.arr[i + 1];
-			data->b.len -= 1;
-		}
-		return ;
+		data->a.len += 1;
+		i = data->a.len;
+		while (--i > 0)
+			data->a.arr[i] = data->a.arr[i - 1];
+		data->a.arr[0] = data->b.arr[0];
+		i = -1;
+		while (++i < data->b.len - 1)
+			data->b.arr[i] = data->b.arr[i + 1];
+		data->b.len -= 1;
 	}
+}
+
+void	push_b(t_data *data)
+{
+	int	i;
+
 	if (data->a.len) //if 0, will not push(b is full capacity)
 	{
 		data->b.len += 1; //auto handle > capacity
@@ -53,15 +55,15 @@ void	push_ops(t_data *data, int option)
 	char	c;
 
 	c = 'a';
-	if (option == 1)
+	if (option == 0)
 	{
-		push(data, option);
-		c = 'b';
+		push_a(data);
+		c = 'a';
 	}
 	else
 	{
-		push(data, option);
-		c = 'a';
+		push_b(data);
+		c = 'b';
 	}
 	printf("p%c\n", c);
 }
