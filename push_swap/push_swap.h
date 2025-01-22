@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/22 11:20:10 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/22 18:54:06 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,23 @@ typedef struct s_stack
 {
 	int	*arr;
 	int	len;
+	int	capacity;
 }		t_stack;
 
-void	init_stack(t_stack *stk, char **av);
+typedef struct s_data
+{
+	t_stack	a;
+	t_stack	b;
+	int	*input;
+	int	len; //ints nb
+}		t_data;
+
+void	init_stack(t_stack *stk, char **av, int option);
+
+void	swap(t_stack stk);
+void	swap_ops(t_data *data, int option);
+void	push(t_data *data);
+void	push_ops(t_data *data, int option);
 
 void	*ft_calloc(size_t nmemb, size_t size);
 int		is_overflow(char *s);

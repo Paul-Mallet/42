@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:34:23 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/21 11:28:31 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/22 18:53:36 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_stack(t_stack *stk)
 
 int	main(int ac, char **av)
 {
-	t_stack	stk;
+	t_data	data;
 	int	i;
 
 	i = 0;
@@ -32,8 +32,12 @@ int	main(int ac, char **av)
 	{
 		while (av[++i])
 			is_valid_input(av[i]);
-		init_stack(&stk, av);
-		print_stack(&stk);
+		init_stack(&data.a, av, 0);
+		init_stack(&data.b, av, 1);
+		swap_ops(&data, 0);
+		push_ops(&data, 1);
+		print_stack(&data.a);
+		print_stack(&data.b);
 	}
 	return (0);
 }
