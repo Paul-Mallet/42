@@ -6,15 +6,13 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:21:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/22 23:20:05 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/23 12:20:40 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//rotate, reverse rotate = circular buffer
-
-void	push_a(t_data *data)
+static void	push_a(t_data *data)
 {
 	int	i;
 
@@ -32,13 +30,13 @@ void	push_a(t_data *data)
 	}
 }
 
-void	push_b(t_data *data)
+static void	push_b(t_data *data)
 {
 	int	i;
 
 	if (data->a.len) //if 0, will not push(b is full capacity)
 	{
-		data->b.len += 1; //auto handle > capacity
+		data->b.len += 1;
 		i = data->b.len;
 		while (--i > 0)
 			data->b.arr[i] = data->b.arr[i - 1];
@@ -68,7 +66,7 @@ void	push_ops(t_data *data, int option)
 	printf("p%c\n", c);
 }
 
-void	swap(t_stack stk)
+static void	swap(t_stack stk)
 {
 	int	tmp;
 

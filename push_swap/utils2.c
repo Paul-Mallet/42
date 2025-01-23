@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 22:55:20 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/22 11:37:16 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/23 13:04:52 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 int	is_overflow(char *s)
 {
 	long	res;
-	int	sign;
+	int		sign;
 
 	res = 0;
 	sign = 1;
@@ -59,7 +59,7 @@ int	is_duplicate(t_stack *stk, int k, int n)
 	i = 0;
 	while (i < k)
 	{
-		if (stk->arr[i] == n) 
+		if (stk->arr[i] == n)
 			handle_error(ERROR_MSG);
 		i++;
 	}

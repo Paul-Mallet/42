@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/22 23:20:27 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/23 13:03:52 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,16 @@ typedef struct s_data
 {
 	t_stack	a;
 	t_stack	b;
-	int	*input;
-	int	len; //ints nb
+	int		*input;
+	int		len;
 }		t_data;
 
 void	init_stack(t_stack *stk, char **av, int option);
 
-void	swap(t_stack stk);
 void	swap_ops(t_data *data, int option);
-void	push_a(t_data *data);
-void	push_b(t_data *data);
 void	push_ops(t_data *data, int option);
+void	rotate_ops(t_data *data, int option);
+void	rev_rotate_ops(t_data *data, int option);
 
 void	*ft_calloc(size_t nmemb, size_t size);
 int		is_overflow(char *s);

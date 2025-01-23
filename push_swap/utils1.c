@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:46:52 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/22 10:59:55 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/23 13:05:08 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	is_valid_input(char *s)
 			s++;
 		if (!is_digit(*s) || (*s == '0' && is_digit(*(s + 1))))
 			handle_error(ERROR_MSG);
-		//conv with atoi() [min, max]
 		while (is_digit(*s))
 			s++;
 	}
