@@ -6,30 +6,44 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 22:55:20 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/23 13:04:52 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/24 16:37:05 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
+}
+
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	unsigned char	*arr;
-	size_t			i;
+	size_t		i;
 
 	arr = (unsigned char *)malloc(nmemb * size);
 	if (arr == NULL)
 		return (NULL);
 	i = 0;
 	while (i < size)
-		arr[i++] = 0;
+		arr[i++] = '\0';
 	return (arr);
 }
 
 int	is_overflow(char *s)
 {
 	long	res;
-	int		sign;
+	int	sign;
 
 	res = 0;
 	sign = 1;
