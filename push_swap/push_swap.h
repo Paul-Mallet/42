@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/24 16:42:17 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:16:08 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 
 typedef struct s_stack
 {
-	int	*arr;
-	int	len;
-	int	capacity;
-	char	*order;
+	char	name;
+	int		*arr;
+	int		len;
+	int		capacity;
 }		t_stack;
 
 typedef struct s_data
@@ -37,13 +37,12 @@ typedef struct s_data
 	int	len;
 }		t_data;
 
-void	init_stack(t_stack *stk, char **av, int option);
-void	order_3_nums(t_stack *stk);
+void	init_stack(t_stack *stk, char **av, char name);
 
-void	swap_ops(t_data *data, int option);
-void	push_ops(t_data *data, int option);
-void	rotate_ops(t_data *data, int option);
-void	rev_rotate_ops(t_data *data, int option);
+void	swap(t_stack *stk);
+void	push(t_stack *from, t_stack *to);
+void	rotate(t_stack *stk);
+void	rev_rotate(t_stack *stk);
 
 int	ft_strcmp(const char *s1, const char *s2);
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -57,6 +56,8 @@ int	is_space(const char c);
 int	is_digit(const char c);
 int	is_valid_input(char *s);
 
+void	sort_three(t_stack *stk);
+void	sort_five(t_stack *a, t_stack *b);
 /* int		ft_quick_select(int *arr, int left, int right, int k); */
 /* int		ft_partition(int *arr, int low, int high); */
 /* void	ft_quick_sort(int *arr, int low, int high); */

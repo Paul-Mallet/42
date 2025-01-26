@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:34:23 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/24 16:47:48 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:44:47 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ int	main(int ac, char **av)
 	{
 		while (av[++i])
 			is_valid_input(av[i]);
-		init_stack(&data.a, av, 0);
-		init_stack(&data.b, av, 1);
+		init_stack(&data.a, av, 'a');
+		init_stack(&data.b, av, 'b');
 		if (data.a.len == 3)
-			order_3_nums(&data.a);
+			sort_three(&data.a);
+		else if (data.a.len == 5)
+			sort_five(&data.a, &data.b);
 		print_stack(&data.a);
 		print_stack(&data.b);
 	}

@@ -2,8 +2,7 @@ CC=cc
 FLAGS=-Wall -Wextra -Werror
 SRCS=main.c \
      init.c \
-     ops1.c \
-     ops2.c \
+     operations.c \
      sorts.c \
      utils1.c \
      utils2.c
