@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:34:23 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/26 12:44:47 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/27 12:07:54 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	main(int ac, char **av)
 		init_stack(&data.b, av, 'b');
 		if (data.a.len == 3)
 			sort_three(&data.a);
-		else if (data.a.len == 5)
-			sort_five(&data.a, &data.b);
 		print_stack(&data.a);
 		print_stack(&data.b);
 	}
