@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/26 12:16:08 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/27 15:44:31 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ int	is_space(const char c);
 int	is_digit(const char c);
 int	is_valid_input(char *s);
 
-void	sort_three(t_stack *stk);
-void	sort_five(t_stack *a, t_stack *b);
-/* int		ft_quick_select(int *arr, int left, int right, int k); */
-/* int		ft_partition(int *arr, int low, int high); */
-/* void	ft_quick_sort(int *arr, int low, int high); */
+void	turk_sort(t_data *data);
+void	cheap_sort(t_stack *stk);
+void	three_sort(t_stack *stk);
 
 #endif
