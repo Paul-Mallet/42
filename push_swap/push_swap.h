@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/27 15:44:31 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:11:19 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	is_digit(const char c);
 int	is_valid_input(char *s);
 
 void	turk_sort(t_data *data);
-void	cheap_sort(t_stack *stk);
+void	cheap_sort(t_data *data);
 void	three_sort(t_stack *stk);
 
 #endif

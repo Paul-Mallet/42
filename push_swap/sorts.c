@@ -6,29 +6,53 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/27 19:20:09 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:37:13 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//based on elem a, desc_sort b
-//top elem in b must be shortest to elem a
-int	desc_sort(int elem, t_stack *b)
+int	get_index(int elem, t_stack *b)
 {
 	int	i;
-	int	count;
+	int	save;
+	int	save_i;
 
-	i = 0;
-	count = 0;
-	while (data->b.arr[i]) //b.arr[0] < elem, but 
+	i = 1;
+	save = elem - b->arr[0];
+	save_i = i;
+	while (i < b->len)
 	{
-		//
-		//rb or rrb
-		//bubble sort as indexes? better to sort?
-		count++;
+		if ((elem - b->arr[i]) < save && (elem - b->arr[i]) > 0)
+		{
+			save = elem - b->arr[i];
+			save_i = i;
+		}
+		if (save == 1)
+			break ;
 		i++;
 	}
+	return (save_i);
+}
+
+int	desc_sort_count(int elem, t_stack *b)
+{
+	int	i;
+	int	nb_op;
+	int	short_elem;
+
+	i = 0;
+	nb_op = 0;
+	short_elem = b->arr[get_index(elem, b)]; //value
+	while (b->arr[0] != short_elem) //short_elem not at top
+	{
+		if (get_index(elem, b) < (b->len / 2)) //ne pas effectuer les actions, compter!
+			rotate(b);
+		else
+			rev_rotate(b);
+		nb_op++;
+	}
+	return (nb_op);
 }
 
 void	cheap_sort(t_data *data)
@@ -39,17 +63,14 @@ void	cheap_sort(t_data *data)
 
 	i = 0;
 	save = 0;
-	while (data->a.arr[i]) //loop to push only 1 elem
+	while (i < data->a.len)
 	{
 		count = 0;
-		if (i == 0)
-			count = desc_sort(data->a.arr[i], &data->b); //7, stack b
-		else if (i < data->a.len / 2)
-			//rotate
-		else
-			//rev_rotate
-		if (i == 0 || count < save)
-			save = count;
+		if (i == 0) //sort to top a
+			count += desc_sort_count(data->a.arr[i], &data->b);
+		/* if (count < save) */
+		/* 	save = count; */
+		printf("%d\n", count);
 		i++;
 	}
 	//reuse only 1 iteration to apply save on elem
@@ -61,15 +82,18 @@ void	turk_sort(t_data *data) //a, b stacks
 	{
 		push(&data->a, &data->b);
 		push(&data->a, &data->b);
-		while (data->a.len > 3)
-			cheap_sort(data); //counter
+		/* while (data->a.len > 3) */
+		cheap_sort(data); //counter
 	}
 	if (data->a.len == 3)
 		three_sort(&data->a);
+	//while (data->b.len > 0)
+		//push_back to a
 }
 
 void	three_sort(t_stack *stk)
 {
+	printf("\n");
 	if ((stk->len != 3)
 		|| (stk->arr[0] < stk->arr[1] && stk->arr[1] < stk->arr[2]))
 		return ;
