@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:34:23 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/28 17:08:56 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:33:38 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ int	main(int ac, char **av)
 			is_valid_input(av[i]);
 		init_stack(&data.a, av, 'a');
 		init_stack(&data.b, av, 'b');
+		init_stack(&data.cpy, av, 'c');
+		fill_stack(&data.a, av);
+		fill_stack(&data.cpy, av);
+		bubble_sort(&data.cpy);
+		refill_stack(&data.a, &data.cpy);
 		turk_sort(&data);
 		print_stack(&data.a);
 		print_stack(&data.b);

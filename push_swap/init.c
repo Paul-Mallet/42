@@ -6,14 +6,41 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:28:37 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/29 16:00:26 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:30:21 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//map here?, just replace by index
-static void	fill_stack(t_stack *stk, char **av)
+void	ft_swap(int *a, int *b)
+{
+	int	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void	bubble_sort(t_stack *stk)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < stk->len)
+	{
+		j = 0;
+		while (j < stk->len - 1)
+		{
+			if (stk->arr[j] > stk->arr[j + 1])
+				ft_swap(&stk->arr[j], &stk->arr[j + 1]);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	fill_stack(t_stack *stk, char **av)
 {
 	int	i;
 	int	j;
@@ -41,6 +68,28 @@ static void	fill_stack(t_stack *stk, char **av)
 	}
 }
 
+void	refill_stack(t_stack *stk, t_stack *cpy)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < stk->len)
+	{
+		j = 0;
+		while (j < stk->len)
+		{
+			if (stk->arr[i] == cpy->arr[j])
+			{
+				stk->arr[i] = j;
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	init_stack(t_stack *stk, char **av, char name)
 {
 	int	i;
@@ -52,11 +101,9 @@ void	init_stack(t_stack *stk, char **av, char name)
 	stk->capacity = 0;
 	while (av[++i])
 		stk->capacity += count_ints(av[i]);
-	if (stk->name == 'a')
+	if (stk->name == 'a' || stk->name == 'c')
 		stk->len = stk->capacity;
 	stk->arr = (int *)ft_calloc(stk->capacity, sizeof(int)); //free
 	if (!stk->arr)
 		handle_error(ERROR_MSG);
-	if (stk->name == 'a')
-		fill_stack(stk, av);
 }

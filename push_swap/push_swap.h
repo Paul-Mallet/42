@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/29 15:56:58 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:29:37 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,16 @@ typedef struct s_data
 {
 	t_stack	a;
 	t_stack	b;
+	t_stack	cpy;
 	int	*input;
 	int	len;
 }		t_data;
 
 void	init_stack(t_stack *stk, char **av, char name);
+void	bubble_sort(t_stack *stk);
+void	fill_stack(t_stack *stk, char **av);
+void	refill_stack(t_stack *stk, t_stack *cpy);
+
 
 void	swap(t_stack *stk);
 void	push(t_stack *from, t_stack *to);
