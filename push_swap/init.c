@@ -6,30 +6,13 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:28:37 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/25 13:12:04 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/29 16:00:26 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	count_ints(char *s)
-{
-	int	count;
-
-	count = 0;
-	while (*s)
-	{
-		while (is_space(*s))
-			s++;
-		if (*s == '-')
-			s++;
-		while (is_digit(*s))
-			s++;
-		count++;
-	}
-	return (count);
-}
-
+//map here?, just replace by index
 static void	fill_stack(t_stack *stk, char **av)
 {
 	int	i;
@@ -45,9 +28,8 @@ static void	fill_stack(t_stack *stk, char **av)
 		{
 			while (is_space(av[i + 1][j]))
 				j++;
-			if (av[i + 1][j]
-			&& !is_overflow(&(av[i + 1])[j]) 
-			&& !is_duplicate(stk, k, ft_atoi(&(av[i + 1])[j])))
+			if (av[i + 1][j] && !is_overflow(&(av[i + 1])[j])
+				&& !is_duplicate(stk, k, ft_atoi(&(av[i + 1])[j])))
 				stk->arr[k] = ft_atoi(&(av[i + 1])[j]);
 			if (av[i + 1][j] == '-')
 				j++;

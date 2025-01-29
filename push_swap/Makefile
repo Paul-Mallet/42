@@ -5,7 +5,8 @@ SRCS=main.c \
      operations.c \
      sorts.c \
      utils1.c \
-     utils2.c
+     utils2.c \
+     utils3.c
 OBJS=$(SRCS:.c=.o)
 LIB=libpush_swap.a
 NAME=push_swap

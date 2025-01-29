@@ -6,11 +6,13 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/29 12:39:47 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/29 15:58:53 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+//mapper to indexes [0, n]
 
 int	get_index(int elem, t_stack *b)
 {
@@ -41,6 +43,7 @@ int	desc_sort_count(int elem, t_stack *b)
 	int	short_elem;
 
 	nb_op = 0;
+	//if elem is MIN(can be -)
 	short_elem = b->arr[get_index(elem, b)]; //value
 	while (b->arr[0] != short_elem) //short_elem not at top
 	{
@@ -68,7 +71,6 @@ void	cheap_sort(t_data *data)
 			count += desc_sort_count(data->a.arr[i], &data->b);
 		if (count < save)
 			save = count;
-		printf("%d\n", count);
 		i++;
 	}
 	//reuse only 1 iteration to apply save on elem

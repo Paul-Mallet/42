@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/28 17:11:19 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:56:58 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	swap(t_stack *stk);
 void	push(t_stack *from, t_stack *to);
 void	rotate(t_stack *stk);
 void	rev_rotate(t_stack *stk);
+
+int	count_ints(char *s);
 
 int	ft_strcmp(const char *s1, const char *s2);
 void	*ft_calloc(size_t nmemb, size_t size);

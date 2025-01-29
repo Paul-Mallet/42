@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:46:52 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/23 13:05:08 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/29 15:59:27 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,26 @@ int	ft_strlen(const char *s)
 
 int	is_valid_input(char *s)
 {
+	int	count;
+	int	nb_ints;
+
+	count = 0;
+	nb_ints = count_ints(s);
 	if (!ft_strlen(s))
 		handle_error(ERROR_MSG);
 	while (*s)
 	{
 		while (is_space(*s))
 			s++;
+		if (count == nb_ints)
+			return (1);
 		if (*s == '-')
 			s++;
-		if (!is_digit(*s) || (*s == '0' && is_digit(*(s + 1))))
+		if (!is_digit(*s))
 			handle_error(ERROR_MSG);
 		while (is_digit(*s))
 			s++;
+		count++;
 	}
 	return (1);
 }
