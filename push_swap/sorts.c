@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/28 17:37:13 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:39:47 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	get_index(int elem, t_stack *b)
 	int	save;
 	int	save_i;
 
-	i = 1;
+	i = 0;
 	save = elem - b->arr[0];
 	save_i = i;
-	while (i < b->len)
+	while (i < b->len || save != 1)
 	{
 		if ((elem - b->arr[i]) < save && (elem - b->arr[i]) > 0)
 		{
@@ -37,16 +37,14 @@ int	get_index(int elem, t_stack *b)
 
 int	desc_sort_count(int elem, t_stack *b)
 {
-	int	i;
 	int	nb_op;
 	int	short_elem;
 
-	i = 0;
 	nb_op = 0;
 	short_elem = b->arr[get_index(elem, b)]; //value
 	while (b->arr[0] != short_elem) //short_elem not at top
 	{
-		if (get_index(elem, b) < (b->len / 2)) //ne pas effectuer les actions, compter!
+		if (get_index(elem, b) < (b->len / 2)) //pas call ops, just count!
 			rotate(b);
 		else
 			rev_rotate(b);
@@ -68,8 +66,8 @@ void	cheap_sort(t_data *data)
 		count = 0;
 		if (i == 0) //sort to top a
 			count += desc_sort_count(data->a.arr[i], &data->b);
-		/* if (count < save) */
-		/* 	save = count; */
+		if (count < save)
+			save = count;
 		printf("%d\n", count);
 		i++;
 	}
@@ -82,8 +80,8 @@ void	turk_sort(t_data *data) //a, b stacks
 	{
 		push(&data->a, &data->b);
 		push(&data->a, &data->b);
-		/* while (data->a.len > 3) */
-		cheap_sort(data); //counter
+		while (data->a.len > 3)
+			cheap_sort(data); //counter
 	}
 	if (data->a.len == 3)
 		three_sort(&data->a);
