@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:28:37 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/29 17:30:21 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:52:41 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	refill_stack(t_stack *stk, t_stack *cpy)
 		{
 			if (stk->arr[i] == cpy->arr[j])
 			{
-				stk->arr[i] = j;
+				stk->arr[i] = j + 1; //?
 				break ;
 			}
 			j++;

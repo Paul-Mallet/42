@@ -6,46 +6,56 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/29 22:58:32 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/01/30 18:35:13 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	short_index(int elem, t_stack *stk)
+int	short_index(int elem, t_stack *stk) //a[0], b
 {
 	int	i;
 	int	save;
 	int	save_i;
 
 	i = 0;
-	save = elem - stk->arr[0];
-	save_i = i;
+	save = elem;
+	save_i = 0;
 	while (i < stk->len)
 	{
-		if ((elem - stk->arr[i]) < save && (elem - stk->arr[i]) > 0)
+		if ((elem - stk->arr[i]) < save && (elem - stk->arr[i]) > 0) //max
 		{
 			save = elem - stk->arr[i];
 			save_i = i;
 		}
 		if (save == 1)
-			break ;
+			return (save_i);
 		i++;
 	}
-	if (i == stk->len)
+	if (i == stk->len && save_i == 0) //new min, placed above biggest(must be sorted bef!)TODO
 		save_i = 0;
 	return (save_i);
 }
 
 int	desc_sort_count(int elem, t_stack *stk)
 {
+	int	i;
 	int	nb_op;
-	int	short_elem;
+	int	cheapest_elem;
 
+	i = 0;
 	nb_op = 0;
-	short_elem = stk->arr[short_index(elem, stk)];
-	while (stk->arr[0] != short_elem)
-		nb_op++;
+	cheapest_elem = stk->arr[short_index(elem, stk)]; //index: TODO
+	while (stk->arr[i] != cheapest_elem)//?
+	{
+		nb_op = 1;
+		if (i <= stk->len / 2)
+			nb_op += i;
+		else
+			nb_op += stk->len - i;
+		i++;
+	}
+	printf("nb_op: %d\n", nb_op);
 	return (nb_op);
 }
 
@@ -57,7 +67,7 @@ int	cheapest_index(t_data *data)
 	int	count;
 
 	i = 0;
-	save = data->a.len;
+	save = data->a.len; //max
 	save_i = i;
 	while (i < data->a.len)
 	{
@@ -65,35 +75,34 @@ int	cheapest_index(t_data *data)
 		if (i <= data->a.len / 2)
 			count += i;
 		else
-			count += (i - data->a.len / 2);
-		count += desc_sort_count(data->a.arr[i], &data->b); //stk b
+			count += data->a.len - i; //ra / rra counter: OK
+		printf("count(bef): %d\n", count);
+		count += desc_sort_count(data->a.arr[i], &data->b); //TODO
+		/* printf("count(aft): %d\n", count); */
 		if (count < save)
 		{
 			save = count;
 			save_i = i;
 		}
-		/* printf("%d\n", count); */
 		i++;
 	}
 	return (save_i);
 }
 
-void	desc_sort(int cheapest_index, t_stack *stk) //*stk = b
+void	desc_sort(int cheapest_index, t_stack *stk) //TODO
 {
 	int	cheapest_elem;
 
 	cheapest_elem = stk->arr[cheapest_index];
-	while (stk->arr[0] != cheapest_elem)
-	{
-		if (cheapest_index < (stk->len / 2))
-			rotate(stk);
-		else
-			rev_rotate(stk);
-	}
+	/* while (stk->arr[0] != cheapest_elem) */
+	/* { */
+	/* 	if (cheapest_index < (stk->len / 2)) */
+	/* 		rotate(stk); */
+	/* 	else */
+	/* 		rev_rotate(stk); */
+	/* } */
 }
 
-//cheapest index(a), desc_sort(b), push(a->b)
-//continue... until a->len = 3
 void	a_to_b_sort(t_data *data)
 {
 	int i;
