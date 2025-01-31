@@ -6,60 +6,59 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/30 18:35:13 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:30:57 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	short_index(int elem, t_stack *stk) //a[0], b
+int	cheap_index_from_b(int top_a, t_stack *b) //a[0], b
 {
 	int	i;
-	int	save;
-	int	save_i;
+	int	cheap;
+	int	cheap_i;
 
 	i = 0;
-	save = elem;
-	save_i = 0;
-	while (i < stk->len)
+	cheap = top_a;
+	cheap_i = 0;
+	while (i < b->len)
 	{
-		if ((elem - stk->arr[i]) < save && (elem - stk->arr[i]) > 0) //max
+		if ((top_a - b->arr[i]) < cheap && (top_a - b->arr[i]) > 0) //max - shorter
 		{
-			save = elem - stk->arr[i];
-			save_i = i;
+			cheap = top_a - b->arr[i];
+			cheap_i = i;
 		}
-		if (save == 1)
-			return (save_i);
+		if (cheap == 1)
+			return (cheap_i);
 		i++;
 	}
-	if (i == stk->len && save_i == 0) //new min, placed above biggest(must be sorted bef!)TODO
-		save_i = 0;
-	return (save_i);
+	if (i == b->len && cheap_i == 0) //new min, placed above biggest(must be sorted bef!)TODO
+		cheap_i = 0;
+	return (cheap_i);
 }
 
-int	desc_sort_count(int elem, t_stack *stk)
+int	desc_sort_count(int top_a, t_stack *b)
 {
 	int	i;
 	int	nb_op;
-	int	cheapest_elem;
+	int	cheap_elem;
 
 	i = 0;
 	nb_op = 0;
-	cheapest_elem = stk->arr[short_index(elem, stk)]; //index: TODO
-	while (stk->arr[i] != cheapest_elem)//?
+	cheap_elem = b->arr[cheap_index_from_b(top_a, b)]; //index: TODO
+	while (b->arr[i] != cheap_elem)//?
 	{
 		nb_op = 1;
-		if (i <= stk->len / 2)
+		if (i <= b->len / 2)
 			nb_op += i;
 		else
-			nb_op += stk->len - i;
+			nb_op += b->len - i;
 		i++;
 	}
-	printf("nb_op: %d\n", nb_op);
 	return (nb_op);
 }
 
-int	cheapest_index(t_data *data)
+int	cheap_index_from_a(t_data *data)
 {
 	int	i;
 	int	save;
@@ -76,9 +75,7 @@ int	cheapest_index(t_data *data)
 			count += i;
 		else
 			count += data->a.len - i; //ra / rra counter: OK
-		printf("count(bef): %d\n", count);
-		count += desc_sort_count(data->a.arr[i], &data->b); //TODO
-		/* printf("count(aft): %d\n", count); */
+		count += desc_sort_count(data->a.arr[i], &data->b);
 		if (count < save)
 		{
 			save = count;
@@ -89,27 +86,40 @@ int	cheapest_index(t_data *data)
 	return (save_i);
 }
 
-void	desc_sort(int cheapest_index, t_stack *stk) //TODO
+void	desc_sort_b(int cheap_a, t_stack *b) //TODO
 {
-	int	cheapest_elem;
+	int	cheap_b;
+	int	cheap_index_b;
+	//cheap a(top a), stk b
+	//param1 can be min, between, max, 1 approach for each?
+	//found cheap b thanks to cheap a
+	//tant que top b != cheap b found, continue rb / rrb
 
-	cheapest_elem = stk->arr[cheapest_index];
-	/* while (stk->arr[0] != cheapest_elem) */
-	/* { */
-	/* 	if (cheapest_index < (stk->len / 2)) */
-	/* 		rotate(stk); */
-	/* 	else */
-	/* 		rev_rotate(stk); */
-	/* } */
+	cheap_index_b = cheap_index_from_b(cheap_a, b);
+	cheap_b = b->arr[cheap_index_b];
+	while (b->arr[0] != cheap_b)
+	{
+		if (cheap_index_b <= (b->len / 2))
+			rotate(b);
+		else
+			rev_rotate(b);
+	}
 }
 
 void	a_to_b_sort(t_data *data)
 {
-	int i;
+	int cheap_i;
 
-	i = cheapest_index(data);
-	desc_sort(i, &data->b);
+	cheap_i = cheap_index_from_a(data);
+	/* printf("%d\n", cheap_i); */
+	desc_sort_b(data->a.arr[cheap_i], &data->b);
 	push(&data->a, &data->b);
+}
+
+void	first_desc_sort_b(t_stack *stk)
+{
+	if (stk->arr[0] < stk->arr[1])
+		swap(stk);
 }
 
 void	turk_sort(t_data *data)
@@ -118,13 +128,14 @@ void	turk_sort(t_data *data)
 	{
 		push(&data->a, &data->b);
 		push(&data->a, &data->b);
+		first_desc_sort_b(&data->b);
 		while (data->a.len > 3)
 			a_to_b_sort(data);
 	}
 	if (data->a.len == 3)
 		three_sort(&data->a);
 	//while (data->b.len > 0)
-		//push_back to a
+		//b_to_a_sort(data);
 }
 
 void	three_sort(t_stack *stk)
