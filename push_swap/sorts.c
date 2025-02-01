@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/31 19:30:57 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:21:36 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	cheap_index_from_b(int top_a, t_stack *b) //a[0], b
 			return (cheap_i);
 		i++;
 	}
-	if (i == b->len && cheap_i == 0) //new min, placed above biggest(must be sorted bef!)TODO
+	if (i == b->len && cheap_i == 0) //new min, above biggest(sorted bef!)
 		cheap_i = 0;
 	return (cheap_i);
 }
@@ -45,8 +45,8 @@ int	desc_sort_count(int top_a, t_stack *b)
 
 	i = 0;
 	nb_op = 0;
-	cheap_elem = b->arr[cheap_index_from_b(top_a, b)]; //index: TODO
-	while (b->arr[i] != cheap_elem)//?
+	cheap_elem = b->arr[cheap_index_from_b(top_a, b)];
+	while (b->arr[i] != cheap_elem)
 	{
 		nb_op = 1;
 		if (i <= b->len / 2)
@@ -86,14 +86,10 @@ int	cheap_index_from_a(t_data *data)
 	return (save_i);
 }
 
-void	desc_sort_b(int cheap_a, t_stack *b) //TODO
+void	desc_sort_b(int cheap_a, t_stack *b)
 {
 	int	cheap_b;
 	int	cheap_index_b;
-	//cheap a(top a), stk b
-	//param1 can be min, between, max, 1 approach for each?
-	//found cheap b thanks to cheap a
-	//tant que top b != cheap b found, continue rb / rrb
 
 	cheap_index_b = cheap_index_from_b(cheap_a, b);
 	cheap_b = b->arr[cheap_index_b];
@@ -106,13 +102,28 @@ void	desc_sort_b(int cheap_a, t_stack *b) //TODO
 	}
 }
 
+void	rotate_to_top_a(int cheap_index_a, t_stack *a)
+{
+	int	i;
+
+	i = 0;
+	while (a->arr[0] != a->arr[cheap_index_a])
+	{
+		if (cheap_index_a <= (a->len / 2))
+			rotate(a);
+		else
+			rev_rotate(a);
+	}
+}
+
 void	a_to_b_sort(t_data *data)
 {
-	int cheap_i;
+	int cheap_index_a;
 
-	cheap_i = cheap_index_from_a(data);
-	/* printf("%d\n", cheap_i); */
-	desc_sort_b(data->a.arr[cheap_i], &data->b);
+	cheap_index_a = cheap_index_from_a(data);
+	printf("i: %d\n", cheap_index_a);
+	rotate_to_top_a(cheap_index_a, &data->a);
+	desc_sort_b(data->a.arr[cheap_index_a], &data->b);
 	push(&data->a, &data->b);
 }
 
