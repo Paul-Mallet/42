@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:21:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/01/26 12:53:21 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/01 16:56:51 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ void	swap(t_stack *stk)
 	printf("s%c\n", stk->name);
 }
 
-void	rotate(t_stack *stk)
+void	rotate(t_stack *stk, char **log_ops, int log_index)
 {
 	int	i;
 	int	tmp;
+	char	*str;
 
 	i = -1;
 	tmp = stk->arr[0];
@@ -55,13 +56,22 @@ void	rotate(t_stack *stk)
 		stk->arr[i] = stk->arr[i + 1];
 	if (i == stk->len - 1)
 		stk->arr[i] = tmp;
+	str = (char *)malloc((2 + 1) * sizeof(char));
+	if (!str)
+		handle_error(ERROR_MSG);
+	str[0] = 'r';
+	str[1] = stk->name;
+	str[2] = '\0';
+	log_ops[log_index] = str;
+	log_index++;
 	printf("r%c\n", stk->name);
 }
 
-void	rev_rotate(t_stack *stk)
+void	rev_rotate(t_stack *stk, char **log_ops, int log_index)
 {
 	int	i;
 	int	tmp;
+	char	*str;
 
 	i = stk->len;
 	tmp = stk->arr[i - 1];
@@ -69,5 +79,14 @@ void	rev_rotate(t_stack *stk)
 		stk->arr[i] = stk->arr[i - 1];
 	if (i == 0)
 		stk->arr[i] = tmp;
+	str = (char *)malloc((3 + 1) * sizeof(char));
+	if (!str)
+		handle_error(ERROR_MSG);
+	str[0] = 'r';
+	str[1] = 'r';
+	str[2] = stk->name;
+	str[3] = '\0';
+	log_ops[log_index] = str;
+	log_index++;
 	printf("rr%c\n", stk->name);
 }

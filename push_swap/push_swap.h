@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/29 17:29:37 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:53:30 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 typedef struct s_stack
 {
 	char	name;
-	int		*arr;
-	int		len;
-	int		capacity;
+	int	*arr;
+	int	len;
+	int	capacity;
 }		t_stack;
 
 typedef struct s_data
@@ -34,6 +34,9 @@ typedef struct s_data
 	t_stack	a;
 	t_stack	b;
 	t_stack	cpy;
+	char	**log_ops;
+	int	log_index;
+	int	nb_ops;
 	int	*input;
 	int	len;
 }		t_data;
@@ -43,11 +46,10 @@ void	bubble_sort(t_stack *stk);
 void	fill_stack(t_stack *stk, char **av);
 void	refill_stack(t_stack *stk, t_stack *cpy);
 
-
 void	swap(t_stack *stk);
 void	push(t_stack *from, t_stack *to);
-void	rotate(t_stack *stk);
-void	rev_rotate(t_stack *stk);
+void	rotate(t_stack *stk, char **log_ops, int log_index);
+void	rev_rotate(t_stack *stk, char **log_ops, int log_index);
 
 int	count_ints(char *s);
 
@@ -65,6 +67,6 @@ int	is_valid_input(char *s);
 
 void	turk_sort(t_data *data);
 void	cheap_sort(t_data *data);
-void	three_sort(t_stack *stk);
+void	three_sort(t_data *data);
 
 #endif

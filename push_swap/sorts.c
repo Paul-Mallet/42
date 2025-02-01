@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/01 13:21:36 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/01 17:58:52 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,45 +40,44 @@ int	cheap_index_from_b(int top_a, t_stack *b) //a[0], b
 int	desc_sort_count(int top_a, t_stack *b)
 {
 	int	i;
-	int	nb_op;
+	int	nb_ops;
 	int	cheap_elem;
 
 	i = 0;
-	nb_op = 0;
+	nb_ops = 0;
 	cheap_elem = b->arr[cheap_index_from_b(top_a, b)];
 	while (b->arr[i] != cheap_elem)
 	{
-		nb_op = 1;
+		nb_ops = 0; //1
 		if (i <= b->len / 2)
-			nb_op += i;
+			nb_ops += i;
 		else
-			nb_op += b->len - i;
+			nb_ops += b->len - i;
 		i++;
 	}
-	return (nb_op);
+	return (nb_ops);
 }
 
-int	cheap_index_from_a(t_data *data)
+int	cheap_index_from_a_to_b(t_data *data)
 {
 	int	i;
 	int	save;
 	int	save_i;
-	int	count;
 
 	i = 0;
 	save = data->a.len; //max
 	save_i = i;
 	while (i < data->a.len)
 	{
-		count = 0;
+		data->nb_ops = 0;
 		if (i <= data->a.len / 2)
-			count += i;
+			data->nb_ops += i;
 		else
-			count += data->a.len - i; //ra / rra counter: OK
-		count += desc_sort_count(data->a.arr[i], &data->b);
-		if (count < save)
+			data->nb_ops += data->a.len - i; //ra / rra counter: OK
+		data->nb_ops += desc_sort_count(data->a.arr[i], &data->b); //total ops(!opti)
+		if (data->nb_ops < save)
 		{
-			save = count;
+			save = data->nb_ops;
 			save_i = i;
 		}
 		i++;
@@ -86,44 +85,65 @@ int	cheap_index_from_a(t_data *data)
 	return (save_i);
 }
 
-void	desc_sort_b(int cheap_a, t_stack *b)
+void	desc_sort_b(t_data *data, int cheap_index_a)
 {
+	int	cheap_a;
 	int	cheap_b;
 	int	cheap_index_b;
 
-	cheap_index_b = cheap_index_from_b(cheap_a, b);
-	cheap_b = b->arr[cheap_index_b];
-	while (b->arr[0] != cheap_b)
+	cheap_a = data->a.arr[cheap_index_a];
+	cheap_index_b = cheap_index_from_b(cheap_a, &data->b);
+	cheap_b = data->b.arr[cheap_index_b];
+	while (data->b.arr[0] != cheap_b)
 	{
-		if (cheap_index_b <= (b->len / 2))
-			rotate(b);
+		if (cheap_index_b <= (data->b.len / 2))
+			rotate(&data->b, data->log_ops, data->log_index);
 		else
-			rev_rotate(b);
+			rev_rotate(&data->b, data->log_ops, data->log_index);
 	}
 }
 
-void	rotate_to_top_a(int cheap_index_a, t_stack *a)
+void	rotate_to_top_a(t_data *data, int cheap_index_a)
 {
 	int	i;
 
 	i = 0;
-	while (a->arr[0] != a->arr[cheap_index_a])
+	/* printf("i: %d\n", cheap_index_a); */
+	while (data->a.arr[0] != data->a.arr[cheap_index_a])
 	{
-		if (cheap_index_a <= (a->len / 2))
-			rotate(a);
+		if (cheap_index_a <= (data->a.len / 2))
+			rotate(&data->a, data->log_ops, data->log_index);
 		else
-			rev_rotate(a);
+			rev_rotate(&data->a, data->log_ops, data->log_index);
 	}
+}
+
+void	ft_free_log_ops(char **log_ops)
+{
+	int	i;
+
+	i = -1;
+	while (log_ops[++i])
+		free(log_ops[i]);
+	free(log_ops);
 }
 
 void	a_to_b_sort(t_data *data)
 {
-	int cheap_index_a;
+	int	cheap_index_a;
 
-	cheap_index_a = cheap_index_from_a(data);
-	printf("i: %d\n", cheap_index_a);
-	rotate_to_top_a(cheap_index_a, &data->a);
-	desc_sort_b(data->a.arr[cheap_index_a], &data->b);
+	data->nb_ops = 0;
+	data->log_index = 0;
+	cheap_index_a = cheap_index_from_a_to_b(data);
+	/* printf("%d\n", data->nb_ops); */
+	data->log_ops = (char **)malloc((data->nb_ops + 1) * sizeof(char *)); //not count push!
+	if (!data->log_ops) //free?
+		handle_error(ERROR_MSG);
+	rotate_to_top_a(data, cheap_index_a); //inf ra with 19 elems?
+	desc_sort_b(data, cheap_index_a);
+	data->log_ops[data->nb_ops] = 0;
+	/* opti_printf(data->log_ops); //later*/
+	ft_free_log_ops(data->log_ops);
 	push(&data->a, &data->b);
 }
 
@@ -137,40 +157,40 @@ void	turk_sort(t_data *data)
 {
 	if (data->a.len > 3)
 	{
-		push(&data->a, &data->b);
-		push(&data->a, &data->b);
-		first_desc_sort_b(&data->b);
+		push(&data->a, &data->b); //pb
+		push(&data->a, &data->b); //pb
+		first_desc_sort_b(&data->b); //sb
 		while (data->a.len > 3)
 			a_to_b_sort(data);
 	}
 	if (data->a.len == 3)
-		three_sort(&data->a);
+		three_sort(data);
 	//while (data->b.len > 0)
 		//b_to_a_sort(data);
 }
 
-void	three_sort(t_stack *stk)
+void	three_sort(t_data *data)
 {
 	printf("\n");
-	if ((stk->len != 3)
-		|| (stk->arr[0] < stk->arr[1] && stk->arr[1] < stk->arr[2]))
+	if ((data->a.len != 3)
+		|| (data->a.arr[0] < data->a.arr[1] && data->a.arr[1] < data->a.arr[2]))
 		return ;
-	else if (stk->arr[0] > stk->arr[1] && stk->arr[1] < stk->arr[2])
-		rotate(stk);
-	else if (stk->arr[0] < stk->arr[1] && stk->arr[1] > stk->arr[2]
-		&& stk->arr[0] > stk->arr[2])
-		rev_rotate(stk);
-	else if (stk->arr[0] > stk->arr[1] && stk->arr[1] < stk->arr[2]
-		&& stk->arr[0] < stk->arr[2])
-		swap(stk);
-	else if (stk->arr[0] > stk->arr[1] && stk->arr[1] > stk->arr[2])
+	else if (data->a.arr[0] > data->a.arr[1] && data->a.arr[1] < data->a.arr[2])
+		rotate(&data->a, data->log_ops, data->log_index);
+	else if (data->a.arr[0] < data->a.arr[1] && data->a.arr[1] > data->a.arr[2]
+		&& data->a.arr[0] > data->a.arr[2])
+		rev_rotate(&data->a, data->log_ops, data->log_index);
+	else if (data->a.arr[0] > data->a.arr[1] && data->a.arr[1] < data->a.arr[2]
+		&& data->a.arr[0] < data->a.arr[2])
+		swap(&data->a);
+	else if (data->a.arr[0] > data->a.arr[1] && data->a.arr[1] > data->a.arr[2])
 	{
-		swap(stk);
-		rev_rotate(stk);
+		swap(&data->a);
+		rev_rotate(&data->a, data->log_ops, data->log_index);
 	}
 	else
 	{
-		swap(stk);
-		rotate(stk);
+		swap(&data->a);
+		rotate(&data->a, data->log_ops, data->log_index);
 	}
 }
