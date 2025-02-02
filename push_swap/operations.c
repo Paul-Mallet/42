@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:21:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/01 23:02:49 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/02 15:21:20 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	swap(t_stack *stk)
 	printf("s%c\n", stk->name);
 }
 
-void	rotate(t_stack *stk, char **log_ops, int log_index)
+void	rotate(t_stack *stk, t_data *data)
 {
 	int	i;
 	int	tmp;
@@ -62,12 +62,13 @@ void	rotate(t_stack *stk, char **log_ops, int log_index)
 	str[0] = 'r';
 	str[1] = stk->name;
 	str[2] = '\0';
-	log_ops[log_index] = str;
-	log_index++;
-	printf("r%c\n", stk->name);
+	data->log_ops[data->log_index] = str;
+	data->log_index++;
+ 	/* printf("log_index after inc: %d\n", log_index); */
+	/* printf("r%c\n", stk->name); */
 }
 
-void	rev_rotate(t_stack *stk, char **log_ops, int log_index)
+void	rev_rotate(t_stack *stk, t_data *data)
 {
 	int	i;
 	int	tmp;
@@ -86,7 +87,7 @@ void	rev_rotate(t_stack *stk, char **log_ops, int log_index)
 	str[1] = 'r';
 	str[2] = stk->name;
 	str[3] = '\0';
-	log_ops[log_index] = str;
-	log_index++;
-	printf("rr%c\n", stk->name);
+	data->log_ops[data->log_index] = str;
+	data->log_index++;
+	/* printf("rr%c\n", stk->name); */
 }

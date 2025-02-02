@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/01 16:53:30 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/02 15:21:39 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	refill_stack(t_stack *stk, t_stack *cpy);
 
 void	swap(t_stack *stk);
 void	push(t_stack *from, t_stack *to);
-void	rotate(t_stack *stk, char **log_ops, int log_index);
-void	rev_rotate(t_stack *stk, char **log_ops, int log_index);
+void	rotate(t_stack *stk, t_data *data);
+void	rev_rotate(t_stack *stk, t_data *data);
 
 int	count_ints(char *s);
 
