@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/01 17:58:52 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/01 22:55:53 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	cheap_index_from_a_to_b(t_data *data)
 		else
 			data->nb_ops += data->a.len - i; //ra / rra counter: OK
 		data->nb_ops += desc_sort_count(data->a.arr[i], &data->b); //total ops(!opti)
+		printf("nb_ops: %d\n", data->nb_ops);
 		if (data->nb_ops < save)
 		{
 			save = data->nb_ops;
@@ -82,6 +83,7 @@ int	cheap_index_from_a_to_b(t_data *data)
 		}
 		i++;
 	}
+	data->nb_ops = save;
 	return (save_i);
 }
 
@@ -105,10 +107,6 @@ void	desc_sort_b(t_data *data, int cheap_index_a)
 
 void	rotate_to_top_a(t_data *data, int cheap_index_a)
 {
-	int	i;
-
-	i = 0;
-	/* printf("i: %d\n", cheap_index_a); */
 	while (data->a.arr[0] != data->a.arr[cheap_index_a])
 	{
 		if (cheap_index_a <= (data->a.len / 2))
@@ -128,23 +126,31 @@ void	ft_free_log_ops(char **log_ops)
 	free(log_ops);
 }
 
+void	print_log_ops(char **log_ops)
+{
+	int	i;
+
+	i = -1;
+	while (log_ops[++i])
+		printf("[%d] %s\n", i, log_ops[i]);
+}
+
 void	a_to_b_sort(t_data *data)
 {
 	int	cheap_index_a;
 
 	data->nb_ops = 0;
 	data->log_index = 0;
-	cheap_index_a = cheap_index_from_a_to_b(data);
-	/* printf("%d\n", data->nb_ops); */
+	cheap_index_a = cheap_index_from_a_to_b(data); //count nb_ops
 	data->log_ops = (char **)malloc((data->nb_ops + 1) * sizeof(char *)); //not count push!
 	if (!data->log_ops) //free?
 		handle_error(ERROR_MSG);
 	rotate_to_top_a(data, cheap_index_a); //inf ra with 19 elems?
 	desc_sort_b(data, cheap_index_a);
-	data->log_ops[data->nb_ops] = 0;
-	/* opti_printf(data->log_ops); //later*/
-	ft_free_log_ops(data->log_ops);
-	push(&data->a, &data->b);
+	data->log_ops[data->nb_ops] = 0; //ok
+	print_log_ops(data->log_ops); //ok
+	ft_free_log_ops(data->log_ops); //ok
+	push(&data->a, &data->b); //ok
 }
 
 void	first_desc_sort_b(t_stack *stk)
