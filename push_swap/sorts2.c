@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:16:26 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 13:19:36 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:48:52 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void	print_rest(int n, int m, char *s1, char *s2)
 	{
 		n++;
 		while (--n > 0)
-			printf("%s\n", s1);
+			ft_printf("%s\n", s1);
 	}
 	else
 	{
 		m++;
 		while (--m > 0)
-			printf("%s\n", s2);
+			ft_printf("%s\n", s2);
 	}
 }
 
@@ -47,7 +47,7 @@ static void	similar_rotate(t_data *data)
 	/* printf("n(ra): %d, m(rb): %d\n", n, m); */
 	while (n > 0 && m > 0)
 	{
-		printf("rr");
+		ft_printf("rr");
 		n--;
 		m--;
 	}
@@ -73,7 +73,7 @@ static void	similar_rev_rotate(t_data *data)
 	/* printf("n(rra): %d, m(rrb): %d\n", n, m); */
 	while (n > 0 && m > 0)
 	{
-		printf("rrr");
+		ft_printf("rrr");
 		n--;
 		m--;
 	}

@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:39:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 13:44:35 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:22:36 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,34 @@ int	cheap_index_from_b(int top_a, t_stack *b) //a[0], b
 	return (cheap_i);
 }
 
-int	cheap_index_from_a_to_b(t_data *data)
+int	cheap_index_from_a_to_b(t_data *data) //3 rows
 {
 	int	i;
 	int	tmp;
 	int	cheap_i;
 	int	count;
+	int	is_r;
 
-	i = 0;
+	i = -1; //
+	is_r = 0;
 	tmp = data->a.len; //max
 	cheap_i = i;
-	while (i < data->a.len)
+	while (++i < data->a.len)
 	{
 		count = 0;
 		if (i <= data->a.len / 2)
-			count += i;
+		{
+			count += i; //ra counter: OK, add bool r = true
+			is_r = 1;
+		}
 		else
-			count += data->a.len - i; //ra / rra counter: OK
-		count += desc_sort_count(data->a.arr[i], &data->b); //total ops(!opti)
+			count += data->a.len - i; //rra counter: OK
+		count = desc_rotate_count(data->a.arr[i], &data->b, count, is_r); //+rb/rrb counter = total
 		if (count < tmp)
 		{
 			tmp = count;
 			cheap_i = i;
 		}
-		i++;
 	}
 	return (cheap_i);
 }

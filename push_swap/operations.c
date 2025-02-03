@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:21:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 14:58:16 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:45:04 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	push(t_stack *from, t_stack *to)
 		while (++i < from->len - 1)
 			from->arr[i] = from->arr[i + 1];
 		from->len -= 1;
-		printf("p%c\n", to->name);
+		ft_printf("p%c\n", to->name);
 	}
 }
 
@@ -41,7 +41,7 @@ void	swap(t_stack *stk)
 		stk->arr[0] = stk->arr[1];
 		stk->arr[1] = tmp;
 	}
-	printf("s%c\n", stk->name);
+	ft_printf("s%c\n", stk->name);
 }
 
 void	rotate(t_stack *stk, t_data *data)
@@ -62,7 +62,7 @@ void	rotate(t_stack *stk, t_data *data)
 	str[0] = 'r';
 	str[1] = stk->name;
 	str[2] = '\0';
- 	printf("log_index: %d\n", data->log_index);
+ 	ft_printf("log_index: %d\n", data->log_index);
 	data->log_ops[data->log_index] = str; //when > 9 elem, after push 3, rest 9 4 8 10
 	data->log_index++;
 }

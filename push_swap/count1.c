@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:26:00 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 15:24:36 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:41:40 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	count_from_a_to_b(t_data *data)
 		i++;
 	}
 	data->nb_ops = tmp;
-	printf("nb_ops: %d\n", data->nb_ops);
+	/* ft_printf("nb_ops: %d\n", data->nb_ops); */
 }
 
 static void	count_a_three_sort(t_data *data)
@@ -63,5 +63,5 @@ void	count_cheap_total_ops(t_data *data, int is_first)
 	else if (data->a.len == 3)
 		count_a_three_sort(data);
 	/* else */
-	/* 	count_from_b_to_a(data); //TODO 3*/
+	/* 	count_from_b_to_a(data); //TODO*/
 }

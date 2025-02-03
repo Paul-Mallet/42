@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:31:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 15:05:20 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:33:32 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_log_ops(t_data *data)
 {
 	data->log_index = 0;
-	printf("nb_ops: %d\n", data->nb_ops);
+	/* ft_printf("nb_ops: %d\n", data->nb_ops); */
 	data->log_ops = (char **)malloc((data->nb_ops + 1) * sizeof(char *));
 	if (!data->log_ops) //free?
 		handle_error(ERROR_MSG);
