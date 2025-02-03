@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:39:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 19:22:36 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 23:22:12 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,34 @@ int	cheap_index_from_b(int top_a, t_stack *b) //a[0], b
 	return (cheap_i);
 }
 
+int	desc_sort_count(int top_a, t_stack *b)
+{
+	int	i;
+	int	count;
+	int	cheap_b;
+
+	i = 0;
+	count = 0;
+	cheap_b = b->arr[cheap_index_from_b(top_a, b)];
+	while (b->arr[i] != cheap_b)
+		i++;
+	if (i <= b->len / 2) //rb
+		count = i;
+	else
+		count = b->len - i;
+	return (count);
+}
+
 int	cheap_index_from_a_to_b(t_data *data) //3 rows
 {
 	int	i;
 	int	tmp;
 	int	cheap_i;
 	int	count;
-	int	is_r;
+	/* int	is_r; */
 
 	i = -1; //
-	is_r = 0;
+	/* is_r = 0; */
 	tmp = data->a.len; //max
 	cheap_i = i;
 	while (++i < data->a.len)
@@ -55,11 +73,11 @@ int	cheap_index_from_a_to_b(t_data *data) //3 rows
 		if (i <= data->a.len / 2)
 		{
 			count += i; //ra counter: OK, add bool r = true
-			is_r = 1;
+			/* is_r = 1; */
 		}
 		else
 			count += data->a.len - i; //rra counter: OK
-		count = desc_rotate_count(data->a.arr[i], &data->b, count, is_r); //+rb/rrb counter = total
+		count += desc_sort_count(data->a.arr[i], &data->b); //+rb/rrb counter = total
 		if (count < tmp)
 		{
 			tmp = count;

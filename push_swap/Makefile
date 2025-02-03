@@ -3,7 +3,7 @@ FLAGS=-Wall -Wextra -Werror
 SRCS=main.c \
      init.c \
      operations.c \
-     log_ops.c \
+  	 log_ops.c \
      cheapi.c \
      count1.c \
      count2.c \
@@ -15,30 +15,25 @@ SRCS=main.c \
      free.c
 OBJS=$(SRCS:.c=.o)
 NAME_1=./libft/libft.a
-NAME_2=libpush_swap.a
-EXEC=push_swap
+NAME_2=push_swap
 
-all: $(NAME_1) $(NAME_2)
+all: $(NAME_2)
+
+$(NAME_2): $(OBJS) $(NAME_1)
+	$(CC) $(FLAGS) -g $(OBJS) -L./libft -lft -o $(NAME_2)
 
 $(NAME_1):
 	$(MAKE) -C ./libft
 
-%.o:%.c
+%.o: %.c
 	$(CC) $(FLAGS) -g -c $< -o $@
 
-$(NAME_2): $(OBJS)
-	cp $(NAME_1) $(NAME_2)
-	ar -rcs $(NAME_2) $(OBJS)
-
-exec:
-	$(CC) $(OBJS) -L. -lpush_swap -o $(EXEC)
-
 clean:
-	rm -rf $(OBJS)
+	rm -f $(OBJS)
 	$(MAKE) -C ./libft clean
 
 fclean: clean
-	rm -rf $(NAME_2)
+	rm -f $(NAME_2)
 	$(MAKE) -C ./libft fclean
 
 re: fclean all

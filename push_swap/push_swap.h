@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/03 19:25:50 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 22:46:16 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	desc_sort_count(int top_a, t_stack *b);
 int	cheap_index_from_b(int top_a, t_stack *b);
 int	cheap_index_from_a_to_b(t_data *data);
 int	desc_rotate_count(int top_a, t_stack *b, int count, int is_r);
-int	desc_rev_rotate_count(int top_a, t_stack *b);
 void	print_log_ops(t_data *data);
 
 int	ft_strcmp(const char *s1, const char *s2);

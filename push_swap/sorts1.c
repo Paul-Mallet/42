@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 19:45:37 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 23:04:52 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	desc_sort_b(t_data *data)
 	cheap_a = data->a.arr[cheap_index_a];
 	cheap_index_b = cheap_index_from_b(cheap_a, &data->b);
 	cheap_b = data->b.arr[cheap_index_b];
+	ft_printf("cheap_i of b: %d\n", cheap_index_b);
 	while (data->b.arr[0] != cheap_b)
 	{
 		if (cheap_index_b <= (data->b.len / 2))
@@ -57,7 +58,7 @@ void	a_to_b_sort(t_data *data)
 	rotate_to_top_a(data); //ra/rra, ok
 	desc_sort_b(data); //rb/rrb, ok
 	data->log_ops[data->nb_ops] = 0; //ok
-	ft_printf("log_index: %d\n", data->log_index); //ok
+	//ft_printf("log_index: %d\n", data->log_index); //ok
 	print_log_ops(data); //ok
 	ft_free_log_ops(data); //ok
 	push(&data->a, &data->b); //a.len-- ok
@@ -87,7 +88,7 @@ void	turk_sort(t_data *data)
 		init_log_ops(data); //ok
 		three_sort(data); //ok
 		ft_printf("\n---three_sort---\n");
-		/* ft_printf("nb_ops: %d\n", data->nb_ops); */
+		ft_printf("nb_ops: %d\n", data->nb_ops);
 		ft_printf("log_index: %d\n", data->log_index); //ok
 		print_log_ops(data); //ok
 		ft_free_log_ops(data); //ok

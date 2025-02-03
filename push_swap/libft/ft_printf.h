@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 14:22:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 17:13:51 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 22:54:10 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <limits.h>
 # include "libft.h"
 
+int				ft_strlen(const char *str);
 unsigned int	ft_printub10(va_list ap);
 int				ft_printf(const char *s, ...);
 int				ft_printb10(va_list ap);
