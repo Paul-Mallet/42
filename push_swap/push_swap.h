@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/03 13:20:04 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:54:15 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ void	init_stack(t_stack *stk, char **av, char name);
 void	bubble_sort(t_stack *stk);
 void	fill_stack(t_stack *stk, char **av);
 void	refill_stack(t_stack *stk, t_stack *cpy);
+void	init_log_ops(t_data *data);
+void	ft_free_log_ops(t_data *data);
+void	free_stacks(t_data *data);
 
 void	swap(t_stack *stk);
 void	push(t_stack *from, t_stack *to);
@@ -52,8 +55,12 @@ void	rotate(t_stack *stk, t_data *data);
 void	rev_rotate(t_stack *stk, t_data *data);
 
 int	count_ints(char *s);
+void	count_cheap_total_ops(t_data *data, int is_first);
+int	desc_sort_count(int top_a, t_stack *b);
+int	cheap_index_from_b(int top_a, t_stack *b);
+int	cheap_index_from_a_to_b(t_data *data);
+void	desc_sort_b(t_data *data);
 void	print_log_ops(t_data *data);
-
 
 int	ft_strcmp(const char *s1, const char *s2);
 void	*ft_calloc(size_t nmemb, size_t size);
