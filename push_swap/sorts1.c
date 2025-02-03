@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorts.c                                            :+:      :+:    :+:   */
+/*   sorts1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/02 18:58:34 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:20:42 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,20 +189,6 @@ void	ft_free_log_ops(t_data *data)
 	while (++i < data->log_index)
 		free(data->log_ops[i]);
 	free(data->log_ops);
-}
-
-void	print_log_ops(t_data *data)
-{
-	int	i;
-	int	n;
-	int	m;
-
-	i = -1;
-	n = 0;
-	//opti for rr/rrr(nested loop?), strcmp(data->log_ops[i], "ra")
-	
-	while (++i < data->log_index)
-		printf("[%d] %s\n", i, data->log_ops[i]);
 }
 
 void	a_to_b_sort(t_data *data)
