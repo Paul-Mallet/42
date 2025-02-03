@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:46:52 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/01/29 15:59:27 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:36:47 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ int	is_space(const char c)
 int	is_digit(const char c)
 {
 	return (c >= '0' && c <= '9');
-}
-
-int	ft_strlen(const char *s)
-{
-	int	len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
 }
 
 int	is_valid_input(char *s)

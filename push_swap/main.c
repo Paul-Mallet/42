@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:34:23 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/03 15:53:37 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:42:18 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	print_stack(t_stack *stk)
 
 	i = 0;
 	while (i < stk->len)
-		printf("%d ", stk->arr[i++]);
-	printf("\n");
+		ft_printf("%d ", stk->arr[i++]);
+	ft_printf("\n");
 }
 
 int	main(int ac, char **av)

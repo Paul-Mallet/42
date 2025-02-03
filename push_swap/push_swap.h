@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/03 15:54:15 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:35:02 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <limits.h>
 # include <stdlib.h>
+# include "./libft/libft.h"
 
 # define ERROR_MSG "Error\n"
 # define BUFFER_SIZE 8
@@ -69,7 +70,6 @@ int	ft_atoi(char *s);
 int	is_duplicate(t_stack *stk, int k, int n);
 
 void	handle_error(const char *s);
-int	ft_strlen(const char *s);
 int	is_space(const char c);
 int	is_digit(const char c);
 int	is_valid_input(char *s);

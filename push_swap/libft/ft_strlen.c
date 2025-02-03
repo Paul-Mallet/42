@@ -5,27 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 14:19:36 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/31 11:29:59 by pamallet         ###   ########.fr       */
+/*   Created: 2025/02/03 17:36:56 by pamallet          #+#    #+#             */
+/*   Updated: 2025/02/03 17:37:11 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	len;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }
-/*
-int	main(void)
-{
-	printf("%lu\n", ft_strlen("test"));
-	printf("%lu\n", strlen("test"));
-	return (0);
-}
-*/
