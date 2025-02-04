@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:16:26 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 17:48:52 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/04 19:07:39 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static void	similar_rev_rotate(t_data *data)
 	m = 0;
 	while (++i < data->log_index)
 	{
+		printf("i: %d\n", i); //[1] = null, instead of rrb
 		if (!ft_strcmp(data->log_ops[i], "rra"))
 			n++;
 		if (!ft_strcmp(data->log_ops[i], "rrb"))
@@ -85,6 +86,7 @@ static int	ft_only_includes_rotates(char **log_ops, int log_index)
 	int	i;
 
 	i = 0;
+	printf("check_include_rotates\n");
 	while (i < log_index)
 	{
 		if (ft_strcmp(log_ops[i], "ra")

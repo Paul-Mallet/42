@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 23:04:52 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/04 18:49:21 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,38 @@ void	rotate_to_top_a(t_data *data)
 
 	cheap_index_a = cheap_index_from_a_to_b(data);
 	cheap_a = data->a.arr[cheap_index_a];
-	ft_printf("cheap_i of a: %d\n", cheap_index_a);
+	ft_printf("cheap_i of a: %d\n", cheap_index_a); //[3]
 	while (data->a.arr[0] != cheap_a)
 	{
 		if (cheap_index_a <= (data->a.len / 2))
-			rotate(&data->a, data);
+			rotate(&data->a, data); //log_index++
 		else
-			rev_rotate(&data->a, data);
+		{
+			ft_printf("test\n");
+			rev_rotate(&data->a, data); //log_index++
+		}
 	}
 }
 
 void	a_to_b_sort(t_data *data)
 {
 	data->nb_ops = 0;
-	count_cheap_total_ops(data, 1); //ok for 1rst sort, reduce if rr / rrr TODO 2
-	init_log_ops(data); //ok
+	count_cheap_total_ops(data, 1); //ok
+	printf("nb_ops:%d\n", data->nb_ops);
+	init_log_ops(data); //ok, log_index = 0
+	ft_printf("log_index(bef rot a): %d\n", data->log_index); //ok
 	rotate_to_top_a(data); //ra/rra, ok
-	desc_sort_b(data); //rb/rrb, ok
+	ft_printf("log_index(aft rot a): %d\n", data->log_index); //ok
+	desc_sort_b(data); //rb/rrb, log_index++ (+1)
+	ft_printf("log_index(aft rot b): %d\n", data->log_index); //ok
 	data->log_ops[data->nb_ops] = 0; //ok
-	//ft_printf("log_index: %d\n", data->log_index); //ok
+	ft_printf("nb_ops: %d\n", data->nb_ops); //ok
+	ft_printf("log_index: %d\n", data->log_index); //ok
 	print_log_ops(data); //ok
 	ft_free_log_ops(data); //ok
 	push(&data->a, &data->b); //a.len-- ok
+	print_stack(&data->a);
+	print_stack(&data->b);
 	printf("\n");
 }
 
