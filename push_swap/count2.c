@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:36:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 23:07:36 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/04 11:31:17 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	desc_rotate_count(int top_a, t_stack *b, int count, int is_r)
 		i++;
 	if (i <= b->len / 2) //rb
 	{
-		count2 = i;
+		count2 = i; //here!!!
 		if (is_r) //ra
 		{
 			if (count2 < count)
@@ -45,5 +45,6 @@ int	desc_rotate_count(int top_a, t_stack *b, int count, int is_r)
 				return (0 + count2);
 		}
 	}
+	printf("count: %d, count2: %d\n", count, count2);
 	return (count + count2);
 }

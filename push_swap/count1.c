@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:26:00 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 22:56:35 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/04 10:40:45 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static void	count_from_a_to_b(t_data *data)
 		}
 		else
 			data->nb_ops += data->a.len - i; //rra
-		/* printf("[%d] = %d, nb_ops(a sort): %d\n", i, data->a.arr[i], data->nb_ops); */
+		printf("[%d] = %d, nb_ops(a sort): %d\n", i, data->a.arr[i], data->nb_ops);
 		data->nb_ops = desc_rotate_count(data->a.arr[i], &data->b, data->nb_ops, is_r);
-		/* printf("total nb_ops(a + b sort): %d\n\n", data->nb_ops); */
+		printf("total nb_ops(a + b sort): %d\n\n", data->nb_ops);
 		if (data->nb_ops < tmp)
 			tmp = data->nb_ops;
 	}
