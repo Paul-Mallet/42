@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 22:55:20 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/04 18:55:24 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/05 23:48:24 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_strcmp(const char *s1, const char *s2)
 	int	i;
 
 	i = 0;
-	printf("s1: %s || s2: %s\n", s1, s2);
 	while (s1[i] || s2[i])
 	{
 		if (s1[i] != s2[i])
