@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:21:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/05 18:13:41 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:40:03 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	rotate(t_stack *stk, t_data *data)
 		stk->arr[i] = stk->arr[i + 1];
 	if (i == stk->len - 1)
 		stk->arr[i] = tmp;
-	if (data->len_log) //!= 0
+	if (data->len_log) //!= 0, from_a_to_b
 	{
 		str = (char *)malloc((2 + 1) * sizeof(char));
 		if (!str)

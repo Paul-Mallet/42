@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:26:00 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/05 19:23:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/05 23:36:23 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,6 @@ static void	len_log_ops_from_a_to_b(t_data *data)
 	}
 	data->len_log = tmp; //= 2, log_index = 2 (with 8) if (rra, rrb) => rrr
 }
-
-/* static void	len_log_ops_from_b_to_a(t_data *data) */
-/* { */
-/* 	int	i; */
-/* 	int	tmp; */
-
-/* 	i = -1; */
-/* 	tmp = data->a.len; //max */
-/* 	while (++i < data->a.len) */
-/* 	{ */
-/* 		data->len_log = 0; */
-/* 		if (i <= data->a.len / 2) //ra */
-/* 			data->len_log += i; */
-/* 		else */
-/* 			data->len_log += data->a.len - i; //rra */
-/* 		data->len_log += asc_rotate_len(data->a.arr[i], &data->b.arr[0]); //TODO */
-/* 		if (data->len_log < tmp) */
-/* 			tmp = data->len_log; */
-/* 	} */
-/* 	data->len_log = tmp; */
-/* } */
 
 static void	count_from_a_to_b(t_data *data)
 {
@@ -101,26 +80,9 @@ static void	count_a_three_sort(t_data *data) //need len_log_ops?
 		data->nb_ops = 2;
 }
 
-static void	count_from_b_to_a(t_data *data) //TODO count for nb_ops, len_log, then log_ops in init_log_ops()
+static void	count_from_b_to_a(t_data *data) //TODO count for cheap nb_ops
 {
-	int	i;
-	int	tmp;
-
-	i = -1;
-	tmp = data->a.len; //max
-	while (++i < data->a.len)
-	{
-		data->nb_ops = 0;
-		if (i <= data->a.len / 2) //ra
-			data->nb_ops += i;
-		else
-			data->nb_ops += data->a.len - i; //rra
-		data->nb_ops += asc_rotate_nb_ops(data->a.arr[i], &data->b); //TODO (1) !!!!!!!!!!!
-		if (data->nb_ops < tmp)
-			tmp = data->nb_ops;
-	}
-	data->nb_ops = tmp; //nb_ops(rrr)
-	len_log_ops_from_b_to_a(data); //len_log_ops(rra, rrb) TODO (2)
+	data->nb_ops = asc_rotate_nb_ops(data->b.arr[0], &data->a); //TODO
 }
 
 void	count_cheap_total_ops(t_data *data, int is_first, int is_second)

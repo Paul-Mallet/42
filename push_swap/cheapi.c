@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:39:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/05 19:03:52 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/05 23:28:27 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	cheap_index_from_a(int top_b, t_stack *a) //from_b_to_a cheap index OK
 	return (cheap_i);
 }
 
-
 int	desc_sort_count(int top_a, t_stack *b, int count, int is_r)
 {
 	int	i;
@@ -82,7 +81,7 @@ int	desc_sort_count(int top_a, t_stack *b, int count, int is_r)
 			if (count2 < count)
 				return (count + 0);
 			else
-				return (0 + count2);
+				return (0 + count);
 		}
 	}
 	else //rrb
@@ -93,11 +92,12 @@ int	desc_sort_count(int top_a, t_stack *b, int count, int is_r)
 			if (count2 < count)
 				return (count + 0);
 			else
-				return (0 + count2);
+				return (0 + count);
 		}
 	}
 	return (count + count2);
 }
+      
 
 int	cheap_index_from_a_to_b(t_data *data) //3 rows
 {

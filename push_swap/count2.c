@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:36:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/05 19:35:16 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/05 23:37:44 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,6 @@ int	desc_rotate_len(int top_a, t_stack *b)
 		count = b->len - i;
 	return (count);
 }
-
-/* int	asc_rotate_len(int top_b, t_stack *a) */
-/* { */
-/* 	int	i; */
-/* 	int	count; */
-/* 	int	cheap_b; */
-
-/* 	i = 0; */
-/* 	count = 0; */
-/* 	cheap_a = a->arr[cheap_index_from_a(top_b, a)]; //ok //TODO */
-/* 	while (a->arr[i] != cheap_a) //ok */
-/* 		i++; */
-/* 	if (i <= b->len / 2) //ra */
-/* 		count = i; */
-/* 	else //rra */
-/* 		count = a->len - i; */
-/* 	return (count); */
-/* } */
 
 int	desc_rotate_nb_ops(int top_a, t_stack *b, int count, int is_r)
 {
@@ -88,21 +70,21 @@ int	desc_rotate_nb_ops(int top_a, t_stack *b, int count, int is_r)
 	return (count + count2);
 }
 
-int	asc_rotate_nb_ops(int top_a, t_stack *b) //TODO
+int	asc_rotate_nb_ops(int top_b, t_stack *a)
 {
 	int	i;
 	int	count;
-	int	cheap_b;
+	int	cheap_a;
 
 	i = 0;
 	count = 0;
-	cheap_b = b->arr[cheap_index_from_b(top_a, b)]; //TODO ???
-	while (b->arr[i] != cheap_b) //ok
+	cheap_a = a->arr[cheap_index_from_a(top_b, a)];
+	while (a->arr[i] != cheap_a) //ok
 		i++;
-	if (i <= b->len / 2) //ra
+	if (i <= a->len / 2) //ra
 		count = i;
 	else //rra
-		count = b->len - i;
+		count = a->len - i;
 	return (count);
 }
 
