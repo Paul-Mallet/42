@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:39:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/04 17:06:30 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:03:52 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	cheap_index_from_b(int top_a, t_stack *b) //a[0], b
 	cheap_i = 0;
 	while (i < b->len)
 	{
-		if ((top_a - b->arr[i]) < cheap && (top_a - b->arr[i]) > 0) //max - shorter
+		if ((top_a - b->arr[i]) < cheap && (top_a - b->arr[i]) > 0)
 		{
 			cheap = top_a - b->arr[i];
 			cheap_i = i;
@@ -36,6 +36,32 @@ int	cheap_index_from_b(int top_a, t_stack *b) //a[0], b
 		cheap_i = 0;
 	return (cheap_i);
 }
+
+int	cheap_index_from_a(int top_b, t_stack *a) //from_b_to_a cheap index OK
+{
+	int	i;
+	int	cheap;
+	int	cheap_i;
+
+	i = 0;
+	cheap = top_b;
+	cheap_i = 0;
+	while (i < a->len)
+	{
+		if (ft_abs(top_b - a->arr[i]) < cheap && (top_b - a->arr[i] < 0))
+		{
+			cheap = ft_abs(top_b - a->arr[i]);
+			cheap_i = i;
+		}
+		if (cheap == 1)
+			return (cheap_i);
+		i++;
+	}
+	if (i == a->len && cheap_i == 0) //new max, above min, just rotate
+		cheap_i = 0;
+	return (cheap_i);
+}
+
 
 int	desc_sort_count(int top_a, t_stack *b, int count, int is_r)
 {
@@ -88,16 +114,14 @@ int	cheap_index_from_a_to_b(t_data *data) //3 rows
 	while (++i < data->a.len)
 	{
 		count = 0;
+		is_r = 0;
 		if (i <= data->a.len / 2)
 		{
 			count += i; //ra counter: OK, add bool r = true
 			is_r = 1;
 		}
 		else
-		{
 			count += data->a.len - i; //rra counter: OK
-			is_r = 0;
-		}
 		count = desc_sort_count(data->a.arr[i], &data->b, count, is_r); //+rb/rrb counter = total
 		if (count < tmp)
 		{

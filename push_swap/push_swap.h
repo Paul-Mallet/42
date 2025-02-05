@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/05 13:56:18 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:15:11 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	rotate(t_stack *stk, t_data *data);
 void	rev_rotate(t_stack *stk, t_data *data);
 
 int	count_ints(char *s);
-void	count_cheap_total_ops(t_data *data, int is_first);
+void	count_cheap_total_ops(t_data *data, int is_first, int is_second);
 int	cheap_index_from_b(int top_a, t_stack *b);
 int	cheap_index_from_a_to_b(t_data *data);
 void	first_desc_sort_b(t_stack *stk);
@@ -70,6 +70,7 @@ int	is_overflow(char *s);
 int	ft_atoi(char *s);
 int	is_duplicate(t_stack *stk, int k, int n);
 
+int	ft_abs(int n);
 void	handle_error(const char *s);
 int	is_space(const char c);
 int	is_digit(const char c);

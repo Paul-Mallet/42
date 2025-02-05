@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorts2.c                                           :+:      :+:    :+:   */
+/*   print_log_ops.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:16:26 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/05 11:48:00 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:03:02 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	similar_rotate(t_data *data)
 	/* printf("n(ra): %d, m(rb): %d\n", n, m); */
 	while (n > 0 && m > 0)
 	{
-		ft_printf("rr");
+		ft_printf("rr\n");
 		n--;
 		m--;
 	}
@@ -73,7 +73,7 @@ static void	similar_rev_rotate(t_data *data)
 	/* printf("n(rra): %d, m(rrb): %d\n", n, m); */
 	while (n > 0 && m > 0)
 	{
-		ft_printf("rrr");
+		ft_printf("rrr\n");
 		n--;
 		m--;
 	}
