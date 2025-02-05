@@ -3,7 +3,8 @@ FLAGS=-Wall -Wextra -Werror
 SRCS=main.c \
      init.c \
      operations.c \
-  	 log_ops.c \
+     log_ops.c \
+     print_log_ops.c \
      cheapi.c \
      count1.c \
      count2.c \

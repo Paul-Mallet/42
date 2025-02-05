@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/04 17:07:12 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:56:18 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ typedef struct s_data
 	char	**log_ops;
 	int	log_index;
 	int	nb_ops;
-	int	*input;
-	int	len;
+	int	len_log;
 }		t_data;
 
 void	init_stack(t_stack *stk, char **av, char name);
@@ -59,8 +58,9 @@ int	count_ints(char *s);
 void	count_cheap_total_ops(t_data *data, int is_first);
 int	cheap_index_from_b(int top_a, t_stack *b);
 int	cheap_index_from_a_to_b(t_data *data);
-int	desc_sort_count(int top_a, t_stack *b, int count, int is_r);
-int	desc_rotate_count(int top_a, t_stack *b, int count, int is_r);
+void	first_desc_sort_b(t_stack *stk);
+int	desc_rotate_len(int top_a, t_stack *b);
+int	desc_rotate_nb_ops(int top_a, t_stack *b, int count, int is_r);
 void	print_stack(t_stack *stk);
 void	print_log_ops(t_data *data);
 

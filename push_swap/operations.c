@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:21:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 19:45:04 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:57:23 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	rotate(t_stack *stk, t_data *data)
 	str[0] = 'r';
 	str[1] = stk->name;
 	str[2] = '\0';
- 	ft_printf("log_index: %d\n", data->log_index);
+ 	ft_printf("%s at r log_index: %d\n", str, data->log_index);
 	data->log_ops[data->log_index] = str; //when > 9 elem, after push 3, rest 9 4 8 10
 	data->log_index++;
 }
@@ -86,6 +86,8 @@ void	rev_rotate(t_stack *stk, t_data *data)
 	str[1] = 'r';
 	str[2] = stk->name;
 	str[3] = '\0';
+ 	ft_printf("%s at rr log_index: %d\n", str, data->log_index);
 	data->log_ops[data->log_index] = str;
+ 	ft_printf("%s at rr log_index: %d\n", data->log_ops[data->log_index]);
 	data->log_index++;
 }

@@ -6,11 +6,32 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:26:00 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/04 16:19:26 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:28:50 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	len_log_ops_from_a_to_b(t_data *data)
+{
+	int	i;
+	int	tmp;
+
+	i = -1;
+	tmp = data->a.len; //max
+	while (++i < data->a.len)
+	{
+		data->len_log = 0;
+		if (i <= data->a.len / 2) //ra
+			data->len_log += i;
+		else
+			data->len_log += data->a.len - i; //rra
+		data->len_log += desc_rotate_len(data->a.arr[i], &data->b);
+		if (data->len_log < tmp)
+			tmp = data->len_log;
+	}
+	data->len_log = tmp; //= 2, log_index = 2 (with 8) if (rra, rrb) => rrr
+}
 
 static void	count_from_a_to_b(t_data *data)
 {
@@ -24,6 +45,7 @@ static void	count_from_a_to_b(t_data *data)
 	while (++i < data->a.len)
 	{
 		data->nb_ops = 0;
+		//is_r = 0; //?
 		if (i <= data->a.len / 2) //ra
 		{
 			data->nb_ops += i;
@@ -34,17 +56,17 @@ static void	count_from_a_to_b(t_data *data)
 			data->nb_ops += data->a.len - i; //rra
 			is_r = 0;
 		}
-		printf("[%d] = %d, nb_ops(a sort): %d\n", i, data->a.arr[i], data->nb_ops);
-		data->nb_ops = desc_rotate_count(data->a.arr[i], &data->b, data->nb_ops, is_r);
-		printf("total nb_ops(a + b sort): %d\n\n", data->nb_ops);
+		/* printf("[%d] = %d, nb_ops(a sort): %d\n", i, data->a.arr[i], data->nb_ops); */
+		data->nb_ops = desc_rotate_nb_ops(data->a.arr[i], &data->b, data->nb_ops, is_r);
+		/* printf("total nb_ops(a + b sort): %d\n\n", data->nb_ops); */
 		if (data->nb_ops < tmp)
 			tmp = data->nb_ops;
 	}
 	data->nb_ops = tmp;
-	ft_printf("cheap nb_ops: %d\n\n\n", data->nb_ops);
+	len_log_ops_from_a_to_b(data); //nb_ops(rrr) + len_log_ops(rra, rrb)
 }
 
-static void	count_a_three_sort(t_data *data)
+static void	count_a_three_sort(t_data *data) //need len_log_ops?
 {
 	if ((data->a.len != 3)
 		|| (data->a.arr[0] < data->a.arr[1] && data->a.arr[1] < data->a.arr[2]))
