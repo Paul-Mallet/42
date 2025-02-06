@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:21:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/05 22:40:03 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/06 10:31:30 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	swap(t_stack *stk)
 	ft_printf("s%c\n", stk->name);
 }
 
-void	rotate(t_stack *stk, t_data *data)
+void	rotate(t_stack *stk, t_data *data, int is_final)
 {
 	int	i;
 	int	tmp;
@@ -56,7 +56,7 @@ void	rotate(t_stack *stk, t_data *data)
 		stk->arr[i] = stk->arr[i + 1];
 	if (i == stk->len - 1)
 		stk->arr[i] = tmp;
-	if (data->len_log) //!= 0, from_a_to_b
+	if (!is_final) //!= 0, from_a_to_b
 	{
 		str = (char *)malloc((2 + 1) * sizeof(char));
 		if (!str)
@@ -70,7 +70,7 @@ void	rotate(t_stack *stk, t_data *data)
 	}
 }
 
-void	rev_rotate(t_stack *stk, t_data *data)
+void	rev_rotate(t_stack *stk, t_data *data, int is_final)
 {
 	int	i;
 	int	tmp;
@@ -82,7 +82,7 @@ void	rev_rotate(t_stack *stk, t_data *data)
 		stk->arr[i] = stk->arr[i - 1];
 	if (i == 0)
 		stk->arr[i] = tmp;
-	if (data->len_log) //!= 0
+	if (!is_final)
 	{
 		str = (char *)malloc((3 + 1) * sizeof(char));
 		if (!str)

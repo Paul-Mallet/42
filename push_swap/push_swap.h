@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/05 23:37:00 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/06 10:32:52 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	free_stacks(t_data *data);
 
 void	swap(t_stack *stk);
 void	push(t_stack *from, t_stack *to);
-void	rotate(t_stack *stk, t_data *data);
-void	rev_rotate(t_stack *stk, t_data *data);
+void	rotate(t_stack *stk, t_data *data, int is_final);
+void	rev_rotate(t_stack *stk, t_data *data, int is_final);
 
 int	count_ints(char *s);
 void	count_cheap_total_ops(t_data *data, int is_first, int is_second);

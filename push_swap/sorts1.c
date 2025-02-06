@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/05 23:39:01 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/06 10:44:46 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	desc_sort_b(t_data *data)
 	while (data->b.arr[0] != cheap_b)
 	{
 		if (cheap_index_b <= (data->b.len / 2))
-			rotate(&data->b, data);
+			rotate(&data->b, data, 0);
 		else
-			rev_rotate(&data->b, data);
+			rev_rotate(&data->b, data, 0);
 	}
 }
 
@@ -53,15 +53,23 @@ void	rotate_to_top_a(t_data *data, int is_from_a_to_b)
 	{
 		if (cheap_index_a <= (data->a.len / 2))
 		{
-			rotate(&data->a, data);
-			if (!is_from_a_to_b)
+			if (is_from_a_to_b)
+				rotate(&data->a, data, 0);
+			else
+			{
+				rotate(&data->a, data, 1);
 				ft_printf("r%c\n", data->a.name);
+			}
 		}
 		else
 		{
-			rev_rotate(&data->a, data);
-			if (!is_from_a_to_b)
+			if (is_from_a_to_b)
+				rev_rotate(&data->a, data, 0); //TODO
+			else
+			{
+				rev_rotate(&data->a, data, 1); //TODO
 				ft_printf("rr%c\n", data->a.name);
+			}
 		}
 	}
 }
@@ -118,22 +126,22 @@ void	three_sort(t_data *data)
 		|| (data->a.arr[0] < data->a.arr[1] && data->a.arr[1] < data->a.arr[2]))
 		return ;
 	else if (data->a.arr[0] > data->a.arr[1] && data->a.arr[1] < data->a.arr[2])
-		rotate(&data->a, data);
+		rotate(&data->a, data, 1);
 	else if (data->a.arr[0] < data->a.arr[1] && data->a.arr[1] > data->a.arr[2]
 		&& data->a.arr[0] > data->a.arr[2])
-		rev_rotate(&data->a, data);
+		rev_rotate(&data->a, data, 1);
 	else if (data->a.arr[0] > data->a.arr[1] && data->a.arr[1] < data->a.arr[2]
 		&& data->a.arr[0] < data->a.arr[2])
 		swap(&data->a);
 	else if (data->a.arr[0] > data->a.arr[1] && data->a.arr[1] > data->a.arr[2])
 	{
 		swap(&data->a);
-		rev_rotate(&data->a, data);
+		rev_rotate(&data->a, data, 0);
 	}
 	else
 	{
 		swap(&data->a);
-		rotate(&data->a, data);
+		rotate(&data->a, data, 0);
 	}
 }
 
@@ -151,12 +159,12 @@ void	final_asc_sort_a(t_data *data)
 	{
 		if (cheap_index_a <= (data->a.len / 2))
 		{
-			rotate(&data->a, data);
+			rotate(&data->a, data, 1);
 			ft_printf("r%c\n", data->a.name); //ra
 		}
 		else
 		{
-			rev_rotate(&data->a, data);
+			rev_rotate(&data->a, data, 1);
 			ft_printf("rr%c\n", data->a.name); //rra
 		}
 	}
