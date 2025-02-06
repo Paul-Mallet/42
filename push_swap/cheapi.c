@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:39:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/06 11:45:24 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:15:35 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	cheap_index_from_b(int top_a, t_stack *b) //a[0], b
 	cheap_i = 0;
 	while (i < b->len)
 	{
-		if ((top_a - b->arr[i]) < cheap && (top_a - b->arr[i]) > 0)
+		if ((top_a - b->arr[i]) < cheap && (top_a - b->arr[i]) > 0) //8 - 7 = 1, 3 - 2 = 1
 		{
 			cheap = top_a - b->arr[i];
 			cheap_i = i;
@@ -62,7 +62,7 @@ int	cheap_index_from_a(int top_b, t_stack *a) //from_b_to_a cheap index OK
 	return (cheap_i);
 }
 
-int	desc_sort_count(int top_a, t_stack *b, int count, int is_r)
+int	desc_sort_count(int top_a, t_stack *b, int count, int is_r) //3, b, 0, 1 //ra
 {
 	int	i;
 	int	count2;
@@ -71,17 +71,19 @@ int	desc_sort_count(int top_a, t_stack *b, int count, int is_r)
 	i = 0;
 	count2 = 0;
 	cheap_b = b->arr[cheap_index_from_b(top_a, b)];
+	/* printf("cheap_b: %d\n", cheap_b); */
 	while (b->arr[i] != cheap_b)
 		i++;
 	if (i <= b->len / 2) //rb
 	{
 		count2 = i;
+		/* printf("count2: %d\n", count2); */
 		if (is_r) //ra
 		{
 			if (count2 < count)
 				return (count + 0);
 			else
-				return (0 + count);
+				return (0 + count2);
 		}
 	}
 	else //rrb
@@ -89,7 +91,6 @@ int	desc_sort_count(int top_a, t_stack *b, int count, int is_r)
 		count2 = b->len - i;
 		if (!is_r) //rra
 		{
-			printf("rrr?\n");
 			if (count2 < count)
 				return (count + 0);
 			else
@@ -124,6 +125,7 @@ int	cheap_index_from_a_to_b(t_data *data) //3 rows
 		else
 			count += data->a.len - i; //rra counter: OK
 		count = desc_sort_count(data->a.arr[i], &data->b, count, is_r); //+rb/rrb counter = total
+		printf("[%d] count: %d\n", i, count);
 		if (count < tmp)
 		{
 			tmp = count;

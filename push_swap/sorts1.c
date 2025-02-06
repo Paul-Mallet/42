@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/06 11:36:26 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:57:39 by paul_mall        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	a_to_b_sort(t_data *data)
 {
 	data->nb_ops = 0;
 	count_cheap_total_ops(data, 1, 0); //ok, nb_ops + len_log
-	/* ft_printf("nb_ops:%d, len_log: %d\n", data->nb_ops, data->len_log); */
+	ft_printf("nb_ops:%d, len_log: %d\n", data->nb_ops, data->len_log);
 	init_log_ops(data); //ok, log_index = 2, len_log = 2
 	/* ft_printf("log_index(bef rot a): %d\n", data->log_index); //ok */
 	rotate_to_top_a(data, 1); //ra/rra, ok
@@ -104,21 +104,21 @@ void	a_to_b_sort(t_data *data)
 	print_log_ops(data); //ok
 	ft_free_log_ops(data); //ok
 	push(&data->a, &data->b); //a.len-- ok
-	/* print_stack(&data->a); */
-	/* print_stack(&data->b); */
-	/* ft_printf("\n"); */
+	print_stack(&data->a);
+	print_stack(&data->b);
+	ft_printf("\n");
 }
 
 void	b_to_a_sort(t_data *data)
 {
 	data->nb_ops = 0;
 	count_cheap_total_ops(data, 0, 1); //nb_ops 
-	/* ft_printf("nb_ops:%d\n", data->nb_ops); */
+	ft_printf("nb_ops:%d\n", data->nb_ops);
 	rotate_to_top_a(data, 0); //ra/rra 
 	push(&data->b, &data->a); //b.len-- ok
-	/* print_stack(&data->a); */
-	/* print_stack(&data->b); */
-	/* ft_printf("\n"); */
+	print_stack(&data->a);
+	print_stack(&data->b);
+	ft_printf("\n");
 }
 
 void	three_sort(t_data *data)
@@ -187,9 +187,9 @@ void	turk_sort(t_data *data)
 		count_cheap_total_ops(data, 0, 0); //ok
 		init_log_ops(data); //ok
 		three_sort(data); //ok
-		/* ft_printf("\n---three_sort---\n"); */
-		/* ft_printf("nb_ops: %d\n", data->nb_ops); */
-		/* ft_printf("log_index: %d\n", data->log_index); //ok */
+		ft_printf("\n---three_sort---\n");
+		ft_printf("nb_ops: %d\n", data->nb_ops);
+		ft_printf("log_index: %d\n", data->log_index); //ok
 		print_log_ops(data); //ok
 		ft_free_log_ops(data); //ok
 	}
