@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:16:26 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/05 14:03:02 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:37:07 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ static int	ft_only_includes_rotates(char **log_ops, int log_index)
 	int	i;
 
 	i = 0;
-	printf("check_include_rotates\n");
+	/* printf("check_include_rotates\n"); */
 	while (i < log_index)
 	{
-		if (ft_strcmp(log_ops[i], "ra")
-			&& ft_strcmp(log_ops[i], "rb")) //1 = not same
+		if (log_ops[i] == NULL || (ft_strcmp(log_ops[i], "ra")
+			&& ft_strcmp(log_ops[i], "rb"))) //TODO must not access NULL when > 9 elems
 			return (0);
 		i++;
 	}

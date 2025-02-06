@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:34:23 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/03 22:56:00 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/06 11:00:26 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	main(int ac, char **av)
 		bubble_sort(&data.cpy);
 		refill_stack(&data.a, &data.cpy);
 		turk_sort(&data);
-		print_stack(&data.a);
-		print_stack(&data.b);
+		/* print_stack(&data.a); */
+		/* print_stack(&data.b); */
 		free_stacks(&data);
 	}
 	return (0);

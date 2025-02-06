@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:39:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/05 23:28:27 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/06 11:45:24 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	desc_sort_count(int top_a, t_stack *b, int count, int is_r)
 		count2 = b->len - i;
 		if (!is_r) //rra
 		{
+			printf("rrr?\n");
 			if (count2 < count)
 				return (count + 0);
 			else
@@ -107,11 +108,11 @@ int	cheap_index_from_a_to_b(t_data *data) //3 rows
 	int	count;
 	int	is_r;
 
-	i = -1; //
+	i = 0;
 	is_r = 0;
 	tmp = data->a.len; //max
-	cheap_i = i;
-	while (++i < data->a.len)
+	cheap_i = 0;
+	while (i < data->a.len)
 	{
 		count = 0;
 		is_r = 0;
@@ -128,6 +129,7 @@ int	cheap_index_from_a_to_b(t_data *data) //3 rows
 			tmp = count;
 			cheap_i = i;
 		}
+		i++;
 	}
 	return (cheap_i);
 }
