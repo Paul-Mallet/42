@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:39:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/08 17:32:58 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/08 19:20:44 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,9 @@ int	cheap_index_from_b(int top_a, t_data *data) //a[0], b
 	}
 	if (i == data->b.len && cheap_i == 0)
 	{
-		cheap_i = 0;
-		desc_sort_bigger(data);
+		/* cheap_i = 0; */
+		cheap_i = above_bigger(&data->b);
+		/* desc_sort_bigger(data); // */
 	}
 	return (cheap_i);
 }
@@ -179,6 +180,5 @@ int	cheap_index_from_a_to_b(t_data *data) //3 rows
 		}
 		i++;
 	}
-	printf("cheap_i: %d\n", cheap_i);
 	return (cheap_i);
 }
