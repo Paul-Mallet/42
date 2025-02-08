@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/08 19:00:22 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/08 19:50:37 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	desc_sort_b(t_data *data) //after rotate, so cheap a is top!
 
 	cheap_index_b = cheap_index_from_b(cheap_a, data);
 	cheap_b = data->b.arr[cheap_index_b];
-	ft_printf("cheap_i of b: %d\n", cheap_index_b);
+	/* ft_printf("cheap_i of b: %d\n", cheap_index_b); */
 	while (data->b.arr[0] != cheap_b)
 	{
 		if (cheap_index_b <= (data->b.len / 2))
@@ -42,7 +42,7 @@ void	rotate_to_top_a(t_data *data, int is_from_a_to_b)
 	if (is_from_a_to_b)
 	{
 		cheap_index_a = cheap_index_from_a_to_b(data); //TODO (2)
-		printf("cheap_i of a: %d\n", cheap_index_a);
+		/* printf("cheap_i of a: %d\n", cheap_index_a); */
 		cheap_a = data->a.arr[cheap_index_a];
 	}
 	else //from_b_to_a
@@ -91,7 +91,7 @@ void	a_to_b_sort(t_data *data)
 {
 	data->nb_ops = 0;
 	count_cheap_total_ops(data, 1, 0); //ok, nb_ops + len_log
-	ft_printf("nb_ops: %d, len_log: %d\n", data->nb_ops, data->len_log);
+	/* ft_printf("nb_ops: %d, len_log: %d\n", data->nb_ops, data->len_log); */
 	init_log_ops(data); //ok, log_index = 2, len_log = 2
 	/* ft_printf("log_index(bef rot a): %d\n", data->log_index); //ok */
 	rotate_to_top_a(data, 1); //ra/rra, ok
@@ -100,7 +100,7 @@ void	a_to_b_sort(t_data *data)
 	/* ft_printf("log_index(aft rot b): %d\n", data->log_index); //ok */
 	data->log_ops[data->len_log] = 0; //ok
 	/* ft_printf("log_index: %d\n", data->log_index); //ok */
-	print_log_ops_easy(data); //ok
+	/* print_log_ops_easy(data); //ok */
 	print_log_ops(data); //ok
 	ft_free_log_ops(data); //ok
 	push(&data->a, &data->b); //a.len-- ok
@@ -114,13 +114,13 @@ void	b_to_a_sort(t_data *data)
 {
 	data->nb_ops = 0;
 	count_cheap_total_ops(data, 0, 1); //nb_ops 
-	ft_printf("nb_ops: %d\n", data->nb_ops);
+	/* ft_printf("nb_ops: %d\n", data->nb_ops); */
 	rotate_to_top_a(data, 0); //ra/rra 
 	push(&data->b, &data->a); //b.len-- ok
-	print_stack(&data->a);
-	ft_printf("\n");
-	print_stack(&data->b);
-	ft_printf("\n");
+	/* print_stack(&data->a); */
+	/* ft_printf("\n"); */
+	/* print_stack(&data->b); */
+	/* ft_printf("\n"); */
 }
 
 void	three_sort(t_data *data)
@@ -189,9 +189,9 @@ void	turk_sort(t_data *data)
 		count_cheap_total_ops(data, 0, 0); //ok
 		init_log_ops(data); //ok
 		three_sort(data); //ok
-		ft_printf("\n---three_sort---\n");
-		ft_printf("nb_ops: %d\n", data->nb_ops);
-		ft_printf("log_index: %d\n", data->log_index); //ok
+		/* ft_printf("\n---three_sort---\n"); */
+		/* ft_printf("nb_ops: %d\n", data->nb_ops); */
+		/* ft_printf("log_index: %d\n", data->log_index); //ok */
 		print_log_ops(data); //ok
 		ft_free_log_ops(data); //ok
 	}
@@ -199,4 +199,8 @@ void	turk_sort(t_data *data)
 	 	b_to_a_sort(data);
 	if (data->a.arr[0] != 1)
 		final_asc_sort_a(data);
+	print_stack(&data->a);
+	ft_printf("\n");
+	print_stack(&data->b);
+	ft_printf("\n");
 }
