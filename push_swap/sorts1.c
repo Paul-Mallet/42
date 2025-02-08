@@ -6,23 +6,23 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/06 12:57:39 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/08 19:00:22 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	desc_sort_b(t_data *data)
+void	desc_sort_b(t_data *data) //after rotate, so cheap a is top!
 {
-	int	cheap_index_a;
+	/* int	cheap_index_a; */
 	int	cheap_a;
 	int	cheap_index_b;
 	int	cheap_b;
 
-	cheap_index_a = cheap_index_from_a_to_b(data); //TODO must be a[3] = 8
-	cheap_a = data->a.arr[cheap_index_a];
-	ft_printf("cheap_i of a: %d\n", cheap_index_a);
-	cheap_index_b = cheap_index_from_b(cheap_a, &data->b);
+	cheap_a = data->a.arr[0];
+	/* ft_printf("\ncheap_i of a: %d\n", cheap_index_a); */
+
+	cheap_index_b = cheap_index_from_b(cheap_a, data);
 	cheap_b = data->b.arr[cheap_index_b];
 	ft_printf("cheap_i of b: %d\n", cheap_index_b);
 	while (data->b.arr[0] != cheap_b)
@@ -41,15 +41,15 @@ void	rotate_to_top_a(t_data *data, int is_from_a_to_b)
 
 	if (is_from_a_to_b)
 	{
-		cheap_index_a = cheap_index_from_a_to_b(data);
+		cheap_index_a = cheap_index_from_a_to_b(data); //TODO (2)
+		printf("cheap_i of a: %d\n", cheap_index_a);
 		cheap_a = data->a.arr[cheap_index_a];
 	}
 	else //from_b_to_a
 	{
-		cheap_index_a = cheap_index_from_a(data->b.arr[0], &data->a); //always b.arr[0]
+		cheap_index_a = cheap_index_from_a(data->b.arr[0], data); //always b.arr[0]
 		cheap_a = data->a.arr[cheap_index_a];
 	}
-	/* ft_printf("cheap_i of a: %d\n", cheap_index_a); //[3] */
 	while (data->a.arr[0] != cheap_a)
 	{
 		if (cheap_index_a <= (data->a.len / 2))
@@ -91,7 +91,7 @@ void	a_to_b_sort(t_data *data)
 {
 	data->nb_ops = 0;
 	count_cheap_total_ops(data, 1, 0); //ok, nb_ops + len_log
-	ft_printf("nb_ops:%d, len_log: %d\n", data->nb_ops, data->len_log);
+	ft_printf("nb_ops: %d, len_log: %d\n", data->nb_ops, data->len_log);
 	init_log_ops(data); //ok, log_index = 2, len_log = 2
 	/* ft_printf("log_index(bef rot a): %d\n", data->log_index); //ok */
 	rotate_to_top_a(data, 1); //ra/rra, ok
@@ -105,6 +105,7 @@ void	a_to_b_sort(t_data *data)
 	ft_free_log_ops(data); //ok
 	push(&data->a, &data->b); //a.len-- ok
 	print_stack(&data->a);
+	ft_printf("\n");
 	print_stack(&data->b);
 	ft_printf("\n");
 }
@@ -113,10 +114,11 @@ void	b_to_a_sort(t_data *data)
 {
 	data->nb_ops = 0;
 	count_cheap_total_ops(data, 0, 1); //nb_ops 
-	ft_printf("nb_ops:%d\n", data->nb_ops);
+	ft_printf("nb_ops: %d\n", data->nb_ops);
 	rotate_to_top_a(data, 0); //ra/rra 
 	push(&data->b, &data->a); //b.len-- ok
 	print_stack(&data->a);
+	ft_printf("\n");
 	print_stack(&data->b);
 	ft_printf("\n");
 }

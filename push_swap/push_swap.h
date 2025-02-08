@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/06 10:32:52 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/08 16:56:53 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void	rev_rotate(t_stack *stk, t_data *data, int is_final);
 
 int	count_ints(char *s);
 void	count_cheap_total_ops(t_data *data, int is_first, int is_second);
-int	cheap_index_from_a(int top_b, t_stack *a);
-int	cheap_index_from_b(int top_a, t_stack *b);
+int	cheap_index_from_a(int top_b, t_data *data);
+int	cheap_index_from_b(int top_a, t_data *data);
 int	cheap_index_from_a_to_b(t_data *data);
 void	first_desc_sort_b(t_stack *stk);
-int	desc_rotate_len(int top_a, t_stack *b);
-int	desc_rotate_nb_ops(int top_a, t_stack *b, int count, int is_r);
-int	asc_rotate_nb_ops(int top_b, t_stack *a);
+int	desc_rotate_len(int top_a, t_data *data);
+int	desc_rotate_nb_ops(int top_a, t_data *data, int count, int is_r);
+int	asc_rotate_nb_ops(int top_b, t_data *data);
 void	print_stack(t_stack *stk);
 void	print_log_ops(t_data *data);
 
