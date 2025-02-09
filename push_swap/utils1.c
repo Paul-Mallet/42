@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:46:52 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/09 16:29:48 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 18:06:31 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	is_valid_input(char *s) //TODO
 	nb_ints = count_ints(s);
 	if (!ft_strlen(s))
 		handle_error(ERROR_MSG);
-	while (*s)
+	while (*s) //seg_fault
 	{
 		while (is_space(*s))
 			s++;
