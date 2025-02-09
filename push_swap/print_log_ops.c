@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:16:26 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 12:47:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 15:29:24 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,43 @@ static int	ft_only_includes_rotates(char **log_ops, int log_index)
 	while (i < log_index)
 	{
 		if (ft_strcmp(log_ops[i], "ra")
-			&& ft_strcmp(log_ops[i], "rb"))
+			&& ft_strcmp(log_ops[i], "rb")) //TODO
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
+static int	ft_only_includes_rev_rotates(char **log_ops, int log_index)
+{
+	int	i;
+
+	i = 0;
+	while (i < log_index)
+	{
+		if (ft_strcmp(log_ops[i], "rra")
+			&& ft_strcmp(log_ops[i], "rrb")) //TODO
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	print_all_log_ops(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->log_index)
+		ft_printf("%s\n", data->log_ops[i++]);
+}
+
 void	print_log_ops(t_data *data)
 {
 	if (ft_only_includes_rotates(data->log_ops, data->log_index))
 		similar_rotate(data);
-	else
+	else if (ft_only_includes_rev_rotates(data->log_ops, data->log_index))
 		similar_rev_rotate(data);
+	else
+		print_all_log_ops(data);
 }
