@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:26:00 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 12:53:47 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 12:58:57 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	count_a_three_sort(t_data *data)
 		|| (data->a.arr[0] < data->a.arr[1] && data->a.arr[1] < data->a.arr[2]))
 		data->len_log = 0;
 	else if (data->a.arr[0] > data->a.arr[1] && data->a.arr[1] < data->a.arr[2])
-		data->len_log = 1; //TODO
+		data->len_log = 1;
 	else if (data->a.arr[0] < data->a.arr[1] && data->a.arr[1] > data->a.arr[2]
 		&& data->a.arr[0] > data->a.arr[2])
 		data->len_log = 1;
