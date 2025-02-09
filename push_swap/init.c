@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:28:37 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/03 14:23:30 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 12:49:27 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	refill_stack(t_stack *stk, t_stack *cpy)
 		{
 			if (stk->arr[i] == cpy->arr[j])
 			{
-				stk->arr[i] = j + 1; //?
+				stk->arr[i] = j + 1;
 				break ;
 			}
 			j++;
@@ -103,7 +103,7 @@ void	init_stack(t_stack *stk, char **av, char name)
 		stk->capacity += count_ints(av[i]);
 	if (stk->name == 'a' || stk->name == 'c')
 		stk->len = stk->capacity;
-	stk->arr = (int *)ft_calloc(stk->capacity, sizeof(int)); //free
+	stk->arr = (int *)ft_calloc(stk->capacity, sizeof(int));
 	if (!stk->arr)
 		handle_error(ERROR_MSG);
 }

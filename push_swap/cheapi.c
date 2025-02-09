@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:39:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 11:49:38 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 12:46:09 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,18 @@ void	desc_sort_bigger(t_data *data)
 	}
 }
 
-int	cheap_index_from_b(int top_a, t_data *data) //a[0], b
+int	cheap_index_from_b(int top_a, t_data *data)
 {
 	int	i;
 	int	cheap;
 	int	cheap_i;
 
 	i = 0;
-	cheap = data->a.capacity; //max
-	cheap_i = data->a.capacity; //10 = bigger of whole stack
+	cheap = data->a.capacity;
+	cheap_i = data->a.capacity;
 	while (i < data->b.len)
 	{
-		if ((top_a - data->b.arr[i]) < cheap && (top_a - data->b.arr[i]) > 0) //n - n < 0 TODO
+		if ((top_a - data->b.arr[i]) < cheap && (top_a - data->b.arr[i]) > 0)
 		{
 			cheap = top_a - data->b.arr[i];
 			cheap_i = i;
@@ -75,12 +75,12 @@ int	cheap_index_from_b(int top_a, t_data *data) //a[0], b
 			return (cheap_i);
 		i++;
 	}
-	if (i == data->b.len && cheap_i == data->a.capacity) // 14 96? not 7? TODO
+	if (i == data->b.len && cheap_i == data->a.capacity)
 		cheap_i = above_bigger(&data->b);
 	return (cheap_i);
 }
 
-int	cheap_index_from_a(int top_b, t_data *data) //from_b_to_a cheap index OK
+int	cheap_index_from_a(int top_b, t_data *data)
 {
 	int	i;
 	int	cheap;
@@ -88,10 +88,10 @@ int	cheap_index_from_a(int top_b, t_data *data) //from_b_to_a cheap index OK
 
 	i = 0;
 	cheap = data->a.capacity;
-	cheap_i = 0; //TODO bad cheap_i?
+	cheap_i = 0;
 	while (i < data->a.len)
 	{
-		if (ft_abs(top_b - data->a.arr[i]) < cheap && (top_b - data->a.arr[i] < 0)) //abs?
+		if (ft_abs(top_b - data->a.arr[i]) < cheap && (top_b - data->a.arr[i] < 0))
 		{
 			cheap = ft_abs(top_b - data->a.arr[i]);
 			cheap_i = i;
@@ -100,12 +100,12 @@ int	cheap_index_from_a(int top_b, t_data *data) //from_b_to_a cheap index OK
 			return (cheap_i);
 		i++;
 	}
-	if (i == data->a.len && cheap_i == 0) //new max, above min, just rotate
-		cheap_i = 0; //TODO bad cheap_a?
+	if (i == data->a.len && cheap_i == 0)
+		cheap_i = 0;
 	return (cheap_i);
 }
 
-int	desc_sort_count(int top_a, t_data *data, int count, int is_r) //3, b, 0, 1 //ra
+int	desc_sort_count(int top_a, t_data *data, int count, int is_r) //TODO
 {
 	int	i;
 	int	count2;
@@ -116,22 +116,21 @@ int	desc_sort_count(int top_a, t_data *data, int count, int is_r) //3, b, 0, 1 /
 	cheap_b = data->b.arr[cheap_index_from_b(top_a, data)];
 	while (data->b.arr[i] != cheap_b)
 		i++;
-	if (i <= data->b.len / 2) //rb
+	if (i <= data->b.len / 2)
 	{
 		count2 = i;
-		if (is_r) //ra
+		if (is_r)
 		{
-			/* printf("count(desc_sort_count): %d\n", count); */
 			if (count2 < count)
 				return (count + 0);
 			else
 				return (0 + count2);
 		}
 	}
-	else //rrb
+	else
 	{
 		count2 = data->b.len - i;
-		if (!is_r) //rra
+		if (!is_r)
 		{
 			if (count2 < count)
 				return (count + 0);
@@ -143,7 +142,7 @@ int	desc_sort_count(int top_a, t_data *data, int count, int is_r) //3, b, 0, 1 /
 }
       
 
-int	cheap_index_from_a_to_b(t_data *data) //3 rows
+int	cheap_index_from_a_to_b(t_data *data) //TODO
 {
 	int	i;
 	int	tmp;
@@ -153,22 +152,20 @@ int	cheap_index_from_a_to_b(t_data *data) //3 rows
 
 	i = 0;
 	is_r = 0;
-	tmp = data->a.capacity; //max
+	tmp = data->a.capacity;
 	cheap_i = 0;
 	while (i < data->a.len)
 	{
 		count = 0;
 		is_r = 0;
-		if (i <= data->a.len / 2) //ra
+		if (i <= data->a.len / 2)
 		{
-			count = i; //ra counter: OK, add bool r = true
+			count = i;
 			is_r = 1;
 		}
-		else //rra
-			count = data->a.len - i; //rra counter: OKo
-		/* ft_printf("count(bef desc_sort_c): %d\n", count); */
-		count = desc_sort_count(data->a.arr[i], data, count, is_r); //+rb/rrb counter = total
-		/* ft_printf("count(aft desc_s_c): %d\n", count); */
+		else
+			count = data->a.len - i;
+		count = desc_sort_count(data->a.arr[i], data, count, is_r);
 		if (count < tmp)
 		{
 			tmp = count;

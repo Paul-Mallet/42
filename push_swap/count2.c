@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:36:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/08 17:05:58 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 12:48:37 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ int	desc_rotate_len(int top_a, t_data *data)
 
 	i = 0;
 	count = 0;
-	cheap_b = data->b.arr[cheap_index_from_b(top_a, data)]; //ok
-	while (data->b.arr[i] != cheap_b) //ok
+	cheap_b = data->b.arr[cheap_index_from_b(top_a, data)];
+	while (data->b.arr[i] != cheap_b)
 		i++;
-	if (i <= data->b.len / 2) //rb
+	if (i <= data->b.len / 2)
 		count = i;
-	else //rrb
+	else
 		count = data->b.len - i;
 	return (count);
 }
 
-int	desc_rotate_nb_ops(int top_a, t_data *data, int count, int is_r)
+int	desc_rotate_nb_ops(int top_a, t_data *data, int count, int is_r) //TODO
 {
 	int	i;
 	int	count2;
@@ -38,25 +38,24 @@ int	desc_rotate_nb_ops(int top_a, t_data *data, int count, int is_r)
 
 	i = 0;
 	count2 = 0;
-	cheap_b = data->b.arr[cheap_index_from_b(top_a, data)]; //TODO
-	/* ft_printf("count: %d\n", count); */
-	while (data->b.arr[i] != cheap_b) //ok
+	cheap_b = data->b.arr[cheap_index_from_b(top_a, data)];
+	while (data->b.arr[i] != cheap_b)
 		i++;
-	if (i <= data->b.len / 2) //rb
+	if (i <= data->b.len / 2)
 	{
 		count2 = i;
-		if (is_r) //ra
+		if (is_r)
 		{
 			if (count2 < count)
-				return (count + 0); //TODO
+				return (count + 0);
 			else
 				return (0 + count2);
 		}
 	}
-	else //rrb
+	else
 	{
 		count2 = data->b.len - i;
-		if (!is_r) //rra
+		if (!is_r)
 		{
 			if (count2 < count)
 				return (count + 0);
@@ -76,11 +75,11 @@ int	asc_rotate_nb_ops(int top_b, t_data *data)
 	i = 0;
 	count = 0;
 	cheap_a = data->a.arr[cheap_index_from_a(top_b, data)];
-	while (data->a.arr[i] != cheap_a) //ok
+	while (data->a.arr[i] != cheap_a)
 		i++;
-	if (i <= data->a.len / 2) //ra
+	if (i <= data->a.len / 2)
 		count = i;
-	else //rra
+	else
 		count = data->a.len - i;
 	return (count);
 }

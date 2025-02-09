@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:16:26 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/06 12:56:10 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/09 12:47:45 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	similar_rotate(t_data *data)
 		if (!ft_strcmp(data->log_ops[i], "rb"))
 			m++;
 	}
-	/* printf("n(ra): %d, m(rb): %d\n", n, m); */
 	while (n > 0 && m > 0)
 	{
 		ft_printf("rr\n");
@@ -70,7 +69,6 @@ static void	similar_rev_rotate(t_data *data)
 		if (!ft_strcmp(data->log_ops[i], "rrb"))
 			m++;
 	}
-	/* printf("n(rra): %d, m(rrb): %d\n", n, m); */
 	while (n > 0 && m > 0)
 	{
 		ft_printf("rrr\n");
@@ -85,11 +83,10 @@ static int	ft_only_includes_rotates(char **log_ops, int log_index)
 	int	i;
 
 	i = 0;
-	/* printf("check_include_rotates\n"); */
 	while (i < log_index)
 	{
 		if (ft_strcmp(log_ops[i], "ra")
-			&& ft_strcmp(log_ops[i], "rb")) //TODO must not access NULL when > 9 elems
+			&& ft_strcmp(log_ops[i], "rb"))
 			return (0);
 		i++;
 	}
