@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:26:00 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 12:58:57 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:47:21 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,11 @@ static void	len_log_ops_from_a_to_b(t_data *data, int cheap_i_from_a)
 	data->len_log += desc_rotate_len(data->a.arr[cheap_i_from_a], data);
 }
 
-static void	count_from_a_to_b(t_data *data) //TODO
+static int	count_from_a_to_b(t_data *data, int i, int is_r)
 {
-	int	i;
 	int	tmp;
 	int	tmp_i;
-	int	is_r;
 
-	i = -1;
-	is_r = 0;
 	tmp_i = 0;
 	tmp = data->a.capacity;
 	while (++i < data->a.len)
@@ -44,7 +40,7 @@ static void	count_from_a_to_b(t_data *data) //TODO
 		}
 		else
 			data->nb_ops = data->a.len - i;
-		data->nb_ops = desc_rotate_nb_ops(data->a.arr[i], data, data->nb_ops, is_r);
+		data->nb_ops = dsc_rot_nb_ops(data->a.arr[i], data, data->nb_ops, is_r);
 		if (data->nb_ops < tmp)
 		{
 			tmp = data->nb_ops;
@@ -52,7 +48,7 @@ static void	count_from_a_to_b(t_data *data) //TODO
 		}
 	}
 	data->nb_ops = tmp;
-	len_log_ops_from_a_to_b(data, tmp_i);
+	return (tmp_i);
 }
 
 static void	count_a_three_sort(t_data *data)
@@ -81,10 +77,16 @@ static void	count_from_b_to_a(t_data *data)
 
 void	count_cheap_total_ops(t_data *data, int is_first, int is_second)
 {
+	int	tmp_i;
+
+	tmp_i = 0;
 	if (data->a.len > 3 && is_first && !is_second)
-		count_from_a_to_b(data);
+	{
+		tmp_i = count_from_a_to_b(data, INDEX, 0);
+		len_log_ops_from_a_to_b(data, tmp_i);
+	}
 	else if (data->a.len == 3 && !is_first && !is_second)
 		count_a_three_sort(data);
 	else
-	  	count_from_b_to_a(data);
+		count_from_b_to_a(data);
 }

@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:56:18 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/05 18:14:43 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 16:51:31 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,33 @@ int	count_ints(char *s)
 		count++;
 	}
 	return (count);
+}
+
+int	optimal_count(int count, int count2)
+{
+	if (count2 < count)
+		return (count + 0);
+	else
+		return (0 + count2);
+}
+
+int	above_bigger(t_stack *b)
+{
+	int	i;
+	int	big_i;
+	int	bigger;
+
+	i = 0;
+	big_i = 0;
+	bigger = 0;
+	while (i < b->len)
+	{
+		if (b->arr[i] > bigger)
+		{
+			bigger = b->arr[i];
+			big_i = i;
+		}
+		i++;
+	}
+	return (big_i);
 }

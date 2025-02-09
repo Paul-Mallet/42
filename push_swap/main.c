@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:34:23 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/09 13:07:54 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:23:08 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,12 @@ int	is_already_sort(t_stack *a)
 	if (i != a->len - 1)
 		return (0);
 	return (1);
-
 }
 
 int	main(int ac, char **av)
 {
 	t_data	data;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (ac > 1)

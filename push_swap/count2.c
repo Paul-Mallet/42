@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:36:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 12:48:37 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:48:40 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	desc_rotate_len(int top_a, t_data *data)
 	return (count);
 }
 
-int	desc_rotate_nb_ops(int top_a, t_data *data, int count, int is_r) //TODO
+int	dsc_rot_nb_ops(int top_a, t_data *data, int count, int is_r)
 {
 	int	i;
 	int	count2;
@@ -45,23 +45,13 @@ int	desc_rotate_nb_ops(int top_a, t_data *data, int count, int is_r) //TODO
 	{
 		count2 = i;
 		if (is_r)
-		{
-			if (count2 < count)
-				return (count + 0);
-			else
-				return (0 + count2);
-		}
+			return (optimal_count(count, count2));
 	}
 	else
 	{
 		count2 = data->b.len - i;
 		if (!is_r)
-		{
-			if (count2 < count)
-				return (count + 0);
-			else
-				return (0 + count2);
-		}
+			return (optimal_count(count, count2));
 	}
 	return (count + count2);
 }
@@ -83,4 +73,3 @@ int	asc_rotate_nb_ops(int top_b, t_data *data)
 		count = data->a.len - i;
 	return (count);
 }
-

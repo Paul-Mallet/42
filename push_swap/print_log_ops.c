@@ -6,27 +6,11 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:16:26 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 15:29:24 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:25:11 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static void	print_rest(int n, int m, char *s1, char *s2)
-{
-	if (n > 0)
-	{
-		n++;
-		while (--n > 0)
-			ft_printf("%s\n", s1);
-	}
-	else
-	{
-		m++;
-		while (--m > 0)
-			ft_printf("%s\n", s2);
-	}
-}
 
 static void	similar_rotate(t_data *data)
 {
@@ -86,7 +70,7 @@ static int	ft_only_includes_rotates(char **log_ops, int log_index)
 	while (i < log_index)
 	{
 		if (ft_strcmp(log_ops[i], "ra")
-			&& ft_strcmp(log_ops[i], "rb")) //TODO
+			&& ft_strcmp(log_ops[i], "rb"))
 			return (0);
 		i++;
 	}
@@ -101,20 +85,11 @@ static int	ft_only_includes_rev_rotates(char **log_ops, int log_index)
 	while (i < log_index)
 	{
 		if (ft_strcmp(log_ops[i], "rra")
-			&& ft_strcmp(log_ops[i], "rrb")) //TODO
+			&& ft_strcmp(log_ops[i], "rrb"))
 			return (0);
 		i++;
 	}
 	return (1);
-}
-
-void	print_all_log_ops(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->log_index)
-		ft_printf("%s\n", data->log_ops[i++]);
 }
 
 void	print_log_ops(t_data *data)

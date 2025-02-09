@@ -6,32 +6,11 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:39:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 12:46:09 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:21:30 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	above_bigger(t_stack *b)
-{
-	int	i;
-	int	big_i;
-	int	bigger;
-
-	i = 0;
-	big_i = 0;
-	bigger = 0;
-	while (i < b->len)
-	{
-		if (b->arr[i] > bigger)
-		{
-			bigger = b->arr[i];
-			big_i = i;
-		}
-		i++;
-	}
-	return (big_i);
-}
 
 void	desc_sort_bigger(t_data *data)
 {
@@ -66,7 +45,8 @@ int	cheap_index_from_b(int top_a, t_data *data)
 	cheap_i = data->a.capacity;
 	while (i < data->b.len)
 	{
-		if ((top_a - data->b.arr[i]) < cheap && (top_a - data->b.arr[i]) > 0)
+		if ((top_a - data->b.arr[i]) < cheap
+			&& (top_a - data->b.arr[i]) > 0)
 		{
 			cheap = top_a - data->b.arr[i];
 			cheap_i = i;
@@ -91,7 +71,8 @@ int	cheap_index_from_a(int top_b, t_data *data)
 	cheap_i = 0;
 	while (i < data->a.len)
 	{
-		if (ft_abs(top_b - data->a.arr[i]) < cheap && (top_b - data->a.arr[i] < 0))
+		if (ft_abs(top_b - data->a.arr[i]) < cheap
+			&& (top_b - data->a.arr[i] < 0))
 		{
 			cheap = ft_abs(top_b - data->a.arr[i]);
 			cheap_i = i;
@@ -105,7 +86,7 @@ int	cheap_index_from_a(int top_b, t_data *data)
 	return (cheap_i);
 }
 
-int	desc_sort_count(int top_a, t_data *data, int count, int is_r) //TODO
+int	desc_sort_count(int top_a, t_data *data, int count, int is_r)
 {
 	int	i;
 	int	count2;
@@ -120,43 +101,28 @@ int	desc_sort_count(int top_a, t_data *data, int count, int is_r) //TODO
 	{
 		count2 = i;
 		if (is_r)
-		{
-			if (count2 < count)
-				return (count + 0);
-			else
-				return (0 + count2);
-		}
+			return (optimal_count(count, count2));
 	}
 	else
 	{
 		count2 = data->b.len - i;
 		if (!is_r)
-		{
-			if (count2 < count)
-				return (count + 0);
-			else
-				return (0 + count2);
-		}
+			return (optimal_count(count, count2));
 	}
 	return (count + count2);
 }
-      
 
-int	cheap_index_from_a_to_b(t_data *data) //TODO
+int	cheap_index_from_a_to_b(t_data *data, int i)
 {
-	int	i;
 	int	tmp;
 	int	cheap_i;
 	int	count;
 	int	is_r;
 
-	i = 0;
-	is_r = 0;
 	tmp = data->a.capacity;
 	cheap_i = 0;
-	while (i < data->a.len)
+	while (++i < data->a.len)
 	{
-		count = 0;
 		is_r = 0;
 		if (i <= data->a.len / 2)
 		{
@@ -171,7 +137,6 @@ int	cheap_index_from_a_to_b(t_data *data) //TODO
 			tmp = count;
 			cheap_i = i;
 		}
-		i++;
 	}
 	return (cheap_i);
 }

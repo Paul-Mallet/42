@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:28:37 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/09 12:49:27 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 18:04:37 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	fill_stack(t_stack *stk, char **av)
 			while (is_space(av[i + 1][j]))
 				j++;
 			if (av[i + 1][j] && !is_overflow(&(av[i + 1])[j])
-				&& !is_duplicate(stk, k, ft_atoi(&(av[i + 1])[j])))
+				&& !is_duplicate(stk, k, ft_atoi(&(av[i + 1])[j]))) //1 if error(free_stacks + error_handle)
 				stk->arr[k] = ft_atoi(&(av[i + 1])[j]);
 			if (av[i + 1][j] == '-')
 				j++;

@@ -6,7 +6,7 @@
 /*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:46:52 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/03 17:36:47 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 16:29:48 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_digit(const char c)
 	return (c >= '0' && c <= '9');
 }
 
-int	is_valid_input(char *s)
+int	is_valid_input(char *s) //TODO
 {
 	int	count;
 	int	nb_ints;

@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:21:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 12:46:31 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 17:23:39 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	swap(t_stack *stk)
 
 void	rotate(t_stack *stk, t_data *data, int is_final)
 {
-	int	i;
-	int	tmp;
+	int		i;
+	int		tmp;
 	char	*str;
 
 	i = -1;
@@ -71,8 +71,8 @@ void	rotate(t_stack *stk, t_data *data, int is_final)
 
 void	rev_rotate(t_stack *stk, t_data *data, int is_final)
 {
-	int	i;
-	int	tmp;
+	int		i;
+	int		tmp;
 	char	*str;
 
 	i = stk->len;
