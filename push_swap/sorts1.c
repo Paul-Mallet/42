@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/08 19:50:37 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 12:01:54 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,9 @@ void	a_to_b_sort(t_data *data)
 	print_log_ops(data); //ok
 	ft_free_log_ops(data); //ok
 	push(&data->a, &data->b); //a.len-- ok
+	ft_printf("A: ");
 	print_stack(&data->a);
-	ft_printf("\n");
+	ft_printf("\nB: ");
 	print_stack(&data->b);
 	ft_printf("\n");
 }
@@ -117,10 +118,11 @@ void	b_to_a_sort(t_data *data)
 	/* ft_printf("nb_ops: %d\n", data->nb_ops); */
 	rotate_to_top_a(data, 0); //ra/rra 
 	push(&data->b, &data->a); //b.len-- ok
-	/* print_stack(&data->a); */
-	/* ft_printf("\n"); */
-	/* print_stack(&data->b); */
-	/* ft_printf("\n"); */
+	ft_printf("A: ");
+	print_stack(&data->a);
+	ft_printf("\nB: ");
+	print_stack(&data->b);
+	ft_printf("\n");
 }
 
 void	three_sort(t_data *data)
@@ -128,7 +130,8 @@ void	three_sort(t_data *data)
 	if ((data->a.len != 3)
 		|| (data->a.arr[0] < data->a.arr[1] && data->a.arr[1] < data->a.arr[2]))
 		return ;
-	else if (data->a.arr[0] > data->a.arr[1] && data->a.arr[1] < data->a.arr[2])
+	else if (data->a.arr[0] > data->a.arr[1] && data->a.arr[1] < data->a.arr[2]
+		&& data->a.arr[0] > data->a.arr[2])
 		rotate(&data->a, data, 1);
 	else if (data->a.arr[0] < data->a.arr[1] && data->a.arr[1] > data->a.arr[2]
 		&& data->a.arr[0] > data->a.arr[2])
@@ -189,18 +192,24 @@ void	turk_sort(t_data *data)
 		count_cheap_total_ops(data, 0, 0); //ok
 		init_log_ops(data); //ok
 		three_sort(data); //ok
-		/* ft_printf("\n---three_sort---\n"); */
+		ft_printf("\n---three_sort---\n");
 		/* ft_printf("nb_ops: %d\n", data->nb_ops); */
 		/* ft_printf("log_index: %d\n", data->log_index); //ok */
 		print_log_ops(data); //ok
+		ft_printf("A: ");
+		print_stack(&data->a);
+		ft_printf("\nB: ");
+		print_stack(&data->b);
+		ft_printf("\n");
 		ft_free_log_ops(data); //ok
 	}
 	while (data->b.len > 0)
 	 	b_to_a_sort(data);
 	if (data->a.arr[0] != 1)
 		final_asc_sort_a(data);
+	ft_printf("A: ");
 	print_stack(&data->a);
-	ft_printf("\n");
+	ft_printf("\nB: ");
 	print_stack(&data->b);
 	ft_printf("\n");
 }

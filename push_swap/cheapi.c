@@ -6,7 +6,7 @@
 /*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:39:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/08 19:20:44 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/09 11:49:38 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	cheap_index_from_b(int top_a, t_data *data) //a[0], b
 	int	cheap_i;
 
 	i = 0;
-	cheap = data->a.capacity; //1
-	cheap_i = 0; //10 = bigger of whole stack
+	cheap = data->a.capacity; //max
+	cheap_i = data->a.capacity; //10 = bigger of whole stack
 	while (i < data->b.len)
 	{
 		if ((top_a - data->b.arr[i]) < cheap && (top_a - data->b.arr[i]) > 0) //n - n < 0 TODO
@@ -75,12 +75,8 @@ int	cheap_index_from_b(int top_a, t_data *data) //a[0], b
 			return (cheap_i);
 		i++;
 	}
-	if (i == data->b.len && cheap_i == 0)
-	{
-		/* cheap_i = 0; */
+	if (i == data->b.len && cheap_i == data->a.capacity) // 14 96? not 7? TODO
 		cheap_i = above_bigger(&data->b);
-		/* desc_sort_bigger(data); // */
-	}
 	return (cheap_i);
 }
 
