@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:56:18 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 16:51:31 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/10 18:17:57 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	count_ints(char *s)
 	count = 0;
 	while (*s)
 	{
-		while (is_space(*s))
+		while (ft_isspace(*s))
 			s++;
 		if (!*s)
 			break ;
-		if (*s == '-')
+		if (ft_issign(*s))
 			s++;
-		while (is_digit(*s))
+		while (ft_isdigit(*s))
 			s++;
 		count++;
 	}

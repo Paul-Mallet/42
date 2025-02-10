@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/09 17:52:55 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:42:33 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int		is_duplicate(t_stack *stk, int k, int n);
 
 int		ft_abs(int n);
 void	handle_error(const char *s);
-int		is_space(const char c);
-int		is_digit(const char c);
+int		ft_isspace(const char c);
+int		ft_issign(const char c);
 int		is_valid_input(char *s);
 
 void	turk_sort(t_data *data);

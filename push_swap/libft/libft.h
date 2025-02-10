@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:28:59 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/03 22:53:29 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/10 18:20:10 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+int		ft_isspace(const char c);
+int		ft_issign(const char c);
 
 int		ft_strlen(const char *str);
 int		ft_isalpha(int c);
