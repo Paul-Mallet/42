@@ -1,6 +1,6 @@
 CC=cc
 CFLAGS=-Wall -Wextra -Werror
-SRCS=main.c
+SRCS=src/main.c
 OBJS=$(SRCS:.c=.o)
 NAME=pipex
 

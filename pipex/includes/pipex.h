@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:53:05 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/02/12 00:09:29 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/02/12 00:16:34 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <string.h>
+# include <stdlib.h>
 # include <sys/wait.h>
 
 typedef struct  s_pipex
@@ -23,11 +24,11 @@ typedef struct  s_pipex
     int     infile;
     int     outfile;
     int     **pipes;
-    int     cmd_nb;
+    int     cmds_nb;
     int     ***cmds;
     char    **paths;
     char    **envp;
-    int     heredoc;
+    int     is_hdoc;
 }       t_pipex;
 
 #endif

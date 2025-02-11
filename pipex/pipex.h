@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/11 23:40:53 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/02/12 00:18:53 by paul_mallet      ###   ########.fr       */
+/*   Created: 2025/02/11 23:53:05 by paul_mallet       #+#    #+#             */
+/*   Updated: 2025/02/12 00:12:22 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#ifndef PIPEX_H
+# define PIPEX_H
 
-void    pipex(char **av)
-{
-    write(1, &av[1][0], 1);
-}
+# include <stdio.h>
+# include <unistd.h>
+# include <string.h>
+# include <sys/wait.h>
 
-int main(int ac, char **av, char **envp)
+typedef struct  s_pipex
 {
-    (void)envp;
-    if (ac > 1)
-        pipex(av);
-    return (0);
-}
+    int     infile;
+    int     outfile;
+    int     **pipes;
+    int     cmds_nb;
+    int     ***cmds;
+    char    **paths;
+    char    **envp;
+    int     is_hdoc;
+}       t_pipex;
+
+#endif
