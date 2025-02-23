@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sorts1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:29:51 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 17:50:13 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:44:05 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void	desc_sort_b(t_data *data)
 {
@@ -79,6 +79,7 @@ void	turk_sort(t_data *data)
 		first_desc_sort_b(&data->b);
 		while (data->a.len > 3)
 			a_to_b_sort(data);
+		last_desc_sort_b(data);
 	}
 	if (data->a.len == 3)
 	{

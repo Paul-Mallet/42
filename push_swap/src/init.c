@@ -6,11 +6,11 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 11:28:37 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/10 18:10:42 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/22 14:32:25 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void	ft_swap(int *a, int *b)
 {
@@ -40,7 +40,7 @@ void	bubble_sort(t_stack *stk)
 	}
 }
 
-void	fill_stack(t_stack *stk, char **av)
+void	fill_stack(t_data *data, t_stack *stk, char **av)
 {
 	int	i;
 	int	j;
@@ -55,8 +55,9 @@ void	fill_stack(t_stack *stk, char **av)
 		{
 			while (ft_isspace(av[i + 1][j]))
 				j++;
-			if (av[i + 1][j] && !is_overflow(&(av[i + 1])[j])
-				&& !is_duplicate(stk, k, ft_atoi(&(av[i + 1])[j])))
+			if (av[i + 1][j] && is_poten_error(&(av[i + 1])[j], data, stk, k))
+				return ;
+			if (av[i + 1][j])
 				stk->arr[k] = ft_atoi(&(av[i + 1])[j]);
 			if (ft_issign(av[i + 1][j]))
 				j++;

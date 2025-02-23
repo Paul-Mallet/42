@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <marvin@42.fr>                 +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 22:55:20 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/09 18:03:52 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/22 14:21:06 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
@@ -56,10 +56,10 @@ int	is_overflow(char *s)
 	{
 		res *= 10;
 		if ((res * sign) < -2147483648 || (res * sign) > INT_MAX)
-			handle_error(ERROR_MSG);
+			return (1);
 		res += (*s++ - 48);
 		if ((res * sign) < -2147483648 || (res * sign) > INT_MAX)
-			handle_error(ERROR_MSG);
+			return (1);
 	}
 	return (0);
 }

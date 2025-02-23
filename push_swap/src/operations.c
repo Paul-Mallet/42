@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:21:56 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 17:23:39 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:43:51 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void	push(t_stack *from, t_stack *to)
 {

@@ -6,11 +6,11 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:34:23 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/10 18:12:29 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:42:31 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void	print_stack(t_stack *stk)
 {
@@ -47,8 +47,8 @@ int	main(int ac, char **av)
 		init_stack(&data.a, av, 'a');
 		init_stack(&data.b, av, 'b');
 		init_stack(&data.cpy, av, 'c');
-		fill_stack(&data.a, av);
-		fill_stack(&data.cpy, av);
+		fill_stack(&data, &data.a, av);
+		fill_stack(&data, &data.cpy, av);
 		bubble_sort(&data.cpy);
 		refill_stack(&data.a, &data.cpy);
 		if (is_already_sort(&data.a))

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_log_ops.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:16:26 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 17:25:11 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:43:56 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 static void	similar_rotate(t_data *data)
 {

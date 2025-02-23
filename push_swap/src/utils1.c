@@ -6,11 +6,11 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:46:52 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/10 18:17:47 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:44:18 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void	handle_error(const char *s)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cheapi.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:39:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 17:21:30 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:43:17 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void	desc_sort_bigger(t_data *data)
 {

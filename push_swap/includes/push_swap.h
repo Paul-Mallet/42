@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 11:36:01 by paul_mall         #+#    #+#             */
-/*   Updated: 2025/02/10 17:42:33 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/22 14:14:43 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <limits.h>
 # include <stdlib.h>
-# include "./libft/libft.h"
+# include "../libft/libft.h"
 
 # define ERROR_MSG "Error\n"
 # define BUFFER_SIZE 8
@@ -44,7 +44,7 @@ typedef struct s_data
 
 void	init_stack(t_stack *stk, char **av, char name);
 void	bubble_sort(t_stack *stk);
-void	fill_stack(t_stack *stk, char **av);
+void	fill_stack(t_data *data, t_stack *stk, char **av);
 void	refill_stack(t_stack *stk, t_stack *cpy);
 void	init_log_ops(t_data *data);
 void	ft_free_log_ops(t_data *data);
@@ -63,6 +63,7 @@ int		above_bigger(t_stack *b);
 int		cheap_index_from_b(int top_a, t_data *data);
 int		cheap_index_from_a_to_b(t_data *data, int i);
 void	first_desc_sort_b(t_stack *stk);
+void	last_desc_sort_b(t_data *data);
 void	two_sort(t_data *data);
 void	three_sort(t_data *data);
 int		desc_rotate_len(int top_a, t_data *data);
@@ -83,12 +84,12 @@ int		is_duplicate(t_stack *stk, int k, int n);
 
 int		ft_abs(int n);
 void	handle_error(const char *s);
+int		is_poten_error(char *str, t_data *data, t_stack *stk, int k);
 int		ft_isspace(const char c);
 int		ft_issign(const char c);
 int		is_valid_input(char *s);
 
 void	turk_sort(t_data *data);
-void	cheap_sort(t_data *data);
 void	three_sort(t_data *data);
 
 #endif
