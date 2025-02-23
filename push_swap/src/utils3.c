@@ -6,11 +6,22 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:56:18 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/10 18:17:57 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/23 11:52:42 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
+
+int	is_poten_error(char *str, t_data *data, t_stack *stk, int k)
+{
+	if (is_overflow(str) || is_duplicate(stk, k, ft_atoi(str)))
+	{
+		free_stacks(data);
+		handle_error(ERROR_MSG);
+		return (1);
+	}
+	return (0);
+}
 
 int	ft_abs(int n)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   log_ops.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:31:37 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/05 23:11:29 by paul_mall        ###   ########.fr       */
+/*   Updated: 2025/02/22 13:43:45 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void	init_log_ops(t_data *data)
 {

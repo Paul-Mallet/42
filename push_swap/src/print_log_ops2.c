@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_log_ops2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 17:24:49 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 17:25:57 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:44:01 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void	print_rest(int n, int m, char *s1, char *s2)
 {

@@ -6,11 +6,11 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:46:17 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/10 18:18:42 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:44:10 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
 void	first_desc_sort_b(t_stack *stk)
 {
