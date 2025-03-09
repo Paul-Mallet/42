@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:53:05 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/09 18:13:42 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/09 19:43:08 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ typedef struct	s_data
 }		t_data;
 
 /*
+	Init t_cmd
+*/
+t_cmd	*init_cmds(int ac, char **av, char **env);
+
+/*
 	Valid argv syntax to fit files, cmds, args and redirs
 */
 int 	valid_syntax(int ac, char **av);
@@ -49,6 +54,11 @@ int 	valid_syntax(int ac, char **av);
 */
 void	handle_errors(int status);
 
+
+/*
+	Print args of 1 cmd as ["arg1", "arg2"...]
+*/
+void	print_args(char **args);
 /*
 	Validate length of filenames & pathnames
 */

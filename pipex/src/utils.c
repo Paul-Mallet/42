@@ -6,11 +6,20 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:22:09 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/08 15:19:30 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/09 19:18:52 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
+
+void	print_args(char **args)
+{
+	int	i;
+
+	i = -1;
+	while (args[++i])
+		printf("cmd[%d]: %s\n", i, args[i]);
+}
 
 int	valid_len(int ac, char **av)
 {
@@ -23,7 +32,7 @@ int	valid_len(int ac, char **av)
 		j = 0;
 		if (i == 1 || i == (ac - 1)) //file1 or file2
 		{
-			while (av[i][j]) //handle path(save last '/' -> means filename after) < 4096
+			while (av[i][j]) //handle pathname(paht + file) < 4096
 				j++;
 			if (j >= 255) //filename
 				return (0);

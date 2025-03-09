@@ -3,6 +3,7 @@ FLAGS=-Wall -Wextra -Werror
 SRC_DIR=src/
 SRC=$(addprefix $(SRC_DIR), \
 	main.c \
+	cmds.c \
 	utils.c \
 	syntax.c \
 	errors.c)

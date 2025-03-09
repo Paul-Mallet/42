@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:40:53 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/08 15:41:49 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/09 19:42:22 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@
 	input[ac - 1] -> file2 -> outfile (will create / update it)
 		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 */
-void    init_data(t_data *data, int ac, char **av)
+void    init_data(t_data *data, int ac, char **av, char **env)
 {
-	data->cmds = init_cmds(av);
+	data->cmds = init_cmds(ac, av, env);
 	if (ft_strcmp(av[1], "here_doc"))
 	{
 		data->delim = NULL;
@@ -95,7 +95,7 @@ int main(int ac, char **av, char **envp)
 	{
 		if (!valid_syntax(ac, av) || !valid_len(ac, av)) //valid_len?
 			handle_errors(SYNTAX_ERR);
-		init_data(&data, ac, av);
+		init_data(&data, ac, av, envp);
 		//exec(&data, envp);
 	}
 	else
