@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 15:42:05 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/09 19:50:16 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/09 19:51:30 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_cmd	*new_cmd(char *args, char **env)
 		return (NULL);
 	new->next = NULL;
 	new->args = ft_split(args, ' ');
-	paths = ;
+	paths = get_paths(env);
 	new->path = find_path(paths, new->args[0]);
 	new->fd[0] = -1;
 	new->fd[1] = -1;
