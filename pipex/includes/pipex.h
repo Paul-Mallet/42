@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:53:05 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/08 15:21:04 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/09 18:13:42 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,26 @@ typedef struct	s_data
 }		t_data;
 
 /*
-	Syntax
+	Valid argv syntax to fit files, cmds, args and redirs
 */
 int 	valid_syntax(int ac, char **av);
 
 /*
-	Errors
+	Print error based on status
 */
 void	handle_errors(int status);
 
 /*
-	Utils
+	Validate length of filenames & pathnames
 */
 int		valid_len(int ac, char **av);
+/*
+	Compare 2 strings
+*/
 int		ft_strcmp(const char *s1, const char *s2);
+/*
+	Check valid chars '-', '_', '.', & '/'
+*/
 int		ft_is_spechar(char c);
 
 #endif
