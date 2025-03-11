@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:17:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/08 15:47:56 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:21:28 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,13 @@ static int	valid_cmd(char *cmd) //not handle redir!
 {
 	char	*trimmed;
 	char	**args;
+	int		res;
 
 	trimmed = ft_strtrim(cmd, " ");
 	args = ft_split(trimmed, ' ');
-	return (valid_args(args)); //free args!
+	res = valid_args(args);
+	free(args);
+	return (res);
 }
 
 static int	valid_heredoc(char *heredoc, char *delim)

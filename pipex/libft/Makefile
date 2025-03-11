@@ -19,6 +19,7 @@ SRCS=ft_issign.c \
 	 ft_strdup.c \
 	 ft_substr.c \
 	 ft_strtrim.c \
+	 ft_strjoin.c \
 	 ft_memchr.c \
 	 ft_memcmp.c \
 	 ft_strnstr.c \

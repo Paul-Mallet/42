@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:40:53 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/09 19:42:22 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:29:04 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,19 @@ void    init_data(t_data *data, int ac, char **av, char **env)
 	}
 }
 
+void	free_rest(t_data *data)
+{
+	// if (data->cmds)
+	// 	free_cmds(data->cmds);
+	if (data->delim)
+		free(data->delim);
+	if (data->file_names[0] && data->file_names[1])
+	{
+		free(data->file_names[0]);
+		free(data->file_names[1]);
+	}
+}
+
 int main(int ac, char **av, char **envp)
 {
 	t_data  data;
@@ -97,6 +110,7 @@ int main(int ac, char **av, char **envp)
 			handle_errors(SYNTAX_ERR);
 		init_data(&data, ac, av, envp);
 		//exec(&data, envp);
+		free_rest(&data);
 	}
 	else
 		ft_printf("Input must have at least 4 args!\n");

@@ -4,6 +4,7 @@ SRC_DIR=src/
 SRC=$(addprefix $(SRC_DIR), \
 	main.c \
 	cmds.c \
+	paths.c \
 	utils.c \
 	syntax.c \
 	errors.c)

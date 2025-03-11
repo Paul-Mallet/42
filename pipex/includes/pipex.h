@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:53:05 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/09 19:43:08 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:14:25 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,37 +39,40 @@ typedef struct	s_data
 	int		fd[2];			//fd for stdin / stdout
 }		t_data;
 
-/*
-	Init t_cmd
-*/
+//	CMDS
+//	Init t_cmd
 t_cmd	*init_cmds(int ac, char **av, char **env);
+//	Create a new node to t_cmd
+t_cmd	*new_cmd(char *args, char **env);
+//	Add to back of t_cmd linked list
+void	cmd_add_back(t_cmd **cmds, t_cmd *new);
 
-/*
-	Valid argv syntax to fit files, cmds, args and redirs
-*/
+//	PATH
+//	Get paths from envp
+char	**get_paths(char **env);
+//	Construct path(try all paths from PATH)
+char	*construct_path(char *dir, char *cmd);
+// 	Find path based on PATH=... from envp
+char	*find_path(char **paths, char *cmd);
+
+//	SYNTAX
+//	Valid argv syntax to fit files, cmds, args and redirs
 int 	valid_syntax(int ac, char **av);
 
-/*
-	Print error based on status
-*/
+//	ERRORS
+//	Print error based on status
 void	handle_errors(int status);
 
-
-/*
-	Print args of 1 cmd as ["arg1", "arg2"...]
-*/
+//	PRINTS
+//	Print args of 1 cmd as ["arg1", "arg2"...]
 void	print_args(char **args);
-/*
-	Validate length of filenames & pathnames
-*/
+
+//	UTILS
+//	Validate length of filenames & pathnames
 int		valid_len(int ac, char **av);
-/*
-	Compare 2 strings
-*/
+//	Compare 2 strings
 int		ft_strcmp(const char *s1, const char *s2);
-/*
-	Check valid chars '-', '_', '.', & '/'
-*/
+//	Check valid chars '-', '_', '.', & '/'
 int		ft_is_spechar(char c);
 
 #endif
