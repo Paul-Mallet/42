@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:05:55 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/15 18:10:09 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/15 18:37:57 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ int	find_path_cmd(t_data *data, char *cmd)
 	return (1);
 }
 
+void	not_find_path(t_data *data, char *road, char *cmd)
+{
+	not_find_cmd(data, road, cmd);
+	not_perm_cmd(data, road, cmd);
+}
+
 void	not_find_cmd(t_data *data, char *road, char *cmd)
 {
 	if (access(road, F_OK) == -1)
@@ -81,16 +87,12 @@ char	*find_path(t_data *data, char **paths, char *cmd)
 	while (paths[++i])
 	{
 		road = construct_path(paths[i], cmd);
-		printf("road: %s\n", road);
 		if (!road)
 			return (NULL);	//malloc error
 		if (access(road, X_OK) == 0)	//ready to exec, free!
 			return (road);
 		if (!(paths[i + 1]))
-		{
-			not_find_cmd(data, road, cmd);
-			not_perm_cmd(data, road, cmd);
-		}
+			not_find_path(data, paths, cmd);
 		free(road);
 	}
 	return (NULL);

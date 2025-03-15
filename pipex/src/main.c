@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:40:53 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/15 18:18:46 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/15 18:20:24 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int main(int ac, char **av, char **envp)
 		if (!valid_syntax(ac, av) || !valid_len(ac, av)) //valid_len?
 			handle_errors(&data, NULL, SYNTAX_ERR);
 		fill_data(&data, ac, av, envp);
-		//exec(&data, envp);
+		//exec_data(&data, envp);
 		// free_rest(&data);
 	}
 	else
