@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:40:53 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/11 15:29:04 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/15 18:18:46 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,51 +66,48 @@
 	input[ac - 1] -> file2 -> outfile (will create / update it)
 		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 */
-void    init_data(t_data *data, int ac, char **av, char **env)
+void	init_data(t_data *data)
+{
+	data->cmds = NULL;
+	data->delim = NULL;
+	data->file_names[0] = NULL;
+	data->file_names[1] = NULL;
+	data->is_here_doc = -1;
+}
+
+void    fill_data(t_data *data, int ac, char **av, char **env)
 {
 	data->cmds = init_cmds(ac, av, env);
-	if (ft_strcmp(av[1], "here_doc"))
-	{
-		data->delim = NULL;
-		data->file_names[0] = ft_strdup(av[1]);
-		data->file_names[1] = ft_strdup(av[ac - 1]);
-		data->is_here_doc = 0;
-	}
-	else
+	if (!ft_strcmp(av[1], "here_doc"))
 	{
 		data->delim = ft_strdup(av[1]);
 		data->file_names[0] = NULL;
 		data->file_names[1] = ft_strdup(av[ac - 1]);
 		data->is_here_doc = 1;
 	}
-}
-
-void	free_rest(t_data *data)
-{
-	// if (data->cmds)
-	// 	free_cmds(data->cmds);
-	if (data->delim)
-		free(data->delim);
-	if (data->file_names[0] && data->file_names[1])
+	else
 	{
-		free(data->file_names[0]);
-		free(data->file_names[1]);
+		data->delim = NULL;
+		data->file_names[0] = ft_strdup(av[1]);
+		data->file_names[1] = ft_strdup(av[ac - 1]);
+		data->is_here_doc = 0;
 	}
+	init_paths(data);
 }
 
 int main(int ac, char **av, char **envp)
 {
 	t_data  data;
 
-	(void)data;
 	(void)envp;
-	if (ac > 4) //std mode && multi cmds 
+	if (ac > 4)
 	{
+		init_data(&data);
 		if (!valid_syntax(ac, av) || !valid_len(ac, av)) //valid_len?
-			handle_errors(SYNTAX_ERR);
-		init_data(&data, ac, av, envp);
+			handle_errors(&data, NULL, SYNTAX_ERR);
+		fill_data(&data, ac, av, envp);
 		//exec(&data, envp);
-		free_rest(&data);
+		// free_rest(&data);
 	}
 	else
 		ft_printf("Input must have at least 4 args!\n");

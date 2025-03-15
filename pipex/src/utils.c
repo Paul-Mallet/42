@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:22:09 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/11 15:16:37 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/15 11:46:16 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
-void	print_args(char **args)
-{
-	int	i;
-
-	i = -1;
-	while (args[++i])
-		printf("cmd[%d]: %s\n", i, args[i]);
-}
 
 int	valid_len(int ac, char **av)
 {

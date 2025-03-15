@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putunbr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 10:31:33 by pamallet          #+#    #+#             */
-/*   Updated: 2025/02/09 17:53:54 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/13 22:33:11 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putunbr_fd(unsigned int n, int fd)
 {
-	if (n >= 0 && n <= 9)
+	if (n > 0 && n <= 9) //>= 0
 	{
 		n += 48;
 		write(fd, &n, 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:17:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/11 15:21:28 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/15 11:49:38 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static int	valid_cmd(char *cmd) //not handle redir!
 	trimmed = ft_strtrim(cmd, " ");
 	args = ft_split(trimmed, ' ');
 	res = valid_args(args);
-	free(args);
+	free(trimmed);
+	free_strs(args);
 	return (res);
 }
 

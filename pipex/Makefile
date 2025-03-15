@@ -1,11 +1,13 @@
 CC=cc
-FLAGS=-Wall -Wextra -Werror
+FLAGS=-Wall -Wextra -Werror -g
 SRC_DIR=src/
 SRC=$(addprefix $(SRC_DIR), \
 	main.c \
 	cmds.c \
 	paths.c \
 	utils.c \
+	frees.c \
+	prints.c \
 	syntax.c \
 	errors.c)
 OBJ_DIR=obj/
