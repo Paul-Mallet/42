@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:17:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/15 11:49:38 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/16 12:18:28 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	valid_heredoc(char *heredoc, char *delim)
 	return (!ft_strcmp(heredoc, "here_doc") && valid_file(delim));
 }
 
-int valid_syntax(int ac, char **av) //["ls -l", "cat -e", ...] not builtins
+int valid_syntax(int ac, char **av)
 {
 	int i;
 

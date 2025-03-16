@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 15:42:05 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/15 12:10:49 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/16 11:14:37 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	cmd_add_back(t_cmd **cmds, t_cmd *new)
 {
 	t_cmd	*current;
 
-	if (!cmds || !new) //!cmds?
+	if (!cmds || !new)
 		return ;
 	if (!*cmds)
 	{
@@ -50,7 +50,6 @@ void	cmd_add_back(t_cmd **cmds, t_cmd *new)
 		current = current->next;
 	current->next = new;
 }
-
 
 t_cmd	*init_cmds(int ac, char **av, char **env)
 {
@@ -64,6 +63,8 @@ t_cmd	*init_cmds(int ac, char **av, char **env)
 	while(++i < ac - 1) //not [1] & [ac - 1] -> files
 	{
 		new = init_cmd();
+		if (!new)
+			return (NULL);
 		fill_cmd(new, av[i], env);
 		cmd_add_back(&head, new);
 	}

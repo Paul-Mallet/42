@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:40:53 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/15 18:20:24 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/16 12:16:48 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,10 @@ int main(int ac, char **av, char **envp)
 	{
 		init_data(&data);
 		if (!valid_syntax(ac, av) || !valid_len(ac, av)) //valid_len?
-			handle_errors(&data, NULL, SYNTAX_ERR);
+			handle_errors(&data, find_syntax_err(ac, av), SYNTAX_ERR);
 		fill_data(&data, ac, av, envp);
 		//exec_data(&data, envp);
-		// free_rest(&data);
+		free_rest(&data);
 	}
 	else
 		ft_printf("Input must have at least 4 args!\n");

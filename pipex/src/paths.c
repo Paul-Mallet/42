@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:05:55 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/15 18:37:57 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/16 12:05:50 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,10 @@ char	*construct_path(char *dir, char *cmd)
 int	find_path_cmd(t_data *data, char *cmd)
 {
 	if (ft_strchr(cmd, '/') && access(cmd, F_OK) == -1)
-		handle_errors(data, cmd, NOT_FOUND_ERR);
+		handle_errors(data, cmd, NO_SUCH_FILE_ERR);
 	else if (!ft_strchr(cmd, '/'))
 		return (0);
 	return (1);
-}
-
-void	not_find_path(t_data *data, char *road, char *cmd)
-{
-	not_find_cmd(data, road, cmd);
-	not_perm_cmd(data, road, cmd);
 }
 
 void	not_find_cmd(t_data *data, char *road, char *cmd)
@@ -74,6 +68,12 @@ void	not_perm_cmd(t_data *data, char *road, char *cmd)
 	}
 }
 
+void	not_find_path(t_data *data, char *road, char *cmd)
+{
+	not_find_cmd(data, road, cmd);
+	not_perm_cmd(data, road, cmd);
+}
+
 char	*find_path(t_data *data, char **paths, char *cmd)
 {
 	char	*road;
@@ -92,7 +92,7 @@ char	*find_path(t_data *data, char **paths, char *cmd)
 		if (access(road, X_OK) == 0)	//ready to exec, free!
 			return (road);
 		if (!(paths[i + 1]))
-			not_find_path(data, paths, cmd);
+			not_find_path(data, road, cmd);
 		free(road);
 	}
 	return (NULL);

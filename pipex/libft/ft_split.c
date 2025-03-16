@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:23:13 by pamallet          #+#    #+#             */
-/*   Updated: 2024/10/31 11:23:04 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/16 11:38:27 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	*ft_strdup_split(char const *s, char c)
 
 static void	*ft_arrclear(char **arr)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	while (arr[i])
@@ -90,7 +90,7 @@ char	**ft_split(char const *s, char c)
 		if (s[j] == '\0')
 			break ;
 		arr[i] = ft_strdup_split(&s[j], c);
-		if (arr[i] == NULL)
+		if (!arr[i])
 			return (ft_arrclear(arr));
 		while (!ft_is_delim(s[j], c) && s[j])
 			j++;

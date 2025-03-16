@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:53:05 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/15 18:09:11 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/16 12:19:09 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
 typedef enum	s_err
 {
 	SYNTAX_ERR,
+	NO_SUCH_FILE_ERR,
 	NOT_FOUND_ERR,
 	PERMISSION_ERR,
+	INVALID_ARG_ERR,
 }		t_err;
 
 typedef struct  s_cmd
@@ -78,6 +80,8 @@ int 	valid_syntax(int ac, char **av);
 
 //	Print error based on status
 void	handle_errors(t_data *data, char *cmd, int status);
+//	Find syntax errors and return the char concerned
+char	*find_syntax_err(int ac, char **av);
 
 //	PRINTS
 
