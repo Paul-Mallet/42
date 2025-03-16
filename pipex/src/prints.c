@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 11:39:19 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/16 17:50:10 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/16 20:18:28 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	print_cmds(t_cmd *cmds)
 		if (curr->path)
 			print_str("path", curr->path);
 		ft_printf("fd[0]: %d\nfd[1]: %d\n", curr->fd[0], curr->fd[1]);
+		ft_printf("is_first: %d\n", curr->is_first);
 		curr = curr->next;
 	}
 }

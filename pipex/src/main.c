@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:40:53 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/16 17:40:53 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/16 20:15:07 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,35 +66,6 @@
 	input[ac - 1] -> file2 -> outfile (will create / update it)
 		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 */
-void	init_data(t_data *data)
-{
-	data->cmds = NULL;
-	data->delim = NULL;
-	data->file_names[0] = NULL;
-	data->file_names[1] = NULL;
-	data->is_here_doc = -1;
-}
-
-void    fill_data(t_data *data, int ac, char **av, char **env)
-{
-	data->cmds = init_cmds(ac, av, env);
-	if (!ft_strcmp(av[1], "here_doc"))
-	{
-		data->delim = ft_strdup(av[1]);
-		data->file_names[0] = NULL;
-		data->file_names[1] = ft_strdup(av[ac - 1]);
-		data->is_here_doc = 1;
-	}
-	else
-	{
-		data->delim = NULL;
-		data->file_names[0] = ft_strdup(av[1]);
-		data->file_names[1] = ft_strdup(av[ac - 1]);
-		data->is_here_doc = 0;
-	}
-	init_paths(data);
-}
-
 int main(int ac, char **av, char **envp)
 {
 	t_data  data;
@@ -106,8 +77,8 @@ int main(int ac, char **av, char **envp)
 		if (!valid_syntax(ac, av) || !valid_len(ac, av)) //valid_len?
 			handle_errors(&data, find_syntax_err(ac, av), SYNTAX_ERR);
 		fill_data(&data, ac, av, envp);
-		//exec_data(&data, envp);
 		print_data(&data);
+		exec_data(&data);
 		free_rest(&data);
 	}
 	else

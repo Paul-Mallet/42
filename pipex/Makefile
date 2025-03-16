@@ -3,6 +3,8 @@ FLAGS=-Wall -Wextra -Werror -g
 SRC_DIR=src/
 SRC=$(addprefix $(SRC_DIR), \
 	main.c \
+	data.c \
+	exec.c \
 	cmds.c \
 	paths.c \
 	utils.c \

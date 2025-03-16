@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 15:42:05 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/16 11:14:37 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/16 20:23:18 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	cmd_add_back(t_cmd **cmds, t_cmd *new)
 	current->next = new;
 }
 
-t_cmd	*init_cmds(int ac, char **av, char **env)
+void	init_cmds(t_data *data, int ac, char **av, char **env)
 {
 	t_cmd	*head;
 	t_cmd	*new;
@@ -68,5 +68,5 @@ t_cmd	*init_cmds(int ac, char **av, char **env)
 		fill_cmd(new, av[i], env);
 		cmd_add_back(&head, new);
 	}
-	return (head);
+	data->cmds = head;
 }
