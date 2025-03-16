@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:53:05 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/16 12:19:09 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/16 17:39:54 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct	s_data
 	char	*delim;			//only _ || A-Z || a-z, after << + space || <<
 	char	*file_names[2];	//redir stdin to files[0], stdout of last cmd to files[1]
 	int		is_here_doc;	//if find "here_doc" in av[1], >> in same exec
-	int		fd[2];			//fd for stdin / stdout
 }		t_data;
 
 //	CMDS
@@ -85,8 +84,8 @@ char	*find_syntax_err(int ac, char **av);
 
 //	PRINTS
 
-//	Print args, paths from ["arg1", "arg2"...]
-void	print_strs(char **strs);
+//	Print cmds, delim, filenames, heredoc from data
+void	print_data(t_data *data);
 
 //	FREES
 
