@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 18:40:58 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/16 20:25:17 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/16 23:23:10 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,23 @@ void    fill_data(t_data *data, int ac, char **av, char **env)
 }
 
 //start, end || start, mid, end based on cmds->next
-void	exec_data(t_data *data)
+void	exec_data(t_data *data, char **envp)
 {
 	t_cmd	*curr;
 
 	curr = data->cmds;
 	if (data->is_here_doc)
-		exec_here_doc(data);
+		exec_here_doc(data, envp);
 	else
 	{
 		while (curr)
 		{
 			if (data->is_first_cmd)
-				exec_first_cmd(data, curr);	//change bool in this function
+				exec_first_cmd(data, curr, envp);	//change bool in this function
 			else if (!curr->next)
-				exec_last_cmd(data, curr);
+				exec_last_cmd(data, curr, envp);
 			else
-				exec_mid_cmd(data, curr);
+				exec_mid_cmd(data, curr, envp);
 			curr = curr->next;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:53:05 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/16 20:29:08 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/16 23:44:09 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "../libft/libft.h"
 # include <stdio.h>
+# include <fcntl.h>
+# include <errno.h>
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
@@ -29,8 +31,9 @@ typedef enum	s_err
 	NOT_FOUND_ERR,
 	PERMISSION_ERR,
 	INVALID_OPT_ERR,	//TODO
-	PIPE_ERR,			//TODO
+	PIPE_ERR,
 	FORK_ERR,
+	OPEN_FILE_ERR,
 }		t_err;
 
 typedef struct  s_cmd
@@ -47,6 +50,8 @@ typedef struct	s_data
 	t_cmd	*cmds;
 	char	*delim;			//only _ || A-Z || a-z, after << + space || <<
 	char	*file_names[2];	//redir stdin to files[0], stdout of last cmd to files[1]
+	int		infile;
+	int		outfile;
 	int		is_here_doc;	//if find "here_doc" in av[1], >> in same exec
 	int		is_first_cmd;	//bool to know if it's 1rst cmd
 }		t_data;
@@ -58,7 +63,7 @@ void	init_data(t_data *data);
 //	Fill data based on here_doc redir
 void    fill_data(t_data *data, int ac, char **av, char **env);
 //	Exec data based on cmds & here_doc
-void	exec_data(t_data *data);
+void	exec_data(t_data *data, char **envp);
 
 //	CMDS
 
@@ -85,13 +90,13 @@ char	*construct_path(char *dir, char *cmd);
 //	EXEC
 
 //	Exec first cmd
-void    exec_first_cmd(t_data *data, t_cmd *cmd);
+void    exec_first_cmd(t_data *data, t_cmd *cmd, char **envp);
 //	Exec in between cmds
-void    exec_mid_cmd(t_data *data, t_cmd *cmd);
+void    exec_mid_cmd(t_data *data, t_cmd *cmd, char **envp);
 //	Exec last cmd
-void    exec_last_cmd(t_data *data, t_cmd *cmd);
+void    exec_last_cmd(t_data *data, t_cmd *cmd, char **envp);
 //	Exec here_doc redirection
-void    exec_here_doc(t_data *data);
+void    exec_here_doc(t_data *data, char **envp);
 
 //	SYNTAX
 

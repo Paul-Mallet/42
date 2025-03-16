@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:47:57 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/16 19:58:58 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/16 23:46:01 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ void	handle_errors(t_data *data, char *cmd, int status) //va_list?(*)
 	else if (status == INVALID_OPT_ERR)
 		ft_printf("%s: invalid option -- '%c'\n", data->cmds->args[1][0]); //find wrong -arg
 	else if (status == PIPE_ERR)
-		ft_printf("bash: %s: Pipefd is not valid\n", cmd);
+		perror("bash: pipe: \n");
 	else if (status == FORK_ERR)
-		ft_printf("bash: %s: Pipefd is not valid\n", cmd);
+		perror("bash: fork: \n");
+	else if (status == OPEN_FILE_ERR)
+		perror("bash: open: \n");
 	if (data)
 		free_rest(data);
 	exit(EXIT_FAILURE);
