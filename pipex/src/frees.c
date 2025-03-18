@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 19:38:28 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/15 18:15:35 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/18 15:04:07 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void    free_cmds(t_cmd *cmds)
         next = curr->next;
         if (curr->args)
             free_strs(curr->args);
-        if (curr->paths)
-            free_strs(curr->paths);
         if (curr->path)
             free(curr->path);
         free(curr);
@@ -53,4 +51,6 @@ void	free_rest(t_data *data)
 		free(data->file_names[0]);
 		free(data->file_names[1]);
 	}
+    if (data->paths)
+        free_strs(data->paths);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 15:42:05 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/18 00:10:51 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/18 15:13:44 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ t_cmd	*init_cmd(void)
 	return (new);
 }
 
-void	fill_cmd(t_cmd *new, char *args, char **env)
+void	fill_cmd(t_cmd *new, char *args)
 {
 	new->next = NULL;
-	new->args = ft_split(args, ' ');	//"ls -l" -> ["ls", "-l", NULL]
-	new->paths = get_paths(env);		//"...:...:..." -> ["...", "...", NULL]
+	new->args = ft_split(args, ' '); //"ls -l" -> ["ls", "-l", NULL]
 }
 
 void	cmd_add_back(t_cmd **cmds, t_cmd *new)
@@ -51,7 +50,7 @@ void	cmd_add_back(t_cmd **cmds, t_cmd *new)
 	current->next = new;
 }
 
-void	init_cmds(t_data *data, int ac, char **av, char **env)
+void	init_cmds(t_data *data, int ac, char **av)
 {
 	t_cmd	*head;
 	t_cmd	*new;
@@ -65,7 +64,7 @@ void	init_cmds(t_data *data, int ac, char **av, char **env)
 		new = init_cmd();
 		if (!new)
 			break ;
-		fill_cmd(new, av[i], env);
+		fill_cmd(new, av[i]);
 		cmd_add_back(&head, new);
 	}
 	data->cmds = head;

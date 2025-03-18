@@ -3,68 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 20:26:00 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/18 10:01:13 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/18 15:49:19 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-//open pipe, fork(child process) cmd
-// void    exec_first_cmd(t_data *data, t_cmd *cmd, char **envp)
-// {
-// 	pid_t   pid;
-// 	// int     status;
+void    exec_first_cmd(t_data *data, t_cmd *cmd, char **envp)
+{
+	pid_t   pid;
+	char	*path;
 
-// 	data->is_first_cmd = 0;
-// 	if (pipe(data->pipe_fd) == -1)   //1. pipe(fds) - pipe fds(read, write), need 2 close()
-// 		handle_errors(data, NULL, PIPE_ERR);
-// 	pid = fork();               //2. fork() - child process
-// 	if (pid == -1)
-// 		handle_errors(data, NULL, FORK_ERR);
-// 	else if (pid == 0)
-// 	{
-// 		close(data->pipe_fd[0]);
-// 		data->infile = open(data->file_names[0], O_RDONLY);
-// 		if (data->infile == -1)
-// 			handle_errors(data, NULL, OPEN_FILE_ERR);
-// 		dup2(data->infile, STDIN_FILENO);
-// 		close(data->infile);
-// 		dup2(data->pipe_fd[1], STDOUT_FILENO);
-// 		close(data->pipe_fd[1]);
-// 		execve(cmd->path, cmd->args, envp);
-// 		handle_errors(data, NULL, EXECVE_ERR);
-// 	}
-// 	else
-// 		wait(NULL);
-// }
+	data->is_first_cmd = 0;
+	path = NULL;
+	pid = fork();
+	if (pid == -1)
+		handle_errors(data, NULL, -1);
+    else if (pid == 0)
+	{
+		path = check_path(data, cmd->args[0]);
+		if (!path)
+			handle_errors(data, NULL, PATH_ERR);
+        close(data->pipe_fd[0]);
+		data->infile = open(data->file_names[0], O_RDONLY);
+		if (data->infile == -1)
+			handle_errors(data, path, OPEN_FILE_ERR);
+		dup2(data->infile, STDIN_FILENO);
+		close(data->infile);
+        dup2(data->pipe_fd[1], STDOUT_FILENO);
+        close(data->pipe_fd[1]);
+        execve(path, cmd->args, envp);
+		handle_errors(data, NULL, -1);
+    }
+}
 
-// void    exec_last_cmd(t_data *data, t_cmd *cmd, char **envp)
-// {
-// 	pid_t   pid;
+void    exec_last_cmd(t_data *data, t_cmd *cmd, char **envp)
+{
+	pid_t   pid;
+	char	*path;
 
-// 	pid = fork();
-// 	if (pid == -1)
-// 		handle_errors(data, NULL, FORK_ERR);
-// 	else if (pid == 0)
-// 	{
-// 		print_data(data);
-// 		close(data->pipe_fd[1]);
-// 		data->outfile = open(data->file_names[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-// 		if (data->outfile == -1)
-// 			handle_errors(data, NULL, OPEN_FILE_ERR);
-// 		dup2(data->outfile, STDOUT_FILENO);
-// 		close(data->outfile);
-// 		dup2(data->pipe_fd[0], STDIN_FILENO);
-//         close(data->pipe_fd[0]);
-// 		execve(cmd->path, cmd->args, envp);
-// 		handle_errors(data, NULL, EXECVE_ERR);
-// 	}
-// 	else
-// 		wait(NULL);
-// }
+	path = NULL;
+	pid = fork();
+	if (pid == -1)
+		handle_errors(data, NULL, -1);
+	else if (pid == 0)
+	{
+		path = check_path(data, cmd->args[0]);
+		if (!path)
+			handle_errors(data, NULL, PATH_ERR);
+        close(data->pipe_fd[1]);
+		dup2(data->pipe_fd[0], STDIN_FILENO);
+        close(data->pipe_fd[0]);
+        data->outfile = open(data->file_names[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+        if (data->outfile == -1)
+			handle_errors(data, NULL, OPEN_FILE_ERR);
+        dup2(data->outfile, STDOUT_FILENO);
+        close(data->outfile);
+        execve(path, cmd->args, envp);
+        handle_errors(data, NULL, -1);
+    }
+}
 
 // void    exec_mid_cmd(t_data *data, t_cmd *cmd, char **envp)
 // {

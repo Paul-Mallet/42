@@ -6,9 +6,9 @@ SRC=$(addprefix $(SRC_DIR), \
 	data.c \
 	exec.c \
 	cmds.c \
-	paths.c \
 	utils.c \
 	frees.c \
+	paths.c \
 	prints.c \
 	syntax.c \
 	errors.c)

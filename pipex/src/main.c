@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:40:53 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/18 09:55:00 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/18 16:02:04 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,11 @@ int main(int ac, char **av, char **envp)
 {
 	t_data  data;
 
-	(void)envp;
-	if (ac == 5)
+	if (ac == 5)	//handle "" "" "" "" && env -i -> only if PATH doesn't exist return cmd_not_found
 	{
 		init_data(&data);
-		if (!valid_syntax(ac, av) || !valid_len(ac, av)) //valid_len?
-			handle_errors(&data, find_syntax_err(ac, av), SYNTAX_ERR);
+		if (!valid_syntax(ac, av) || !valid_len(ac, av))
+			handle_errors(&data, find_syntax_err(ac, av), -1);
 		fill_data(&data, ac, av, envp);
 		// print_data(&data);
 		exec_data(&data, envp);

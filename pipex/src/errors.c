@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:47:57 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/17 23:58:27 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/18 15:47:53 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,11 @@
 
 void	handle_errors(t_data *data, char *cmd, int status) //va_list?(*)
 {
-	if (status == SYNTAX_ERR)
-		ft_printf("bash: syntax error near unexpected token '%c'\n", cmd[0]);
-	else if (status == NO_SUCH_FILE_ERR)
-		ft_printf("bash: %s: No such file or directory\n", cmd);
-	else if (status == NOT_FOUND_ERR)
-		ft_printf("bash: %s: command not found\n", cmd);
-	else if (status == PERMISSION_ERR)
-		ft_printf("bash: %s: Permission denied\n", cmd); //not add_back yet !(*)
-	else if (status == INVALID_OPT_ERR)
-		ft_printf("%s: invalid option -- '%c'\n", data->cmds->args[1][0]); //find wrong -arg
-	else if (status == PIPE_ERR)
-		perror("bash: pipe");
-	else if (status == FORK_ERR)
-		perror("bash: fork");
+	if (status == PATH_ERR)
+		close_pipe(data);
 	else if (status == OPEN_FILE_ERR)
-		perror("bash: open() failed");
-	else if (status == EXECVE_ERR)
-		perror("bash: execve() failed");
+		free(cmd);
+	perror("bash");
 	if (data)
 		free_rest(data);
 	exit(EXIT_FAILURE);

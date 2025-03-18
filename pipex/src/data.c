@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 18:40:58 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/18 10:45:15 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/18 15:48:48 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	init_data(t_data *data)
 	data->file_names[1] = NULL;
 	data->is_here_doc = 0;
 	data->is_first_cmd = 1;
-	data->pipe_fd[0] = -1;
+	data->pipe_fd[0] = -1;	//tmp, move 
 	data->pipe_fd[1] = -1;
 }
 
-void    fill_data(t_data *data, int ac, char **av, char **env)
+void    fill_data(t_data *data, int ac, char **av, char **envp)
 {
-	init_cmds(data, ac, av, env);
+	init_cmds(data, ac, av);
 	if (!ft_strcmp(av[1], "here_doc"))
 	{
 		data->delim = ft_strdup(av[1]);
@@ -38,62 +38,43 @@ void    fill_data(t_data *data, int ac, char **av, char **env)
 		data->file_names[0] = ft_strdup(av[1]);
 		data->file_names[1] = ft_strdup(av[ac - 1]);
 	}
-	init_paths(data);
+	get_paths(data, envp);
+}
+
+void	close_pipe(t_data *data)
+{
+	close(data->pipe_fd[0]);
+    close(data->pipe_fd[1]);
+}
+
+void	wait_forks(t_data *data)
+{
+	t_cmd	*curr;
+
+	curr = data->cmds;
+	while (curr)
+	{
+		wait(NULL);
+		curr = curr->next;
+	}
 }
 
 //start, end || start, mid, end based on cmds->next
 void	exec_data(t_data *data, char **envp)
 {
 	t_cmd	*curr;
-	pid_t	pid1;
-	pid_t	pid2;
-	int		status;
 
+	if (pipe(data->pipe_fd) == -1)
+    	handle_errors(data, NULL, -1);
 	curr = data->cmds;
-    if (pipe(data->pipe_fd) == -1)
-        handle_errors(data, NULL, PIPE_ERR);
-	pid1 = fork();
-	if (pid1 == -1)
-		handle_errors(data, NULL, FORK_ERR);
-    else if (pid1 == 0)
+	while (curr)
 	{
-		printf("test");
-		data->infile = open(data->file_names[0], O_RDONLY);
-		if (data->infile == -1)
-			handle_errors(data, NULL, OPEN_FILE_ERR);
-		dup2(data->infile, STDIN_FILENO);
-		close(data->infile);
-
-        dup2(data->pipe_fd[1], STDOUT_FILENO);
-        close(data->pipe_fd[0]);
-        close(data->pipe_fd[1]);
-
-        execve(curr->path, curr->args, NULL);
-		handle_errors(data, NULL, EXECVE_ERR);
-    }
-
-	curr = curr->next;
-
-	pid2 = fork();
-	if (pid2 == -1)
-		handle_errors(data, NULL, FORK_ERR);
-	else if (pid2 == 0)
-	{
-		dup2(data->pipe_fd[0], STDIN_FILENO);
-        close(data->pipe_fd[0]);
-        close(data->pipe_fd[1]);
-
-        data->outfile = open(data->file_names[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-        if (data->outfile == -1)
-			handle_errors(data, NULL, OPEN_FILE_ERR);
-
-        dup2(data->outfile, STDOUT_FILENO);
-        close(data->outfile);
-        execve(curr->path, curr->args, envp);
-        handle_errors(data, NULL, EXECVE_ERR);
-    }
-    close(data->pipe_fd[0]);
-    close(data->pipe_fd[1]);
-    waitpid(pid1, &status, 0);
-    waitpid(pid2, &status, 0);
+		if (data->is_first_cmd)
+			exec_first_cmd(data, curr, envp);
+		else
+			exec_last_cmd(data, curr, envp);
+		curr = curr->next;
+	}
+	close_pipe(data);
+	wait_forks(data);
 }
