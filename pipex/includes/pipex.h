@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:53:05 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/16 23:44:09 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/18 00:08:49 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef enum	s_err
 	PIPE_ERR,
 	FORK_ERR,
 	OPEN_FILE_ERR,
+	EXECVE_ERR,
 }		t_err;
 
 typedef struct  s_cmd
@@ -50,6 +51,7 @@ typedef struct	s_data
 	t_cmd	*cmds;
 	char	*delim;			//only _ || A-Z || a-z, after << + space || <<
 	char	*file_names[2];	//redir stdin to files[0], stdout of last cmd to files[1]
+	int		pipe_fd[2];		//fd for input / output redirs fd
 	int		infile;
 	int		outfile;
 	int		is_here_doc;	//if find "here_doc" in av[1], >> in same exec

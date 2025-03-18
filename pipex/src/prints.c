@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 11:39:19 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/16 20:18:28 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/18 09:56:57 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	print_cmds(t_cmd *cmds)
 		if (curr->path)
 			print_str("path", curr->path);
 		ft_printf("fd[0]: %d\nfd[1]: %d\n", curr->fd[0], curr->fd[1]);
-		ft_printf("is_first: %d\n", curr->is_first);
 		curr = curr->next;
 	}
 }
@@ -54,5 +53,9 @@ void	print_data(t_data *data)
 	if (data->file_names[0] && data->file_names[1])
 		ft_printf("file_names[0]: %s\nfile_name[1]: %s\n",
 			data->file_names[0], data->file_names[1]);
+	if (data->pipe_fd[0] && data->pipe_fd[1])
+		ft_printf("pipe_fd[0]: %d\npipe_fd[1]: %d\n",
+			data->pipe_fd[0], data->pipe_fd[1]);
 	ft_printf("is_here_doc: %d\n", data->is_here_doc);
+	ft_printf("is_first_cmd: %d\n", data->is_first_cmd);
 }

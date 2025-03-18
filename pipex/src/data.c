@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 18:40:58 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/16 23:23:10 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/18 10:25:35 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	init_data(t_data *data)
 	data->file_names[1] = NULL;
 	data->is_here_doc = 0;
 	data->is_first_cmd = 1;
+	data->pipe_fd[0] = -1;
+	data->pipe_fd[1] = -1;
 }
 
 void    fill_data(t_data *data, int ac, char **av, char **env)
@@ -45,19 +47,35 @@ void	exec_data(t_data *data, char **envp)
 	t_cmd	*curr;
 
 	curr = data->cmds;
-	if (data->is_here_doc)
-		exec_here_doc(data, envp);
-	else
-	{
-		while (curr)
-		{
-			if (data->is_first_cmd)
-				exec_first_cmd(data, curr, envp);	//change bool in this function
-			else if (!curr->next)
-				exec_last_cmd(data, curr, envp);
-			else
-				exec_mid_cmd(data, curr, envp);
-			curr = curr->next;
-		}
-	}
+    if (pipe(data->pipe_fd) == -1)
+        handle_errors(data, NULL, PIPE_ERR);
+    data->infile = open(data->file_names[0], O_RDONLY);
+    if (data->infile == -1)
+		handle_errors(data, NULL, OPEN_FILE_ERR);
+    dup2(data->infile, STDIN_FILENO);
+    close(data->infile);
+    if (fork() == 0) {
+        dup2(data->pipe_fd[1], STDOUT_FILENO);
+        // close(data->pipe_fd[0]);
+        close(data->pipe_fd[1]);
+        execve(curr->path, curr->args, NULL);
+		handle_errors(data, NULL, EXECVE_ERR);
+    }
+	curr = curr->next;
+    if (fork() == 0) {
+        dup2(data->pipe_fd[0], STDIN_FILENO);
+        close(data->pipe_fd[0]);
+        close(data->pipe_fd[1]);
+        data->outfile = open(data->file_names[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+        if (data->outfile == -1)
+			handle_errors(data, NULL, OPEN_FILE_ERR);
+        dup2(data->outfile, STDOUT_FILENO);
+        close(data->outfile);
+        execve(curr->path, curr->args, envp);
+        handle_errors(data, NULL, EXECVE_ERR);
+    }
+    close(data->pipe_fd[0]);
+    close(data->pipe_fd[1]);
+    wait(NULL);
+    wait(NULL);
 }

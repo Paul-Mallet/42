@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:40:53 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/16 23:09:41 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/18 09:55:00 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 /*
 	To do:
+
+	./pipex infile cmd1 cmd2 outfile
+	< infile cmd1 | cmd2 > outfile
+
 	./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2
 	< file1 cmd1 | cmd2 | cmd3 ... | cmdn > file2
 
@@ -71,13 +75,13 @@ int main(int ac, char **av, char **envp)
 	t_data  data;
 
 	(void)envp;
-	if (ac > 4)
+	if (ac == 5)
 	{
 		init_data(&data);
 		if (!valid_syntax(ac, av) || !valid_len(ac, av)) //valid_len?
 			handle_errors(&data, find_syntax_err(ac, av), SYNTAX_ERR);
 		fill_data(&data, ac, av, envp);
-		print_data(&data);
+		// print_data(&data);
 		exec_data(&data, envp);
 		free_rest(&data);
 	}
