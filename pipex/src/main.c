@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:40:53 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/18 16:02:04 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/19 00:56:58 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,33 @@
 	Allowed chars: A-Z, a-z, 0-9, -, _, . everywhere
 	Max size: 255
 
-	input[1] -> file1 -> infile (must exist, or whole cmd until END or | not exec)
+	input[1] -> file1 -> infile
+	(must exist, or whole cmd until END or | not exec)
 		fd = open(filename, O_RDONLY);
 	input[ac - 1] -> file2 -> outfile (will create / update it)
 		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 */
-int main(int ac, char **av, char **envp)
+int	strlen_av(char **av)
 {
-	t_data  data;
+	int	i;
 
-	if (ac == 5)	//handle "" "" "" "" && env -i -> only if PATH doesn't exist return cmd_not_found
+	i = 0;
+	while (av[++i])
+		if (!ft_strlen(av[i]))
+			return (0);
+	return (1);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_data	data;
+
+	if (ac == 5 && strlen_av(av))
 	{
 		init_data(&data);
 		if (!valid_syntax(ac, av) || !valid_len(ac, av))
 			handle_errors(&data, find_syntax_err(ac, av), -1);
 		fill_data(&data, ac, av, envp);
-		// print_data(&data);
 		exec_data(&data, envp);
 		free_rest(&data);
 	}

@@ -6,14 +6,14 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 11:39:19 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/18 15:28:14 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/19 00:46:31 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
 static void	print_str(char *custom, char *str)
-{	
+{
 	ft_printf("%s: %s\n", custom, str);
 }
 
@@ -35,8 +35,6 @@ static void	print_cmds(t_cmd *cmds)
 	{
 		if (curr->args)
 			print_strs("args", curr->args);
-		// if (curr->paths)
-		// 	print_strs("paths", curr->paths);
 		if (curr->path)
 			print_str("path", curr->path);
 		ft_printf("fd[0]: %d\nfd[1]: %d\n", curr->fd[0], curr->fd[1]);
@@ -48,8 +46,6 @@ void	print_data(t_data *data)
 {
 	if (data->cmds)
 		print_cmds(data->cmds);
-	if (data->delim)
-		print_str("delim", data->delim);
 	if (data->file_names[0] && data->file_names[1])
 		ft_printf("file_names[0]: %s\nfile_name[1]: %s\n",
 			data->file_names[0], data->file_names[1]);
@@ -58,6 +54,5 @@ void	print_data(t_data *data)
 			data->pipe_fd[0], data->pipe_fd[1]);
 	if (data->paths)
 		print_strs("paths", data->paths);
-	ft_printf("is_here_doc: %d\n", data->is_here_doc);
 	ft_printf("is_first_cmd: %d\n", data->is_first_cmd);
 }

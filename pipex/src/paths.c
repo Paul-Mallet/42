@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:05:55 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/18 15:53:32 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/19 00:31:22 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,8 @@ char	*find_path(char **paths, char *cmd)
 	while (paths[++i])
 	{
 		road = construct_path(paths[i], cmd);
-		if (access(road, X_OK) == 0)	//ready to exec, free!
+		if (access(road, X_OK) == 0)
 			return (road);
-		// if (!(paths[i + 1]))
-		// 	return (NULL);
 		free(road);
 	}
 	return (NULL);
@@ -77,21 +75,22 @@ char	*check_path(t_data *data, char *cmd)
 	return (find_path(data->paths, cmd));
 }
 
-void	get_paths(t_data *data, char **envp) //["COLORS=...", "PATH=...", ...]
+void	get_paths(t_data *data, char **envp)
 {
 	char	*skip_key;
 	int		i;
 
 	i = -1;
 	skip_key = NULL;
+	if (!envp)
+		return ;
 	while (envp[++i])
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0) //["PATH=/home/pamallet/bin:/home/pamallet/bin:..."]
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 		{
 			skip_key = ft_strchr(envp[i], '=');
-			data->paths = ft_split(skip_key + 1, ':'); //["/home/pamallet/bin", "/home/pamallet/bin..."]
+			data->paths = ft_split(skip_key + 1, ':');
 			return ;
 		}
 	}
-	handle_errors(data, NULL, -1);
 }

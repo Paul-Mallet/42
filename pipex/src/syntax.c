@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:17:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/16 12:18:28 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/19 00:34:30 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	valid_file(char *str)
 	return (1);
 }
 
-static int	valid_args(char **args) //["ls", "-l", NULL], not handle "---"
+static int	valid_args(char **args)
 {
 	int	i;
 	int	j;
@@ -62,9 +62,9 @@ static int	valid_heredoc(char *heredoc, char *delim)
 	return (!ft_strcmp(heredoc, "here_doc") && valid_file(delim));
 }
 
-int valid_syntax(int ac, char **av)
+int	valid_syntax(int ac, char **av)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (++i < ac)

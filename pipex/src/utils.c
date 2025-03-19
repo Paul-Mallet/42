@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:22:09 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/15 11:46:16 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/03/19 00:34:50 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	valid_len(int ac, char **av)
 	while (++i < ac)
 	{
 		j = 0;
-		if (i == 1 || i == (ac - 1)) //file1 or file2
+		if (i == 1 || i == (ac - 1))
 		{
-			while (av[i][j]) //handle pathname(paht + file) < 4096
+			while (av[i][j])
 				j++;
-			if (j >= 255) //filename
+			if (j >= 255)
 				return (0);
 		}
 	}

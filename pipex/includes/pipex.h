@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:53:05 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/18 15:52:32 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/19 00:44:59 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,37 @@
 
 # define BUF_SIZE 1024
 
-typedef enum	s_err
+typedef enum s_err
 {
 	SYNTAX_ERR,
 	PATH_ERR,
 	OPEN_FILE_ERR,
 }		t_err;
 
-typedef struct  s_cmd
+typedef struct s_cmd
 {
 	struct s_cmd	*next;
-	char			**args; 	//for execve();
-	char			*path;		//absolute / relative path of cmd (bin/ls)
-	int				fd[2];		//fd for input / output redirs fd
-	//char	**paths;			//from PATH of envp, get all paths between ':'
-}       t_cmd;
+	char			**args;
+	char			*path;
+	int				fd[2];
+}		t_cmd;
 
-typedef struct	s_data
+typedef struct s_data
 {
-	t_cmd	*cmds;			//cmds->next...
-	char	**paths;		//for cmds exec (aka: usr/bin/"ls"...)
-	char	*file_names[2];	//redir stdin to files[0], stdout of last cmd to files[1]
-	int		pipe_fd[2];		//fd for input / output redirs fd
-	int		infile;			//infile fd
-	int		outfile;		//outfile fd
-	int		is_first_cmd;	//bool to know if it's 1rst cmd
-	int		is_here_doc;	//if find "here_doc" in av[1], >> in same exec
-	char	*delim;			//only _ || A-Z || a-z, after << + space || <<
+	t_cmd	*cmds;
+	char	**paths;
+	char	*file_names[2];
+	int		pipe_fd[2];
+	int		infile;
+	int		outfile;
+	int		is_first_cmd;
 }		t_data;
 
 //	DATA
 //	Init t_data
 void	init_data(t_data *data);
 //	Fill data based on here_doc redir
-void    fill_data(t_data *data, int ac, char **av, char **env);
+void	fill_data(t_data *data, int ac, char **av, char **env);
 //	Exec data based on cmds & here_doc
 void	exec_data(t_data *data, char **envp);
 
@@ -83,11 +80,11 @@ char	*construct_path(char *dir, char *cmd);
 
 //	EXEC
 //	Exec first cmd
-void    exec_first_cmd(t_data *data, t_cmd *cmd, char **envp);
+void	exec_first_cmd(t_data *data, t_cmd *cmd, char **envp);
 //	Exec in between cmds
 // void    exec_mid_cmd(t_data *data, t_cmd *cmd, char **envp);
 //	Exec last cmd
-void    exec_last_cmd(t_data *data, t_cmd *cmd, char **envp);
+void	exec_last_cmd(t_data *data, t_cmd *cmd, char **envp);
 //	Exec here_doc redirection
 // void    exec_here_doc(t_data *data, char **envp);
 //	Close the pipe
@@ -95,7 +92,7 @@ void	close_pipe(t_data *data);
 
 //	SYNTAX
 //	Valid argv syntax to fit files, cmds, args and redirs
-int 	valid_syntax(int ac, char **av);
+int		valid_syntax(int ac, char **av);
 
 //	ERRORS
 //	Print error based on status

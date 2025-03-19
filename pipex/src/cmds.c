@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 15:42:05 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/18 15:13:44 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/19 00:37:47 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_cmd	*init_cmd(void)
 void	fill_cmd(t_cmd *new, char *args)
 {
 	new->next = NULL;
-	new->args = ft_split(args, ' '); //"ls -l" -> ["ls", "-l", NULL]
+	new->args = ft_split(args, ' ');
 }
 
 void	cmd_add_back(t_cmd **cmds, t_cmd *new)
@@ -59,7 +59,7 @@ void	init_cmds(t_data *data, int ac, char **av)
 	head = NULL;
 	new = NULL;
 	i = 1;
-	while(++i < ac - 1) //not [1] & [ac - 1] -> files
+	while (++i < ac - 1)
 	{
 		new = init_cmd();
 		if (!new)
