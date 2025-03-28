@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:53:05 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/19 00:44:59 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/19 02:36:08 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int		valid_syntax(int ac, char **av);
 
 //	ERRORS
 //	Print error based on status
-void	handle_errors(t_data *data, char *cmd, int status);
+void	handle_errors(t_data *data, char *cmd, int status, char *path);
 //	Find syntax errors and return the char concerned
 char	*find_syntax_err(int ac, char **av);
 

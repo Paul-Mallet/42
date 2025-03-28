@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 15:05:55 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/19 00:31:22 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/19 02:43:16 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	is_executable(t_data *data, char *cmd)
 	if (access(cmd, F_OK) != 0)
 	{
 		close_pipe(data);
-		handle_errors(data, NULL, -1);
+		handle_errors(data, NULL, -1, NULL);
 	}
 	else if (access(cmd, X_OK) != 0)
 	{
 		close_pipe(data);
-		handle_errors(data, NULL, -1);
+		handle_errors(data, NULL, -1, NULL);
 	}
 	return (1);
 }

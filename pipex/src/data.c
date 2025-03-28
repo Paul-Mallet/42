@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 18:40:58 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/19 00:46:16 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/19 02:37:29 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	exec_data(t_data *data, char **envp)
 	t_cmd	*curr;
 
 	if (pipe(data->pipe_fd) == -1)
-		handle_errors(data, NULL, -1);
+		handle_errors(data, NULL, -1, NULL);
 	curr = data->cmds;
 	while (curr)
 	{

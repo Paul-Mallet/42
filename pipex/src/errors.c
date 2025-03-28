@@ -6,19 +6,20 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 13:47:57 by pamallet          #+#    #+#             */
-/*   Updated: 2025/03/19 00:32:32 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/19 02:49:22 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	handle_errors(t_data *data, char *cmd, int status)
+void	handle_errors(t_data *data, char *cmd, int status, char *path)
 {
-	if (status == PATH_ERR)
-		close_pipe(data);
-	else if (status == OPEN_FILE_ERR)
+	if (status == OPEN_FILE_ERR)
 		free(cmd);
 	perror("bash");
+	if (path)
+		free(path);
+	close_pipe(data);
 	free_rest(data);
 	exit(EXIT_FAILURE);
 }

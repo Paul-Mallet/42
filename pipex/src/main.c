@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:40:53 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/19 00:56:58 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/03/19 02:37:17 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int ac, char **av, char **envp)
 	{
 		init_data(&data);
 		if (!valid_syntax(ac, av) || !valid_len(ac, av))
-			handle_errors(&data, find_syntax_err(ac, av), -1);
+			handle_errors(&data, find_syntax_err(ac, av), -1, NULL);
 		fill_data(&data, ac, av, envp);
 		exec_data(&data, envp);
 		free_rest(&data);
