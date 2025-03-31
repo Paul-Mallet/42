@@ -1,5 +1,6 @@
 CC=cc
 FLAGS=-Wall -Wextra -Werror -g -I includes/
+T_FLAG=-pthread
 SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR), \
 		main.c)
@@ -11,7 +12,7 @@ all: $(NAME)
 	@echo "philo compiled"
 
 $(NAME): $(OBJS)
-	@$(CC) $(FLAGS) -o $@ $(OBJS)
+	@$(CC) $(FLAGS) $(T_FLAG) -o $@ $(OBJS)
 
 $(OBJS_DIR)%.o: %.c
 	@mkdir -p $(dir $@)
