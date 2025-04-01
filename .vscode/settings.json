@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"push_swap.h": "c"
+		"push_swap.h": "c",
+		"__mutex_base": "c"
 	}
 }

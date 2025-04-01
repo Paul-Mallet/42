@@ -3,7 +3,9 @@ FLAGS=-Wall -Wextra -Werror -g -I includes/
 T_FLAG=-pthread -fsanitize
 SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR), \
-		main.c)
+		main.c \
+		parsing.c \
+		utils.c)
 OBJS_DIR=obj/
 OBJS=$(SRCS:%.c=$(OBJS_DIR)%.o)
 NAME=philo

@@ -56,9 +56,11 @@ odd / even philos = threads
 
 1 philo take 1rst fork on left, then right, eat, drop right, so another philo can take this drop one
 
-400 200 200 -> not enough time to take fork or doing action, so will die
-410 200 200 -> enough time(can minimize ms lost between actions)
+400 200 200 7-> not enough time to take fork or doing action, so will die
+410 200 200 7-> enough time(can minimize ms lost between actions)
 
 start timer when parsing ok, substract timers to check if will be still alive
 
 usleep -> waiter
+
+loop threads_create() + loop threads_join()
