@@ -64,3 +64,40 @@ start timer when parsing ok, substract timers to check if will be still alive
 usleep -> waiter
 
 loop threads_create() + loop threads_join()
+
+typedef struct s_philo {
+    int             id;            // id philo
+    pthread_t       thread;        // 1 thread = 1 philo
+    int             meals_eaten;   // num of meal eaten
+    long            last_meal_time;// time of last meal
+    struct s_program *program;     // ref vers data
+} t_philo;
+
+typedef struct s_data {
+    t_philo         *philos;       // arr philosophes
+    pthread_mutex_t *forks;        // arr de forks
+    pthread_mutex_t write_lock;    // mutex to print(checker)
+    pthread_mutex_t dead_lock;     // mutex to verif dead(checker)
+    int             dead_flag;     // fin de simulation
+    int             time_to_die;
+    int             time_to_eat;
+    int             time_to_sleep;
+	int				num_meals_to_eat;
+} t_data;
+
+5 steps in routine(infinite loop while)
+check after each action if philo deaded with if
+Penser(print) → Prendre deux fourchettes(lock * 2) → Manger(print) → Rendre les fourchettes(unlock * 2 + ) → Dormir(print)
+
+cas pour manger:
+- si 1 philo = 1 fork = peut pas manger?
+- avoid deadlocks with odd / even(philo id -> know who's it, start from 0) forks taken in 1rst
+	ex: philo 0 -> even = take fork 0, then 1
+		philo 1 -> odd = take fork 2, then 1
+		philo 2 -> even = take fork 2, then 3...
+	take_fork() -> arr of forks[philo->id + 1]
+- semaphore alternative = limit num of philos to eat in same time
+
+fork[0(left), 1(right - left), 2(right - left), 3(right - left)...]
+
+philo take 1 fork(), wait the other one after all take their first one
