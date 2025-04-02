@@ -61,7 +61,7 @@ odd / even philos = threads
 
 start timer when parsing ok, substract timers to check if will be still alive
 
-usleep -> waiter
+usleep -> waiter when finish to eat?
 
 loop threads_create() + loop threads_join()
 

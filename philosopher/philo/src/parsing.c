@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 11:26:41 by pamallet          #+#    #+#             */
-/*   Updated: 2025/04/01 13:23:09 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:26:14 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	handle_error(int status)
 	else if (status == INVALID_DIGITS_ERR)
 		printf("Invalid digits format.\n");
 	else if (status == INVALID_SIGN_ERR)
-		printf("Invalid sign input.\n");
+		printf("Invalid sign, not handle.\n");
+	else if (status == INVALID_OVERF_ERR)
+		printf("Invalid type, only handle int.\n");
 }
 
 int	is_only_spaces(const char *s)
@@ -57,7 +59,8 @@ int	is_correct_sign(const char *s)
 		if (!*s)
 			return (1);
 		if (ft_issign(*s))
-			s++;
+			return (0);
+			// s++;
 		if (!ft_isdigit(*s))
 			return (0);
 		while (ft_isdigit(*s))
@@ -66,7 +69,23 @@ int	is_correct_sign(const char *s)
 	return (1);
 }
 
-//200 philos, intmax, no nega, no signs handle "" "   " "-200" "10billions" "+"
+int	is_overflow(char *s)
+{
+	long	res;
+
+	res = 0;
+	while (*s >= '0' && *s <= '9')
+	{
+		res *= 10;
+		if (res > INT_MAX)
+			return (1);
+		res += (*s++ - 48);
+		if (res > INT_MAX)
+			return (1);
+	}
+	return (0);
+}
+
 int	parsing(char **av)
 {
 	int	i;
@@ -76,12 +95,14 @@ int	parsing(char **av)
 	{
 		if (!ft_strlen(av[i]))
 			handle_error(EMPTY_INPUT_ERR);
-		if (is_only_spaces(av[i]))
+		else if (is_only_spaces(av[i]))
 			handle_error(ONLY_SPACES_ERR);
-		if (!is_correct_digits(av[i]))
+		else if (!is_correct_digits(av[i]))
 			handle_error(INVALID_DIGITS_ERR);
-		if (!is_correct_sign(av[i]))
+		else if (!is_correct_sign(av[i]))
 			handle_error(INVALID_SIGN_ERR);
+		else if (is_overflow(av[i]))
+			handle_error(INVALID_OVERF_ERR);
 		if (!ft_strlen(av[i]) || is_only_spaces(av[i])
 			|| !is_correct_digits(av[i]) || !is_correct_sign(av[i]))
 			return (0);
