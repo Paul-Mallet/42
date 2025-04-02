@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 11:26:41 by pamallet          #+#    #+#             */
-/*   Updated: 2025/04/02 15:26:14 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:33:31 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,30 +60,12 @@ int	is_correct_sign(const char *s)
 			return (1);
 		if (ft_issign(*s))
 			return (0);
-			// s++;
 		if (!ft_isdigit(*s))
 			return (0);
 		while (ft_isdigit(*s))
 			s++;
 	}
 	return (1);
-}
-
-int	is_overflow(char *s)
-{
-	long	res;
-
-	res = 0;
-	while (*s >= '0' && *s <= '9')
-	{
-		res *= 10;
-		if (res > INT_MAX)
-			return (1);
-		res += (*s++ - 48);
-		if (res > INT_MAX)
-			return (1);
-	}
-	return (0);
 }
 
 int	parsing(char **av)

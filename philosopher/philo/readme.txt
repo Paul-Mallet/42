@@ -70,7 +70,7 @@ typedef struct s_philo {
     pthread_t       thread;        // 1 thread = 1 philo
     int             meals_eaten;   // num of meal eaten
     long            last_meal_time;// time of last meal
-    struct s_program *program;     // ref vers data
+    struct s_program *data;     // ref vers data
 } t_philo;
 
 typedef struct s_data {

@@ -1,11 +1,14 @@
 CC=cc
 FLAGS=-Wall -Wextra -Werror -g -I includes/
-T_FLAG=-pthread #-fsanitize
+T_FLAG=-pthread
 SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR), \
 		main.c \
 		parsing.c \
-		utils.c)
+		print_data.c \
+		handle_data.c \
+		utils_conversion.c \
+		utils_parsing.c)
 OBJS_DIR=obj/
 OBJS=$(SRCS:%.c=$(OBJS_DIR)%.o)
 NAME=philo

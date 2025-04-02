@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/04/02 15:24:22 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:27:59 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,26 @@ typedef struct s_data
 }		t_data;
 
 /* PARSING */
-int	parsing(char **av);
+int		parsing(char **av);
 
-/* UTILS */
-int	ft_strlen(const char *s);
-int	ft_isspace(const char c);
-int	ft_issign(const char c);
-int	ft_isdigit(int c);
+/* PARSING_UTILS */
+int		ft_strlen(const char *s);
+int		ft_isspace(const char c);
+int		ft_issign(const char c);
+int		ft_isdigit(int c);
+int		is_overflow(char *s);
+
+/* CONVERSION_UTILS */
+int		ft_atoi(const char *nptr);
+
+/* HANDLE_DATA */
+void	init_data(t_data *data, char **av);
+int		check_data(t_data *data);
+
+
+/* PRINT_DATA */
+void	print_data(t_data *data);
+void	print_philos(t_philo *philos);
+void	print_forks(pthread_mutex_t *forks);
 
 #endif

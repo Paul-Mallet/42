@@ -6,42 +6,86 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/04/02 14:40:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/04/02 18:53:15 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-// void	init_data(t_data *data, char **av)
-// {
-// 	data->philos[ft_atoi(av[1])];
-// 	data->forks[ft_atoi(av[1])];
-// 	data->is_dead = 0;
-// }
+void	*routine(void *arg)
+{
+	t_data data = *(t_data)arg;
+
+	while (1)
+	{
+		/* THINK */
+		printf("thinking: %s\n");
+
+		/* TAKE 1 FORK */
+		//lock
+		/* TAKE 2nd FORK */
+		//unlock
+
+		/* EAT */
+		printf("eating: %s\n");
+		//check if dead
+
+		/* DROP 2 FORKS */
+
+		/* SLEEP */
+		printf("sleeping: %s\n");
+		//check if dead
+	}
+}
+
+void	start_diner(t_data *data)
+{
+	int	i;
+	//...
+
+	/* LOOP THREADS(0) */
+	i = -1;
+	while (data->philos[++i])
+		if (pthread_create(&data->philos->thread, NULL, &routine, &data) != 0)
+			return (EXIT_FAILURE);
+	i = -1;
+	while (data->philos[++i])
+		if (pthread_join(data->philos->thread, NULL) != 0)
+			return (EXIT_FAILURE);
+
+	/* LOOP MUTEXES(1) */
+	// i = -1;
+	// while (data->forks[++i])
+	// 	pthread_mutex_init(&data->forks[i], NULL);
+	// i = -1;
+	// while (data->forks[++i])
+	// 	pthread_mutex_lock(&data->forks[i]);
+	// i = -1;
+	// while (data->forks[++i])
+	// 	pthread_mutex_unlock(&data->forks[i]);
+	// i = -1;
+	// while (data->forks[++i])
+	// 	pthread_mutex_destroy(&data->forks[i]);
+}
 
 int	main(int ac, char **av)
 {
-	// t_data	data;
+	t_data	data;
 
 	if (ac >= 5 && ac <= 6)
 	{
 		if (!parsing(av))
 			return (EXIT_FAILURE);
-		// init_data(&data, av);
-		//...
+		init_data(&data, av);
+		if (!check_data(&data))
+			return (EXIT_FAILURE);
+		print_data(&data);
+		start_diner(&data);
 	}
 	else
 		printf("Invalid number of args.\n");
 	return (EXIT_SUCCESS);
 }
-
-// void	*routine()
-// {
-// 	while (1)
-// 	{
-// 		//...
-// 	}
-// }
 
 // pthread_t		t1, t2;
 
@@ -57,6 +101,7 @@ int	main(int ac, char **av)
 // 	printf("Ending thread");
 // }
 
+// (1)
 // pthread_mutex_init(&mutex, NULL) + pthread_mutex_destroy(&mutex)
 // pthread_mutex_lock(&mutex) + pthread_mutex_unlock(&mutex)
 
