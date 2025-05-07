@@ -15,10 +15,10 @@ parsing like push_swap
 	-> no negative value
 	-> handle 0 too
 
-nb_philos(also forks) ttdie(ms) tteat(ms) ttsleep(ms) nbtimes/philo_eat
+nb_philos(also forks = mutexes) ttdie(ms) tteat(ms) ttsleep(ms) nbtimes/philo_eat
 
 threads exec at same time (env 10ms interval)
-when fork -> duplicate env, syst ressources, global vars...
+when fork(mutex) -> duplicate env, syst ressources, global vars...
 when thread -> share all ressources, cause n thread / 1 process
 share memories -> can modif same vars = race conditions
 
@@ -34,13 +34,17 @@ philo visualizer -> schema of prints return
 
 OS context switch and temp change thread access to data which is shared
 
-1. thread -> 
+1. mutex(fork)
+-> 1rst to be init, to avoid thread attempt to use other uninit mutexes
+-> 
 
-2. race condition
+2. thread
+-> 
+
+3. race condition
 	-> when 2 threads access to same address mem(var)
 	-> read / increment / write in Assembler level %eax = cpu register
 	-> if time consumming operations(high n iterations...)
-3. mutex -> 
 
 4. deadlock -> mutex not unlock, process 1 wait for resource 2, process 2 wait for resource 1 etc.
 
@@ -66,11 +70,11 @@ usleep -> waiter when finish to eat?
 loop threads_create() + loop threads_join()
 
 typedef struct s_philo {
-    int             id;            // id philo
-    pthread_t       thread;        // 1 thread = 1 philo
-    int             meals_eaten;   // num of meal eaten
-    long            last_meal_time;// time of last meal
-    struct s_program *data;     // ref vers data
+    int             	id;            // id philo
+    pthread_t       	thread;        // 1 thread = 1 philo
+    int             	meals_eaten;   // num of meal eaten
+    long            	last_meal_time;// time of last meal
+    struct s_program 	*data;     // ref vers data
 } t_philo;
 
 typedef struct s_data {
@@ -89,8 +93,10 @@ typedef struct s_data {
 check after each action if philo deaded with if
 Penser(print) → Prendre deux fourchettes(lock * 2) → Manger(print) → Rendre les fourchettes(unlock * 2 + ) → Dormir(print)
 
-cas pour manger:
-- si 1 philo = 1 fork = peut pas manger?
+### Forks taken ordering ###
+
+case to eat
+- if 1 philo = 1 fork = peut pas manger?
 - avoid deadlocks with odd / even(philo id -> know who's it, start from 0) forks taken in 1rst
 	ex: philo 0 -> even = take fork 0, then 1
 		philo 1 -> odd = take fork 2, then 1
@@ -98,6 +104,13 @@ cas pour manger:
 	take_fork() -> arr of forks[philo->id + 1]
 - semaphore alternative = limit num of philos to eat in same time
 
+even -> right 1rst || odd -> left 1rst
 fork[0(left), 1(right - left), 2(right - left), 3(right - left)...]
+= asymmetry to break deadlock -> synchro strat
 
-philo take 1 fork(), wait the other one after all take their first one
+1rst philo takes forks
+concurrent system -> OS decides which thread(philo) runs 1rst
+all philo threads compete simult for forks
+=> ANY philo could be 1rst
+
+##############################

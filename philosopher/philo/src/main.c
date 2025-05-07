@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/04/02 18:53:15 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/07 18:16:35 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,32 @@
 
 void	*routine(void *arg)
 {
-	t_data data = *(t_data)arg;
+	t_data data = *(t_data*)arg;
+	//int left_fork = id;
+	//int right_fork = (id + 1) % ft_nbphilos(data->philos);
 
 	while (1)
 	{
 		/* THINK */
-		printf("thinking: %s\n");
+		printf("%s %d is thinking\n", );
 
-		/* TAKE 1 FORK */
-		//lock
-		/* TAKE 2nd FORK */
-		//unlock
+		/* TAKE 2 FORKS - conditions */
+		pthread_mutex_lock(&forks[left_fork]);
+		pthread_mutex_lock(&forks[right_fork]);
 
 		/* EAT */
 		printf("eating: %s\n");
 		//check if dead
 
 		/* DROP 2 FORKS */
+		pthread_mutex_unlock(&forks[left_fork]);
+		pthread_mutex_unlock(&forks[right_fork]);
 
 		/* SLEEP */
 		printf("sleeping: %s\n");
 		//check if dead
 	}
+	return (NULL);
 }
 
 void	start_diner(t_data *data)
@@ -43,7 +47,12 @@ void	start_diner(t_data *data)
 	int	i;
 	//...
 
-	/* LOOP THREADS(0) */
+	/* LOOP MUTEXES INIT(0) */
+	i = -1;
+	while (data->forks[++i])
+		pthread_mutex_init(&data->forks[i], NULL);
+
+	/* LOOP THREADS CREATE(1) */
 	i = -1;
 	while (data->philos[++i])
 		if (pthread_create(&data->philos->thread, NULL, &routine, &data) != 0)
@@ -53,10 +62,6 @@ void	start_diner(t_data *data)
 		if (pthread_join(data->philos->thread, NULL) != 0)
 			return (EXIT_FAILURE);
 
-	/* LOOP MUTEXES(1) */
-	// i = -1;
-	// while (data->forks[++i])
-	// 	pthread_mutex_init(&data->forks[i], NULL);
 	// i = -1;
 	// while (data->forks[++i])
 	// 	pthread_mutex_lock(&data->forks[i]);

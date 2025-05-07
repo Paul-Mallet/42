@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/04/02 18:27:59 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:18:25 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int		ft_atoi(const char *nptr);
 /* HANDLE_DATA */
 void	init_data(t_data *data, char **av);
 int		check_data(t_data *data);
-
 
 /* PRINT_DATA */
 void	print_data(t_data *data);
