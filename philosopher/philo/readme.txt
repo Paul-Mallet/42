@@ -93,10 +93,10 @@ typedef struct s_data {
 check after each action if philo deaded with if
 Penser(print) → Prendre deux fourchettes(lock * 2) → Manger(print) → Rendre les fourchettes(unlock * 2 + ) → Dormir(print)
 
-### Forks taken ordering ###
+### Forks Logic ###
 
 case to eat
-- if 1 philo = 1 fork = peut pas manger?
+- if 1 philo = 1 fork = can't eat = die
 - avoid deadlocks with odd / even(philo id -> know who's it, start from 0) forks taken in 1rst
 	ex: philo 0 -> even = take fork 0, then 1
 		philo 1 -> odd = take fork 2, then 1
@@ -112,5 +112,8 @@ fork[0(left), 1(right - left), 2(right - left), 3(right - left)...]
 concurrent system -> OS decides which thread(philo) runs 1rst
 all philo threads compete simult for forks
 => ANY philo could be 1rst
+
+6 philos = 1 take left + right, 2 cannot, 3 taken both, 4 cannot, 5 take, 6 cannot
+
 
 ##############################

@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/07 18:16:35 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:13:08 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,16 @@ void	*routine(void *arg)
 	while (1)
 	{
 		/* THINK */
-		printf("%s %d is thinking\n", );
+		printf("%s %d is thinking\n");
 
 		/* TAKE 2 FORKS - conditions */
 		pthread_mutex_lock(&forks[left_fork]);
+		printf("%s %d has taken a fork\n", );
 		pthread_mutex_lock(&forks[right_fork]);
+		printf("%s %d has taken a fork\n", );
 
 		/* EAT */
-		printf("eating: %s\n");
+		printf("%s %d is eating: %s\n");
 		//check if dead
 
 		/* DROP 2 FORKS */
@@ -36,7 +38,7 @@ void	*routine(void *arg)
 		pthread_mutex_unlock(&forks[right_fork]);
 
 		/* SLEEP */
-		printf("sleeping: %s\n");
+		printf("%s %d is sleeping: %s\n");
 		//check if dead
 	}
 	return (NULL);
