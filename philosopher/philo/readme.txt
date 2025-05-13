@@ -3,6 +3,8 @@ Way to solve Philosophers
 * 1 philo, 1 fork
 * eat, think, sleep, can't do 2 actions in while
 * eat -> sleep -> think, stop when 1 philo die
+* when start eating, timer reset
+* timer continue until eating again, if reach the ttdie, philo die 
 * every philo needs to eat & should never die
 * philo don't know if another philo is about to die
 * 2 structs t_data + t_philo, many vars inside
@@ -22,11 +24,6 @@ when fork(mutex) -> duplicate env, syst ressources, global vars...
 when thread -> share all ressources, cause n thread / 1 process
 share memories -> can modif same vars = race conditions
 
-p_thread monitor
-	-> create + join independantly from philos
-	-> access to value
-	-> boolean as finished
-
 while philos(n from param)
 
 fsanitize -> detect data race, compile with objs + bin
@@ -35,30 +32,29 @@ philo visualizer -> schema of prints return
 OS context switch and temp change thread access to data which is shared
 
 1. mutex(fork)
--> 1rst to be init, to avoid thread attempt to use other uninit mutexes
--> 
+	-> 1rst to be init, to avoid thread attempt to use other uninit mutexes
+	-> 1 mutex = 1 fork / philo
+	-> 
 
 2. thread
--> 
+	-> create as many as philos there are, then join them
+	-> 1 thread = 1 philo
+	-> 
 
 3. race condition
 	-> when 2 threads access to same address mem(var)
 	-> read / increment / write in Assembler level %eax = cpu register
 	-> if time consumming operations(high n iterations...)
+	-> need mutex to lock / unlock and avoid this case
 
-4. deadlock -> mutex not unlock, process 1 wait for resource 2, process 2 wait for resource 1 etc.
+4. deadlock
+	-> mutex not unlock, process 1 wait for resource 2, process 2 wait for resource 1 etc.
 
 5. lock order inversion
--> t1 acquires mutex A, tries to acquire mutex B
--> t2 acquires mutex B, tries to acquire mutex A
+	-> t1 acquires mutex A, tries to acquire mutex B
+	-> t2 acquires mutex B, tries to acquire mutex A
 
-odd / even philos = threads
-	odd = pair = take right fork 1rst
-		ex: 4 philos -> 1(1) | 1(1) | 1(1) | 1(1)
-	even = impair = take left fork 1rst
-		ex: 5 philos -> 1(1) | 1(1) | 1(1) | 1(1) | 1(1)
-
-1 philo take 1rst fork on left, then right, eat, drop right, so another philo can take this drop one
+### 
 
 400 200 200 7-> not enough time to take fork or doing action, so will die
 410 200 200 7-> enough time(can minimize ms lost between actions)
@@ -69,29 +65,75 @@ usleep -> waiter when finish to eat?
 
 loop threads_create() + loop threads_join()
 
-typedef struct s_philo {
-    int             	id;            // id philo
-    pthread_t       	thread;        // 1 thread = 1 philo
-    int             	meals_eaten;   // num of meal eaten
-    long            	last_meal_time;// time of last meal
-    struct s_program 	*data;     // ref vers data
+### Race Condition ###
+
+
+
+### Methods to avoid Race Condition ###
+
+
+
+### Deadlocks Occuring case ###
+
+4 conditions :
+- mutual exclusion (no fork can be simultaneously used by multiple philos)
+- resource holding (the philos hold 1 fork while waiting for the 2nd)
+- non-preemption (no philo can take 1 fork from another)
+- circular wait (each philo may be waiting on the philo to their left)
+
+### Many Methods to avoid Deadlocks ###
+
+---
+1. Resource Hierarchy (Total Ordering, unique num = philo, philos always pick up lower num fork 1rst, which breaks circular wait condition)
+---
+ex: 
+P0 needs forks 0 and 1: Takes fork 0 first, then fork 1
+P1 needs forks 1 and 2: Takes fork 1 first, then fork 2 if P0 take both 1rst, will wait
+P2 needs forks 2 and 3: Takes fork 2 first, then fork 3
+P3 needs forks 3 and 4: Takes fork 3 first, then fork 4 if P2 take both 1rst, will wait
+PN-1 needs forks N-1 and 0: Takes fork 0 first, then fork N-1 !!!
+
+2. Mutex + Condition Variables(single mutex to protect state of all forks, condition vars to have philos wait when resources aren't available, wake up waiting philos when forks available)
+3. Monitor-based Solution(encapsulate shared states in monitor, provide sync methods for taking and releasing forks, condition vars for waiting)
+4. Chandy/Misra Solution(forks assigned to philos, philos comm through message to req forks, clean / dirty fork states determine transfer prio)
+5. Atomic Operations(atomic compare-and-swap operations to try to acquire both forks simult, if failed release any acquired forks and try again)
+6. Dining Philosophers with a Waiter(semaphore or mutex lock : only allow N-1 philos to try to eat simult)
+
+### Structs Logic based on Deadlocks Resource Hierarchy Method ###
+
+typedef struct s_philo
+{
+    int             id;                   // Philosopher ID (0 to num_philos-1)
+    int             meals_eaten;          // Counter for meals eaten
+    long long       last_meal_time;       // Timestamp of last meal(time_to_think, time_to_eat, time_to_sleep?)
+    pthread_t       thread;               // Thread ID
+    t_data          *data;                // Pointer to shared data
 } t_philo;
 
-typedef struct s_data {
-    t_philo         *philos;       // arr philosophes
-    pthread_mutex_t *forks;        // arr de forks
-    pthread_mutex_t write_lock;    // mutex to print(checker)
-    pthread_mutex_t dead_lock;     // mutex to verif dead(checker)
-    int             dead_flag;     // fin de simulation
+typedef struct s_data
+{
+    int             num_philos;
     int             time_to_die;
     int             time_to_eat;
     int             time_to_sleep;
-	int				num_meals_to_eat;
+    int             must_eat_count;       // Optional(5th arg): number of times each philosopher must eat
+    int             simulation_stop;      // Flag to stop simulation(simulation_is_over())
+    long long       start_time;           // Simulation start timestamp
+    pthread_mutex_t *forks;               // Array of fork mutexes
+    pthread_mutex_t write_mutex;          // For synchronized console output
+    pthread_mutex_t meal_mutex;           // For updating meal timestamps safely
 } t_data;
+
+### Routines Logic ###
 
 5 steps in routine(infinite loop while)
 check after each action if philo deaded with if
-Penser(print) → Prendre deux fourchettes(lock * 2) → Manger(print) → Rendre les fourchettes(unlock * 2 + ) → Dormir(print)
+kind of method :
+1. think(print) ~ not necessary to check? instant action?
+2. take 2 available forks in certain order(lock * 2)
+3. eat(print + check if dead)
+4. drop 2 available forks in certain order(unlock * 2)
+5. sleep(print + check if dead)
 
 ### Forks Logic ###
 
@@ -104,16 +146,14 @@ case to eat
 	take_fork() -> arr of forks[philo->id + 1]
 - semaphore alternative = limit num of philos to eat in same time
 
-even -> right 1rst || odd -> left 1rst
+even -> right fork 1rst
+odd -> left fork 1rst
 fork[0(left), 1(right - left), 2(right - left), 3(right - left)...]
 = asymmetry to break deadlock -> synchro strat
 
-1rst philo takes forks
+1rst philo will not necessary takes forks first
 concurrent system -> OS decides which thread(philo) runs 1rst
-all philo threads compete simult for forks
+all philo threads compete simultaneously for forks
 => ANY philo could be 1rst
 
-6 philos = 1 take left + right, 2 cannot, 3 taken both, 4 cannot, 5 take, 6 cannot
-
-
-##############################
+6 philos = 1 take left + right, 2 cannot, 3 take both, 4 cannot, 5 take both, 6 cannot
