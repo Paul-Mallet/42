@@ -54,7 +54,7 @@ OS context switch and temp change thread access to data which is shared
 	-> t1 acquires mutex A, tries to acquire mutex B
 	-> t2 acquires mutex B, tries to acquire mutex A
 
-### 
+### Subject Exemples ###
 
 400 200 200 7-> not enough time to take fork or doing action, so will die
 410 200 200 7-> enough time(can minimize ms lost between actions)
@@ -84,7 +84,7 @@ loop threads_create() + loop threads_join()
 ### Many Methods to avoid Deadlocks ###
 
 ---
-1. Resource Hierarchy (Total Ordering, unique num = philo, philos always pick up lower num fork 1rst, which breaks circular wait condition)
+1. Resource Hierarchy (Total Ordering, based on philo's ID, philos always pick up min fork 1rst, which breaks circular wait condition)
 ---
 ex: 
 P0 needs forks 0 and 1: Takes fork 0 first, then fork 1
@@ -130,30 +130,37 @@ typedef struct s_data
 check after each action if philo deaded with if
 kind of method :
 1. think(print) ~ not necessary to check? instant action?
-2. take 2 available forks in certain order(lock * 2)
+2. take 2 available forks in certain order(min - max, lock * 2)
 3. eat(print + check if dead)
 4. drop 2 available forks in certain order(unlock * 2)
 5. sleep(print + check if dead)
+
+### Timestamps for event tracking ###
+
+gettimeofday() -> to get the current time
+result in philo->last_meal_time(where set it?, start, mid, end of the loop? outside?)
+check all philos in a loop
+	time_elapsed = current_time - philos[i].last_meal_time
+	if time_elapsed > tt_die, then print death_msg(philos[i] to get philo ID) + end_simulation
+
+### Actions and Monitoring frequencyControl ###
+
+1 usleep() / action(tt_sleep, tt_eat, tt_think) + 1 usleep(check_interval) for the monitoring thread(routine main loop) to check philo deaths
+usleep(tt_doing) -> check philo statuses after a given time in ms(user's inputs) pause to avoid consume too many CPU resources
+improve fairness if certain philos unable to eat due to bad timing, no need for complex priority
+
+### Load Balancing due to tight(low) timing constraints ###
+
+- risk of philos dying
 
 ### Forks Logic ###
 
 case to eat
 - if 1 philo = 1 fork = can't eat = die
-- avoid deadlocks with odd / even(philo id -> know who's it, start from 0) forks taken in 1rst
-	ex: philo 0 -> even = take fork 0, then 1
-		philo 1 -> odd = take fork 2, then 1
-		philo 2 -> even = take fork 2, then 3...
-	take_fork() -> arr of forks[philo->id + 1]
-- semaphore alternative = limit num of philos to eat in same time
-
-even -> right fork 1rst
-odd -> left fork 1rst
-fork[0(left), 1(right - left), 2(right - left), 3(right - left)...]
-= asymmetry to break deadlock -> synchro strat
+- avoid deadlocks with Resource Hierarchy Method
+- asymmetry to break deadlock -> synchro strat
 
 1rst philo will not necessary takes forks first
 concurrent system -> OS decides which thread(philo) runs 1rst
 all philo threads compete simultaneously for forks
 => ANY philo could be 1rst
-
-6 philos = 1 take left + right, 2 cannot, 3 take both, 4 cannot, 5 take both, 6 cannot
