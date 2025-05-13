@@ -129,11 +129,13 @@ typedef struct s_data
 5 steps in routine(infinite loop while)
 check after each action if philo deaded with if
 kind of method :
-1. think(print) ~ not necessary to check? instant action?
-2. take 2 available forks in certain order(min - max, lock * 2)
-3. eat(print + check if dead)
-4. drop 2 available forks in certain order(unlock * 2)
-5. sleep(print + check if dead)
+1. think(print + usleep(1000) + is_dead(time_elapsed < tt_die) ~ instant action?)
+2. take 2 available forks in certain order(min 1rst, max 2nd, lock * 2)
+3. eat(print + usleep(tt_eat) + is_dead(time_elapsed < tt_die))?
+4. drop 2 available forks in certain order(min 1rst, max 2nd, unlock * 2)
+5. sleep(print + usleep(tt_sleep) + is_dead(time_elapsed < tt_die))?
+
+is_dead() in an other loop inside the monitoring one?
 
 ### Timestamps for event tracking ###
 
@@ -143,15 +145,20 @@ check all philos in a loop
 	time_elapsed = current_time - philos[i].last_meal_time
 	if time_elapsed > tt_die, then print death_msg(philos[i] to get philo ID) + end_simulation
 
-### Actions and Monitoring frequencyControl ###
+### Actions and Monitoring frequency Control ###
 
 1 usleep() / action(tt_sleep, tt_eat, tt_think) + 1 usleep(check_interval) for the monitoring thread(routine main loop) to check philo deaths
 usleep(tt_doing) -> check philo statuses after a given time in ms(user's inputs) pause to avoid consume too many CPU resources
-improve fairness if certain philos unable to eat due to bad timing, no need for complex priority
+tt_think improve fairness if certain philos unable to eat due to bad timing, no need for complex priority
+focus on synchronization problem, tt_think is not critical for deadlock prevention / starvation detection!
 
 ### Load Balancing due to tight(low) timing constraints ###
 
 - risk of philos dying
+
+### Synchronization Problem ###
+
+
 
 ### Forks Logic ###
 
