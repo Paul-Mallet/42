@@ -1,4 +1,4 @@
-Way to solve Philosophers
+### Resume to solve Philosophers ###
 
 * 1 philo, 1 fork
 * eat, think, sleep, can't do 2 actions in while
@@ -15,7 +15,9 @@ Way to solve Philosophers
 parsing like push_swap
 	-> int
 	-> no negative value
+	-> only numeric value
 	-> handle 0 too
+	-> not over 200 philos
 
 nb_philos(also forks = mutexes) ttdie(ms) tteat(ms) ttsleep(ms) nbtimes/philo_eat
 
@@ -26,8 +28,13 @@ share memories -> can modif same vars = race conditions
 
 while philos(n from param)
 
+### Tools to check ###
+
 fsanitize -> detect data race, compile with objs + bin
 philo visualizer -> schema of prints return
+
+
+### General OS implication ###
 
 OS context switch and temp change thread access to data which is shared
 
@@ -54,6 +61,7 @@ OS context switch and temp change thread access to data which is shared
 	-> t1 acquires mutex A, tries to acquire mutex B
 	-> t2 acquires mutex B, tries to acquire mutex A
 
+
 ### Subject Exemples ###
 
 400 200 200 7-> not enough time to take fork or doing action, so will die
@@ -65,12 +73,19 @@ usleep -> waiter when finish to eat?
 
 loop threads_create() + loop threads_join()
 
-### Race Condition ###
 
+### Race Condition(Data race) ###
+
+when 2 threads want access 1 var value and execute 3 actions(read / increase / write)
+but if run simultaneously(without locking with mutexes / synchronize with semaphores),
+will read(0), increase(0), write(1) - read(1), increase(1), write(2) -> int varname = 2
+will read(0) - read(0), increase(0) - increase(0), write(1) - write(1) -> int varname = 1 !
+when dependent on the sequence / timing of other uncontrollable events, leading to unexpected results
 
 
 ### Methods to avoid Race Condition ###
 
+using mutex_lock() & mutex_unlock()
 
 
 ### Deadlocks Occuring case ###
@@ -80,6 +95,7 @@ loop threads_create() + loop threads_join()
 - resource holding (the philos hold 1 fork while waiting for the 2nd)
 - non-preemption (no philo can take 1 fork from another)
 - circular wait (each philo may be waiting on the philo to their left)
+
 
 ### Many Methods to avoid Deadlocks ###
 
@@ -99,6 +115,7 @@ PN-1 needs forks N-1 and 0: Takes fork 0 first, then fork N-1 !!!
 5. Atomic Operations(atomic compare-and-swap operations to try to acquire both forks simult, if failed release any acquired forks and try again)
 6. Dining Philosophers with a Waiter(semaphore or mutex lock : only allow N-1 philos to try to eat simult)
 
+
 ### Structs Logic based on Deadlocks Resource Hierarchy Method ###
 
 typedef struct s_philo
@@ -112,10 +129,10 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-    int             num_philos;
-    int             time_to_die;
-    int             time_to_eat;
-    int             time_to_sleep;
+    int             num_philos;			  // 1rst arg
+    int             tt_die;				  // 2nd arg
+    int             tt_eat;				  // 3rd arg
+    int             tt_sleep;		  	  // 4th arg
     int             must_eat_count;       // Optional(5th arg): number of times each philosopher must eat
     int             simulation_stop;      // Flag to stop simulation(simulation_is_over())
     long long       start_time;           // Simulation start timestamp
@@ -124,18 +141,24 @@ typedef struct s_data
     pthread_mutex_t meal_mutex;           // For updating meal timestamps safely
 } t_data;
 
+
 ### Routines Logic ###
 
 5 steps in routine(infinite loop while)
 check after each action if philo deaded with if
 kind of method :
-1. think(print + usleep(1000) + is_dead(time_elapsed < tt_die) ~ instant action?)
-2. take 2 available forks in certain order(min 1rst, max 2nd, lock * 2)
+1. think(print + usleep(10) just time to take forks but not influence death + is_dead(time_elapsed < tt_die) ~ instant action?)
+2. pick up 2 available forks in min-max order(min 1rst(left), max 2nd(right), lock * 2)
+---
+which philos take forks 1rst -> non-deterministic due to thread scheduling(OS decides)
+when philo1 takes 1rst, philo2 would wait for -> cascading dependency = prevents deadlocks
+---
 3. eat(print + usleep(tt_eat) + is_dead(time_elapsed < tt_die))?
-4. drop 2 available forks in certain order(min 1rst, max 2nd, unlock * 2)
+4. release 2 current forks in reverse order(max 1rst(right), min 2nd(left), unlock * 2)
 5. sleep(print + usleep(tt_sleep) + is_dead(time_elapsed < tt_die))?
 
-is_dead() in an other loop inside the monitoring one?
+monitor thread is_dead() in an other loop inside the monitoring one?
+
 
 ### Timestamps for event tracking ###
 
@@ -145,18 +168,22 @@ check all philos in a loop
 	time_elapsed = current_time - philos[i].last_meal_time
 	if time_elapsed > tt_die, then print death_msg(philos[i] to get philo ID) + end_simulation
 
+
 ### Actions and Monitoring frequency Control ###
 
-1 usleep() / action(tt_sleep, tt_eat, tt_think) + 1 usleep(check_interval) for the monitoring thread(routine main loop) to check philo deaths
+1 usleep() / action(sleeping, eating, thinking) + 1 usleep(check_interval) for the monitoring thread(routine main loop) to check philo deaths
 usleep(tt_doing) -> check philo statuses after a given time in ms(user's inputs) pause to avoid consume too many CPU resources
 tt_think improve fairness if certain philos unable to eat due to bad timing, no need for complex priority
 focus on synchronization problem, tt_think is not critical for deadlock prevention / starvation detection!
+
 
 ### Load Balancing due to tight(low) timing constraints ###
 
 - risk of philos dying
 
+
 ### Synchronization Problem ###
+
 
 
 
