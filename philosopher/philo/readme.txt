@@ -30,7 +30,10 @@ while philos(n from param)
 
 ### Tools to check ###
 
-fsanitize -> detect data race, compile with objs + bin
+pthread -> -pthread flag to compile threads
+fsanitize -> detect data races, must not have 1
+	-> -fsanitize flag during compilation, not with valgrind or risk of pc's crash!!!
+	-> take care to compile with (objs + bin)
 philo visualizer -> schema of prints return
 
 
@@ -44,9 +47,16 @@ OS context switch and temp change thread access to data which is shared
 	-> 
 
 2. thread
-	-> create as many as philos there are, then join them
 	-> 1 thread = 1 philo
-	-> 
+	-> create as many as philos there are, then join them
+	-> pthread_join(tid, retval) :
+		1. synchronization primitive, will blocked tid until it completes its exec
+		-> strutured coordination = current thread ca nwait for another thread to finish its work
+		2. cleanup, system(OS) keeps some metadata about the current thread completed
+		-> own stack memory(store local vars, )
+	-> [optional]pthread_detach(thread) :
+		1. immediately free up any resources it used, auto-clean* mode
+			* -> only if thread already completed its exec by the time call this function
 
 3. race condition
 	-> when 2 threads access to same address mem(var)

@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/14 17:07:17 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/15 18:43:45 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,35 @@ void	*routine(void *arg)
 void *monitor_routine(void *arg)
 {
 	t_data *data = (t_data *)arg;
-	
+	int i;
+
 	while (!simulation_stop)
 	{
-		//loop num_philos
-		//get_current_time()
+		i = 0;
+		while (i < data->num_philos)
+		{
+			//check if philos has died
+			i++;
+		}
+		usleep(500);
 	}
+	return (NULL);
 }
 
 void	start_diner(t_data *data)
 {
-	int	i;
+	int			i;
+	pthread_t	monitor;
 	//...
 
 	/* LOOP MUTEXES INIT(0) */
 	i = -1;
 	while (data->forks[++i])
 		pthread_mutex_init(&data->forks[i], NULL);
+
+	/* MONITOR BEFORE PHILOS ROUTINES*/
+	if (pthread_create(&monitor, NULL, &monitor_routine, &data) != 0)
+		return (EXIT_FAILURE);
 
 	/* LOOP THREADS CREATE(1) */
 	i = -1;
@@ -82,7 +94,6 @@ void	start_diner(t_data *data)
 	while (data->philos[++i])
 		if (pthread_join(data->philos->thread, NULL) != 0)
 			return (EXIT_FAILURE);
-	/* ... */
 }
 
 int	main(int ac, char **av)
@@ -96,7 +107,7 @@ int	main(int ac, char **av)
 		init_data(&data, av);
 		if (!check_data(&data))
 			return (EXIT_FAILURE);
-		print_data(&data);
+		// print_data(&data);
 		start_diner(&data);
 	}
 	else
