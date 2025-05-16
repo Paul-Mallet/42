@@ -173,6 +173,10 @@ monitor thread is_dead() in an other loop inside the monitoring one?
 ### Timestamps for event tracking ###
 
 gettimeofday() -> to get the current time
+get_current_time()
+	-> struct timeval tv;
+	-> gettimeofday(&tv, NULL);
+	-> ms = ((tv.tv_sec * 1000, to add ms value) + (tv.tv_usec / 1000, to get ms value))
 result in philo->last_meal_time(where set it?, start, mid, end of the loop? outside?)
 check all philos in a loop
 	time_elapsed = current_time - philos[i].last_meal_time
@@ -185,6 +189,12 @@ check all philos in a loop
 usleep(tt_doing) -> check philo statuses after a given time in ms(user's inputs) pause to avoid consume too many CPU resources
 tt_think improve fairness if certain philos unable to eat due to bad timing, no need for complex priority
 focus on synchronization problem, tt_think is not critical for deadlock prevention / starvation detection!
+
+
+### Time spent Processing Function Calls ###
+
+usleep(0) -> 75usec * N calls in the program
+gettimeofday() -> 0.02usec
 
 
 ### Load Balancing due to tight(low) timing constraints ###

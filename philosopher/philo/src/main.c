@@ -6,11 +6,19 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/15 18:43:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:53:34 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+long long	get_current_time_in_ms()
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
 
 void	*routine(void *arg)
 {
@@ -54,15 +62,20 @@ void	*routine(void *arg)
 //check if time_elapsed since last_meal > tt_die for any philo
 void *monitor_routine(void *arg)
 {
-	t_data *data = (t_data *)arg;
-	int i;
+	t_data		*data;
+	long long	current_time;
+	long long	elapsed_time;
+	int			i;
 
+	data = (t_data *)arg;
 	while (!simulation_stop)
 	{
 		i = 0;
 		while (i < data->num_philos)
 		{
 			//check if philos has died
+			//current_time = get_current_time_in_ms();
+			//elapsed_time = current_time - data->start_time;
 			i++;
 		}
 		usleep(500);
@@ -85,15 +98,21 @@ void	start_diner(t_data *data)
 	if (pthread_create(&monitor, NULL, &monitor_routine, &data) != 0)
 		return (EXIT_FAILURE);
 
-	/* LOOP THREADS CREATE(1) */
+	/* LOOP THREADS CREATE(1) ROUTINES */
 	i = -1;
 	while (data->philos[++i])
 		if (pthread_create(&data->philos->thread, NULL, &routine, &data) != 0)
 			return (EXIT_FAILURE);
+
+	/* LOOP THREADS JOIN(2) */
 	i = -1;
 	while (data->philos[++i])
 		if (pthread_join(data->philos->thread, NULL) != 0)
 			return (EXIT_FAILURE);
+	
+	/* JOIN MONITOR LAST */
+	if (pthread_join(monitor, NULL) != 0)
+		return (EXIT_FAILURE);
 }
 
 int	main(int ac, char **av)

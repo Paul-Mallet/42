@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/07 16:18:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:59:48 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,27 @@ typedef enum e_msg {
 
 typedef struct s_philo
 {
-	pthread_t	thread;
-	int			id;
-	int			meals_eaten;
-	int			last_meal_time;
-}		t_philo;
+    int             id;                   // Philosopher ID (0 to num_philos-1)
+    int             meals_eaten;          // Counter for meals eaten
+    long long       last_meal_time;       // Timestamp of last meal(time_to_think, time_to_eat, time_to_sleep?)
+    pthread_t       thread;               // Thread ID
+    t_data          *data;                // Pointer to shared data
+} t_philo;
 
 typedef struct s_data
 {
-	t_philo			*philos;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	write_lock;
-	pthread_mutex_t	dead_lock;
-	int				is_dead;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				num_meals_to_eat;
-}		t_data;
+	int				num_philos;			  // 1rst arg
+	int				tt_die;				  // 2nd arg
+	int				tt_eat;				  // 3rd arg
+	int				tt_sleep;		  	  // 4th arg
+	int				must_eat_count;       // Optional(5th arg): number of times each philosopher must eat
+	int				simulation_stop;      // Flag to stop simulation(simulation_is_over())
+	long long		start_time;           // Simulation start timestamp
+	// t_philo		*philos;              // Array of philos threads
+	pthread_mutex_t	*forks;               // Array of fork mutexes
+	pthread_mutex_t write_mutex;          // For synchronized console output
+	pthread_mutex_t meal_mutex;           // For updating meal timestamps safely
+} t_data;
 
 /* PARSING */
 int		parsing(char **av);
