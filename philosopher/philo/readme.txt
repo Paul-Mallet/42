@@ -44,7 +44,7 @@ OS context switch and temp change thread access to data which is shared
 1. mutex(fork)
 	-> 1rst to be init, to avoid thread attempt to use other uninit mutexes
 	-> 1 mutex = 1 fork / philo
-	-> 
+	-> certain serve to wrap share data between routines
 
 2. thread
 	-> 1 thread = 1 philo
@@ -193,6 +193,7 @@ focus on synchronization problem, tt_think is not critical for deadlock preventi
 
 ### Time spent Processing Function Calls ###
 
+mutex_lock & mutex_unlock() -> fewest as possible
 usleep(0) -> 75usec * N calls in the program
 gettimeofday() -> 0.02usec
 
