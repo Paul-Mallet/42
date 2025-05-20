@@ -76,7 +76,7 @@ void *monitor_routine(void *arg)
 	int			i;
 
 	data = (t_data *)arg;
-	while (!simulation_is_hover())
+	while (!data->simulation_stop)
 	{
 		i = 0;
 		while (i < data->num_philos)
@@ -92,7 +92,7 @@ void *monitor_routine(void *arg)
 			{
 				pthread_mutex_lock(&data->simulation_mutex);
 				printf("%lld %d died\n", current_time - data->start_time, current_philo->id + 1);
-				data->simulation_stop = 1; //for simulation_is_hover()? #TODO
+				data->simulation_stop = 1; //check into philo's routine too #TODO
 				pthread_mutex_unlock(&data->simulation_mutex);
 				break ;
 			}
