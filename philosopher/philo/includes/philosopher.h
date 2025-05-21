@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/21 13:20:40 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:01:15 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <stdbool.h>
 # include <sys/time.h>
 # include <pthread.h>
 # include <errno.h>
@@ -31,10 +32,14 @@ typedef enum e_err_code {
 	SIGN_ERR,
 	OVERFLOW_ERR,
 	/* MUTEX ERRORS */
-	INIT_ERR,
-	LOCK_ERR,
-	UNLOCK_ERR,
-	DESTROY_ERR,
+	INIT,
+	LOCK,
+	UNLOCK,
+	DESTROY,
+	/* THREAD ERRORS */
+	CREATE,
+	JOIN,
+	DETACH
 } t_err_code;
 
 typedef struct s_fork
@@ -57,11 +62,11 @@ typedef struct s_philo
 typedef struct s_data
 {
 	unsigned int	num_philos;			  // 1rst arg
-	int				tt_die;				  // 2nd arg
-	int				tt_eat;				  // 3rd arg
-	int				tt_sleep;		  	  // 4th arg
-	int				must_eat_count;       // Optional(5th arg): number of times each philosopher must eat
-	int				simulation_stop;      // Flag to stop simulation(simulation_is_over())
+	unsigned int	tt_die;				  // 2nd arg
+	unsigned int	tt_eat;				  // 3rd arg
+	unsigned int	tt_sleep;		  	  // 4th arg
+	unsigned int	must_eat_count;       // Optional(5th arg): number of times each philosopher must eat
+	bool			simulation_stop;      // Flag to stop simulation(simulation_is_over())
 	long			start_time;           // Simulation start timestamp
 	t_fork			*forks;               // Array of fork mutexes
 	t_philo			*philos;              // Array of philos threads
@@ -85,7 +90,7 @@ void		*handle_malloc_error(size_t bytes);
 void		handle_mutex_error(int status, t_err_code code);
 void		error_exit(const char *msg);
 
-/* FREE_DATA */
+/* CLEAN */
 // void		free_data(t_data *data);
 
 /* PARSING_UTILS */
