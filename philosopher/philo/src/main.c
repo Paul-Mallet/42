@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/21 18:14:56 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/21 18:23:08 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,13 +169,14 @@ void	handle_multiple_philos(t_data *data)
 	int			i;
 	pthread_t	monitor;
 
-	//BOOL to start routine when all_timers_ready?
+	//BOOL to start routine when all_thread_ready?
 	i = -1;
 	while (++i < data->num_philos)
 		data->philos[i].last_meal_time = data->start_time;
 	//wrap in mutexes? not already in loops
 	//not get_current_time_in_ms(); -> each have same timestamp to start at same time
 
+	//handle_thread, add monitor condition?
 	/* MONITOR BEFORE PHILOS ROUTINES*/
 	if (pthread_create(&monitor, NULL, &monitor_routine, &data) != 0)
 		return (EXIT_FAILURE);
@@ -210,8 +211,6 @@ void	start_dinner(t_data *data)
 		handle_single_philo(data);
 	else
 		handle_multiple_philos(data);
-
-
 }
 
 int	main(int ac, char **av)
