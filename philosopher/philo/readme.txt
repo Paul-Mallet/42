@@ -1,3 +1,10 @@
+### OceanO ###
+1'05'00 -> getters - setters bool && long(all_thread_ready, simulation_stop...)
+1'26'30 -> mutex wrapper only for printf(write_status)
+1'33'30 -> eating phase(forks + eat + philo->meals_eaten == must_eat_count)
+1'41'00 -> all_threads_running bool == num_philos, monitor busy waits
+1'4
+
 ### Resume to solve Philosophers ###
 
 * 1 philo, 1 fork

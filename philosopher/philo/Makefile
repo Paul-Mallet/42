@@ -11,6 +11,7 @@ SRCS=$(addprefix $(SRCS_DIR), \
 		errors.c \
 		utils_conversion.c \
 		utils_parsing.c \
+		utils_routine.c \
 		print.c)
 OBJS_DIR=obj/
 OBJS=$(SRCS:%.c=$(OBJS_DIR)%.o)

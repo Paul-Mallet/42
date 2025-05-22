@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/21 23:35:52 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:39:13 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@
 typedef pthread_mutex_t	t_mtx;
 
 /* ENUMS */
+typedef enum e_philo_state {
+	THINKING,
+	EATING,
+	SLEEPING,
+	TAKING_FORK_1,
+	TAKING_FORK_2,
+	DIED,
+} t_philo_state;
+
 typedef enum e_err_code {
 	/* PARSING */
 	EMPTY_ERR,
@@ -47,19 +56,19 @@ typedef enum e_err_code {
 /* STRUCTS */
 typedef struct s_fork
 {
-	int		id;
-	t_mtx	fork;
+	unsigned int	id;
+	t_mtx			fork;
 } t_fork;
 
 typedef struct s_philo
 {
-    int			id;                   // Philosopher ID (0 to num_philos-1)
-    int			meals_eaten;          // Counter for meals eaten(to reach must_eat_count)
-    t_fork		*left_fork;			  // Min fork id, always taking 1rstly
-    t_fork		*right_fork;		  // Max fork id, always taking 2ndly
-    time_t		last_meal_time;       // Timestamp of last meal(started before philos thread creations, updated during routine)
-	pthread_t	thread;               // Thread ID
-    t_data		*data;                // Pointer to shared data
+    unsigned int	id;                   // Philosopher ID (0 to num_philos-1)
+    unsigned int	meals_eaten;          // Counter for meals eaten(to reach must_eat_count)
+    t_fork			*left_fork;			  // Min fork id, always taking 1rstly
+    t_fork			*right_fork;		  // Max fork id, always taking 2ndly
+    time_t			last_meal_time;       // Timestamp of last meal(started before philos thread creations, updated during routine)
+	pthread_t		thread;               // Thread ID
+    t_data			*data;                // Pointer to shared data
 } t_philo;
 
 typedef struct s_data
@@ -73,6 +82,7 @@ typedef struct s_data
 	time_t			start_time;           // Simulation start timestamp
 	t_philo			*philos;              // Array of philos threads
 	t_fork			*forks;               // Array of fork mutexes
+	pthread_t		monitor;			  // Monitor to continuously check philos states
 	t_mtx 			stop_mutex;        	  // For reading iteratively simulation_stop safely
 	t_mtx 			meal_mutex;        	  // For writing and reading meal timestamps safely
 	t_mtx 			simulation_mutex;     // For writing and reading simulation_stop bool safely
@@ -93,6 +103,10 @@ void    	handle_thread(t_data *data, int i, t_err_code code); //???
 void		*routine(void *arg);
 void 		*monitor_routine(void *arg);
 void		*single_routine(void *arg);
+
+/* ROUTINES UTILS */
+void    	is_philos_all_eaten(t_data *data);
+void    	is_philo_died(t_data *data);
 
 /* ERRORS */
 void    	handle_input_error(t_err_code code);

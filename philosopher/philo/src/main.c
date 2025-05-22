@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/22 08:01:51 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:10:53 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	handle_single_philo(t_data *data)
 {
 	int			i;
 	t_philo		*philo;
-	pthread_t	monitor;
 
 	i = 0;
 	philo = &data->philos[i];
@@ -25,7 +24,7 @@ void	handle_single_philo(t_data *data)
 	philo->last_meal_time = data->start_time;
 
 	/* MONITOR BEFORE PHILOS ROUTINES*/
-	if (pthread_create(&monitor, NULL, &monitor_routine, &data) != 0)
+	if (pthread_create(&data->monitor, NULL, &monitor_routine, &data) != 0)
 		return (EXIT_FAILURE);
 
 	//CREATE THREAD(SINGLE PHILO)
@@ -35,14 +34,13 @@ void	handle_single_philo(t_data *data)
 	handle_thread(data, i, JOIN);
 
 	/* JOIN MONITOR LAST */
-	if (pthread_join(monitor, NULL) != 0)
+	if (pthread_join(data->monitor, NULL) != 0)
 		return (EXIT_FAILURE);
 }
 
 void	handle_multiple_philos(t_data *data)
 {
 	int			i;
-	pthread_t	monitor;
 
 	//BOOL to start routine when all_thread_ready?
 	i = -1;
@@ -53,7 +51,7 @@ void	handle_multiple_philos(t_data *data)
 
 	//handle_thread, add monitor condition?
 	/* MONITOR BEFORE PHILOS ROUTINES*/
-	if (pthread_create(&monitor, NULL, &monitor_routine, &data) != 0)
+	if (pthread_create(&data->monitor, NULL, &monitor_routine, &data) != 0)
 		return (EXIT_FAILURE);
 
 	/* LOOP THREADS CREATE(1) ROUTINES */
@@ -67,7 +65,7 @@ void	handle_multiple_philos(t_data *data)
 		handle_thread(data, i, JOIN);
 	
 	/* JOIN MONITOR LAST */
-	if (pthread_join(monitor, NULL) != 0)
+	if (pthread_join(data->monitor, NULL) != 0)
 		return (EXIT_FAILURE);
 }
 
