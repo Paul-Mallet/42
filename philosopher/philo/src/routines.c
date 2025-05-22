@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 23:16:29 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/22 12:36:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:40:19 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void *monitor_routine(void *arg)
 	while (!data->simulation_stop)
 	{
 		is_philos_all_eaten(data);
-		//is_philo_died(data);
+		is_philo_died(data);
 		usleep(1000);
 	}
 	pthread_mutex_unlock(&data->stop_mutex);
