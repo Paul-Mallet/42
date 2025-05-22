@@ -22,7 +22,7 @@ all: $(NAME)
 	@echo "philo compiled"
 
 $(NAME): $(OBJS)
-	@$(CC) $(FLAGS) $(T_FLAG) -o $@ $(OBJS)
+	@$(CC) $(FLAGS) -o $@ $(OBJS) # $(T_FLAG)
 
 $(OBJS_DIR)%.o: %.c
 	@mkdir -p $(dir $@)
