@@ -5,14 +5,15 @@ SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR), \
 		main.c \
 		parsing.c \
-		data.c \
+		init.c \
 		handling.c \
 		routines.c \
 		errors.c \
+		clean.c \
+		print.c \
 		utils_conversion.c \
 		utils_parsing.c \
-		utils_routine.c \
-		print.c)
+		utils_routine.c)
 OBJS_DIR=obj/
 OBJS=$(SRCS:%.c=$(OBJS_DIR)%.o)
 NAME=philo

@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/22 11:10:53 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/22 17:58:54 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,50 +23,54 @@ void	handle_single_philo(t_data *data)
 	//START LAST_MEAL_TIME
 	philo->last_meal_time = data->start_time;
 
-	/* MONITOR BEFORE PHILOS ROUTINES*/
-	if (pthread_create(&data->monitor, NULL, &monitor_routine, &data) != 0)
-		return (EXIT_FAILURE);
+	/* CREATE MONITOR BEFORE PHILOS ROUTINES*/
+	handle_thread(data, i, CREATE, true);
 
-	//CREATE THREAD(SINGLE PHILO)
-	handle_thread(data, i, CREATE);
+	// CREATE THREAD(SINGLE PHILO)
+	handle_thread(data, i, CREATE, false);
 
-	//JOIN THREAD(SINGLE PHILO)
-	handle_thread(data, i, JOIN);
+	// JOIN THREAD(SINGLE PHILO)
+	handle_thread(data, i, JOIN, false);
 
 	/* JOIN MONITOR LAST */
-	if (pthread_join(data->monitor, NULL) != 0)
-		return (EXIT_FAILURE);
+	handle_thread(data, i, JOIN, true);
 }
 
 void	handle_multiple_philos(t_data *data)
 {
-	int			i;
+	unsigned int	i;
 
 	//BOOL to start routine when all_thread_ready?
-	i = -1;
-	while (++i < data->num_philos)
+	i = 0;
+	while (i < data->num_philos)
+	{
 		data->philos[i].last_meal_time = data->start_time;
-	//wrap in mutexes? not already in loops
-	//not get_current_time_in_ms(); -> each have same timestamp to start at same time
+		i++;
+	}
+	//wrap in mutexes? when implement it?
 
-	//handle_thread, add monitor condition?
-	/* MONITOR BEFORE PHILOS ROUTINES*/
-	if (pthread_create(&data->monitor, NULL, &monitor_routine, &data) != 0)
-		return (EXIT_FAILURE);
+	/* MONITOR CREATE */
+	handle_thread(data, i, CREATE, true);
 
-	/* LOOP THREADS CREATE(1) ROUTINES */
-	i = -1;
-	while (++i < data->num_philos)
-		handle_thread(data, i, CREATE);
+	/* PHILOS[i].THREADS CREATE(1) ROUTINES */
+	//check all threads are running?
+	i = 0;
+	while (i < data->num_philos)
+	{
+		handle_thread(data, i, CREATE, false);
+		i++;	
+	}
 
-	/* LOOP THREADS JOIN(2) ROUTINES */
-	i = -1;
-	while (++i < data->num_philos)
-		handle_thread(data, i, JOIN);
-	
-	/* JOIN MONITOR LAST */
-	if (pthread_join(data->monitor, NULL) != 0)
-		return (EXIT_FAILURE);
+	/* PHILOS[i].THREADS JOIN(2) ROUTINES */
+	i = 0;
+	while (i < data->num_philos)
+	{
+		handle_thread(data, i, JOIN, false);
+		i++;
+	}
+
+	/* MONITOR JOIN */
+	handle_thread(data, i, JOIN, true);
 }
 
 void	start_dinner(t_data *data)
@@ -75,8 +79,8 @@ void	start_dinner(t_data *data)
 	data->start_time = get_current_time_in_ms();
 
 	/* CHECK SPECIAL CASES */
-	if (data->must_eat_count == 0) // && argc == 6 | 0 != NULL, means explicitly add it
-		return ; //back main + clean
+	if (data->num_philos == 0 || data->must_eat_count == 0)
+		return ; //back main
 	else if (data->num_philos == 1)
 		handle_single_philo(data);
 	else
@@ -102,7 +106,7 @@ int	main(int ac, char **av)
 		start_dinner(&data);
 
 		/* CLEAN */
-		//clean_data(&data);
+		clean_data(&data);
 	}
 	else
 		error_exit("Invalid arguments.\n Ex: 5 410 200 200 [7]");

@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/22 12:39:13 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/22 17:53:18 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 /* MACROS */
 typedef pthread_mutex_t	t_mtx;
+typedef struct s_data	t_data;
 
 /* ENUMS */
 typedef enum e_philo_state {
@@ -97,7 +98,7 @@ void		init_data(t_data *data, char **av);
 
 /* HANDLING */
 void    	handle_mutex(t_mtx *fork, t_err_code code);
-void    	handle_thread(t_data *data, int i, t_err_code code); //???
+void    	handle_thread(t_data *data, int i, t_err_code code, bool is_monitor); //???
 
 /* ROUTINES */
 void		*routine(void *arg);
@@ -116,7 +117,7 @@ void		handle_thread_error(int status, t_err_code code); //???
 void		error_exit(const char *msg);
 
 /* CLEAN */
-// void		free_data(t_data *data);
+void		clean_data(t_data *data);
 
 /* PARSING_UTILS */
 int			ft_strlen(const char *s);

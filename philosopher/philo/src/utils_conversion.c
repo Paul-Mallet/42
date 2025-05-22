@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:34:52 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/22 09:12:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:08:25 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	precise_usleep(time_t usec)
 	time_t			remove_time;
 
 	gettimeofday(&tv_start, NULL);
+	gettimeofday(&tv_curr, NULL);
+	elapsed_time = get_elapsed_time_in_us(tv_start, tv_curr);
 	while (elapsed_time < usec)
 	{
 		gettimeofday(&tv_curr, NULL);
