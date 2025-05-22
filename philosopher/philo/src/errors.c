@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 08:46:45 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/21 17:19:53 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/21 23:28:24 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	handle_mutex_error(int status, t_err_code code)
 {
     if (status == 0)
         return ;
-    else if (status == EINVAL && (code == LOCK || code == UNLOCK || code == DESTROY))
+    else if (status == EINVAL
+        && (code == LOCK || code == UNLOCK || code == DESTROY))
         error_exit("The value specified by mutex is invalid.");
     else if (status == EINVAL && code == INIT)
         error_exit("The value specified by attr is invalid.");
@@ -69,9 +70,15 @@ void	handle_mutex_error(int status, t_err_code code)
     else if (status == EPERM)
         error_exit("The current thread does not hold a lock on mutex.");
     else if (status == EDEADLK)
-        error_exit("A deadlock would occur if the thread blocked waiting for mutex.");
+    {
+        error_exit("A deadlock would occur if the thread"
+            "blocked waiting for mutex.");
+    }
     else if (status == ENOMEM)
-        error_exit("The process cannot allocate enough memory to create another mutex.");
+    {
+        error_exit("The process cannot allocate enough"
+            "memory to create another mutex.");
+    }
 }
 
 /*

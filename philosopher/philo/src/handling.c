@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:53:52 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/21 17:19:44 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/21 23:24:07 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void    handle_mutex(t_mtx *fork, t_err_code code)
     if (code == INIT)
         handle_mutex_error(pthread_mutex_init(fork, NULL), code);
     else if (code == LOCK)
-        handle_mutex_error(pthread_mutex_lock(fork, NULL), code);
+        handle_mutex_error(pthread_mutex_lock(fork), code);
     else if (code == UNLOCK)
-        handle_mutex_error(pthread_mutex_unlock(fork, NULL), code);
+        handle_mutex_error(pthread_mutex_unlock(fork), code);
     else if (code == DESTROY)
         handle_mutex_error(pthread_mutex_destroy(fork), code);
 }

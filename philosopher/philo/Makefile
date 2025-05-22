@@ -7,10 +7,11 @@ SRCS=$(addprefix $(SRCS_DIR), \
 		parsing.c \
 		data.c \
 		handling.c \
+		routines.c \
 		errors.c \
 		utils_conversion.c \
 		utils_parsing.c \
-		print_data.c)
+		print.c)
 OBJS_DIR=obj/
 OBJS=$(SRCS:%.c=$(OBJS_DIR)%.o)
 NAME=philo

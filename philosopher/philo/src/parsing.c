@@ -6,25 +6,11 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 11:26:41 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/21 11:24:48 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/21 23:25:14 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
-
-void	handle_error(int status)
-{
-	if (status == EMPTY_ERR)
-		printf("Invalid empty input.\n");
-	else if (status == SPACES_ERR)
-		printf("Invalid only spaces input.\n");
-	else if (status == DIGITS_ERR)
-		printf("Invalid digits format.\n");
-	else if (status == SIGN_ERR)
-		printf("Invalid sign, not handle.\n");
-	else if (status == OVERFLOW_ERR)
-		printf("Invalid type, only handle int.\n");
-}
 
 int	is_only_spaces(const char *s)
 {

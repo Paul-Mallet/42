@@ -6,42 +6,45 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/21 17:01:15 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/21 23:35:52 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHER_H
 
+# include <errno.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <stdbool.h>
-# include <sys/time.h>
 # include <pthread.h>
-# include <errno.h>
+# include <sys/time.h>
 
+/* MACROS */
 typedef pthread_mutex_t	t_mtx;
 
+/* ENUMS */
 typedef enum e_err_code {
-	/* PARSING ERRORS */
+	/* PARSING */
 	EMPTY_ERR,
 	SPACES_ERR,
 	DIGITS_ERR,
 	SIGN_ERR,
 	OVERFLOW_ERR,
-	/* MUTEX ERRORS */
+	/* MUTEX */
 	INIT,
 	LOCK,
 	UNLOCK,
 	DESTROY,
-	/* THREAD ERRORS */
+	/* THREAD */
 	CREATE,
 	JOIN,
 	DETACH
 } t_err_code;
 
+/* STRUCTS */
 typedef struct s_fork
 {
 	int		id;
@@ -54,7 +57,7 @@ typedef struct s_philo
     int			meals_eaten;          // Counter for meals eaten(to reach must_eat_count)
     t_fork		*left_fork;			  // Min fork id, always taking 1rstly
     t_fork		*right_fork;		  // Max fork id, always taking 2ndly
-    long		last_meal_time;       // Timestamp of last meal(started before philos thread creations, updated during routine)
+    time_t		last_meal_time;       // Timestamp of last meal(started before philos thread creations, updated during routine)
 	pthread_t	thread;               // Thread ID
     t_data		*data;                // Pointer to shared data
 } t_philo;
@@ -62,19 +65,20 @@ typedef struct s_philo
 typedef struct s_data
 {
 	unsigned int	num_philos;			  // 1rst arg
-	unsigned int	tt_die;				  // 2nd arg
-	unsigned int	tt_eat;				  // 3rd arg
-	unsigned int	tt_sleep;		  	  // 4th arg
+	time_t			tt_die;				  // 2nd arg
+	time_t			tt_eat;				  // 3rd arg
+	time_t			tt_sleep;		  	  // 4th arg
 	unsigned int	must_eat_count;       // Optional(5th arg): number of times each philosopher must eat
 	bool			simulation_stop;      // Flag to stop simulation(simulation_is_over())
-	long			start_time;           // Simulation start timestamp
-	t_fork			*forks;               // Array of fork mutexes
+	time_t			start_time;           // Simulation start timestamp
 	t_philo			*philos;              // Array of philos threads
-	/* MUTEXES TO ACCESS SHARED DATA */
+	t_fork			*forks;               // Array of fork mutexes
+	t_mtx 			stop_mutex;        	  // For reading iteratively simulation_stop safely
 	t_mtx 			meal_mutex;        	  // For writing and reading meal timestamps safely
-	t_mtx 			simulation_mutex;     // For synchronized console output
+	t_mtx 			simulation_mutex;     // For writing and reading simulation_stop bool safely
 } t_data;
 
+/* FUNCTIONS */
 /* PARSING */
 void		parsing(char **av);
 
@@ -83,11 +87,18 @@ void		init_data(t_data *data, char **av);
 
 /* HANDLING */
 void    	handle_mutex(t_mtx *fork, t_err_code code);
-//handle_thread(p_thread...);
+void    	handle_thread(t_data *data, int i, t_err_code code); //???
+
+/* ROUTINES */
+void		*routine(void *arg);
+void 		*monitor_routine(void *arg);
+void		*single_routine(void *arg);
 
 /* ERRORS */
+void    	handle_input_error(t_err_code code);
 void		*handle_malloc_error(size_t bytes);
 void		handle_mutex_error(int status, t_err_code code);
+void		handle_thread_error(int status, t_err_code code); //???
 void		error_exit(const char *msg);
 
 /* CLEAN */
@@ -101,10 +112,8 @@ int			ft_isdigit(int c);
 int			is_overflow(char *s);
 
 /* CONVERSION_UTILS */
-int			ft_atoi(const char *nptr);
-
-/* TIMESTAMP UTILS */
-long		get_current_time_in_ms();
+time_t		get_current_time_in_ms();
+int			ft_atoi(const char *nptr); //???
 
 /* PRINT_DATA(DEBUG) */
 void		print_data(t_data *data);
