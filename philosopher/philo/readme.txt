@@ -3,7 +3,13 @@
 1'26'30 -> mutex wrapper only for printf(write_status)
 1'33'30 -> eating phase(forks + eat + philo->meals_eaten == must_eat_count)
 1'41'00 -> all_threads_running bool == num_philos, monitor busy waits
-1'4
+1'48'40 -> single philo logic
+1'52'30 -> clean data by destroying mutexes, freeing mallocs
+1'57'30 -> odd num_philos, starvation of tt_think, not with even(usleep(10))
+
+### Nico ###
+t_mtx	last_meal; -> within t_philo(1 / philo, + 2 forks, + globals(from data))
+
 
 ### Resume to solve Philosophers ###
 

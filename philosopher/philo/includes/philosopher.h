@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/22 17:53:18 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:38:36 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,8 @@ typedef struct s_data
 	t_philo			*philos;              // Array of philos threads
 	t_fork			*forks;               // Array of fork mutexes
 	pthread_t		monitor;			  // Monitor to continuously check philos states
-	t_mtx 			stop_mutex;        	  // For reading iteratively simulation_stop safely
-	t_mtx 			meal_mutex;        	  // For writing and reading meal timestamps safely
-	t_mtx 			simulation_mutex;     // For writing and reading simulation_stop bool safely
+	/* Could only need 3 mutexesphilo -> all actions | table(read) and write) */
+	//t_mtx
 } t_data;
 
 /* FUNCTIONS */
@@ -99,6 +98,9 @@ void		init_data(t_data *data, char **av);
 /* HANDLING */
 void    	handle_mutex(t_mtx *fork, t_err_code code);
 void    	handle_thread(t_data *data, int i, t_err_code code, bool is_monitor); //???
+
+/* DINNER */
+void		start_dinner(t_data *data);
 
 /* ROUTINES */
 void		*routine(void *arg);
@@ -128,6 +130,7 @@ int			is_overflow(char *s);
 
 /* CONVERSION_UTILS */
 time_t		get_current_time_in_ms();
+void		precise_usleep(time_t usec);
 int			ft_atoi(const char *nptr); //???
 
 /* PRINT_DATA(DEBUG) */

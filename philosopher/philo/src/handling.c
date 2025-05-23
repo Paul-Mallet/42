@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:53:52 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/22 16:27:21 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:38:25 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void    handle_mutex(t_mtx *fork, t_err_code code)
         handle_mutex_error(pthread_mutex_destroy(fork), code);
 }
 
-//???
 void    handle_thread(t_data *data, int i, t_err_code code, bool is_monitor)
 {
     pthread_t   thread;
@@ -49,6 +48,6 @@ void    handle_thread(t_data *data, int i, t_err_code code, bool is_monitor)
         handle_thread_error(pthread_join(data->monitor, NULL), code);
     else if (code == JOIN)
         handle_thread_error(pthread_join(thread, NULL), code);
-    else if (code == DETACH)
+    else if (code == DETACH) //not already used?
         handle_thread_error(pthread_detach(thread), code);
 }

@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:34:52 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/22 18:08:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:38:26 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ time_t	get_current_time_in_ms()
 	return ((tv.tv_sec * 1000L) + (tv.tv_usec / 1e3L));
 }
 
-time_t	get_elapsed_time_in_us(struct timeval start, struct timeval curr)
+static time_t	get_elapsed_time_in_us(struct timeval start, struct timeval curr)
 {
 	return ((curr.tv_sec - start.tv_sec) * 1e6L + (curr.tv_usec - start.tv_usec));
 }
@@ -40,6 +40,9 @@ void	precise_usleep(time_t usec)
 	gettimeofday(&tv_start, NULL);
 	gettimeofday(&tv_curr, NULL);
 	elapsed_time = get_elapsed_time_in_us(tv_start, tv_curr);
+	remove_time = usec - elapsed_time;
+	if (remove_time > 1000)
+		usleep(remove_time / 2);
 	while (elapsed_time < usec)
 	{
 		gettimeofday(&tv_curr, NULL);
