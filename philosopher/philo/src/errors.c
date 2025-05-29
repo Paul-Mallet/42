@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 08:46:45 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/21 23:28:24 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:05:03 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ void	handle_mutex_error(int status, t_err_code code)
 void    handle_thread_error(int status, t_err_code code)
 {
     if (status == 0)
+    {
+        printf("Thread successfully created!\n");
         return ;
+    }
     else if (code == CREATE)
     {
         if (status == EINVAL)
@@ -100,15 +103,15 @@ void    handle_thread_error(int status, t_err_code code)
                 " and parameters specified in attr.");    
         }
     }
-    else if (code == JOIN && status == EDEADLK)
+    else if (code == JOIN)
     {
-        error_exit("A  deadlock  was  detected (e.g., two threads  tried"
-            " to  join  with   each other); or thread specifies the call‐"
-            "ing thread.");
-    }
-    else if (code == JOIN || code == DETACH)
-    {
-        if (status == EINVAL)
+        if (status == EDEADLK)
+        {
+            error_exit("A  deadlock  was  detected (e.g., two threads  tried"
+                " to  join  with   each other); or thread specifies the call‐"
+                "ing thread.");
+        }
+        else if (status == EINVAL)
             error_exit("thread is not a joinable thread.");
         else if (status == ESRCH)
             error_exit("No thread with the ID thread could be found.");

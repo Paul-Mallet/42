@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/23 11:38:36 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:50:30 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_philo
     t_fork			*left_fork;			  // Min fork id, always taking 1rstly
     t_fork			*right_fork;		  // Max fork id, always taking 2ndly
     time_t			last_meal_time;       // Timestamp of last meal(started before philos thread creations, updated during routine)
+	t_mtx			philo_mutex;		  // Mutex to wrap each actions
 	pthread_t		thread;               // Thread ID
     t_data			*data;                // Pointer to shared data
 } t_philo;
@@ -85,7 +86,8 @@ typedef struct s_data
 	t_fork			*forks;               // Array of fork mutexes
 	pthread_t		monitor;			  // Monitor to continuously check philos states
 	/* Could only need 3 mutexesphilo -> all actions | table(read) and write) */
-	//t_mtx
+	t_mtx			write_mutex;
+	t_mtx			read_mutex;
 } t_data;
 
 /* FUNCTIONS */

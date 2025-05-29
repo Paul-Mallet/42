@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 23:16:29 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/23 11:42:28 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:17:20 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ void	*routine(void *arg)
 	{
 		/* THINK */
 		curr_time = get_current_time_in_ms();
+		handle_mutex(&philo->philo_mutex, LOCK);
 		printf("%ld %d is thinking\n", curr_time - philo->data->start_time, philo->id);
-		usleep(10);
+		handle_mutex(&philo->philo_mutex, UNLOCK);
+		precise_usleep(10);
 
 		/* MIN-MAX */
 		if (philo->left_fork->id < philo->right_fork->id)
@@ -65,10 +67,15 @@ void	*routine(void *arg)
 
 		/* EAT */
 		curr_time = get_current_time_in_ms();
+		handle_mutex(&philo->philo_mutex, LOCK);
 		printf("%ld %d is eating\n", curr_time - philo->data->start_time, philo->id);
+		handle_mutex(&philo->philo_mutex, UNLOCK);
 		precise_usleep(philo->data->tt_eat);
+		
+		handle_mutex(&philo->data->write_mutex, LOCK);
 		philo->last_meal_time = get_current_time_in_ms();
 		philo->meals_eaten++;
+		handle_mutex(&philo->data->write_mutex, UNLOCK);
 
 		/* DROP 2 FORKS */
 		handle_mutex(&second_fork, UNLOCK);
@@ -76,8 +83,10 @@ void	*routine(void *arg)
 
 		/* SLEEP */
 		curr_time = get_current_time_in_ms();
+		handle_mutex(&philo->philo_mutex, LOCK);
 		printf("%ld %d is sleeping\n", curr_time - philo->data->start_time, philo->id);
-		usleep(philo->data->tt_sleep);
+		handle_mutex(&philo->philo_mutex, UNLOCK);
+		precise_usleep(philo->data->tt_sleep);
 	}
 	return (NULL);
 }

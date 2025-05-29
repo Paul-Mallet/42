@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:03:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/23 08:54:26 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:17:52 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,34 @@ static void	handle_multiple_philos(t_data *data)
 	i = 0;
 	while (i < data->num_philos)
 	{
-		handle_mutex(&data->meal_mutex, LOCK);
 		data->philos[i].last_meal_time = data->start_time;
-		handle_mutex(&data->meal_mutex, UNLOCK);
 		i++;
 	}
-	//wrap in mutexes? when implement it?
 
 	/* MONITOR CREATE */
 	handle_thread(data, 0, CREATE, true);
 
-	/* PHILOS[i].THREADS CREATE(1) ROUTINES */
+	/* PHILOS[i].THREADS CREATE(1) */
 	//check all threads are running?
 	i = 0;
 	while (i < data->num_philos)
 	{
 		handle_thread(data, i, CREATE, false);
-		i++;	
-	}
-
-	/* PHILOS[i].THREADS JOIN(2) ROUTINES */
-	i = 0;
-	while (i < data->num_philos)
-	{
-		handle_thread(data, i, JOIN, false);
 		i++;
 	}
 
-	/* MONITOR JOIN */
-	handle_thread(data, 0, JOIN, true);
+	while (!data->simulation_stop);
+
+	/* PHILOS[i].THREADS JOIN(2) */
+	// i = 0;
+	// while (i < data->num_philos)
+	// {
+	// 	handle_thread(data, i, JOIN, false);
+	// 	i++;
+	// }
+
+	// /* MONITOR JOIN */
+	// handle_thread(data, 0, JOIN, true);
 }
 
 void	start_dinner(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 18:20:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/23 11:39:23 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:41:20 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static void	init_mutexes(t_data *data)
 {
 	/* WRAPPERS SHARE DATA MUTEXES */
+	handle_mutex(&data->write_mutex, INIT);
+	handle_mutex(&data->read_mutex, INIT);
 }
 
 static void	init_forks(t_data *data)
@@ -44,10 +46,9 @@ static void	init_philos(t_data *data)
 		philo->meals_eaten = 0;
 		philo->left_fork = &data->forks[i]; //min [0 to 4]
 		philo->right_fork = &data->forks[(i + 1) % data->num_philos]; //max [1 to 0]
+		handle_mutex(&philo->philo_mutex, INIT);
 		philo->data = data;
 		i++;
-		// all_threads_running ??? bool to start philo routine ???
-		// philo->full_ate ??? bool to stop philo routine ???
 	}
 }
 

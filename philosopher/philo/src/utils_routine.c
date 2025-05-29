@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 12:16:41 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/22 18:21:52 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:39:10 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void    is_philos_all_eaten(t_data *data)
     {
         all_eaten = true;
         i = 0;
-        pthread_mutex_lock(&data->meal_mutex);
+        pthread_mutex_lock(&data->read_mutex);
         while (i < data->num_philos)
         {
             if (data->philos[i].meals_eaten < data->must_eat_count)
@@ -31,11 +31,11 @@ void    is_philos_all_eaten(t_data *data)
             }
             i++;
         }
-        pthread_mutex_unlock(&data->meal_mutex);
-        pthread_mutex_lock(&data->simulation_mutex);
+        pthread_mutex_unlock(&data->read_mutex);
+        pthread_mutex_lock(&data->write_mutex);
         if (all_eaten)
             data->simulation_stop = true;
-        pthread_mutex_unlock(&data->simulation_mutex);
+        pthread_mutex_unlock(&data->write_mutex);
     }
 }
 
@@ -50,17 +50,17 @@ void    is_philo_died(t_data *data)
     {
         curr_time = get_current_time_in_ms();
         
-        pthread_mutex_lock(&data->meal_mutex);
+        pthread_mutex_lock(&data->read_mutex);
         time_since_last_meal = curr_time - data->philos[i].last_meal_time;
-        pthread_mutex_unlock(&data->meal_mutex);
+        pthread_mutex_unlock(&data->read_mutex);
 
         if (time_since_last_meal > data->tt_die)
         {
             curr_time = get_current_time_in_ms();
-            pthread_mutex_lock(&data->simulation_mutex);
+            pthread_mutex_lock(&data->write_mutex);
             printf("%ld %d died\n", curr_time - data->start_time, data->philos[i].id);
             data->simulation_stop = true;
-            pthread_mutex_unlock(&data->simulation_mutex);
+            pthread_mutex_unlock(&data->write_mutex);
             break ;
         }
     }

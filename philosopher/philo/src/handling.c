@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:53:52 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/23 11:38:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:19:02 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,30 @@ void    handle_thread(t_data *data, int i, t_err_code code, bool is_monitor)
     thread = data->philos[i].thread;
     if (code == CREATE && is_monitor)
     {
+        printf("monitor [i]: %u\n", i);
         handle_thread_error(pthread_create(&data->monitor, NULL,
         &monitor_routine, &data), code);
     }
     else if (code == CREATE && data->num_philos == 1)
     {
+        printf("single philo [i]: %u\n", i);
         handle_thread_error(pthread_create(&thread, NULL,
         &single_routine, &data), code);
     }
     else if (code == CREATE && data->num_philos > 1)
     {
+        printf("philos [i]: %u\n", i);
         handle_thread_error(pthread_create(&thread, NULL,
         &routine, &data), code);
     }
-    else if (code == JOIN && is_monitor)
-        handle_thread_error(pthread_join(data->monitor, NULL), code);
     else if (code == JOIN)
+    {
+        printf("join philos [i]: %u\n", i);
         handle_thread_error(pthread_join(thread, NULL), code);
-    else if (code == DETACH) //not already used?
-        handle_thread_error(pthread_detach(thread), code);
+    }
+    else if (code == JOIN && is_monitor)
+    {
+        printf("join monitor [i]: %u\n", i);
+        handle_thread_error(pthread_join(data->monitor, NULL), code);
+    }
 }
