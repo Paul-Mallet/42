@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 23:16:29 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/23 16:17:20 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:35:25 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,24 @@ void	*single_routine(void *arg)
 	time_t	curr_time;
 
 	philo = (t_philo*)arg;
-	while (!philo->data->simulation_stop)
+	printf("\nsimulation_stop in single_routine: %d\n", philo->data->simulation_stop);
+	while (1)
 	{
+		
+		handle_mutex(&philo->data->read_mutex, LOCK);
+		if (philo->data->simulation_stop) //not enter inside it
+		{
+			handle_mutex(&philo->data->read_mutex, UNLOCK);
+			break ;
+		}
+		handle_mutex(&philo->data->read_mutex, UNLOCK);
+		precise_usleep(500);
+
 		curr_time = get_current_time_in_ms();
+		printf("\nphilo->id: %u\nphilo->left_fork_id: %u\n", philo->id, philo->left_fork->id);
 		pthread_mutex_lock(&philo->left_fork->fork);
-		printf("%ld %d has taken a fork\n", curr_time - philo->data->start_time, philo->id);
+		// output : 335967(GOOD!) -16779160(NOT correct ID) has taken a fork
+		printf("%ld %d has taken a fork\n", (curr_time - philo->data->start_time), philo->id);
 		pthread_mutex_unlock(&philo->left_fork->fork);
 	}
 	return (NULL);
@@ -56,7 +69,7 @@ void	*routine(void *arg)
 			first_fork = philo->right_fork->fork;
 			second_fork = philo->left_fork->fork;
 		}
-		
+
 		/* TAKE 2 FORKS - lower 1rst / higher 2nd */
 		handle_mutex(&first_fork, LOCK);
 		curr_time = get_current_time_in_ms();
@@ -96,8 +109,18 @@ void *monitor_routine(void *arg)
 	t_data	*data;
 
 	data = (t_data *)arg;
-	while (!data->simulation_stop)
+	printf("\ndata->num_philos in monitor_routine: %d\n", data->num_philos);
+	while (1)
 	{
+		handle_mutex(&data->read_mutex, LOCK);
+		if (data->simulation_stop) //not enter inside it
+		{
+			handle_mutex(&data->read_mutex, UNLOCK);
+			break ;
+		}
+		handle_mutex(&data->read_mutex, UNLOCK);
+		precise_usleep(500);
+
 		is_philos_all_eaten(data);
 		is_philo_died(data);
 		usleep(1000);

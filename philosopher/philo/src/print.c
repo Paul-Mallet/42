@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 18:06:25 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/30 12:15:47 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/30 15:38:06 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ static void	print_forks(t_data *data)
 	unsigned int	i;
 
 	i = 0;
-	printf("num_forks: %u\n", data->num_philos);
+	printf("\nnum_forks: %u\n", data->num_philos);
 	while (i < data->num_philos)
 	{
 		printf("fork id: %u\n", data->forks[i].id);
 		i++;
 	}
+	printf("\n");
 }
 
 static void	print_philos(t_data *data)
@@ -31,33 +32,34 @@ static void	print_philos(t_data *data)
 	t_philo			*philo;
 
 	i = 0;
+	printf("\nphilos:\n");
 	while (i < data->num_philos)
 	{
 		philo = &data->philos[i];
-		printf("num_philos: %u\n- id : %u\n- meals_eaten : %u\n"
-			"- left_fork id : %u\n- right_fork id: %u\n- last_time_meal : %ld\n- data->num_philos: %u\n",
-			philo->data->num_philos,
+		printf("- id : %u\n- meals_eaten : %u\n"
+			"- left_fork id : %u\n- right_fork id: %u\n- data->num_philos: %u\n",
 			philo->id,
 			philo->meals_eaten,
 			philo->left_fork->id,
 			philo->right_fork->id,
-			philo->last_meal_time,
 			philo->data->num_philos);
+		// printf("- last_meal_time: %ld\n", philo->last_meal_time);
 		i++;
 	}
+	printf("\n");
 }
 
 void	print_data(t_data *data)
 {
-	printf("num_philos: %u\ntt_die: %ld\ntt_eat: %ld\ntt_sleep: %ld\n"
-		"must_eat_count_meals: %u\nsimulation_stop: %d\nstart_time: %ld\n",
+	printf("\nnum_philos: %u\ntt_die: %ld\ntt_eat: %ld\ntt_sleep: %ld\n"
+		"must_eat_count_meals: %u\nsimulation_stop: %d\n",
 		data->num_philos,
 		data->tt_die,
 		data->tt_eat,
 		data->tt_sleep,
 		data->must_eat_count,
-		data->simulation_stop,
-		data->start_time);
+		data->simulation_stop);
 	print_philos(data);
 	print_forks(data);
+	// printf("\n- start_time: %ld\n", data->start_time);
 }
