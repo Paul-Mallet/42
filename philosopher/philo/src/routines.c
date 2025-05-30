@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 23:16:29 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/30 17:35:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:42:27 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	*single_routine(void *arg)
 	time_t	curr_time;
 
 	philo = (t_philo*)arg;
+	// ??? last seen
 	printf("\nsimulation_stop in single_routine: %d\n", philo->data->simulation_stop);
 	while (1)
 	{
-		
 		handle_mutex(&philo->data->read_mutex, LOCK);
 		if (philo->data->simulation_stop) //not enter inside it
 		{
@@ -123,7 +123,7 @@ void *monitor_routine(void *arg)
 
 		is_philos_all_eaten(data);
 		is_philo_died(data);
-		usleep(1000);
+		precise_usleep(500);
 	}
 	return (NULL);
 }
