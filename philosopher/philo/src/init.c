@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 18:20:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/23 15:41:20 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/30 11:59:34 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	init_philos(t_data *data)
 
 void	init_data(t_data *data, char **av)
 {
-	data->num_philos = ft_atoi(av[1]);
+	data->num_philos = ft_atoi(av[1]); //GOOD
 	data->tt_die = ft_atoi(av[2]);
 	data->tt_eat = ft_atoi(av[3]);
 	data->tt_sleep = ft_atoi(av[4]);

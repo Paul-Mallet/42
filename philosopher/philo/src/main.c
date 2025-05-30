@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/22 20:04:37 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/05/30 12:05:07 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 		init_data(&data, av);
 
 		/* DEBUG */
-		// print_data(&data);
+		print_data(&data);
 
 		/* DINNER */
 		start_dinner(&data);
