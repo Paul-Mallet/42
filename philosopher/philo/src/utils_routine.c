@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 12:16:41 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/30 12:02:16 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:24:02 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void    is_philo_died(t_data *data)
     {
         curr_time = get_current_time_in_ms();
         
-        time_since_last_meal = curr_time - data->philos[i].last_meal_time;
-
+        time_since_last_meal = (curr_time - data->philos[i].last_meal_time);
+        printf("time_since_last_meal: %ld\n", time_since_last_meal);
         if (time_since_last_meal > data->tt_die)
         {
             curr_time = get_current_time_in_ms();
-            printf("%ld %d died\n", curr_time - data->start_time, data->philos[i].id);
+            printf("%ld %d died\n", (curr_time - data->start_time), data->philos[i].id);
             data->simulation_stop = true;
             break ;
         }

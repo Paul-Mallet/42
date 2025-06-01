@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 23:16:29 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/30 17:42:27 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:05:09 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	*single_routine(void *arg)
 	time_t	curr_time;
 
 	philo = (t_philo*)arg;
-	// ??? last seen
 	printf("\nsimulation_stop in single_routine: %d\n", philo->data->simulation_stop);
 	while (1)
 	{
@@ -32,11 +31,10 @@ void	*single_routine(void *arg)
 		precise_usleep(500);
 
 		curr_time = get_current_time_in_ms();
+		handle_mutex(&philo->left_fork->fork, LOCK);
 		printf("\nphilo->id: %u\nphilo->left_fork_id: %u\n", philo->id, philo->left_fork->id);
-		pthread_mutex_lock(&philo->left_fork->fork);
-		// output : 335967(GOOD!) -16779160(NOT correct ID) has taken a fork
 		printf("%ld %d has taken a fork\n", (curr_time - philo->data->start_time), philo->id);
-		pthread_mutex_unlock(&philo->left_fork->fork);
+		handle_mutex(&philo->left_fork->fork, UNLOCK);
 	}
 	return (NULL);
 }
@@ -112,6 +110,7 @@ void *monitor_routine(void *arg)
 	printf("\ndata->num_philos in monitor_routine: %d\n", data->num_philos);
 	while (1)
 	{
+		printf("test in monitor\n");
 		handle_mutex(&data->read_mutex, LOCK);
 		if (data->simulation_stop) //not enter inside it
 		{

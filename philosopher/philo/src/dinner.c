@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:03:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/30 17:32:57 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/01 21:17:21 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	handle_single_philo(t_data *data)
     printf("\ndata->simulation_stop in handle_single_philo: %d\n", data->simulation_stop);	
 	while (1)
 	{
+		//here
 		handle_mutex(&data->read_mutex, LOCK);
 		if (data->simulation_stop) //not enter inside it
 		{

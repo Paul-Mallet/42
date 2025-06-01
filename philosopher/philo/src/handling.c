@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:53:52 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/30 16:08:21 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:11:30 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,19 @@ void    handle_thread(t_data *data, int i, t_err_code code, bool is_monitor)
     {
         printf("\nmonitor [i]: %u\n", i);
         handle_thread_error(pthread_create(&data->monitor, NULL,
-        &monitor_routine, &data), code);
+        &monitor_routine, data), code);
     }
     else if (code == CREATE && data->num_philos == 1)
     {
         printf("\nsingle philo [i]: %u\n", i);
         handle_thread_error(pthread_create(&thread, NULL,
-        &single_routine, &data), code);
+        &single_routine, &data->philos[i]), code); //& care !!!
     }
     else if (code == CREATE && data->num_philos > 1)
     {
         printf("\nphilos [i]: %u\n", i);
         handle_thread_error(pthread_create(&thread, NULL,
-        &routine, &data), code);
+        &routine, data), code);
     }
     else if (code == JOIN)
         handle_thread_error(pthread_join(thread, NULL), code);
