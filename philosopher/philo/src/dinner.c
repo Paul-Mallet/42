@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:03:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/01 21:17:21 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/02 11:09:45 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,40 +20,35 @@ static void	handle_single_philo(t_data *data)
 	i = 0;
 	philo = &data->philos[i];
 
-	//START LAST_MEAL_TIME
 	philo->last_meal_time = data->start_time;
     printf("\nphilo->last_meal_time: %ld\n", philo->last_meal_time);
 
 	/* CREATE MONITOR */
 	handle_thread(data, i, CREATE, true);
 
-	// CREATE THREAD(SINGLE PHILO)
+	// CREATE SINGLE PHILO
 	handle_thread(data, i, CREATE, false);
 
 
 
 	/* CONDITION BEFORE JOIN! */
-    printf("\ndata->simulation_stop in handle_single_philo: %d\n", data->simulation_stop);	
+    printf("\nsimulation_stop in handle_single_philo: %d\n", data->simulation_stop);	
 	while (1)
 	{
-		//here
 		handle_mutex(&data->read_mutex, LOCK);
-		if (data->simulation_stop) //not enter inside it
+		if (data->simulation_stop)
 		{
 			handle_mutex(&data->read_mutex, UNLOCK);
 			break ;
 		}
 		handle_mutex(&data->read_mutex, UNLOCK);
-		precise_usleep(500);
+		precise_usleep(1000);
 	}
-    printf("\ndata->simulation_stop: %d\n", data->simulation_stop);
+    printf("\nsimulation_stop in handle_single_philo: %d\n", data->simulation_stop);
 
 
-
-	// JOIN THREAD(SINGLE PHILO)
 	handle_thread(data, i, JOIN, false);
 
-	/* JOIN MONITOR LAST */
 	handle_thread(data, i, JOIN, true);
 }
 

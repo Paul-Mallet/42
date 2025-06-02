@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 08:46:45 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/23 15:05:03 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/02 11:13:14 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,14 @@ void	handle_mutex_error(int status, t_err_code code)
 */
 void    handle_thread_error(int status, t_err_code code)
 {
-    if (status == 0)
+    if (status == 0 && code == CREATE)
     {
         printf("Thread successfully created!\n");
+        return ;
+    }
+    else if (status == 0 && code == JOIN)
+    {
+        printf("Thread successfully joined!\n");
         return ;
     }
     else if (code == CREATE)

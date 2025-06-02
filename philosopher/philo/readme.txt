@@ -7,6 +7,14 @@
 1'52'30 -> clean data by destroying mutexes, freeing mallocs
 1'57'30 -> odd num_philos, starvation of tt_think, not with even(usleep(10))
 
+### Priority queue ###
+Supposed philos 1, 3 eating, and philos 2, 4, 5 waiting 1 round it's ok
+But if too many rounds, same philos access forks are eating, others will die
+So compare last_meal_time between them, and LONGEST will eat(take forks) next time prior to SHORTEST
+On 5 philos(even)
+-> philo 1 take 2 forks, philo 2 take fork 3, but will wait for fork 2
+-> is my prog continuously taking forks 1 by 1, until others unlocked?
+
 ### Nico ###
 t_mtx	last_meal; -> within t_philo(1 / philo, + 2 forks, + globals(from data))
 
