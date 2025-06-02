@@ -14,6 +14,7 @@ So compare last_meal_time between them, and LONGEST will eat(take forks) next ti
 On 5 philos(even)
 -> philo 1 take 2 forks, philo 2 take fork 3, but will wait for fork 2
 -> is my prog continuously taking forks 1 by 1, until others unlocked?
+=> setup a waiter?
 
 ### Nico ###
 t_mtx	last_meal; -> within t_philo(1 / philo, + 2 forks, + globals(from data))

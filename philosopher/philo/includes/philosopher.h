@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/30 16:45:21 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/02 18:17:05 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void 		*monitor_routine(void *arg);
 void		*single_routine(void *arg);
 
 /* ROUTINES UTILS */
+bool		is_simulation_stopped(t_data *data);
 void    	is_philos_all_eaten(t_data *data);
 void    	is_philo_died(t_data *data);
 

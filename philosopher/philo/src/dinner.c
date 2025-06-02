@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:03:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/02 11:09:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/02 18:37:13 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	handle_single_philo(t_data *data)
 	philo = &data->philos[i];
 
 	philo->last_meal_time = data->start_time;
-    printf("\nphilo->last_meal_time: %ld\n", philo->last_meal_time);
+    // printf("\nphilo->last_meal_time: %ld\n", philo->last_meal_time);
 
 	/* CREATE MONITOR */
 	handle_thread(data, i, CREATE, true);
@@ -29,26 +29,17 @@ static void	handle_single_philo(t_data *data)
 	// CREATE SINGLE PHILO
 	handle_thread(data, i, CREATE, false);
 
-
-
 	/* CONDITION BEFORE JOIN! */
-    printf("\nsimulation_stop in handle_single_philo: %d\n", data->simulation_stop);	
+    // printf("\nsimulation_stop in handle_single_philo: %d\n", data->simulation_stop);	
 	while (1)
 	{
-		handle_mutex(&data->read_mutex, LOCK);
-		if (data->simulation_stop)
-		{
-			handle_mutex(&data->read_mutex, UNLOCK);
+		if (is_simulation_stopped(data))
 			break ;
-		}
-		handle_mutex(&data->read_mutex, UNLOCK);
-		precise_usleep(1000);
+		precise_usleep(500);
 	}
-    printf("\nsimulation_stop in handle_single_philo: %d\n", data->simulation_stop);
-
+    // printf("\nsimulation_stop in handle_single_philo: %d\n", data->simulation_stop);
 
 	handle_thread(data, i, JOIN, false);
-
 	handle_thread(data, i, JOIN, true);
 }
 
@@ -77,19 +68,14 @@ static void	handle_multiple_philos(t_data *data)
 	}
 
 	/* CONDITION BEFORE JOIN! */
-    printf("\ndata->simulation_stop in handle_multi_philo: %d\n", data->simulation_stop);	
+    printf("\nsimulation_stop in handle_multi_philo: %d\n", data->simulation_stop);	
 	while (1)
 	{
-		handle_mutex(&data->read_mutex, LOCK);
-		if (data->simulation_stop)
-		{
-			handle_mutex(&data->read_mutex, UNLOCK);
+		if (is_simulation_stopped(data))
 			break ;
-		}
-		handle_mutex(&data->read_mutex, UNLOCK);
 		precise_usleep(500);
 	}
-    printf("\ndata->simulation_stop: %d\n", data->simulation_stop);
+    printf("\nsimulation_stop in handle_multi_philo: %d\n", data->simulation_stop);
 
 	/* PHILOS[i].THREADS JOIN(2) */
 	i = 0;
