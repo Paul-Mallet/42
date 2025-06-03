@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 12:16:41 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 14:46:31 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:02:14 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void    is_philos_all_eaten(t_data *data)
         i = 0;
         while (i < data->num_philos)
         {
-            printf("meals_eaten: %d\n", data->philos[i].meals_eaten);
+            // printf("meals_eaten: %d\n", data->philos[i].meals_eaten);
             if (data->philos[i].meals_eaten < data->must_eat_count)
             {
                 all_eaten = false;
@@ -58,21 +58,18 @@ void    is_philo_died(t_data *data)
     i = 0;
     while (i < data->num_philos)
     {
-        curr_time = get_current_time_in_ms();
-        //mutex?
         handle_mutex(&data->read_mutex, LOCK);
+        curr_time = get_current_time_in_ms();
         time_since_last_meal = (curr_time - data->philos[i].last_meal_time);
+        // printf("philo %u time_since_last_meal: %ld\n", (i + 1), time_since_last_meal);
         handle_mutex(&data->read_mutex, UNLOCK);
-        printf("philo %u time_since_last_meal: %ld\n", (i + 1), time_since_last_meal);
         if (time_since_last_meal > data->tt_die)
         {
-            curr_time = get_current_time_in_ms();
             handle_mutex(&data->read_mutex, LOCK);
+            curr_time = get_current_time_in_ms();
             printf("%ld %d died\n", (curr_time - data->start_time), data->philos[i].id);
             data->simulation_stop = true;
             handle_mutex(&data->read_mutex, UNLOCK);
-            // handle_mutex(&data->write_mutex, LOCK);
-            // handle_mutex(&data->write_mutex, UNLOCK);
             break ;
         }
         i++;

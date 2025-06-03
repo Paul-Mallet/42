@@ -20,6 +20,10 @@ On 5 philos(even)
 -> is my prog continuously taking forks 1 by 1, until others unlocked?
 => setup a waiter?
 
+QUESTIONS
+=> 
+=> when died, finish the loop of others philos?
+
 ### Nico ###
 t_mtx	last_meal; -> within t_philo(1 / philo, + 2 forks, + globals(from data))
 

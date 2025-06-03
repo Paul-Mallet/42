@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:03:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 10:13:24 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:53:09 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	handle_multiple_philos(t_data *data)
 	while (i < data->num_philos)
 	{
 		data->philos[i].last_meal_time = data->start_time;
-    	printf("\nphilo[%u]->last_meal_time: %ld\n", i, data->philos[i].last_meal_time);
+    	// printf("\nphilo[%u]->last_meal_time: %ld\n", i, data->philos[i].last_meal_time);
 		i++;
 	}
 
@@ -69,14 +69,10 @@ static void	handle_multiple_philos(t_data *data)
 	}
 
 	/* CONDITION BEFORE JOIN! */
-    printf("\nsimulation_stop in handle_multi_philo: %d\n", data->simulation_stop);	
-	while (1)
-	{
-		if (is_simulation_stopped(data))
-			break ;
-		precise_usleep(500);
-	}
-    printf("\nsimulation_stop in handle_multi_philo: %d\n", data->simulation_stop);
+    // printf("\nsimulation_stop in handle_multi_philo: %d\n", data->simulation_stop);	
+	while (!is_simulation_stopped(data))
+		precise_usleep(1000);
+    // printf("\nsimulation_stop in handle_multi_philo: %d\n", data->simulation_stop);
 
 	/* ALL PHILOS THREADS JOIN(2) */
 	i = 0;
