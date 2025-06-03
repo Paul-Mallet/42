@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:34:52 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/23 10:38:26 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:07:49 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,10 @@ void	precise_usleep(time_t usec)
 	}
 }
 
-//??? (uint, time_t(long))
-int	ft_atoi(const char *nptr)
+unsigned int	ft_atoui(const char *nptr)
 {
-	int	res;
-	int	sign;
+	unsigned int	res;
+	unsigned int	sign;
 
 	res = 0;
 	sign = 1;

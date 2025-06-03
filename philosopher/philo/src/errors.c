@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 08:46:45 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/02 11:13:14 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:22:16 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void    handle_input_error(t_err_code code)
 	else if (code == SIGN_ERR)
 		error_exit("Invalid sign, not handle.");
 	else if (code == OVERFLOW_ERR)
-		error_exit("Invalid type, only handle long.");
+		error_exit("Invalid type, only handle unsigned int.");
 }
 
 /*

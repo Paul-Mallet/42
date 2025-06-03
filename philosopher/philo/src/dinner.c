@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:03:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 17:53:09 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:06:07 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	start_dinner(t_data *data)
 
 	/* CHECK SPECIAL CASES */
 	if (data->num_philos == 0 || data->must_eat_count == 0)
-		return ; //back main
+		return ;
 	else if (data->num_philos == 1)
 		handle_single_philo(data);
 	else

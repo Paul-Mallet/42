@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/02 18:17:05 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:09:00 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,51 +92,51 @@ typedef struct s_data
 
 /* FUNCTIONS */
 /* PARSING */
-void		parsing(char **av);
+void			parsing(char **av);
 
 /* DATA */
-void		init_data(t_data *data, char **av);
+void			init_data(t_data *data, char **av);
 
 /* HANDLING */
-void    	handle_mutex(t_mtx *fork, t_err_code code);
-void    	handle_thread(t_data *data, int i, t_err_code code, bool is_monitor); //???
+void    		handle_mutex(t_mtx *fork, t_err_code code);
+void    		handle_thread(t_data *data, int i, t_err_code code, bool is_monitor); //???
 
 /* DINNER */
-void		start_dinner(t_data *data);
+void			start_dinner(t_data *data);
 
 /* ROUTINES */
-void		*routine(void *arg);
-void 		*monitor_routine(void *arg);
-void		*single_routine(void *arg);
+void			*routine(void *arg);
+void	 		*monitor_routine(void *arg);
+void			*single_routine(void *arg);
 
 /* ROUTINES UTILS */
-bool		is_simulation_stopped(t_data *data);
-void    	is_philos_all_eaten(t_data *data);
-void    	is_philo_died(t_data *data);
+bool			is_simulation_stopped(t_data *data);
+void    		is_philos_all_eaten(t_data *data);
+void    		is_philo_died(t_data *data);
 
 /* ERRORS */
-void    	handle_input_error(t_err_code code);
-void		*handle_malloc_error(size_t bytes);
-void		handle_mutex_error(int status, t_err_code code);
-void		handle_thread_error(int status, t_err_code code); //???
-void		error_exit(const char *msg);
+void    		handle_input_error(t_err_code code);
+void			*handle_malloc_error(size_t bytes);
+void			handle_mutex_error(int status, t_err_code code);
+void			handle_thread_error(int status, t_err_code code); //???
+void			error_exit(const char *msg);
 
 /* CLEAN */
-void		clean_data(t_data *data);
+void			clean_data(t_data *data);
 
 /* PARSING_UTILS */
-int			ft_strlen(const char *s);
-int			ft_isspace(const char c);
-int			ft_issign(const char c);
-int			ft_isdigit(int c);
-int			is_overflow(char *s);
+int				ft_strlen(const char *s);
+int				ft_isspace(const char c);
+int				ft_issign(const char c);
+int				ft_isdigit(int c);
+int				is_overflow(char *s);
 
 /* CONVERSION_UTILS */
-time_t		get_current_time_in_ms();
-void		precise_usleep(time_t usec);
-int			ft_atoi(const char *nptr); //???
+time_t			get_current_time_in_ms();
+void			precise_usleep(time_t usec);
+unsigned int	ft_atoui(const char *nptr);
 
 /* PRINT_DATA(DEBUG) */
-void		print_data(t_data *data);
+void			print_data(t_data *data);
 
 #endif
