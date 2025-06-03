@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:03:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/02 18:37:13 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:13:24 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	handle_multiple_philos(t_data *data)
 	while (i < data->num_philos)
 	{
 		data->philos[i].last_meal_time = data->start_time;
+    	printf("\nphilo[%u]->last_meal_time: %ld\n", i, data->philos[i].last_meal_time);
 		i++;
 	}
 
@@ -77,7 +78,7 @@ static void	handle_multiple_philos(t_data *data)
 	}
     printf("\nsimulation_stop in handle_multi_philo: %d\n", data->simulation_stop);
 
-	/* PHILOS[i].THREADS JOIN(2) */
+	/* ALL PHILOS THREADS JOIN(2) */
 	i = 0;
 	while (i < data->num_philos)
 	{
@@ -85,7 +86,7 @@ static void	handle_multiple_philos(t_data *data)
 		i++;
 	}
 
-	// /* MONITOR JOIN */
+	// MONITOR JOIN
 	handle_thread(data, 0, JOIN, true);
 }
 
