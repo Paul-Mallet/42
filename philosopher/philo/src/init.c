@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 18:20:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 20:11:46 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:49:02 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	init_forks(t_data *data)
 	{
 		handle_mutex(&data->forks[i].fork, INIT);
 		data->forks[i].id = i;
-		i++;	
+		i++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 20:06:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:47:43 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,10 @@ int	main(int ac, char **av)
 
 	if (ac >= 5 && ac <= 6)
 	{
-		/* PARSING */
 		parsing(av);
-
-		/* INIT DATA */
 		init_data(&data, av);
-
-		/* DEBUG */
 		print_data(&data);
-
-		/* DINNER */
 		start_dinner(&data);
-
-		/* CLEAN */
 		clean_data(&data);
 		//check_valgrind !
 	}

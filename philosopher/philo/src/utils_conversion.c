@@ -6,13 +6,13 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:34:52 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 20:07:49 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:56:51 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-time_t	get_current_time_in_ms()
+time_t	get_current_time_in_ms(void)
 {
 	struct timeval	tv;
 
@@ -21,9 +21,9 @@ time_t	get_current_time_in_ms()
 	return ((tv.tv_sec * 1000L) + (tv.tv_usec / 1e3L));
 }
 
-static time_t	get_elapsed_time_in_us(struct timeval start, struct timeval curr)
+static time_t	get_elapsed_time_in_us(struct timeval s, struct timeval c)
 {
-	return ((curr.tv_sec - start.tv_sec) * 1e6L + (curr.tv_usec - start.tv_usec));
+	return ((c.tv_sec - s.tv_sec) * 1e6L + (c.tv_usec - s.tv_usec));
 }
 
 /*

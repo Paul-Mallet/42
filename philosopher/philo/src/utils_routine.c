@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 12:16:41 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 17:02:14 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:58:05 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void    is_philo_died(t_data *data)
         {
             handle_mutex(&data->read_mutex, LOCK);
             curr_time = get_current_time_in_ms();
-            printf("%ld %d died\n", (curr_time - data->start_time), data->philos[i].id);
+            printf("%ld %d died\n", (curr_time - data->start_time),
+                data->philos[i].id);
             data->simulation_stop = true;
             handle_mutex(&data->read_mutex, UNLOCK);
             break ;

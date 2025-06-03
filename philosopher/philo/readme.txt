@@ -1,28 +1,9 @@
-### OceanO ###
-1'05'00 -> getters - setters bool && long(all_thread_ready, simulation_stop...)
-1'26'30 -> mutex wrapper only for printf(write_status)
-1'33'30 -> eating phase(forks + eat + philo->meals_eaten == must_eat_count)
-1'41'00 -> all_threads_running bool == num_philos, monitor busy waits
-1'48'40 -> single philo logic
-1'52'30 -> clean data by destroying mutexes, freeing mallocs
-1'57'30 -> odd num_philos, starvation of tt_think, not with even(usleep(10))
 
-Thinking Time(10ms)
-even(pair) num_philos -> system already fair without time set
-odd(impair) num_philos -> 
+TODO
+1. valgrind cause lack of time -> philo died at start when must not !
+2. 4 310 200 100 [?] must not die !
+3. mutex is locked when simulation end !
 
-### Priority queue ###
-Supposed philos 1, 3 eating, and philos 2, 4, 5 waiting 1 round it's ok
-But if too many rounds, same philos access forks are eating, others will die
-So compare last_meal_time between them, and LONGEST will eat(take forks) next time prior to SHORTEST
-On 5 philos(even)
--> philo 1 take 2 forks, philo 2 take fork 3, but will wait for fork 2
--> is my prog continuously taking forks 1 by 1, until others unlocked?
-=> setup a waiter?
-
-QUESTIONS
-=> 
-=> when died, finish the loop of others philos?
 
 ### Nico ###
 t_mtx	last_meal; -> within t_philo(1 / philo, + 2 forks, + globals(from data))

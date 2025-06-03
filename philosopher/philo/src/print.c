@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 18:06:25 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/30 15:38:06 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/03 20:50:05 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ static void	print_philos(t_data *data)
 	{
 		philo = &data->philos[i];
 		printf("- id : %u\n- meals_eaten : %u\n"
-			"- left_fork id : %u\n- right_fork id: %u\n- data->num_philos: %u\n",
+			"- left_fork id : %u\n- right_fork id: %u\n"
+			"- data->num_philos: %u\n",
 			philo->id,
 			philo->meals_eaten,
 			philo->left_fork->id,
 			philo->right_fork->id,
 			philo->data->num_philos);
-		// printf("- last_meal_time: %ld\n", philo->last_meal_time);
 		i++;
 	}
 	printf("\n");
@@ -61,5 +61,4 @@ void	print_data(t_data *data)
 		data->simulation_stop);
 	print_philos(data);
 	print_forks(data);
-	// printf("\n- start_time: %ld\n", data->start_time);
 }
