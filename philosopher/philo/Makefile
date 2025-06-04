@@ -9,6 +9,7 @@ SRCS=$(addprefix $(SRCS_DIR), \
 		handling.c \
 		dinner.c \
 		routines.c \
+		subroutines.c \
 		clean.c \
 		print.c \
 		errors.c \

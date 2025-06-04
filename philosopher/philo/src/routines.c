@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 23:16:29 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 20:52:19 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/04 11:12:14 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	*single_routine(void *arg)
 	philo = (t_philo*)arg;
 	curr_time = get_current_time_in_ms();
 	handle_mutex(&philo->left_fork->fork, LOCK);
-	printf("%ld %d has taken a fork\n", (curr_time - philo->data->start_time), philo->id);
+	printf("%ld %d has taken a fork\n",
+		(curr_time - philo->data->start_time), philo->id);
 	handle_mutex(&philo->left_fork->fork, UNLOCK);
 	while (1)
 	{
@@ -34,74 +35,20 @@ void	*single_routine(void *arg)
 void	*routine(void *arg)
 {
 	t_philo	*philo;
-	time_t	curr_time;
-	t_mtx	first_fork;
-	t_mtx	second_fork;
+	t_mtx	*forks;
 
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		/* MIN-MAX FORKS */
-		if (philo->left_fork->id < philo->right_fork->id)
-		{
-			first_fork = philo->left_fork->fork;
-			second_fork = philo->right_fork->fork;
-		}
-		else
-		{
-			first_fork = philo->right_fork->fork;
-			second_fork = philo->left_fork->fork;
-		}
-
-		/* TAKE 2 FORKS - lower 1rst / higher 2nd */
-		handle_mutex(&first_fork, LOCK);
-		curr_time = get_current_time_in_ms();
-		printf("%ld %d has taken a fork\n", (curr_time - philo->data->start_time), philo->id);
-
-		handle_mutex(&second_fork, LOCK);
-		curr_time = get_current_time_in_ms();
-		printf("%ld %d has taken a fork\n", (curr_time - philo->data->start_time),
-			philo->id);
-
-		/* EAT */
-		handle_mutex(&philo->philo_mutex, LOCK);
-		curr_time = get_current_time_in_ms();
-		if (is_simulation_stopped(philo->data))
+		forks = forks_ordering(philo);
+		if (!is_taking_forks(philo, forks[0], forks[1]))
 			break ;
-		printf("%ld %d is eating\n", (curr_time - philo->data->start_time),
-			philo->id);
-		handle_mutex(&philo->philo_mutex, UNLOCK);
-		precise_usleep(philo->data->tt_eat * 1000);
-
-		// UPDATE LAST_MEAL & MEALS_EATEN OF CURR PHILO
-		handle_mutex(&philo->data->write_mutex, LOCK);
-		philo->last_meal_time = get_current_time_in_ms();
-		philo->meals_eaten++;
-		handle_mutex(&philo->data->write_mutex, UNLOCK);
-		/* DROP 2 FORKS */
-		handle_mutex(&second_fork, UNLOCK);
-		handle_mutex(&first_fork, UNLOCK);
-
-		// /* SLEEP */
-		handle_mutex(&philo->philo_mutex, LOCK);
-		curr_time = get_current_time_in_ms();
-		if (is_simulation_stopped(philo->data))
+		if (!is_sleeping(philo))
 			break ;
-		printf("%ld %d is sleeping\n", (curr_time - philo->data->start_time),
-			philo->id);
-		handle_mutex(&philo->philo_mutex, UNLOCK);
-		precise_usleep(philo->data->tt_sleep * 1000);
-
-		// /* THINK */
-		handle_mutex(&philo->philo_mutex, LOCK);
-		curr_time = get_current_time_in_ms();
-		if (is_simulation_stopped(philo->data))
+		if (!is_thinking(philo))
 			break ;
-		printf("%ld %d is thinking\n", (curr_time - philo->data->start_time),
-			philo->id);
-		handle_mutex(&philo->philo_mutex, UNLOCK);
-		precise_usleep(10);
 	}
+	free(forks);
 	return (NULL);
 }
 

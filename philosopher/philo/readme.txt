@@ -1,8 +1,9 @@
 
 TODO
-1. valgrind cause lack of time -> philo died at start when must not !
-2. 4 310 200 100 [?] must not die !
-3. mutex is locked when simulation end !
+1. valgrind cause lack of time -> philo died at start when must not ! []
+2. 4 310 200 100 [?] must not die ! []
+3. always philo 1 died with forks[0, 1] in case of unfair OS scheduling, setup waiter? []
+4. mutex is locked when simulation end ! [OK]
 
 
 ### Nico ###
