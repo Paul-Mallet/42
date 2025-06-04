@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 08:46:45 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 20:40:30 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/04 11:30:22 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	error_exit(const char *msg)
 /*
 	t_err_code code: enum error code based on mutex function manual 
 */
-void	handle_input_error(t_err_code code)
+void	handle_input_error(t_err code)
 {
 	if (code == EMPTY_ERR)
 		error_exit("Invalid empty input.");
@@ -56,7 +56,7 @@ void	*handle_malloc_error(size_t bytes)
 	int status: status code returned by pthread_mutex functions
 	t_err_code code: enum error code based on mutex function manual
 */
-void	handle_mutex_error(int status, t_err_code code)
+void	handle_mutex_error(int status, t_err code)
 {
 	if (status == 0)
 		return ;
@@ -85,7 +85,7 @@ void	handle_mutex_error(int status, t_err_code code)
 	int status: status code returned by pthread_mutex functions
 	t_err_code code: enum error code based on mutex function manual
 */
-void	handle_thread_error(int status, t_err_code code)
+void	handle_thread_error(int status, t_err code)
 {
 	if (code == CREATE)
 	{

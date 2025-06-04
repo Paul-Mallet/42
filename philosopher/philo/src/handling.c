@@ -6,13 +6,13 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:53:52 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 20:46:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/04 11:30:43 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	handle_mutex(t_mtx *fork, t_err_code code)
+void	handle_mutex(t_mtx *fork, t_err code)
 {
 	if (code == INIT)
 		handle_mutex_error(pthread_mutex_init(fork, NULL), code);
@@ -24,7 +24,7 @@ void	handle_mutex(t_mtx *fork, t_err_code code)
 		handle_mutex_error(pthread_mutex_destroy(fork), code);
 }
 
-void	handle_thread(t_data *data, int i, t_err_code code, bool is_monitor)
+void	handle_thread(t_data *data, int i, t_err code, bool is_monitor)
 {
 	if (code == CREATE && is_monitor)
 	{

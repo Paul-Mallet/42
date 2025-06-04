@@ -5,7 +5,6 @@ TODO
 3. always philo 1 died with forks[0, 1] in case of unfair OS scheduling, setup waiter? []
 4. mutex is locked when simulation end ! [OK]
 
-
 ### Nico ###
 t_mtx	last_meal; -> within t_philo(1 / philo, + 2 forks, + globals(from data))
 
