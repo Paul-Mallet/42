@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 12:16:41 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 20:58:05 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:39:21 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void    is_philo_died(t_data *data)
         handle_mutex(&data->read_mutex, LOCK);
         curr_time = get_current_time_in_ms();
         time_since_last_meal = (curr_time - data->philos[i].last_meal_time);
-        // printf("philo %u time_since_last_meal: %ld\n", (i + 1), time_since_last_meal);
         handle_mutex(&data->read_mutex, UNLOCK);
         if (time_since_last_meal > data->tt_die)
         {

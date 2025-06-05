@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:03:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 20:43:44 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:42:24 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	handle_multiple_philos(t_data *data)
 		i++;
 	}
 	while (!is_simulation_stopped(data))
-		precise_usleep(1000); // < 1000?
+		precise_usleep(1000);
 	i = 0;
 	while (i < data->num_philos)
 	{

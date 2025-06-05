@@ -1,9 +1,37 @@
 
 TODO
-1. valgrind cause lack of time -> philo died at start when must not ! []
-2. 4 310 200 100 [?] must not die ! []
-3. always philo 1 died with forks[0, 1] in case of unfair OS scheduling, setup waiter? []
-4. mutex is locked when simulation end ! [OK]
+1. even OK / odd NOT
+(pierre approach? start even philos(1rst loop(i = 0, then i += 2)), then odd(2nd loop(i = 1, then i += 2)))
+2. setup a waiter !
+
+0 4 has taken a fork
+0 4 has taken a fork
+0 4 is eating
+0 1 has taken a fork
+0 1 has taken a fork
+0 1 is eating
+0 3 has taken a fork
+200 4 is sleeping
+200 5 has taken a fork
+200 1 is sleeping
+200 2 has taken a fork
+200 5 has taken a fork
+200 5 is eating
+200 6 has taken a fork
+200 3 has taken a fork
+200 3 is eating
+400 4 is thinking
+400 1 is thinking
+400 5 is sleeping
+400 3 is sleeping
+400 6 has taken a fork
+400 6 is eating
+400 2 has taken a fork
+400 2 is eating
+400 4 has taken a fork
+400 4 has taken a fork
+400 4 is eating
+411 1 died
 
 ### Nico ###
 t_mtx	last_meal; -> within t_philo(1 / philo, + 2 forks, + globals(from data))

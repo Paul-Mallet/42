@@ -1,6 +1,6 @@
 CC=cc
 FLAGS=-Wall -Wextra -Werror -g -I includes/
-T_FLAG=-pthread
+T_FLAG=-pthread -fsanitize=thread
 SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR), \
 		main.c \

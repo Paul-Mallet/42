@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/04 11:32:23 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:13:45 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void			*single_routine(void *arg);
 
 /* SUB-ROUTINES */
 t_mtx			*forks_ordering(t_philo *philo);
-bool			is_taking_forks(t_philo *philo, t_mtx fst_fork, t_mtx sd_fork);
+bool			is_taking_forks(t_philo *philo, t_mtx *fst_fork, t_mtx *sd_fork);
 bool			is_eating(t_philo *philo);
 bool			is_sleeping(t_philo *philo);
 bool			is_thinking(t_philo *philo);

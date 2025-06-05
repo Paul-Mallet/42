@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 23:16:29 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/04 11:12:14 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:16:41 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,28 @@ void	*single_routine(void *arg)
 void	*routine(void *arg)
 {
 	t_philo	*philo;
-	t_mtx	*forks;
+	// t_mtx	*forks;
 
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		forks = forks_ordering(philo);
-		if (!is_taking_forks(philo, forks[0], forks[1]))
-			break ;
+		// forks = forks_ordering(philo);
+		if (philo->left_fork->id < philo->right_fork->id)
+		{
+			if (!is_taking_forks(philo, &philo->left_fork->fork, &philo->right_fork->fork))
+				break ;
+		}
+		else
+		{
+			if (!is_taking_forks(philo, &philo->right_fork->fork, &philo->left_fork->fork))
+				break ;
+		}
 		if (!is_sleeping(philo))
 			break ;
 		if (!is_thinking(philo))
 			break ;
 	}
-	free(forks);
+	// free(forks);
 	return (NULL);
 }
 
