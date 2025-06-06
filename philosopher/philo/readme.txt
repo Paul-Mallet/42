@@ -1,42 +1,3 @@
-
-TODO
-1. even OK / odd NOT
-(pierre approach? start even philos(1rst loop(i = 0, then i += 2)), then odd(2nd loop(i = 1, then i += 2)))
-2. setup a waiter !
-
-0 4 has taken a fork
-0 4 has taken a fork
-0 4 is eating
-0 1 has taken a fork
-0 1 has taken a fork
-0 1 is eating
-0 3 has taken a fork
-200 4 is sleeping
-200 5 has taken a fork
-200 1 is sleeping
-200 2 has taken a fork
-200 5 has taken a fork
-200 5 is eating
-200 6 has taken a fork
-200 3 has taken a fork
-200 3 is eating
-400 4 is thinking
-400 1 is thinking
-400 5 is sleeping
-400 3 is sleeping
-400 6 has taken a fork
-400 6 is eating
-400 2 has taken a fork
-400 2 is eating
-400 4 has taken a fork
-400 4 has taken a fork
-400 4 is eating
-411 1 died
-
-### Nico ###
-t_mtx	last_meal; -> within t_philo(1 / philo, + 2 forks, + globals(from data))
-
-
 ### Resume to solve Philosophers ###
 
 * 1 philo, 1 fork
@@ -258,3 +219,12 @@ case to eat
 concurrent system -> OS decides which thread(philo) runs 1rst
 all philo threads compete simultaneously for forks
 => ANY philo could be 1rst
+
+
+Amis du monde(Ami d'Herve)
+
+wordpress
+logo ONG, photo, video, texte
+envoie le tt par whatsapp
+connecter ytb, facebook, rsx sociaux
+lien pour des dons

@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:03:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/05 18:42:24 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 12:50:48 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,29 @@ static void	handle_single_philo(t_data *data)
 
 static void	handle_multiple_philos(t_data *data)
 {
-	unsigned int	i;
+	int	i;
 
-	i = 0;
-	while (i < data->num_philos)
-	{
+	i = -1;
+	while ((unsigned int)++i < data->num_philos)
 		data->philos[i].last_meal_time = data->start_time;
-		i++;
-	}
 	handle_thread(data, 0, CREATE, true);
-	i = 0;
-	while (i < data->num_philos)
+	i = 1;
+	while ((unsigned int)i < data->num_philos)
 	{
 		handle_thread(data, i, CREATE, false);
-		i++;
+		i += 2;
+	}
+	i = 0;
+	while ((unsigned int)i < data->num_philos)
+	{
+		handle_thread(data, i, CREATE, false);
+		i += 2;
 	}
 	while (!is_simulation_stopped(data))
 		precise_usleep(1000);
-	i = 0;
-	while (i < data->num_philos)
-	{
+	i = -1;
+	while ((unsigned int)++i < data->num_philos)
 		handle_thread(data, i, JOIN, false);
-		i++;
-	}
 	handle_thread(data, 0, JOIN, true);
 }
 

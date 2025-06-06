@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 23:16:29 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/05 18:16:41 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 12:47:27 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*single_routine(void *arg)
 	t_philo	*philo;
 	time_t	curr_time;
 
-	philo = (t_philo*)arg;
+	philo = (t_philo *)arg;
 	curr_time = get_current_time_in_ms();
 	handle_mutex(&philo->left_fork->fork, LOCK);
 	printf("%ld %d has taken a fork\n",
@@ -35,20 +35,20 @@ void	*single_routine(void *arg)
 void	*routine(void *arg)
 {
 	t_philo	*philo;
-	// t_mtx	*forks;
 
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		// forks = forks_ordering(philo);
 		if (philo->left_fork->id < philo->right_fork->id)
 		{
-			if (!is_taking_forks(philo, &philo->left_fork->fork, &philo->right_fork->fork))
+			if (!is_taking_forks(philo, &philo->left_fork->fork,
+					&philo->right_fork->fork))
 				break ;
 		}
 		else
 		{
-			if (!is_taking_forks(philo, &philo->right_fork->fork, &philo->left_fork->fork))
+			if (!is_taking_forks(philo, &philo->right_fork->fork,
+					&philo->left_fork->fork))
 				break ;
 		}
 		if (!is_sleeping(philo))
@@ -56,11 +56,10 @@ void	*routine(void *arg)
 		if (!is_thinking(philo))
 			break ;
 	}
-	// free(forks);
 	return (NULL);
 }
 
-void *monitor_routine(void *arg)
+void	*monitor_routine(void *arg)
 {
 	t_data	*data;
 

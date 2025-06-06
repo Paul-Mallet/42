@@ -6,13 +6,12 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 12:16:41 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/05 18:39:21 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 12:40:32 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-//is_simulation_stopped(&philo->data) //or data
 bool	is_simulation_stopped(t_data *data)
 {
 	bool	is_stopped;
@@ -25,53 +24,52 @@ bool	is_simulation_stopped(t_data *data)
 	return (is_stopped);
 }
 
-void    is_philos_all_eaten(t_data *data)
+void	is_philos_all_eaten(t_data *data)
 {
-    unsigned int     i;
-    bool            all_eaten;
+	bool			all_eaten;
+	unsigned int	i;
 
-    if (data->must_eat_count > 0)
-    {
-        all_eaten = true;
-        i = 0;
-        while (i < data->num_philos)
-        {
-            // printf("meals_eaten: %d\n", data->philos[i].meals_eaten);
-            if (data->philos[i].meals_eaten < data->must_eat_count)
-            {
-                all_eaten = false;
-                break ;
-            }
-            i++;
-        }
-        if (all_eaten)
-            data->simulation_stop = true;
-    }
+	if (data->must_eat_count > 0)
+	{
+		all_eaten = true;
+		i = 0;
+		while (i < data->num_philos)
+		{
+			if (data->philos[i].meals_eaten < data->must_eat_count)
+			{
+				all_eaten = false;
+				break ;
+			}
+			i++;
+		}
+		if (all_eaten)
+			data->simulation_stop = true;
+	}
 }
 
-void    is_philo_died(t_data *data)
+void	is_philo_died(t_data *data)
 {
-    unsigned int    i;
-    time_t	        curr_time;
-	time_t	        time_since_last_meal;
+	unsigned int	i;
+	time_t			curr_time;
+	time_t			time_since_last_meal;
 
-    i = 0;
-    while (i < data->num_philos)
-    {
-        handle_mutex(&data->read_mutex, LOCK);
-        curr_time = get_current_time_in_ms();
-        time_since_last_meal = (curr_time - data->philos[i].last_meal_time);
-        handle_mutex(&data->read_mutex, UNLOCK);
-        if (time_since_last_meal > data->tt_die)
-        {
-            handle_mutex(&data->read_mutex, LOCK);
-            curr_time = get_current_time_in_ms();
-            printf("%ld %d died\n", (curr_time - data->start_time),
-                data->philos[i].id);
-            data->simulation_stop = true;
-            handle_mutex(&data->read_mutex, UNLOCK);
-            break ;
-        }
-        i++;
-    }
+	i = 0;
+	while (i < data->num_philos)
+	{
+		handle_mutex(&data->read_mutex, LOCK);
+		curr_time = get_current_time_in_ms();
+		time_since_last_meal = (curr_time - data->philos[i].last_meal_time);
+		handle_mutex(&data->read_mutex, UNLOCK);
+		if (time_since_last_meal > data->tt_die)
+		{
+			handle_mutex(&data->read_mutex, LOCK);
+			curr_time = get_current_time_in_ms();
+			printf("%ld %d died\n", (curr_time - data->start_time),
+				data->philos[i].id);
+			data->simulation_stop = true;
+			handle_mutex(&data->read_mutex, UNLOCK);
+			break ;
+		}
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:05:15 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/03 20:47:43 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 12:48:06 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int ac, char **av)
 		print_data(&data);
 		start_dinner(&data);
 		clean_data(&data);
-		//check_valgrind !
 	}
 	else
 		error_exit("Invalid arguments.\n Ex: 5 410 200 200 [7]");
