@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 15:34:52 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/06 16:50:51 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:58:52 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ time_t	get_current_time_in_ms(void)
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL))
-		error_exit("gettimeofday failed.", TIME, NULL);
+		error_exit("gettimeofday failed.", TIME);
 	return ((tv.tv_sec * 1000L) + (tv.tv_usec / 1e3L));
 }
 

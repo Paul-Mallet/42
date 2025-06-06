@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 18:20:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/06 17:25:12 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:58:45 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void	init_data(t_data *data, char **av)
 	data->simulation_stop = false;
 	data->forks = (t_fork *)malloc(data->num_philos * sizeof(t_fork));
 	if (!data->forks)
-		error_exit("Malloc failed. Out of memory.", MALLOC, NULL);
+		error_exit("Malloc failed. Out of memory.", MALLOC);
 	data->philos = (t_philo *)malloc(data->num_philos * sizeof(t_philo));
 	if (!data->philos)
-		error_exit("Malloc failed. Out of memory.", MALLOC, NULL);
+		error_exit("Malloc failed. Out of memory.", MALLOC);
 	init_mutexes(data);
 	init_forks(data);
 	init_philos(data);

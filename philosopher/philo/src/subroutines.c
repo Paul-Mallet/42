@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 10:30:59 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/06 18:42:39 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 19:07:01 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ bool	is_taking_forks(t_philo *philo, t_mtx *fst_fork, t_mtx *sd_fork)
 	time_t	curr_time;
 
 	handle_mutex(fst_fork, LOCK);
-	//unlock_if_simulation_stopped(fork to unlock);
+	//unlock_if_simulation_stopped(fork to unlock); //norm
 	if (is_simulation_stopped(philo->data))
 	{
 		handle_mutex(fst_fork, UNLOCK);
 		return (false);
 	}
-	curr_time = get_current_time_in_ms();
 	handle_mutex(&philo->data->read_mutex, LOCK);
+	curr_time = get_current_time_in_ms();
 	printf("%ld %d has taken a fork\n", (curr_time - philo->data->start_time),
 		philo->id);
 	handle_mutex(&philo->data->read_mutex, UNLOCK);
@@ -35,8 +35,8 @@ bool	is_taking_forks(t_philo *philo, t_mtx *fst_fork, t_mtx *sd_fork)
 		handle_mutex(fst_fork, UNLOCK);
 		return (false);
 	}
-	curr_time = get_current_time_in_ms();
 	handle_mutex(&philo->data->read_mutex, LOCK);
+	curr_time = get_current_time_in_ms();
 	printf("%ld %d has taken a fork\n", (curr_time - philo->data->start_time),
 		philo->id);
 	handle_mutex(&philo->data->read_mutex, UNLOCK);
@@ -57,8 +57,8 @@ bool	is_eating(t_philo *philo)
 		handle_mutex(&philo->philo_mutex, UNLOCK);
 		return (false);
 	}
-	curr_time = get_current_time_in_ms();
 	handle_mutex(&philo->data->read_mutex, LOCK);
+	curr_time = get_current_time_in_ms();
 	printf("%ld %d is eating\n", (curr_time - philo->data->start_time),
 		philo->id);
 	handle_mutex(&philo->data->read_mutex, UNLOCK);
@@ -99,13 +99,13 @@ bool	is_thinking(t_philo *philo)
 	unsigned int	tt_think;
 
 	handle_mutex(&philo->philo_mutex, LOCK);
-	curr_time = get_current_time_in_ms();
 	if (is_simulation_stopped(philo->data))
 	{
 		handle_mutex(&philo->philo_mutex, UNLOCK);
 		return (false);
 	}
 	handle_mutex(&philo->data->read_mutex, LOCK);
+	curr_time = get_current_time_in_ms();
 	printf("%ld %d is thinking\n", (curr_time - philo->data->start_time),
 		philo->id);
 	handle_mutex(&philo->data->read_mutex, UNLOCK);

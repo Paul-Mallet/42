@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/06 17:51:39 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:58:15 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ int				handle_input_error(t_err code);
 // void			*handle_malloc_error(size_t bytes);
 void			handle_mutex_error(int status, t_err code);
 void			handle_thread_error(int status, t_err code);
-int				error_exit(const char *msg, int status, t_data *data);
+int				error_exit(const char *msg, int status);
 
 /* CLEAN */
 void			clean_data(t_data *data);
