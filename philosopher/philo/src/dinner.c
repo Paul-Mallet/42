@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:03:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/06 12:50:48 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:37:03 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	handle_single_philo(t_data *data)
 	handle_thread(data, i, CREATE, true);
 	handle_thread(data, i, CREATE, false);
 	while (!is_simulation_stopped(data))
-		precise_usleep(1000);
+		usleep(1000);
 	handle_thread(data, i, JOIN, false);
 	handle_thread(data, i, JOIN, true);
 }
@@ -42,6 +42,7 @@ static void	handle_multiple_philos(t_data *data)
 		handle_thread(data, i, CREATE, false);
 		i += 2;
 	}
+	usleep(100);
 	i = 0;
 	while ((unsigned int)i < data->num_philos)
 	{
@@ -49,7 +50,7 @@ static void	handle_multiple_philos(t_data *data)
 		i += 2;
 	}
 	while (!is_simulation_stopped(data))
-		precise_usleep(1000);
+		usleep(1000);
 	i = -1;
 	while ((unsigned int)++i < data->num_philos)
 		handle_thread(data, i, JOIN, false);
@@ -59,10 +60,12 @@ static void	handle_multiple_philos(t_data *data)
 void	start_dinner(t_data *data)
 {
 	data->start_time = get_current_time_in_ms();
-	if (data->num_philos == 0 || data->must_eat_count == 0)
-		return ;
+	if (data->num_philos == 0)
+		error_exit("Need 1 meal to start.", PHILO_NUM, data);
+	else if (data->must_eat_count == 0)
+		error_exit("Need 1 meal to start.", MEAL_NUM, data);
 	else if (data->num_philos == 1)
 		handle_single_philo(data);
-	else
+	else if (data->num_philos > 1)
 		handle_multiple_philos(data);
 }

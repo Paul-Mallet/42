@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 08:46:45 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/04 11:30:22 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:52:41 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,31 @@
 	char *msg: message to print
 	exit the program with failure status code
 */
-void	error_exit(const char *msg)
+int	error_exit(const char *msg, int status, t_data *data)
 {
+	(void)data;
 	printf("%s\n", msg);
-	exit(EXIT_FAILURE);
+	// if (data)
+		// clean_data(data);
+	return (status);
 }
 
 /*
 	t_err_code code: enum error code based on mutex function manual 
 */
-void	handle_input_error(t_err code)
+int	handle_input_error(t_err code)
 {
 	if (code == EMPTY_ERR)
-		error_exit("Invalid empty input.");
+		return (error_exit("Invalid empty input.", code, NULL));
 	else if (code == SPACES_ERR)
-		error_exit("Invalid only spaces input.");
+		return (error_exit("Invalid only spaces input.", code, NULL));
 	else if (code == DIGITS_ERR)
-		error_exit("Invalid digits format.");
+		return (error_exit("Invalid digits format.", code, NULL));
 	else if (code == SIGN_ERR)
-		error_exit("Invalid sign, not handle.");
+		return (error_exit("Invalid sign, not handle.", code, NULL));
 	else if (code == OVERFLOW_ERR)
-		error_exit("Invalid type, only handle unsigned int.");
-}
-
-/*
-	size_t bytes: memory size of value type(int, char, struct...)
-*/
-void	*handle_malloc_error(size_t bytes)
-{
-	void	*content;
-
-	content = malloc(bytes);
-	if (!content)
-		error_exit("Malloc failed. Out of memory.");
-	return (content);
+		return (error_exit("Invalid type, only handle unsigned int.", code, NULL));
+	return (SUCCESS);
 }
 
 /*
@@ -62,22 +53,22 @@ void	handle_mutex_error(int status, t_err code)
 		return ;
 	else if (status == EINVAL
 		&& (code == LOCK || code == UNLOCK || code == DESTROY))
-		error_exit("The value specified by mutex is invalid.");
+		error_exit("The value specified by mutex is invalid.", code, NULL);
 	else if (status == EINVAL && code == INIT)
-		error_exit("The value specified by attr is invalid.");
+		error_exit("The value specified by attr is invalid.", code, NULL);
 	else if (status == EBUSY)
-		error_exit("Mutex is locked.");
+		error_exit("Mutex is locked.", code, NULL);
 	else if (status == EPERM)
-		error_exit("The current thread does not hold a lock on mutex.");
+		error_exit("The current thread does not hold a lock on mutex.", code, NULL);
 	else if (status == EDEADLK)
 	{
 		error_exit("A deadlock would occur if the thread"
-			"blocked waiting for mutex.");
+			"blocked waiting for mutex.", code, NULL);
 	}
 	else if (status == ENOMEM)
 	{
 		error_exit("The process cannot allocate enough"
-			"memory to create another mutex.");
+			"memory to create another mutex.", code, NULL);
 	}
 }
 
@@ -90,11 +81,11 @@ void	handle_thread_error(int status, t_err code)
 	if (code == CREATE)
 	{
 		if (status == EINVAL)
-			error_exit("Invalid settings in attr.");
+			error_exit("Invalid settings in attr.", code, NULL);
 		else if (status == EPERM)
 		{
 			error_exit("No permission to set the scheduling policy"
-				" and parameters specified in attr.");
+				" and parameters specified in attr.", code, NULL);
 		}
 	}
 	else if (code == JOIN)
@@ -103,11 +94,11 @@ void	handle_thread_error(int status, t_err code)
 		{
 			error_exit("A  deadlock  was  detected (e.g., two threads  tried"
 				" to  join  with   each other); or thread specifies the call‐"
-				"ing thread.");
+				"ing thread.", code, NULL);
 		}
 		else if (status == EINVAL)
-			error_exit("thread is not a joinable thread.");
+			error_exit("thread is not a joinable thread.", code, NULL);
 		else if (status == ESRCH)
-			error_exit("No thread with the ID thread could be found.");
+			error_exit("No thread with the ID thread could be found.", code, NULL);
 	}
 }

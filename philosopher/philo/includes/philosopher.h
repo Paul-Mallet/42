@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/05 18:13:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:51:39 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,18 @@ typedef enum e_philo_state
 
 typedef enum e_err
 {
+	SUCCESS,
 	/* PARSING */
+	ARGUMENTS,
 	EMPTY_ERR,
 	SPACES_ERR,
 	DIGITS_ERR,
 	SIGN_ERR,
 	OVERFLOW_ERR,
+	PHILO_NUM,
+	MEAL_NUM,
+	MALLOC,
+	TIME,
 	/* MUTEX */
 	INIT,
 	LOCK,
@@ -119,7 +125,7 @@ typedef struct s_data
 
 /* FUNCTIONS */
 /* PARSING */
-void			parsing(char **av);
+int				parsing(char **av);
 
 /* DATA */
 void			init_data(t_data *data, char **av);
@@ -137,7 +143,7 @@ void			*monitor_routine(void *arg);
 void			*single_routine(void *arg);
 
 /* SUB-ROUTINES */
-t_mtx			*forks_ordering(t_philo *philo);
+// t_mtx			*forks_ordering(t_philo *philo);
 bool			is_taking_forks(t_philo *philo, t_mtx *fst_fork, t_mtx *sd_fork);
 bool			is_eating(t_philo *philo);
 bool			is_sleeping(t_philo *philo);
@@ -149,11 +155,11 @@ void			is_philos_all_eaten(t_data *data);
 void			is_philo_died(t_data *data);
 
 /* ERRORS */
-void			handle_input_error(t_err code);
-void			*handle_malloc_error(size_t bytes);
+int				handle_input_error(t_err code);
+// void			*handle_malloc_error(size_t bytes);
 void			handle_mutex_error(int status, t_err code);
 void			handle_thread_error(int status, t_err code);
-void			error_exit(const char *msg);
+int				error_exit(const char *msg, int status, t_data *data);
 
 /* CLEAN */
 void			clean_data(t_data *data);
@@ -167,7 +173,6 @@ int				is_overflow(char *s);
 
 /* CONVERSION_UTILS */
 time_t			get_current_time_in_ms(void);
-void			precise_usleep(time_t usec);
 unsigned int	ft_atoui(const char *nptr);
 
 /* PRINT_DATA(DEBUG) */

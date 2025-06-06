@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 16:54:54 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/04 10:13:42 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:29:17 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 static void	destroy_mutexes(t_data *data)
 {
 	unsigned int	i;
+	t_philo			*philo;
 
 	i = 0;
 	while (i < data->num_philos)
 	{
-		handle_mutex(&data->philos->philo_mutex, DESTROY);
+		philo = data->philos + i;
+		handle_mutex(&philo->philo_mutex, DESTROY);
 		i++;
 	}
 	handle_mutex(&data->write_mutex, DESTROY);
@@ -42,6 +44,8 @@ void	clean_data(t_data *data)
 {
 	destroy_mutexes(data);
 	destroy_forks(data);
-	free(data->philos);
-	free(data->forks);
+	if (data->philos)
+		free(data->philos);
+	if (data->forks)
+		free(data->forks);
 }

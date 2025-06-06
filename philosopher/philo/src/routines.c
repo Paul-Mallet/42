@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 23:16:29 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/06 12:47:27 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:40:31 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*single_routine(void *arg)
 	{
 		if (is_simulation_stopped(philo->data))
 			break ;
-		precise_usleep(500);
+		usleep(500);
 	}
 	return (NULL);
 }
@@ -68,7 +68,7 @@ void	*monitor_routine(void *arg)
 	{
 		is_philos_all_eaten(data);
 		is_philo_died(data);
-		precise_usleep(500);
+		usleep(500);
 	}
 	return (NULL);
 }

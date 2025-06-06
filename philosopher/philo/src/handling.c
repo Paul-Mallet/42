@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:53:52 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/04 11:30:43 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:32:08 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,19 @@ void	handle_mutex(t_mtx *fork, t_err code)
 void	handle_thread(t_data *data, int i, t_err code, bool is_monitor)
 {
 	if (code == CREATE && is_monitor)
-	{
-		handle_thread_error(pthread_create(&data->monitor, NULL,
-				&monitor_routine, data), code);
-	}
+		pthread_create(&data->monitor, NULL, &monitor_routine, data);
 	else if (code == CREATE && data->num_philos == 1)
 	{
-		handle_thread_error(pthread_create(&data->philos[i].thread, NULL,
-				&single_routine, (data->philos + i)), code);
+		pthread_create(&data->philos[i].thread, NULL,
+				&single_routine, (data->philos + i));
 	}
 	else if (code == CREATE && data->num_philos > 1)
 	{
-		handle_thread_error(pthread_create(&data->philos[i].thread, NULL,
-				&routine, &data->philos[i]), code);
+		pthread_create(&data->philos[i].thread, NULL, &routine,
+			&data->philos[i]);
 	}
 	else if (code == JOIN && is_monitor)
-		handle_thread_error(pthread_join(data->monitor, NULL), code);
+		pthread_join(data->monitor, NULL);
 	else if (code == JOIN)
-		handle_thread_error(pthread_join(data->philos[i].thread, NULL), code);
+		pthread_join(data->philos[i].thread, NULL);
 }

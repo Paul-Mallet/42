@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 12:16:41 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/06 12:40:32 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 18:28:14 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,20 @@ void	is_philos_all_eaten(t_data *data)
 		i = 0;
 		while (i < data->num_philos)
 		{
+			handle_mutex(&data->write_mutex, LOCK);
 			if (data->philos[i].meals_eaten < data->must_eat_count)
 			{
+				handle_mutex(&data->write_mutex, UNLOCK);
 				all_eaten = false;
 				break ;
 			}
+			handle_mutex(&data->write_mutex, UNLOCK);
 			i++;
 		}
+		handle_mutex(&data->read_mutex, LOCK);
 		if (all_eaten)
 			data->simulation_stop = true;
+		handle_mutex(&data->read_mutex, UNLOCK);
 	}
 }
 
@@ -56,10 +61,10 @@ void	is_philo_died(t_data *data)
 	i = 0;
 	while (i < data->num_philos)
 	{
-		handle_mutex(&data->read_mutex, LOCK);
+		handle_mutex(&data->write_mutex, LOCK);
 		curr_time = get_current_time_in_ms();
 		time_since_last_meal = (curr_time - data->philos[i].last_meal_time);
-		handle_mutex(&data->read_mutex, UNLOCK);
+		handle_mutex(&data->write_mutex, UNLOCK);
 		if (time_since_last_meal > data->tt_die)
 		{
 			handle_mutex(&data->read_mutex, LOCK);

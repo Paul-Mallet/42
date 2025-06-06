@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 11:26:41 by pamallet          #+#    #+#             */
-/*   Updated: 2025/05/21 23:25:14 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:51:59 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	is_correct_sign(const char *s)
 	return (1);
 }
 
-void	parsing(char **av)
+int	parsing(char **av)
 {
 	int	i;
 
@@ -62,14 +62,15 @@ void	parsing(char **av)
 	while (av[++i])
 	{
 		if (!ft_strlen(av[i]))
-			handle_input_error(EMPTY_ERR);
+			return (handle_input_error(EMPTY_ERR));
 		else if (is_only_spaces(av[i]))
-			handle_input_error(SPACES_ERR);
+			return (handle_input_error(SPACES_ERR));
 		else if (!is_correct_digits(av[i]))
-			handle_input_error(DIGITS_ERR);
+			return (handle_input_error(DIGITS_ERR));
 		else if (!is_correct_sign(av[i]))
-			handle_input_error(SIGN_ERR);
+			return (handle_input_error(SIGN_ERR));
 		else if (is_overflow(av[i]))
-			handle_input_error(OVERFLOW_ERR);
+			return (handle_input_error(OVERFLOW_ERR));
 	}
+	return (SUCCESS);
 }
