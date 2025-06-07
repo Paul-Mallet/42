@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:53:52 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/06 17:32:08 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:22:41 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	handle_thread(t_data *data, int i, t_err code, bool is_monitor)
 	else if (code == CREATE && data->num_philos == 1)
 	{
 		pthread_create(&data->philos[i].thread, NULL,
-				&single_routine, (data->philos + i));
+			&single_routine, (data->philos + i));
 	}
 	else if (code == CREATE && data->num_philos > 1)
 	{

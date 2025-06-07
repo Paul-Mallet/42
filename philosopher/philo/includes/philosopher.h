@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 16:06:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/06 18:58:15 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:26:35 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ typedef struct s_data
 int				parsing(char **av);
 
 /* DATA */
-void			init_data(t_data *data, char **av);
+bool			init_data(t_data *data, char **av);
 
 /* HANDLING */
 void			handle_mutex(t_mtx *fork, t_err code);
@@ -145,7 +145,7 @@ void			*single_routine(void *arg);
 /* SUB-ROUTINES */
 // t_mtx			*forks_ordering(t_philo *philo);
 bool			is_taking_forks(t_philo *philo, t_mtx *fst_fork, t_mtx *sd_fork);
-bool			is_eating(t_philo *philo);
+bool			is_eating(t_philo *philo, t_mtx *fst_fork, t_mtx *sd_fork);
 bool			is_sleeping(t_philo *philo);
 bool			is_thinking(t_philo *philo);
 
@@ -156,7 +156,6 @@ void			is_philo_died(t_data *data);
 
 /* ERRORS */
 int				handle_input_error(t_err code);
-// void			*handle_malloc_error(size_t bytes);
 void			handle_mutex_error(int status, t_err code);
 void			handle_thread_error(int status, t_err code);
 int				error_exit(const char *msg, int status);

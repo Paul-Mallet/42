@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 18:20:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/06 18:58:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:27:56 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	init_philos(t_data *data)
 	}
 }
 
-void	init_data(t_data *data, char **av)
+bool	init_data(t_data *data, char **av)
 {
 	data->num_philos = ft_atoui(av[1]);
 	data->tt_die = ft_atoui(av[2]);
@@ -62,11 +62,18 @@ void	init_data(t_data *data, char **av)
 	data->simulation_stop = false;
 	data->forks = (t_fork *)malloc(data->num_philos * sizeof(t_fork));
 	if (!data->forks)
+	{
 		error_exit("Malloc failed. Out of memory.", MALLOC);
+		return (EXIT_FAILURE);
+	}
 	data->philos = (t_philo *)malloc(data->num_philos * sizeof(t_philo));
 	if (!data->philos)
+	{
 		error_exit("Malloc failed. Out of memory.", MALLOC);
+		return (EXIT_FAILURE);
+	}
 	init_mutexes(data);
 	init_forks(data);
 	init_philos(data);
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 20:03:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/06 18:58:28 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/07 16:25:02 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	start_dinner(t_data *data)
 {
 	data->start_time = get_current_time_in_ms();
 	if (data->num_philos == 0)
-		error_exit("Need 1 meal to start.", PHILO_NUM);
+		error_exit("Need 1 philo to start.", PHILO_NUM);
 	else if (data->must_eat_count == 0)
 		error_exit("Need 1 meal to start.", MEAL_NUM);
 	else if (data->num_philos == 1)

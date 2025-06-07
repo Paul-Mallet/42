@@ -24,11 +24,11 @@ all: $(NAME)
 	@echo "philo compiled"
 
 $(NAME): $(OBJS)
-	@$(CC) $(FLAGS) -o $@ $(OBJS) # $(T_FLAG)
+	@$(CC) $(FLAGS) $(T_FLAG) -o $@ $(OBJS)
 
 $(OBJS_DIR)%.o: %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) $(T_FLAG) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJS_DIR)
