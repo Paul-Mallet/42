@@ -1,2 +1,9 @@
+#bin files
 a.out
-./minilibx-linux
+cub3D
+
+#mlx folder
+/minilibx-linux
+
+#object files
+/obj
