@@ -6,12 +6,14 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/11 17:42:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:02:09 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# define _GNU_SOURCE
 
 # include <unistd.h>
 # include <stdio.h>
@@ -28,5 +30,6 @@
 # include <X11/keysym.h>
 
 //macros, enums, structs, functions...
+
 
 #endif

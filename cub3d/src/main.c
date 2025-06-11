@@ -6,15 +6,22 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:27:54 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/11 17:45:04 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/11 18:07:28 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	mlx_screen()
+double	my_clamped_formula(double (*formula)(double), double input)
 {
-	//...
+	double	res;
+
+	if (input > 1)
+		input = 1.0;
+	if (input < 1)
+		input = -1.0;
+	res = formula(input);
+	return (res);
 }
 
 int	main(void)
@@ -34,6 +41,9 @@ int	main(void)
 	printf("double_t1: %f sizeof(%ld) max(%f)\n", dblet1, sizeof(dblet1), DBL_MAX);
 	
 	/* MATH */
+	//acos, asin, atan()... need input [-1, 1] domain
 	printf("acos: %f\n", acos(dble));
+	printf("acos: %f\n", my_clamped_formula(acos, dble));
+	printf("acos: %f\n", my_clamped_formula(acos, M_PI_4));
 	return (0);
 }
