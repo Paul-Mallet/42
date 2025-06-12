@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/11 18:02:09 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/12 17:44:46 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <X11/X.h>
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
+# include <errno.h>
 
 //macros, enums, structs, functions...
 

@@ -50,5 +50,26 @@ Map(+ file parsing)
 surrounded by walls 1, or error
 [see subject...]
 
-laisse faire le Makefile, ajouterais mes flags / files / minilibx
-main.c simple, parsing en 1er
+ERROR HANDLING
+- functions of math.h
+HUGE_VAL(double | )
+INFINITY(double | isinf)
+NAN(double | isnan)
+
+- syst calls & I/O functions
+open() return (non-neg int |-1 + set errno);
+close() return (0 | -1 + set errno);
+read() return (nb bytes read | -1 + set errno);
+write() return (nb bytes written | -1 + set errno);
+printf() return (nb char printed after joining all values + excluding last \0 | neg value);
+gettimeofday() return (0 | -1 + set errno);
+
+errno.h : EDOM math arg out of domain of function
+int errno; global var with ext linkage(syst lib file, accessible from *.c files, only 1 def, 1 mem location)
+extern int errno;
+
+perror, strerror
+
+- lib-based functions
+malloc() return (void * | NULL);
+free() return (void);

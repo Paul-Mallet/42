@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:27:54 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/11 18:07:28 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:16:21 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,19 @@ int	main(void)
 	
 	/* MATH */
 	//acos, asin, atan()... need input [-1, 1] domain
-	printf("acos: %f\n", acos(dble));
+	printf("acos: %f, can return %f\n", acos(dble), NAN);
 	printf("acos: %f\n", my_clamped_formula(acos, dble));
 	printf("acos: %f\n", my_clamped_formula(acos, M_PI_4));
+	
+	/* flags chars for doubles */
+	// 5 spaces + 24000
+	printf("*: %*d\n", 10, 24000);
+	printf(".1: %.1f\n", 1234567.89);
+
+	/* Error Handling */
+	if (math_errhandling & MATH_ERRNO)
+		printf("Math functions set errno\n");
+	if (math_errhandling &  MATH_ERREXCEPT)
+		printf("Math functions raise floating-point exceptions\n");
 	return (0);
 }
