@@ -52,7 +52,7 @@ surrounded by walls 1, or error
 
 ERROR HANDLING
 - functions of math.h
-HUGE_VAL(double | )
+HUGE_VAL(double | isinf)
 INFINITY(double | isinf)
 NAN(double | isnan)
 
