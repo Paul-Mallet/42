@@ -1,5 +1,5 @@
 CC= gcc
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror -g
 SRC= main.c \
 	 init.c \
      hooks.c \
@@ -16,7 +16,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -I/usr/include -Iminilibx-linux -O3 -g -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lminilibx-linux -lmlx_Linux -lXext -lX11 -o $(NAME)
+	$(CC) $(OBJ) -rdynamic -Xlinker -export-dynamic -Lminilibx-linux -lmlx_Linux -lXext -lX11 -o $(NAME)
 
 clean:
 	rm -f $(OBJ)

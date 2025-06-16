@@ -1,3 +1,5 @@
+"settings, keyboard, compose key(alt + right) for accents"
+
 CUB3D Documentation
 
 HOW TO DEV
@@ -64,12 +66,107 @@ write() return (nb bytes written | -1 + set errno);
 printf() return (nb char printed after joining all values + excluding last \0 | neg value);
 gettimeofday() return (0 | -1 + set errno);
 
-errno.h : EDOM math arg out of domain of function
+- errno.h : EDOM math arg out of domain of function
 int errno; global var with ext linkage(syst lib file, accessible from *.c files, only 1 def, 1 mem location)
 extern int errno;
 
-perror, strerror
+- perror, strerror
+custom string based on enums || errno value(EACCESS = int)
 
 - lib-based functions
 malloc() return (void * | NULL);
 free() return (void);
+
+RAY-CASTING
+
+// Init player position, vector direction, plane 
+double posX; //[x, y] on the grid
+double posY;
+
+double dirX; //[X, Y]
+double dirY;
+
+double planeX; //2d vector plane
+double planeY;
+
+double time; //curr frame
+double oldTime;
+
+// Deduce the Field Of View
+FOV = 2 * atan(dirVector/cameraPlane) = ?deg
+
+// game loop starts
+
+// Start drawing rays based on x-coordinate width of the screen
+double cameraX; //[-1(left), 1(right)]
+double rayDirX;
+double rayDirY;
+double w; //width?
+
+while (x < w)
+{
+	cameraX = 2 * x / w - 1;
+	rayDirX = dirX + (planeX * cameraX);
+	rayDirY = dirY + (planeY * cameraX);
+	x++;
+}
+// got every rayDirs along the screen width(x)
+
+// --- DDA Algo(ray points on each grid square)
+
+unsigned int mapX, mapY //curr map's square coord the ray is in
+
+rayPosX, rayPosY //contains in which square it is && ...
+
+sideDistX, sideDistY //distance ray needs to travel from start pos to 1rst grid x/y side encounter
+
+deltaDistX, deltaDistY //full dist the ray has to travel to go next grid x/y side
+
+// deriving deltaDistX/Y using Pythagoras formula
+double deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
+double deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
+// or
+double deltaDistX = abs(|rayDir| / rayDirX), where rayDir = rayDirX/Y length
+double deltaDistY = abs(|rayDir| / rayDirY)
+// ratio 1 instead of |rayDir|, cause same
+double deltaDistX = abs(1 / rayDirX) || 1e30(or INFINITY) if rayDirX/Y == 0
+double deltaDistY = abs(1 / rayDirY)
+
+double perpWallDist; // ray len
+
+int stepX, stepY; //[-1 or 1], ray direction(x, y)
+
+bool hit = false; //determinate whether or not coming loop may be ended
+int side; //(x = 0 = NS/y = 1 = EW-side)
+// ---
+
+// --- before start DDA calculation, still calculated stepX, stepY, sideDistX and sideDistY
+//calculate step and initial sideDist
+if (rayDirX < 0)
+{
+	stepX = -1;
+	sideDistX = (posX - mapX) * deltaDistX; // dist from start pos to 1rst left side
+}
+else
+{
+	stepX = 1;
+	sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+}
+if (rayDirY < 0)
+{
+	stepY = -1;
+	sideDistY = (posY - mapY) * deltaDistY;
+}
+else
+{
+	stepY = 1;
+	sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+}
+
+
+
+
+
+
+
+

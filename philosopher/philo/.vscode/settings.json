@@ -3,5 +3,6 @@
 		"philosopher.h": "c",
 		"climits": "c",
 		"cstdlib": "c"
-	}
+	},
+	"makefile.configureOnOpen": false
 }

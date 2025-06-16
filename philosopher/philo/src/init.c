@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 18:20:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/07 16:27:56 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:53:55 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ bool	init_data(t_data *data, char **av)
 	if (!data->philos)
 	{
 		error_exit("Malloc failed. Out of memory.", MALLOC);
+		clean_data(data);
 		return (EXIT_FAILURE);
 	}
 	init_mutexes(data);

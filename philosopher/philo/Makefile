@@ -24,7 +24,7 @@ all: $(NAME)
 	@echo "philo compiled"
 
 $(NAME): $(OBJS)
-	@$(CC) $(FLAGS) $(T_FLAG) -o $@ $(OBJS)
+	@$(CC) -rdynamic -Xlinker -export-dynamic $(FLAGS) $(T_FLAG) -o $@ $(OBJS)
 
 $(OBJS_DIR)%.o: %.c
 	@mkdir -p $(dir $@)

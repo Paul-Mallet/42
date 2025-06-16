@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:27:54 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/12 18:16:21 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:36:51 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,47 @@ double	my_clamped_formula(double (*formula)(double), double input)
 	return (res);
 }
 
-int	main(void)
+// void	init_data(t_data *data)
+// {
+// 	data->mlx.name = 
+// }
+
+void	init(t_data *data)
+{
+	data->mlx.mlx_co = mlx_init();
+	// if (!data->mlx.mlx_co)
+	// 	handle_err("Malloc error.");
+	data->mlx.mlx_win = mlx_new_window(data->mlx.mlx_co,
+		WIDTH, HEIGHT, data->mlx.name);
+	// if (!data->mlx.mlx_win)
+	// {
+	// 	mlx_destroy_display(data->mlx.mlx_co);
+	// 	free(data->mlx.mlx_co);
+	// 	handle_err("Malloc error.");
+	// }
+	data->img.img_ptr = mlx_new_image(data->mlx.mlx_co, WIDTH, HEIGHT);
+	// if (!data->img.img_ptr)
+	// {
+	// 	mlx_destroy_window(data->mlx.mlx_co, data->mlx.mlx_win);
+	// 	mlx_destroy_display(data->mlx.mlx_co);
+	// 	free(data->mlx.mlx_co);
+	// 	handle_err("Malloc error.");
+	// }
+	data->img.addr = mlx_get_data_addr(data->img.img_ptr,
+		&data->img.bpp, &data->img.line_len, &data->img.endian);
+	// init_data(data);
+	mlx_loop(data->mlx.mlx_co);
+}
+
+int	main(int ac, char **av)
 {
 	//float = float_t = FLT_EVAL_METHOD 0 = 4 bytes = 32 bits
 	//double = double_t = FLT_EVAL_METHOD 0 = 8 bytes = 64 bits
-	float	flt = 4.2;
-	double	dble = 4.2;
-	float_t	fltt1 = 4.2;
-	double_t dblet1 = 4.2;
+	float		flt = 4.2;
+	double		dble = 4.2;
+	float_t		fltt1 = 4.2;
+	double_t	dblet1 = 4.2;
+	t_data		data;
 
 	/* FLOAT & DOUBLE */
 	printf("FLT_EVAL_METHOD: %d\n", __FLT_EVAL_METHOD__);
@@ -56,5 +89,21 @@ int	main(void)
 		printf("Math functions set errno\n");
 	if (math_errhandling &  MATH_ERREXCEPT)
 		printf("Math functions raise floating-point exceptions\n");
+
+	(void)ac;
+	data.mlx.name = av[1]; //change with *.cub
+	init(&data);
+	// render(&data);
+
+	// /* perror + errno set + exit */
+	// int 	pfd;
+	// char 	*pathname = "/tmp/file";
+
+	// if ((pfd = open(pathname, O_RDONLY)) == -1)
+	// {
+	// 	perror("Cannot open file\n");
+	// 	exit(EXIT_FAILURE);
+	// }
+
 	return (0);
 }

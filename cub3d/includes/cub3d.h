@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/12 17:44:46 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:58:11 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,47 @@
 
 //macros, enums, structs, functions...
 
+# define WIDTH 1280
+# define HEIGHT 720
+
+typedef enum e_err
+{
+	SUCCESS, // 0
+	MALLOC, // MLX too
+	// syst calls
+	OPEN,
+	CLOSE,
+	READ,
+	WRITE,
+	TIME,
+	// Math.h
+	IS_HUGE_VAL,
+	IS_INFINITY,
+	IS_NAN,
+	//...
+}	t_err;
+
+typedef struct s_img
+{
+	void	*img_ptr;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
+typedef struct s_mlx
+{
+	void	*mlx_co;
+	void	*mlx_win;
+	char	*name;
+}	t_mlx;
+
+typedef struct s_data
+{
+	t_mlx	mlx;
+	t_img	img;
+	//grid, vectors...
+}	t_data;
 
 #endif
