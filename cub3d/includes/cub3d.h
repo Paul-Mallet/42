@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/16 17:58:11 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:36:57 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define _GNU_SOURCE
 
+// check /usr/include to see all libs
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
@@ -22,6 +23,7 @@
 # include <fcntl.h>
 # include <sys/time.h>
 # include <limits.h>
+# include <stdbool.h>
 # include <float.h>
 # include <math.h>
 # include "../minilibx-linux/mlx.h"

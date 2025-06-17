@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:27:54 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/16 18:36:51 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:41:36 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	init(t_data *data)
 	// if (!data->mlx.mlx_co)
 	// 	handle_err("Malloc error.");
 	data->mlx.mlx_win = mlx_new_window(data->mlx.mlx_co,
-		WIDTH, HEIGHT, data->mlx.name);
+		S_WIDTH, S_HEIGHT, data->mlx.name);
 	// if (!data->mlx.mlx_win)
 	// {
 	// 	mlx_destroy_display(data->mlx.mlx_co);
 	// 	free(data->mlx.mlx_co);
 	// 	handle_err("Malloc error.");
 	// }
-	data->img.img_ptr = mlx_new_image(data->mlx.mlx_co, WIDTH, HEIGHT);
+	data->img.img_ptr = mlx_new_image(data->mlx.mlx_co, S_WIDTH, S_HEIGHT);
 	// if (!data->img.img_ptr)
 	// {
 	// 	mlx_destroy_window(data->mlx.mlx_co, data->mlx.mlx_win);
@@ -53,7 +53,35 @@ void	init(t_data *data)
 	data->img.addr = mlx_get_data_addr(data->img.img_ptr,
 		&data->img.bpp, &data->img.line_len, &data->img.endian);
 	// init_data(data);
-	mlx_loop(data->mlx.mlx_co);
+}
+
+void    my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->img.addr + (y * data->img.line_len + x * (data->img.bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
+void	render(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < S_HEIGHT)
+	{
+		x = 0;
+		while (x < S_WIDTH)
+		{
+			my_mlx_pixel_put(data, x, y, 0xFF0000);
+			x++;
+		}
+		y++;
+	}
+	mlx_put_image_to_window(data->mlx.mlx_co,
+			data->mlx.mlx_win,
+			data->img.img_ptr, 0, 0);
 }
 
 int	main(int ac, char **av)
@@ -82,7 +110,7 @@ int	main(int ac, char **av)
 	/* flags chars for doubles */
 	// 5 spaces + 24000
 	printf("*: %*d\n", 10, 24000);
-	printf(".1: %.1f\n", 1234567.89);
+	printf(".1f: %.1f\n", 1234567.89);
 
 	/* Error Handling */
 	if (math_errhandling & MATH_ERRNO)
@@ -91,9 +119,10 @@ int	main(int ac, char **av)
 		printf("Math functions raise floating-point exceptions\n");
 
 	(void)ac;
-	data.mlx.name = av[1]; //change with *.cub
+	data.mlx.name = av[1];
 	init(&data);
-	// render(&data);
+	render(&data);
+	mlx_loop(data.mlx.mlx_co);
 
 	// /* perror + errno set + exit */
 	// int 	pfd;
