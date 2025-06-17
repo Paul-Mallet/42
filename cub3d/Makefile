@@ -1,8 +1,6 @@
 CC=cc
-FLAGS=-Wall -Wextra -Werror -g -Iincludes
-MATHF=-lm
-MLXF=-Lminilibx-linux -lmlx_Linux
-X11F=-lXext -lX11
+CFLAGS=-Wall -Wextra -Werror -g -Iincludes -I/usr/include -Iminilibx-linux
+LDFLAGS=-lm -Lminilibx-linux -lmlx_Linux -lXext -lX11
 SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR), \
 		main.c)
@@ -14,12 +12,13 @@ all: $(NAME)
 	@echo "Cub3D compiled"
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(MATHF) $(MLXF) $(X11F) -o $(NAME)
+	@$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
 
 $(OBJS_DIR)%.o: %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(FLAGS) -I/usr/include -Iminilibx-linux -c $< -o $@
-#-03
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+#-03 opti mlx perf?
 
 clean:
 	@rm -rf $(OBJS_DIR)

@@ -162,11 +162,21 @@ else
 	stepY = 1;
 	sideDistY = (mapY + 1.0 - posY) * deltaDistY;
 }
+//---
+//---
 
 
 
 
+#TODO
+Makefile : check CFLAGS(compiler, %.o:%.c), LDFLAGS(linker, exec file)
 
+PARSING :
+like fract-ol -> no need to convert *.cub(32x32) to fit screen view, because 3D FPS!
+worldMap[x][y]	-> char ** "01P..."
+				-> but need (int **) cast!
 
+RENDERING :
+x, y value, where start drawing pixels?, top-left corner(0, 0)?
 
 
