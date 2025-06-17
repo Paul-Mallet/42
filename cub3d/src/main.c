@@ -6,54 +6,11 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:27:54 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/17 15:41:36 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/17 18:11:37 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-double	my_clamped_formula(double (*formula)(double), double input)
-{
-	double	res;
-
-	if (input > 1)
-		input = 1.0;
-	if (input < 1)
-		input = -1.0;
-	res = formula(input);
-	return (res);
-}
-
-// void	init_data(t_data *data)
-// {
-// 	data->mlx.name = 
-// }
-
-void	init(t_data *data)
-{
-	data->mlx.mlx_co = mlx_init();
-	// if (!data->mlx.mlx_co)
-	// 	handle_err("Malloc error.");
-	data->mlx.mlx_win = mlx_new_window(data->mlx.mlx_co,
-		S_WIDTH, S_HEIGHT, data->mlx.name);
-	// if (!data->mlx.mlx_win)
-	// {
-	// 	mlx_destroy_display(data->mlx.mlx_co);
-	// 	free(data->mlx.mlx_co);
-	// 	handle_err("Malloc error.");
-	// }
-	data->img.img_ptr = mlx_new_image(data->mlx.mlx_co, S_WIDTH, S_HEIGHT);
-	// if (!data->img.img_ptr)
-	// {
-	// 	mlx_destroy_window(data->mlx.mlx_co, data->mlx.mlx_win);
-	// 	mlx_destroy_display(data->mlx.mlx_co);
-	// 	free(data->mlx.mlx_co);
-	// 	handle_err("Malloc error.");
-	// }
-	data->img.addr = mlx_get_data_addr(data->img.img_ptr,
-		&data->img.bpp, &data->img.line_len, &data->img.endian);
-	// init_data(data);
-}
 
 void    my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -121,7 +78,12 @@ int	main(int ac, char **av)
 	(void)ac;
 	data.mlx.name = av[1];
 	init(&data);
+	print_data(&data);
 	render(&data);
+	mlx_hook(data.mlx.mlx_win,
+		DestroyNotify, StructureNotifyMask, &handle_close, &data);
+	mlx_hook(data.mlx.mlx_win,
+		KeyPress, KeyPressMask, &handle_keys, &data);
 	mlx_loop(data.mlx.mlx_co);
 
 	// /* perror + errno set + exit */
