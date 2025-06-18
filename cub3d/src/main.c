@@ -6,40 +6,11 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:27:54 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/17 18:11:37 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/18 15:45:25 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void    my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->img.addr + (y * data->img.line_len + x * (data->img.bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	render(t_data *data)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < S_HEIGHT)
-	{
-		x = 0;
-		while (x < S_WIDTH)
-		{
-			my_mlx_pixel_put(data, x, y, 0xFF0000);
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(data->mlx.mlx_co,
-			data->mlx.mlx_win,
-			data->img.img_ptr, 0, 0);
-}
 
 int	main(int ac, char **av)
 {

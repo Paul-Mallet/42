@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/17 18:11:05 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/18 16:46:05 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,10 @@ typedef struct s_wall
 typedef struct s_grid
 {
 	// curr map's square we're in([screen.width x screen.height]?)
-	int			map_x;		//(int)grid.mapX = 0(floor, min)
-	int			map_y;		//(int)grid.mapY = 719(S_HEIGHT - 1, max), if (double)player.posX = 719.99
+	int				map_x;		//(int)grid.mapX = 0(floor, min)
+	int				map_y;		//(int)grid.mapY = 719(S_HEIGHT - 1, max), if (double)player.posX = 719.99
+	unsigned int	map_width;
+	unsigned int	map_height;
 	t_wall		wall;
 }	t_grid;
 
@@ -127,13 +129,6 @@ typedef struct s_ray
 	double	perp_wall_dist;	//ray dist length
 }	t_ray;
 
-typedef struct s_vect
-{
-	t_player	player;
-	t_cam		cam;
-	t_ray		ray;
-}	t_vect;
-
 //full pixels image drawn(1280x720)
 typedef struct s_frame
 {
@@ -145,11 +140,13 @@ typedef struct s_frame
 
 typedef struct s_data
 {
-	t_mlx	mlx;
-	t_img	img;
-	t_vect	vect;
-	t_grid	grid;
-	t_frame	frame;
+	t_mlx		mlx;
+	t_img		img;
+	t_player	player;
+	t_cam		cam;
+	t_ray		ray;
+	t_grid		grid;
+	t_frame		frame;
 }	t_data;
 
 // INIT
@@ -160,6 +157,8 @@ int			handle_close(t_data *data);
 int			handle_keys(int key_sym, t_data *data);
 
 // UTILS
+double		ft_abs(double dir);
+void    	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 double		my_clamped_formula(double (*formula)(double), double input);
 
 // ERRORS
