@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/18 16:46:05 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:55:44 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@
 //macros
 # define S_WIDTH 1280
 # define S_HEIGHT 720
+
+# define RED	0xFF0000
+# define GREEN	0x00FF00
+# define BLUE	0x0000FF
 
 //enums
 typedef enum e_err
@@ -129,24 +133,40 @@ typedef struct s_ray
 	double	perp_wall_dist;	//ray dist length
 }	t_ray;
 
-//full pixels image drawn(1280x720)
-typedef struct s_frame
+//time using gettimeofday()
+typedef struct s_time
 {
 	//diff between 2 = how much should move player on keypress, FPS counter
-	double		time;		//curr frame, using gettimeofday(ms, us?)
-	double		old_time;	//prev frame
-}	t_frame;
+	double		curr;		//curr frame, using gettimeofday(ms, us?)
+	double		old;		//prev frame
+	double		frame;		//time frame has taken to pop
+}	t_time;
 //---
+
+typedef struct s_draw
+{
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}	t_draw;
+
+typedef struct s_speed
+{
+	double	move;
+	double	rotate;
+}	t_speed;
 
 typedef struct s_data
 {
 	t_mlx		mlx;
 	t_img		img;
+	t_grid		grid;
 	t_player	player;
 	t_cam		cam;
 	t_ray		ray;
-	t_grid		grid;
-	t_frame		frame;
+	t_draw		draw;
+	t_time		time;
+	t_speed		speed;
 }	t_data;
 
 // INIT

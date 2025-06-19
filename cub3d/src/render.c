@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:44:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/18 17:09:37 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/19 18:02:35 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,32 @@ void	digit_diff_analyzer(t_data *data)
 	}
 }
 
-void	draw_my_pixel(t_data *data, int x, int y)
+void	handle_vert_line(t_data *data)
+{
+	data->draw.line_height = (int)(S_HEIGHT / data->ray.perp_wall_dist);
+	
+	data->draw.draw_start = (-data->draw.line_height / 2) + (S_HEIGHT / 2);
+	if (data->draw.draw_start < 0)
+		data->draw.draw_start = 0;
+	data->draw.draw_end = (data->draw.line_height / 2) + (S_HEIGHT / 2);
+	if (data->draw.draw_end >= S_HEIGHT)
+		data->draw.draw_end = S_HEIGHT - 1;
+
+	// choose color based on x/y-side hit point
+	// choose_color(data);
+
+	// draw stripe pixels as a vertical line, see how_to_draw line of pixels?
+	// draw_vert_line(x, data->draw.draw_start, data->draw.draw_end, color);
+}
+
+void	draw_my_pixel_line(t_data *data, int x, int y)
 {
 	(void)y;
 	double	max_width;
 
 	max_width = S_WIDTH - 1;
 	// ray position & direction
-	data->cam.camera_x = 2 * x / max_width;
+	data->cam.camera_x = (2 * x) / max_width;
 	data->ray.dir_x = (data->player.dir_x + data->cam.plane_x) * data->cam.camera_x;
 	data->ray.dir_y = (data->player.dir_y + data->cam.plane_y) * data->cam.camera_x;
 
@@ -92,7 +110,26 @@ void	draw_my_pixel(t_data *data, int x, int y)
 	digit_diff_analyzer(data);
 	
 	// ray distance to wall, to determine wall height
-	// after DDA
+	perp_wall_dist = (side_dist_y - delta_dist_y) / ft_abs(ray_dir_y) / ray_dir_y;
+
+	// line height to draw on screen
+	handle_vert_line(data);
+	
+	// ray tracing loop done
+	// return ;
+}
+
+void	get_time_frames(data)
+{
+	data->time.old = data->time.curr;
+	// data->time.curr = get_ticks();
+	data->time.frame = (data->time.curr - data->time.old) / 1000.0; //in sec
+}
+
+void	speed_modifiers(t_data *data)
+{
+	data->speed.move = data->time.frame * 5.0;
+	data->speed.rotate = data->time.frame * 3.0;
 }
 
 void	render(t_data *data)
@@ -101,16 +138,25 @@ void	render(t_data *data)
 	int	y;
 
 	y = 0;
-	while (y < S_HEIGHT)
+	// ray-casting loop on width screen
+	while (x < S_WIDTH)
 	{
-		x = 0;
-		while (x < S_WIDTH)
-		{
-			draw_my_pixel(data, x, y);
-			x++;
-		}
-		y++;
+		draw_my_pixel_line(data, x, y); // not every pxl, every vertical stripe
+		x++;
 	}
+
+	// get time between curr / prev frame & fps
+	get_time_frames(data);
+
+	// get fps
+	printf("fps: %f\n", 1.0 / data->time.frame);
+	// redraw();
+	// clear_backbuff();
+
+	// speed_modifiers(move & rotating hooks)
+	speed_modifiers(data);
+
+	// put fully drawn image to window
 	mlx_put_image_to_window(data->mlx.mlx_co,
 		data->mlx.mlx_win,
 		data->img.img_ptr, 0, 0);

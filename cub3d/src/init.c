@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:26:24 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/17 18:07:23 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:54:08 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,27 @@
 static void	init_data(t_data *data)
 {
 	data->mlx.name = "cub3d_screen";
-	// PARSING CHANGES
+	// PARSING START
+	// player position on 2d grid(22x12)
 	data->vect.player.pos_x = 22.0;
 	data->vect.player.pos_y = 12.0;
-	data->vect.player.dir_x = -1.0;
+	// player direction(N, S, E, W)
+	data->vect.player.dir_x = -1.0; //East Side
 	data->vect.player.dir_y = 0;
+	// vector camera plane
 	data->vect.cam.plane_x = 0.0;
 	data->vect.cam.plane_y = 0.66;
+	// curr 2d grid cell where player is
 	data->grid.map_x = (int)data->vect.player.pos_x;
 	data->grid.map_y = (int)data->vect.player.pos_y;
-	// ---
+	// PARSING END
+	// 2d grid(32x32)
 	data->grid.wall.is_hit = false;
 	data->grid.wall.which_side = false;
-	data->frame.time = 0;
-	data->frame.old_time = 0;
+	// time & fps
+	data->time.old = 0;
+	data->time.curr = 0;
+	data->time.frame = 0;
 }
 
 static void	init_mlx(t_data *data)
@@ -50,7 +57,7 @@ static void	init_mlx(t_data *data)
 		mlx_destroy_window(data->mlx.mlx_co, data->mlx.mlx_win);
 		mlx_destroy_display(data->mlx.mlx_co);
 		free(data->mlx.mlx_co);
-		free(data->mlx.mlx_win); //?
+		free(data->mlx.mlx_win); //needed?
 		handle_err("Malloc error.", IMAGE);
 	}
 	data->img.addr = mlx_get_data_addr(data->img.img_ptr,
