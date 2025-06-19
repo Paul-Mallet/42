@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/19 17:55:44 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/19 18:44:45 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,16 @@ typedef struct s_grid
 	int				map_y;		//(int)grid.mapY = 719(S_HEIGHT - 1, max), if (double)player.posX = 719.99
 	unsigned int	map_width;
 	unsigned int	map_height;
-	t_wall		wall;
+	t_wall			wall;
 }	t_grid;
 
 //FOV, player view
 typedef struct s_cam
 {
-	double	plane_x;			//0
-	double	plane_y;			//0.66
+	double	plane_x;		//0
+	double	plane_y;		//0.66
+	double	old_plane_x;	//saved state of cam.plane_x
 	double	camera_x;		//=2 * x / w - 1;, [-1(left), 0(center), 1(right)]
-	double	width; 			//= S_WIDTH
 }	t_cam;
 
 typedef struct s_player
@@ -113,6 +113,7 @@ typedef struct s_player
 	double	pos_y;			//change after each move
 	double	dir_x;			//-1, vector x coord
 	double	dir_y;			//0, vector y coord
+	double	old_dir_x;		//saved state of prev dir_x
 	//Pythagorean Theorem = sqrt(x ^ 2 + y ^ 2) = vector length;
 	double	fov;			//2 * atan(sqrt(cam.planeX ^ 2 + cam.planeY ^ 2) / sqrt(player.dirX ^ 2 + player.dirY ^ 2)) = N°
 }	t_player;
@@ -153,7 +154,7 @@ typedef struct s_draw
 typedef struct s_speed
 {
 	double	move;
-	double	rotate;
+	double	rot;
 }	t_speed;
 
 typedef struct s_data

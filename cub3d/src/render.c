@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:44:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/19 18:02:35 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/19 19:03:07 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	get_time_frames(data)
 void	speed_modifiers(t_data *data)
 {
 	data->speed.move = data->time.frame * 5.0;
-	data->speed.rotate = data->time.frame * 3.0;
+	data->speed.rot = data->time.frame * 3.0;
 }
 
 void	render(t_data *data)
@@ -149,7 +149,7 @@ void	render(t_data *data)
 	get_time_frames(data);
 
 	// get fps
-	printf("fps: %f\n", 1.0 / data->time.frame);
+	// print_screen(1.0 / data->time.frame);
 	// redraw();
 	// clear_backbuff();
 
