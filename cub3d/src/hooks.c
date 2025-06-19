@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:20:42 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/19 19:04:32 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/19 19:25:43 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,20 @@ int	handle_keys(int key_sym, t_data *data)
 		if (worldMap[(int)(player.pos_x)][(int)(player.pos_y - player.dir_y * speed.move)] == 0)
 			player.pos_y -= player.dir_y * speed.move;
 	}
-	// else if (key_sym == XK_a) 1 left step
-	// else if (key_sym == XK_d) 1 right step
-
+	else if (key_sym == XK_a)
+	{
+		// if (worldMap[(int)][(int)] == 0)
+		// 	player.pos_x += player.dir_x * speed.move;
+		// if (worldMap[(int)][(int)] == 0)
+		// 	player.pos_y += player.dir_y * speed.move;
+	}
+	else if (key_sym == XK_d)
+	{
+		// if (worldMap[(int)][(int)] == 0)
+		// 	player.pos_x += player.dir_x * speed.move;
+		// if (worldMap[(int)][(int)] == 0)
+		// 	player.pos_y += player.dir_y * speed.move;
+	}
 	//Left Arrow / Right Arrow to rotate
 	else if (key_sym == XK_Right)
 	{
