@@ -6,11 +6,20 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:38:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/18 16:46:18 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:34:25 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+double	get_ticks(void)
+{
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL) == -1)
+		return (EXIT_FAILURE);
+	return (tv.tv_sec + tv.tv_usec / 1e6);
+}
 
 double	ft_abs(double dir)
 {

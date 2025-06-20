@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:20:42 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/20 10:54:03 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/20 17:07:58 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,53 +34,53 @@ int	handle_keys(int key_sym, t_data *data)
 	if (key_sym == XK_Escape)
 		handle_close(data);
 	//W, A, S, D to move(t_player + t_cam)...
-	else if (key_sym == XK_w)
-	{
-		if (worldMap[(int)(player.pos_x + player.dir_x * speed.move)][(int)(player.pos_y)] == 0)
-			player.pos_x += player.dir_x * speed.move;
-		if (worldMap[(int)(player.pos_x)][(int)(player.pos_y + player.dir_y * speed.move)] == 0)
-			player.pos_y += player.dir_y * speed.move;
-	}
-	else if (key_sym == XK_s)
-	{
-		if (worldMap[(int)(player.pos_x - player.dir_x * speed.move)][(int)(player.pos_y)] == 0)
-			player.pos_x -= player.dir_x * speed.move;
-		if (worldMap[(int)(player.pos_x)][(int)(player.pos_y - player.dir_y * speed.move)] == 0)
-			player.pos_y -= player.dir_y * speed.move;
-	}
-	else if (key_sym == XK_a)
-	{
-		if (worldMap[(int)(player.pos_x + player.dir_x * speed.move)][(int)(player.pos_y)] == 0)
-			player.pos_x += player.dir_x * speed.move;
-		if (worldMap[(int)(player.pos_x)][(int)(player.pos_y - player.dir_y * speed.move)] == 0)
-			player.pos_y -= player.dir_y * speed.move;
-	}
-	else if (key_sym == XK_d)
-	{
-		if (worldMap[(int)(player.pos_x - player.dir_x * speed.move)][(int)(player.pos_y)] == 0)
-			player.pos_x -= player.dir_x * speed.move;
-		if (worldMap[(int)(player.pos_x)][(int)(player.pos_y + player.dir_y * speed.move)] == 0)
-			player.pos_y += player.dir_y * speed.move;
-	}
-	//Left Arrow / Right Arrow to rotate
-	else if (key_sym == XK_Right)
-	{
-		// rotate both dirX & planeX
-		player.old_dir_x = player.dir_x;
-		player.dir_x = player.dir_x * cos(-speed.rot) - player.dir_y * sin(-speed.rot);
-		player.dir_y = player.old_dir_x * sin(-speed.rot) + player.dir_y * cos(-speed.rot);
-		cam.old_plane_x = cam.plane_x;
-		cam.plane_x = cam.plane_x * cos(-speed.rot) - cam.plane_y * sin(-speed.rot);
-		cam.plane_y = cam.old_plane_x * sin(-speed.rot) + cam.plane_y * cos(-speed.rot);
-	}
-	else if (key_sym == XK_Left)
-	{
-		player.old_dir_x = player.dir_x;
-		player.dir_x = player.dir_x * cos(speed.rot) - player.dir_y * sin(speed.rot);
-		player.dir_y = player.old_dir_x * sin(speed.rot) + player.dir_y * cos(speed.rot);
-		cam.old_plane_x = cam.plane_x;
-		cam.plane_x = cam.plane_x * cos(speed.rot) - cam.plane_y * sin(speed.rot);
-		cam.plane_y = cam.old_plane_x * sin(speed.rot) + cam.plane_y * cos(speed.rot);
-	}
+	// else if (key_sym == XK_w)
+	// {
+	// 	if (worldMap[(int)(player.pos_x + player.dir_x * speed.move)][(int)(player.pos_y)] == 0)
+	// 		player.pos_x += player.dir_x * speed.move;
+	// 	if (worldMap[(int)(player.pos_x)][(int)(player.pos_y + player.dir_y * speed.move)] == 0)
+	// 		player.pos_y += player.dir_y * speed.move;
+	// }
+	// else if (key_sym == XK_s)
+	// {
+	// 	if (worldMap[(int)(player.pos_x - player.dir_x * speed.move)][(int)(player.pos_y)] == 0)
+	// 		player.pos_x -= player.dir_x * speed.move;
+	// 	if (worldMap[(int)(player.pos_x)][(int)(player.pos_y - player.dir_y * speed.move)] == 0)
+	// 		player.pos_y -= player.dir_y * speed.move;
+	// }
+	// else if (key_sym == XK_a)
+	// {
+	// 	if (worldMap[(int)(player.pos_x + player.dir_x * speed.move)][(int)(player.pos_y)] == 0)
+	// 		player.pos_x += player.dir_x * speed.move;
+	// 	if (worldMap[(int)(player.pos_x)][(int)(player.pos_y - player.dir_y * speed.move)] == 0)
+	// 		player.pos_y -= player.dir_y * speed.move;
+	// }
+	// else if (key_sym == XK_d)
+	// {
+	// 	if (worldMap[(int)(player.pos_x - player.dir_x * speed.move)][(int)(player.pos_y)] == 0)
+	// 		player.pos_x -= player.dir_x * speed.move;
+	// 	if (worldMap[(int)(player.pos_x)][(int)(player.pos_y + player.dir_y * speed.move)] == 0)
+	// 		player.pos_y += player.dir_y * speed.move;
+	// }
+	// //Left Arrow / Right Arrow to rotate
+	// else if (key_sym == XK_Right)
+	// {
+	// 	// rotate both dirX & planeX
+	// 	player.old_dir_x = player.dir_x;
+	// 	player.dir_x = player.dir_x * cos(-speed.rot) - player.dir_y * sin(-speed.rot);
+	// 	player.dir_y = player.old_dir_x * sin(-speed.rot) + player.dir_y * cos(-speed.rot);
+	// 	cam.old_plane_x = cam.plane_x;
+	// 	cam.plane_x = cam.plane_x * cos(-speed.rot) - cam.plane_y * sin(-speed.rot);
+	// 	cam.plane_y = cam.old_plane_x * sin(-speed.rot) + cam.plane_y * cos(-speed.rot);
+	// }
+	// else if (key_sym == XK_Left)
+	// {
+	// 	player.old_dir_x = player.dir_x;
+	// 	player.dir_x = player.dir_x * cos(speed.rot) - player.dir_y * sin(speed.rot);
+	// 	player.dir_y = player.old_dir_x * sin(speed.rot) + player.dir_y * cos(speed.rot);
+	// 	cam.old_plane_x = cam.plane_x;
+	// 	cam.plane_x = cam.plane_x * cos(speed.rot) - cam.plane_y * sin(speed.rot);
+	// 	cam.plane_y = cam.old_plane_x * sin(speed.rot) + cam.plane_y * cos(speed.rot);
+	// }
 	return (0);
 }

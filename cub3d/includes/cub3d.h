@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/20 12:15:31 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/20 17:07:26 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,11 +183,15 @@ typedef struct s_data
 // INIT
 void		init(t_data *data);
 
+// RENDER
+void		render(t_data *data);
+
 // HOOKS
 int			handle_close(t_data *data);
 int			handle_keys(int key_sym, t_data *data);
 
 // UTILS
+double		get_ticks(void);
 double		ft_abs(double dir);
 void    	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 double		my_clamped_formula(double (*formula)(double), double input);

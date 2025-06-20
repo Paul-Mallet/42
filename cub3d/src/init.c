@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:26:24 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/19 17:54:08 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:49:22 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ static void	init_data(t_data *data)
 	data->mlx.name = "cub3d_screen";
 	// PARSING START
 	// player position on 2d grid(22x12)
-	data->vect.player.pos_x = 22.0;
-	data->vect.player.pos_y = 12.0;
+	data->player.pos_x = 22.0;
+	data->player.pos_y = 12.0;
 	// player direction(N, S, E, W)
-	data->vect.player.dir_x = -1.0; //East Side
-	data->vect.player.dir_y = 0;
+	data->player.dir_x = -1.0; //East Side
+	data->player.dir_y = 0;
 	// vector camera plane
-	data->vect.cam.plane_x = 0.0;
-	data->vect.cam.plane_y = 0.66;
+	data->cam.plane_x = 0.0;
+	data->cam.plane_y = 0.66;
 	// curr 2d grid cell where player is
-	data->grid.map_x = (int)data->vect.player.pos_x;
-	data->grid.map_y = (int)data->vect.player.pos_y;
+	data->grid.map_x = (int)data->player.pos_x;
+	data->grid.map_y = (int)data->player.pos_y;
 	// PARSING END
 	// 2d grid(32x32)
 	data->grid.wall.is_hit = false;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:44:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/20 12:19:14 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/20 17:41:27 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,9 +162,19 @@ void	draw_my_pixel_line(t_data *data)
 
 void	get_time_frames(data)
 {
-	data->time.old = data->time.curr;
-	// data->time.curr = get_ticks(); // #TODO
-	data->time.frame = (data->time.curr - data->time.old) / 1000.0; //in sec
+	t_time	time;
+
+	time = data->time;
+	time.old = time.curr;
+	time.curr = get_ticks();
+	time.frame = (time.curr - time.old); //in sec.usec
+}
+
+void	print_on_screen(double fps)
+{
+	//1.0 / 0.02 -> 50 fps
+	//above frame drawn, 60.000
+	printf("fps: %d\n", fps);
 }
 
 void	speed_modifiers(t_data *data)
