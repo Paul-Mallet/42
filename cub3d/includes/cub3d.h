@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/19 18:44:45 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/20 12:15:31 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define RED	0xFF0000
 # define GREEN	0x00FF00
 # define BLUE	0x0000FF
+# define BLACK	0x000000
 
 //enums
 typedef enum e_err
@@ -106,6 +107,13 @@ typedef struct s_cam
 	double	camera_x;		//=2 * x / w - 1;, [-1(left), 0(center), 1(right)]
 }	t_cam;
 
+typedef struct s_screen
+{
+	//(0;0) = top-left corner
+	int		x;				//x = width axe
+	int		y;				//y = height axe
+}	t_screen;
+
 typedef struct s_player
 {
 	//start pos will be full values(22, 12) based on grid
@@ -149,6 +157,7 @@ typedef struct s_draw
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	int		color;
 }	t_draw;
 
 typedef struct s_speed
@@ -162,6 +171,7 @@ typedef struct s_data
 	t_mlx		mlx;
 	t_img		img;
 	t_grid		grid;
+	t_screen	screen;
 	t_player	player;
 	t_cam		cam;
 	t_ray		ray;
