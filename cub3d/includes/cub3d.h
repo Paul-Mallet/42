@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/20 17:07:26 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/22 12:39:07 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,17 @@
 # include <errno.h>
 
 //macros
-# define S_WIDTH 1280
-# define S_HEIGHT 720
+# define S_WIDTH	1280
+# define S_HEIGHT	720
 
-# define RED	0xFF0000
-# define GREEN	0x00FF00
-# define BLUE	0x0000FF
-# define BLACK	0x000000
+# define X_STR		4
+# define Y_STR		4
+
+# define RED		0xFF0000
+# define GREEN		0x00FF00
+# define BLUE		0x0000FF
+# define BLACK		0x000000
+# define WHITE		0xFFFFFF
 
 //enums
 typedef enum e_err
@@ -112,6 +116,7 @@ typedef struct s_screen
 	//(0;0) = top-left corner
 	int		x;				//x = width axe
 	int		y;				//y = height axe
+	char	*fps_str;			//string to put on screen
 }	t_screen;
 
 typedef struct s_player
