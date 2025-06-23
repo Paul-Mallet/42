@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:44:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/22 12:43:27 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/23 13:01:36 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ void	digit_diff_analyzer(t_data *data)
 			grid->wall.which_side = 1;
 		}
 		// worldMap = 2d grid from PARSING
-		// if (worldMap[grid->map_x][grid->map_y] > 0) #TODO
-		// 	data->grid.wall.is_hit = true;
+		if (world_map[grid->map_x][grid->map_y] > 0)
+			data->grid.wall.is_hit = true;
 	}
 }
 
-int		choose_color(t_data *data)
+void	choose_color(t_data *data)
 {
 	t_grid	*grid;
 	t_draw	*draw;
@@ -93,9 +93,9 @@ int		choose_color(t_data *data)
 	draw = &data->draw;
 
 	//wall hit or empty space, change with texture after
-	if (worldMap[grid->map_x][grid->map_y] == 1) //wall
+	if (world_map[grid->map_x][grid->map_y] == 1) //wall
 		draw->color = GREEN;
-	if (worldMap[grid->map_x][grid->map_y] == 0) //empty
+	if (world_map[grid->map_x][grid->map_y] == 0) //empty
 		draw->color = BLACK;
 
 	//darker if y-side hit too(diff x/y-sides visible on screen)
@@ -135,7 +135,7 @@ void	handle_vert_line(t_data *data)
 		draw->draw_end = S_HEIGHT - 1;
 
 	// choose color based on x/y-side hit point
-	draw->color = choose_color(data);
+	choose_color(data);
 
 	// draw stripe pixels as a vertical line, see how_to_draw line of pixels?
 	draw_vert_line(data, draw->draw_start, draw->draw_end, draw->color);
@@ -177,38 +177,40 @@ void	draw_my_pixel_line(t_data *data)
 	return ;
 }
 
-void	get_time_frames(data)
+void	get_time_frames(t_data *data)
 {
 	t_time	*time;
 
 	time = &data->time;
 	time->old = time->curr;
 	time->curr = get_ticks();
-	time->frame = (time->curr - time->old); //in sec.usec
+	printf("get_time_frame() time->old: %f\n", time->old);
+	printf("get_time_frame() time->curr: %f\n", time->curr);
+	time->frame = (time->curr - time->old) / 1000.0; //in sec.usec
+	printf("time_frame: %f\n", time->frame);
 }
 
 //1.0 / 0.02 -> 50 fps
 void	get_fps_string(t_data *data, int fps)
 {
-	int			i;
-	t_mlx		*mlx;
-	t_draw		*draw;
 	t_screen	*screen;
+	int			fps_len;
+	int			i;
 
-	mlx = &data->mlx;
-	draw = &data->draw;
 	screen = &data->screen;
-	screen->fps_str = (char *)malloc((ft_intlen(fps) + 1) * sizeof(char));
+	fps_len = ft_intlen(fps);
+	screen->fps_str = (char *)malloc((fps_len + 1) * sizeof(char));
 	if (!screen->fps_str)
-		return ; //check above
-	i = 0;
-	while (fps > 0) //#TODO
+		return ;
+	i = fps_len - 1;
+	while (fps > 9)
 	{
-		screen->fps_str[i] = fps;
+		screen->fps_str[i] = (fps % 10) + '0';
 		fps /= 10;
-		i++;
+		i--;
 	}
-	screen->fps_str[i] = '\0';
+	screen->fps_str[i] = (fps % 10) + '0';
+	screen->fps_str[fps_len] = '\0';
 }
 
 void	speed_modifiers(t_data *data)
@@ -260,7 +262,7 @@ void	render(t_data *data)
 	get_fps_string(data, (int)(1.0 / data->time.frame));
 	// print on screen coord & color
 	mlx_string_put(mlx->mlx_co, mlx->mlx_win,
-		X_STR, Y_STR, WHITE, screen->fps);
+		X_STR, Y_STR, WHITE, screen->fps_str);
 
 	// redraw_frame();
 	// ... not needed

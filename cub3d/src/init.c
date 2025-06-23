@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:26:24 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/20 14:49:22 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:51:21 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	init_data(t_data *data)
 	data->grid.wall.is_hit = false;
 	data->grid.wall.which_side = false;
 	// time & fps
-	data->time.old = 0;
-	data->time.curr = 0;
+	data->time.curr = get_ticks();
+	data->time.old = data->time.curr;
 	data->time.frame = 0;
 }
 

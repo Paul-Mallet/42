@@ -3,22 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:38:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/20 17:34:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:46:02 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*
+	60 = 2, 0 = 1
+	Return is supposed to be always positive value
+*/
+int	ft_intlen(int nb)
+{
+	int	len;
+
+	len = 1;
+	while (nb > 9)
+	{
+		nb /= 10;
+		len++;
+	}
+	return (len);
+}
 
 double	get_ticks(void)
 {
 	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL) == -1)
+	{
+		perror("gettimeofday failed");
 		return (EXIT_FAILURE);
-	return (tv.tv_sec + tv.tv_usec / 1e6);
+	}
+	return (tv.tv_sec + tv.tv_usec / 1e6); //need to return the diff!
 }
 
 double	ft_abs(double dir)

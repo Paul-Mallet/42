@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/22 12:39:07 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/23 10:35:34 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # define S_WIDTH	1280
 # define S_HEIGHT	720
 
+# define MAP_WIDTH	24
+# define MAP_HEIGHT	24
+
 # define X_STR		4
 # define Y_STR		4
 
@@ -44,6 +47,9 @@
 # define BLUE		0x0000FF
 # define BLACK		0x000000
 # define WHITE		0xFFFFFF
+
+//global vars(not allowed)
+extern int	world_map[MAP_WIDTH][MAP_HEIGHT];
 
 //enums
 typedef enum e_err
@@ -95,10 +101,8 @@ typedef struct s_wall
 typedef struct s_grid
 {
 	// curr map's square we're in([screen.width x screen.height]?)
-	int				map_x;		//(int)grid.mapX = 0(floor, min)
-	int				map_y;		//(int)grid.mapY = 719(S_HEIGHT - 1, max), if (double)player.posX = 719.99
-	unsigned int	map_width;
-	unsigned int	map_height;
+	int				map_x;		//(int)player.pos_x = 0(floor, min)
+	int				map_y;		//(int)player.pos_y = 23(map_height - 1, max), if (double)player.posX = 22.999999
 	t_wall			wall;
 }	t_grid;
 
@@ -196,6 +200,7 @@ int			handle_close(t_data *data);
 int			handle_keys(int key_sym, t_data *data);
 
 // UTILS
+int			ft_intlen(int nb);
 double		get_ticks(void);
 double		ft_abs(double dir);
 void    	my_mlx_pixel_put(t_data *data, int x, int y, int color);

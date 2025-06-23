@@ -5,6 +5,7 @@ SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR), \
 		main.c \
 		init.c \
+		render.c \
 		hooks.c \
 		utils.c \
 		errors.c \
