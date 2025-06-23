@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:20:42 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/23 12:37:00 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/23 17:32:04 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	handle_keys(int key_sym, t_data *data)
 	int new_y = (int)(player->pos_y);
 	printf("Trying to access world_map[%d][%d]\n", new_x, new_y);
 	printf("MAP bounds: width=%d, height=%d\n", MAP_WIDTH, MAP_HEIGHT);
+	printf("time_frame: %f\n", data->time.frame);
 	// circle around player won't go inside walls(instead point)
 	if (key_sym == XK_Escape)
 		handle_close(data);
@@ -47,6 +48,7 @@ int	handle_keys(int key_sym, t_data *data)
 			player->pos_x += player->dir_x * speed->move;
 		if (world_map[(int)(player->pos_x)][(int)(player->pos_y + player->dir_y * speed->move)] == 0)
 			player->pos_y += player->dir_y * speed->move;
+		printf("XK_w\nplayer->pos_x: %f\nplayer->pos_y: %f\n", player->pos_x, player->pos_y);
 	}
 	else if (key_sym == XK_s)
 	{
@@ -54,21 +56,22 @@ int	handle_keys(int key_sym, t_data *data)
 			player->pos_x -= player->dir_x * speed->move;
 		if (world_map[(int)(player->pos_x)][(int)(player->pos_y - player->dir_y * speed->move)] == 0)
 			player->pos_y -= player->dir_y * speed->move;
+		printf("XK_s\nplayer->pos_x: %f\nplayer->pos_y: %f\n", player->pos_x, player->pos_y);
 	}
-	else if (key_sym == XK_a)
-	{
-		if (world_map[(int)(player->pos_x + player->dir_x * speed->move)][(int)(player->pos_y)] == 0)
-			player->pos_x += player->dir_x * speed->move;
-		if (world_map[(int)(player->pos_x)][(int)(player->pos_y - player->dir_y * speed->move)] == 0)
-			player->pos_y -= player->dir_y * speed->move;
-	}
-	else if (key_sym == XK_d)
-	{
-		if (world_map[(int)(player->pos_x - player->dir_x * speed->move)][(int)(player->pos_y)] == 0)
-			player->pos_x -= player->dir_x * speed->move;
-		if (world_map[(int)(player->pos_x)][(int)(player->pos_y + player->dir_y * speed->move)] == 0)
-			player->pos_y += player->dir_y * speed->move;
-	}
+	// else if (key_sym == XK_a)
+	// {
+	// 	if (world_map[(int)(player->pos_x + player->dir_x * speed->move)][(int)(player->pos_y)] == 0)
+	// 		player->pos_x += player->dir_x * speed->move;
+	// 	if (world_map[(int)(player->pos_x)][(int)(player->pos_y - player->dir_y * speed->move)] == 0)
+	// 		player->pos_y -= player->dir_y * speed->move;
+	// }
+	// else if (key_sym == XK_d)
+	// {
+	// 	if (world_map[(int)(player->pos_x - player->dir_x * speed->move)][(int)(player->pos_y)] == 0)
+	// 		player->pos_x -= player->dir_x * speed->move;
+	// 	if (world_map[(int)(player->pos_x)][(int)(player->pos_y + player->dir_y * speed->move)] == 0)
+	// 		player->pos_y += player->dir_y * speed->move;
+	// }
 	//Left Arrow / Right Arrow to rotate
 	else if (key_sym == XK_Right)
 	{
@@ -79,6 +82,8 @@ int	handle_keys(int key_sym, t_data *data)
 		cam->old_plane_x = cam->plane_x;
 		cam->plane_x = cam->plane_x * cos(-speed->rot) - cam->plane_y * sin(-speed->rot);
 		cam->plane_y = cam->old_plane_x * sin(-speed->rot) + cam->plane_y * cos(-speed->rot);
+		printf("XK_Right\nplayer->pos_x: %f\nplayer->pos_y: %f\n", player->pos_x, player->pos_y);
+		printf("XK_Right\ncam->plane_x: %f\ncam->plane_y: %f\n", cam->plane_x, cam->plane_y);
 	}
 	else if (key_sym == XK_Left)
 	{
@@ -88,6 +93,9 @@ int	handle_keys(int key_sym, t_data *data)
 		cam->old_plane_x = cam->plane_x;
 		cam->plane_x = cam->plane_x * cos(speed->rot) - cam->plane_y * sin(speed->rot);
 		cam->plane_y = cam->old_plane_x * sin(speed->rot) + cam->plane_y * cos(speed->rot);
+		printf("XK_Left\nplayer->dir_x: %f\nplayer->dir_y: %f\n", player->dir_x, player->dir_y);
+		printf("XK_Left\ncam->plane_x: %f\ncam->plane_y: %f\n", cam->plane_x, cam->plane_y);
 	}
+	render(data);
 	return (0);
 }

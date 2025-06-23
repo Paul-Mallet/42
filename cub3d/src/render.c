@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:44:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/23 13:01:36 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/23 18:44:04 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,25 @@ void	get_init_side_dist(t_data *data)
 	{
 		ray->step_x = -1;
 		ray->side_dist_x = (player->pos_x - data->grid.map_x) * ray->delta_dist_x;
+		printf("ray->side_dist_x: %f\n", ray->side_dist_x);
 	}
 	else
 	{
 		ray->step_x = 1;
 		ray->side_dist_x = (data->grid.map_x + 1.0 - player->pos_x) * ray->delta_dist_x;
+		printf("ray->delta_dist_x: %f\n", ray->delta_dist_x);
 	}
-	if (data->ray.dir_y < 0)
+	if (ray->dir_y < 0)
 	{
-		data->ray.step_y = -1;
-		data->ray.side_dist_y = (player->pos_y - data->grid.map_y) * ray->delta_dist_y;
+		ray->step_y = -1;
+		ray->side_dist_y = (player->pos_y - data->grid.map_y) * ray->delta_dist_y;
+		printf("ray->delta_dist_y: %f\n", ray->delta_dist_y);
 	}
 	else
 	{
 		ray->step_y = 1;
 		ray->side_dist_y = (data->grid.map_y + 1.0 - player->pos_y) * ray->delta_dist_y;
+		printf("ray->delta_dist_y: %f\n", ray->delta_dist_y);
 	}
 }
 
@@ -54,6 +58,8 @@ void	get_next_side_dist(t_data *data)
 		ray->delta_dist_y = INFINITY;
 	else
 		ray->delta_dist_y = ft_abs(1 / ray->dir_y);
+	printf("ray->delta_dist_x: %f\n", ray->delta_dist_x);
+	printf("ray->delta_dist_y: %f\n", ray->delta_dist_y);
 }
 
 void	digit_diff_analyzer(t_data *data)
@@ -126,7 +132,7 @@ void	handle_vert_line(t_data *data)
 	ray = &data->ray;
 	draw = &data->draw;
 	draw->line_height = (int)(S_HEIGHT / ray->perp_wall_dist);
-	
+
 	draw->draw_start = (-draw->line_height / 2) + (S_HEIGHT / 2);
 	if (draw->draw_start < 0)
 		draw->draw_start = 0;
@@ -168,7 +174,10 @@ void	draw_my_pixel_line(t_data *data)
 	digit_diff_analyzer(data);
 	
 	// ray distance to wall, to determine wall height
-	ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y) / ft_abs(ray->dir_y) / ray->dir_y;
+	if (data->grid.wall.which_side == 0)
+		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
+	else
+		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
 
 	// line height to draw on screen
 	handle_vert_line(data);
@@ -186,8 +195,8 @@ void	get_time_frames(t_data *data)
 	time->curr = get_ticks();
 	printf("get_time_frame() time->old: %f\n", time->old);
 	printf("get_time_frame() time->curr: %f\n", time->curr);
-	time->frame = (time->curr - time->old) / 1000.0; //in sec.usec
-	printf("time_frame: %f\n", time->frame);
+	time->frame = (time->curr - time->old); //in sec.usec
+	printf("get_time_frame() time_frame: %f\n", time->frame);
 }
 
 //1.0 / 0.02 -> 50 fps
@@ -211,6 +220,7 @@ void	get_fps_string(t_data *data, int fps)
 	}
 	screen->fps_str[i] = (fps % 10) + '0';
 	screen->fps_str[fps_len] = '\0';
+	printf("fps: %d\nscreen->fps_str: %s\n", fps, screen->fps_str);
 }
 
 void	speed_modifiers(t_data *data)
@@ -222,6 +232,7 @@ void	speed_modifiers(t_data *data)
 	speed = &data->speed;
 	speed->move = time->frame * 5.0;
 	speed->rot = time->frame * 3.0;
+	printf("speed->move: %f\nspeed->rot: %f\n", speed->move, speed->rot);
 }
 
 void	clear_image(t_data *data)
@@ -245,7 +256,7 @@ void	render(t_data *data)
 	t_screen	*screen;
 
 	mlx = &data->mlx;
-	screen = &data->screen; //copy not original
+	screen = &data->screen;
 	screen->x = 0;
 	screen->y = 0;
 	// ray-casting loop on width screen

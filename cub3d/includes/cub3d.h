@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/23 10:35:34 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/23 19:04:00 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # include <errno.h>
 
 //macros
-# define S_WIDTH	1280
-# define S_HEIGHT	720
+# define S_WIDTH	640
+# define S_HEIGHT	480
 
 # define MAP_WIDTH	24
 # define MAP_HEIGHT	24

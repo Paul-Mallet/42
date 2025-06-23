@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:27:54 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/23 12:53:06 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/23 16:51:20 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ int	main(int ac, char **av)
 	(void)ac;
 	data.mlx.name = av[1];
 	init(&data);
-	print_data(&data);
-	render(&data);
+	// print_data(&data);
 	mlx_hook(data.mlx.mlx_win,
 		DestroyNotify, StructureNotifyMask, &handle_close, &data);
 	mlx_hook(data.mlx.mlx_win,
 		KeyPress, KeyPressMask, &handle_keys, &data);
+	render(&data);
 	mlx_loop(data.mlx.mlx_co);
 
 	// /* perror + errno set + exit */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:26:24 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/23 12:51:21 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/23 19:02:39 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	init_data(t_data *data)
 	data->player.pos_x = 22.0;
 	data->player.pos_y = 12.0;
 	// player direction(N, S, E, W)
-	data->player.dir_x = -1.0; //East Side
-	data->player.dir_y = 0;
+	data->player.dir_x = -1.0; //West Side
+	data->player.dir_y = 0.0;
 	// vector camera plane
 	data->cam.plane_x = 0.0;
 	data->cam.plane_y = 0.66;
@@ -35,7 +35,6 @@ static void	init_data(t_data *data)
 	// time & fps
 	data->time.curr = get_ticks();
 	data->time.old = data->time.curr;
-	data->time.frame = 0;
 }
 
 static void	init_mlx(t_data *data)
