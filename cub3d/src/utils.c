@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:38:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/23 12:46:02 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/24 10:38:08 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,21 @@ int	ft_intlen(int nb)
 	return (len);
 }
 
+void    *ft_memset(void *s, int c, size_t n)
+{
+        size_t                  i;
+        unsigned char   *str;
+        unsigned char   ch;
+
+        i = 0;
+        str = (unsigned char *)s;
+        ch = (unsigned char)c;
+        while (i < n)
+                str[i++] = ch;
+        return (str);
+}
+
+// return time in milliseconds !
 double	get_ticks(void)
 {
 	struct timeval	tv;
@@ -38,7 +53,7 @@ double	get_ticks(void)
 		perror("gettimeofday failed");
 		return (EXIT_FAILURE);
 	}
-	return (tv.tv_sec + tv.tv_usec / 1e6); //need to return the diff!
+	return (tv.tv_sec * 1e3 + tv.tv_usec / 1e3); //need to return the diff!
 }
 
 double	ft_abs(double dir)

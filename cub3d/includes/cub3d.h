@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/23 19:04:00 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/24 10:38:20 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ int			handle_close(t_data *data);
 int			handle_keys(int key_sym, t_data *data);
 
 // UTILS
+void    	*ft_memset(void *s, int c, size_t n);
 int			ft_intlen(int nb);
 double		get_ticks(void);
 double		ft_abs(double dir);

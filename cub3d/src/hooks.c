@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:20:42 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/23 17:32:04 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/24 10:47:48 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	handle_keys(int key_sym, t_data *data)
 	cam = &data->cam;
 	speed = &data->speed;
 
-	int new_x = (int)(player->pos_x + player->dir_x * speed->move);
-	int new_y = (int)(player->pos_y);
-	printf("Trying to access world_map[%d][%d]\n", new_x, new_y);
+	int next_map_x = (int)(player->pos_x + player->dir_x * speed->move);
+	int next_map_y = (int)(player->pos_y);
+	printf("Trying to access world_map[%d][%d]\n", next_map_x, next_map_y);
 	printf("MAP bounds: width=%d, height=%d\n", MAP_WIDTH, MAP_HEIGHT);
 	printf("time_frame: %f\n", data->time.frame);
 	// circle around player won't go inside walls(instead point)
@@ -44,7 +44,7 @@ int	handle_keys(int key_sym, t_data *data)
 	//W, A, S, D to move(t_player + t_cam)...
 	else if (key_sym == XK_w)
 	{
-		if (world_map[(int)(player->pos_x + player->dir_x * speed->move)][(int)(player->pos_y)] == 0)
+		if (world_map[next_map_x][next_map_y] == 0) //?
 			player->pos_x += player->dir_x * speed->move;
 		if (world_map[(int)(player->pos_x)][(int)(player->pos_y + player->dir_y * speed->move)] == 0)
 			player->pos_y += player->dir_y * speed->move;

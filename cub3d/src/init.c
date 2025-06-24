@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:26:24 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/23 19:02:39 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/24 09:36:10 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static void	init_data(t_data *data)
 	// vector camera plane
 	data->cam.plane_x = 0.0;
 	data->cam.plane_y = 0.66;
-	// curr 2d grid cell where player is
+	// curr 2d grid cell where player is, RESET at each x++ !
 	data->grid.map_x = (int)data->player.pos_x;
 	data->grid.map_y = (int)data->player.pos_y;
 	// PARSING END
 	// 2d grid(32x32)
-	data->grid.wall.is_hit = false;
-	data->grid.wall.which_side = false;
+	data->grid.wall.is_hit = 0;
+	// data->grid.wall.which_side = false;
 	// time & fps
 	data->time.curr = get_ticks();
 	data->time.old = data->time.curr;

@@ -180,3 +180,25 @@ RENDERING :
 x, y value, where start drawing pixels?, top-left corner(0, 0)?
 
 
+--TEXTURED RAYCASTING--
+
+before
+* while (i < x), where x = width
+* draw vertical line
+* single int color (0xFF0000)
+
+after
+* while (i < x), while (j < y), where x & y = width & height
+* draw every pixel(texel)
+* draw entire screen(frame), then put it on image using mlx
+* convert texture files.xpm(mlx_xpm_file_to_image) into int color
+* texture_width /height = 64px for 640 x 480px screen
+* tex_x = 
+* tex_y = float to int to select actual texture pixel
+* draw y line, 1 pixel at a time
+* interpolation between draw_start & draw_end of vertical line to draw
+* compute step(tex_end - tex_start) / wall_height(line_height) to multiply it each iteration of y pixel
+* take car of color's darker pattern, work with 24 bits int, bit shifting & AND-ing with decimal value
+* drawn the buffer[x][y] = color = 1 pixel, draw entire buffer, then clear it entirely using 2 loops(y 1rst, x nested)
+* strafe Left / Right keys, same as Up/Down but using planeX and planeY instead of dirX & dirY
+* opti CPU cache using and avoid page misses, store in mem vertical stripe / vertical stripe instead of horizontal ones

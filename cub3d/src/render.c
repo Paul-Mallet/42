@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:44:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/23 18:44:04 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/24 10:44:26 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,31 @@ void	get_init_side_dist(t_data *data)
 
 	ray = &data->ray;
 	player = &data->player;
+	data->grid.map_x = (int)data->player.pos_x;
+	data->grid.map_y = (int)data->player.pos_y;
 	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
 		ray->side_dist_x = (player->pos_x - data->grid.map_x) * ray->delta_dist_x;
-		printf("ray->side_dist_x: %f\n", ray->side_dist_x);
 	}
 	else
 	{
 		ray->step_x = 1;
 		ray->side_dist_x = (data->grid.map_x + 1.0 - player->pos_x) * ray->delta_dist_x;
-		printf("ray->delta_dist_x: %f\n", ray->delta_dist_x);
 	}
 	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
 		ray->side_dist_y = (player->pos_y - data->grid.map_y) * ray->delta_dist_y;
-		printf("ray->delta_dist_y: %f\n", ray->delta_dist_y);
 	}
 	else
 	{
 		ray->step_y = 1;
 		ray->side_dist_y = (data->grid.map_y + 1.0 - player->pos_y) * ray->delta_dist_y;
-		printf("ray->delta_dist_y: %f\n", ray->delta_dist_y);
 	}
+	// #TODO : understand map_x : 5.000000, step_x = 1..., all before OK
+	printf("data->grid.map_x: %d\ndata->grid.map_y: %d\n", data->grid.map_x, data->grid.map_y);
+	printf("ray->side_dist_x: %f\nray->side_dist_y: %f\n", ray->side_dist_x, ray->side_dist_y);
 }
 
 void	get_next_side_dist(t_data *data)
@@ -69,6 +70,7 @@ void	digit_diff_analyzer(t_data *data)
 
 	ray = &data->ray;
 	grid = &data->grid;
+	data->grid.wall.is_hit = 0;
 	// start DDA
 	while (!grid->wall.is_hit)
 	{
@@ -86,8 +88,10 @@ void	digit_diff_analyzer(t_data *data)
 		}
 		// worldMap = 2d grid from PARSING
 		if (world_map[grid->map_x][grid->map_y] > 0)
-			data->grid.wall.is_hit = true;
+			grid->wall.is_hit = true;
 	}
+	printf("data->ray.step_x: %d (after dda)\ndata->ray.step_y: %d (after dda)\n", data->ray.step_x, data->ray.step_y);
+	printf("data->grid.map_x: %d (after dda)\ndata->grid.map_y: %d (after dda)\n", data->grid.map_x, data->grid.map_y);
 }
 
 void	choose_color(t_data *data)
@@ -152,17 +156,17 @@ void	draw_my_pixel_line(t_data *data)
 	t_cam		*cam;
 	t_ray		*ray;
 	t_player	*player;
-	double		max_width;
 
 	cam = &data->cam;
 	ray = &data->ray;
 	player = &data->player;
-	max_width = S_WIDTH - 1;
 
 	// ray position & direction
-	cam->camera_x = (2 * data->screen.x) / max_width;
-	ray->dir_x = (player->dir_x + cam->plane_x) * cam->camera_x;
-	ray->dir_y = (player->dir_y + cam->plane_y) * cam->camera_x;
+	printf("screen.x: %d\n", data->screen.x);
+	cam->camera_x = ((2 * data->screen.x) / (double)S_WIDTH) - 1; //[0 - 1]
+	ray->dir_x = player->dir_x + (cam->plane_x * cam->camera_x);
+	ray->dir_y = player->dir_y + (cam->plane_y * cam->camera_x);
+	printf("ray->dir_x: %f\nray->dir_y: %f\n", ray->dir_x, ray->dir_y);
 
 	// Ray len from 1 x/y-side to next side row/col
 	get_next_side_dist(data);
@@ -195,7 +199,7 @@ void	get_time_frames(t_data *data)
 	time->curr = get_ticks();
 	printf("get_time_frame() time->old: %f\n", time->old);
 	printf("get_time_frame() time->curr: %f\n", time->curr);
-	time->frame = (time->curr - time->old); //in sec.usec
+	time->frame = (time->curr - time->old) / 1000.0; //in sec.usec
 	printf("get_time_frame() time_frame: %f\n", time->frame);
 }
 
@@ -237,17 +241,7 @@ void	speed_modifiers(t_data *data)
 
 void	clear_image(t_data *data)
 {
-	t_img		*img;
-	char		*buff;
-	int			total_pxl;
-	int			i;
-
-	img = &data->img;
-	buff = img->addr;
-	total_pxl = S_WIDTH * S_HEIGHT;
-	i = -1;
-	while (++i < total_pxl)
-		buff[i] = BLACK;
+	ft_memset(data->img.addr, 0, S_HEIGHT * data->img.line_len);
 }
 
 void	render(t_data *data)
@@ -259,6 +253,9 @@ void	render(t_data *data)
 	screen = &data->screen;
 	screen->x = 0;
 	screen->y = 0;
+	// fully draw with black pixels img.addr better than mlx functions
+	clear_image(data);
+
 	// ray-casting loop on width screen
 	while (screen->x < S_WIDTH)
 	{
@@ -272,14 +269,14 @@ void	render(t_data *data)
 	// get fps
 	get_fps_string(data, (int)(1.0 / data->time.frame));
 	// print on screen coord & color
-	mlx_string_put(mlx->mlx_co, mlx->mlx_win,
-		X_STR, Y_STR, WHITE, screen->fps_str);
+	// mlx_string_put(mlx->mlx_co, mlx->mlx_win,
+	// 	X_STR, Y_STR, WHITE, screen->fps_str);
 
 	// redraw_frame();
 	// ... not needed
 
-	// fully draw with black pixels > mlx_destroy_window()
-	clear_image(data);
+	// // fully draw with black pixels > mlx_destroy_window()
+	// clear_image(data); before instead of after
 
 	// speed_modifiers(move & rotating hooks)
 	speed_modifiers(data);
