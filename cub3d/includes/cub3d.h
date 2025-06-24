@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/24 16:11:46 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/24 18:15:13 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@
 //macros
 # define S_WIDTH	640
 # define S_HEIGHT	480
+
+// wall, ceil, floor textures and resolutions
+# define TEX_NUM	3
+# define TEX_WIDTH	64
+# define TEX_HEIGHT	64
 
 # define MAP_WIDTH	24
 # define MAP_HEIGHT	24
@@ -193,6 +198,13 @@ typedef struct s_keys
 	int	next_player_dir_y_left;
 }	t_keys;
 
+typedef struct s_tex
+{
+	//TEX_WIDTH * TEX_HEIGHT = 64 * 64(memsize?)
+	
+}	t_tex;
+
+
 typedef struct s_data
 {
 	t_mlx		mlx;
@@ -206,6 +218,7 @@ typedef struct s_data
 	t_time		time;
 	t_speed		speed;
 	t_keys		keys;
+	t_tex		tex;
 }	t_data;
 
 // INIT

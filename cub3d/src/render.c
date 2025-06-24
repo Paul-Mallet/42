@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:44:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/24 16:00:33 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/24 17:43:27 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,19 +253,15 @@ void	render(t_data *data)
 	screen = &data->screen;
 	screen->x = 0;
 	screen->y = 0;
-	// fully draw with black pixels img.addr better than mlx functions
 	clear_image(data);
 	data->time.curr = get_ticks();
 	// ray-casting loop on width screen
 	while (screen->x < S_WIDTH)
 	{
-		draw_my_pixel_line(data); // not every pxl, every vertical stripe
+		draw_my_pixel_line(data);
 		screen->x++;
 	}
-
-	// get time between curr / prev frame & fps
 	get_time_frames(data);
-
 	// get fps
 	// get_fps_string(data, (int)(1.0 / data->time.frame));
 	// print on screen coord & color

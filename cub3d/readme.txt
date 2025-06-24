@@ -191,7 +191,7 @@ after
 * while (i < x), while (j < y), where x & y = width & height
 * draw every pixel(texel)
 * draw entire screen(frame), then put it on image using mlx
-* convert texture files.xpm(mlx_xpm_file_to_image) into int color
+* convert texture files.png(mlx_png_file_to_image) into int color
 * texture_width /height = 64px for 640 x 480px screen
 * tex_x = 
 * tex_y = float to int to select actual texture pixel
