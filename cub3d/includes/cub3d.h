@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/24 10:38:20 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/24 16:11:46 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,9 +171,27 @@ typedef struct s_draw
 
 typedef struct s_speed
 {
-	double	move;
+	double	mov;
 	double	rot;
 }	t_speed;
+
+typedef struct s_keys
+{
+	int	curr_map_x;
+	int	curr_map_y;
+	int	next_map_x_up;
+	int	next_map_x_down;
+	int	next_map_x_left;
+	int	next_map_x_right;
+	int	next_map_y_up;
+	int	next_map_y_down;
+	int	next_map_y_left;
+	int	next_map_y_right;
+	int	next_player_dir_x_right;
+	int	next_player_dir_y_right;
+	int	next_player_dir_x_left;
+	int	next_player_dir_y_left;
+}	t_keys;
 
 typedef struct s_data
 {
@@ -187,6 +205,7 @@ typedef struct s_data
 	t_draw		draw;
 	t_time		time;
 	t_speed		speed;
+	t_keys		keys;
 }	t_data;
 
 // INIT

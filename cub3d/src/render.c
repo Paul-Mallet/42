@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:44:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/24 10:44:26 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/24 16:00:33 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,28 +204,28 @@ void	get_time_frames(t_data *data)
 }
 
 //1.0 / 0.02 -> 50 fps
-void	get_fps_string(t_data *data, int fps)
-{
-	t_screen	*screen;
-	int			fps_len;
-	int			i;
+// void	get_fps_string(t_data *data, int fps)
+// {
+// 	t_screen	*screen;
+// 	int			fps_len;
+// 	int			i;
 
-	screen = &data->screen;
-	fps_len = ft_intlen(fps);
-	screen->fps_str = (char *)malloc((fps_len + 1) * sizeof(char));
-	if (!screen->fps_str)
-		return ;
-	i = fps_len - 1;
-	while (fps > 9)
-	{
-		screen->fps_str[i] = (fps % 10) + '0';
-		fps /= 10;
-		i--;
-	}
-	screen->fps_str[i] = (fps % 10) + '0';
-	screen->fps_str[fps_len] = '\0';
-	printf("fps: %d\nscreen->fps_str: %s\n", fps, screen->fps_str);
-}
+// 	screen = &data->screen;
+// 	fps_len = ft_intlen(fps);
+// 	screen->fps_str = (char *)malloc((fps_len + 1) * sizeof(char));
+// 	if (!screen->fps_str)
+// 		return ;
+// 	i = fps_len - 1;
+// 	while (fps > 9)
+// 	{
+// 		screen->fps_str[i] = (fps % 10) + '0';
+// 		fps /= 10;
+// 		i--;
+// 	}
+// 	screen->fps_str[i] = (fps % 10) + '0';
+// 	screen->fps_str[fps_len] = '\0';
+// 	printf("fps: %d\nscreen->fps_str: %s\n", fps, screen->fps_str);
+// }
 
 void	speed_modifiers(t_data *data)
 {
@@ -234,9 +234,9 @@ void	speed_modifiers(t_data *data)
 
 	time = &data->time;
 	speed = &data->speed;
-	speed->move = time->frame * 5.0;
+	speed->mov = time->frame * 5.0;
 	speed->rot = time->frame * 3.0;
-	printf("speed->move: %f\nspeed->rot: %f\n", speed->move, speed->rot);
+	printf("speed->move: %f\nspeed->rot: %f\n", speed->mov, speed->rot);
 }
 
 void	clear_image(t_data *data)
@@ -255,7 +255,7 @@ void	render(t_data *data)
 	screen->y = 0;
 	// fully draw with black pixels img.addr better than mlx functions
 	clear_image(data);
-
+	data->time.curr = get_ticks();
 	// ray-casting loop on width screen
 	while (screen->x < S_WIDTH)
 	{
@@ -267,7 +267,7 @@ void	render(t_data *data)
 	get_time_frames(data);
 
 	// get fps
-	get_fps_string(data, (int)(1.0 / data->time.frame));
+	// get_fps_string(data, (int)(1.0 / data->time.frame));
 	// print on screen coord & color
 	// mlx_string_put(mlx->mlx_co, mlx->mlx_win,
 	// 	X_STR, Y_STR, WHITE, screen->fps_str);
