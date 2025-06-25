@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:44:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/25 19:06:55 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:42:06 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,7 +348,7 @@ void	load_image(t_data *data,
 	char *pathname)
 {
 	int		tex_w;
-	int		tex_h;	// store the mlx_xpm_image() return (void *);
+	int		tex_h;
 	t_tex	*tex;
 
 	tex = &data->tex;
@@ -358,9 +358,7 @@ void	load_image(t_data *data,
 		printf("Failed to load texture: %s\ntex->tex_img: %p\n", pathname, tex->tex_img);
 	tex->tex_addr = mlx_get_data_addr(tex->tex_img,
 		&tex->tex_bpp, &tex->tex_line_len, &tex->tex_endian);
-	// if (!tex->tex_img)
 	copy_texture_data(tex, texture_slot, tex_w, tex_h);
-	// put_to_image();
 	mlx_destroy_image(data->mlx.mlx_co, tex->tex_img);
 }
 void	load_textures(t_data *data,
