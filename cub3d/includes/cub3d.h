@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/25 11:08:18 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/25 18:42:10 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,12 @@ typedef struct s_tex
 	int			y_tex_buff;
 	double		step;
 	double		pos;
+
+	void		*tex_img;
+	char		*tex_addr;
+	int			tex_bpp;
+	int			tex_line_len;
+	int			tex_endian;
 	u_int32_t	color;
 }	t_tex;
 

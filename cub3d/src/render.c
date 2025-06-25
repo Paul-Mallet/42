@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:44:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/25 15:13:55 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:06:55 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -318,61 +318,100 @@ void	clear_lines(t_data *data)
 	ft_memset(data->img.addr, 0, S_HEIGHT * data->img.line_len);
 }
 
-// void	load_textures(t_data *data, char *pathname, int textures[TEX_NUM][TEX_HEIGHT * TEX_WIDTH])
-// {
-// 	int	tex_w;
-// 	int	tex_h;	// store the mlx_xpm_image() return (void *);
-
-// 	mlx_xpm_file_to_image(data->mlx.mlx_co, pathname, &tex_w, &tex_h);
-// }
-
-void	generate_textures(t_data *data, int textures[TEX_NUM][TEX_HEIGHT * TEX_WIDTH])
+void	copy_texture_data(t_tex *tex,
+	int texture_slot[TEX_HEIGHT * TEX_WIDTH],
+	int tex_w, int tex_h)
 {
-	int		x;
-	int		y;
-	int		convert;
+	int	x;
+	int	y;
+	int	*pixel_data;
+	int	pixel_color;
+
+	// not handle tex_x & tex_y if not 64x64
+	(void)tex_w;
+	(void)tex_h;
+	pixel_data = (int *)tex->tex_addr;
+	y = -1;
+	while (++y < TEX_HEIGHT)
+	{
+		x = -1;
+		while (++x < TEX_WIDTH)
+		{
+			pixel_color = pixel_data[((tex->tex_line_len / 4) * y) + x];
+			texture_slot[TEX_WIDTH * y + x] = pixel_color;
+		}
+	}
+}
+
+void	load_image(t_data *data,
+	int texture_slot[TEX_HEIGHT * TEX_WIDTH],
+	char *pathname)
+{
+	int		tex_w;
+	int		tex_h;	// store the mlx_xpm_image() return (void *);
 	t_tex	*tex;
 
 	tex = &data->tex;
-	x = -1;
-	while (++x < TEX_WIDTH)
-	{
-		y = -1;
-		while (++y < TEX_HEIGHT)
-		{
-			tex->xorcolor = (x * 256 / TEX_WIDTH) ^ (y * 256 / TEX_HEIGHT);
-			// tex->xcolor = x * 256 / TEX_WIDTH; //no need
-			tex->ycolor = y * 256 / TEX_HEIGHT;
-    		tex->xycolor = y * 128 / TEX_HEIGHT + x * 128 / TEX_WIDTH;
-			// printf("tex->xorcolor: %d\ntex->ycolor: %d\ntex->xycolor: %d\n",
-			// 	tex->xorcolor, tex->ycolor, tex->xycolor);
-			// once ok with these values, decomment in render() t_screen and tex_buff
-			convert = TEX_WIDTH * y + x;
-			textures[0][convert] = 65536 * 254 * (x != y && x != TEX_WIDTH - y); //flat red texture with black cross
-			textures[1][convert] = tex->xycolor + 256 * tex->xycolor + 65536 * tex->xycolor; //sloped greyscale
-			textures[2][convert] = 256 * tex->xycolor + 65536 * tex->xycolor; //sloped yellow gradient
-			textures[3][convert] = tex->xorcolor + 256 * tex->xorcolor + 65536 * tex->xorcolor; //xor greyscale
-			textures[4][convert] = 256 * tex->xorcolor; //xor green
-			textures[5][convert] = 65536 * 192 * (x % 16 && y % 16); //red bricks
-			textures[6][convert] = 65536 * tex->ycolor; //red gradient
-			textures[7][convert] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
-		}
-	}
-	// ---
-	
-	// load_texture(data, textures[0], "../assets/eagle.xpm");
+	// loop over 8 textures slots, can reuse same tex_img, tex_addr, 
+	tex->tex_img = mlx_xpm_file_to_image(data->mlx.mlx_co, pathname, &tex_w, &tex_h);
+	if (!tex->tex_img)
+		printf("Failed to load texture: %s\ntex->tex_img: %p\n", pathname, tex->tex_img);
+	tex->tex_addr = mlx_get_data_addr(tex->tex_img,
+		&tex->tex_bpp, &tex->tex_line_len, &tex->tex_endian);
+	// if (!tex->tex_img)
+	copy_texture_data(tex, texture_slot, tex_w, tex_h);
+	// put_to_image();
+	mlx_destroy_image(data->mlx.mlx_co, tex->tex_img);
+}
+void	load_textures(t_data *data,
+	int textures[TEX_NUM][TEX_HEIGHT * TEX_WIDTH])
+{
+	load_image(data, textures[0], "./assets/eagle.xpm");
+	load_image(data, textures[1], "./assets/bluestone.xpm");
+	load_image(data, textures[2], "./assets/barrel.xpm");
+	load_image(data, textures[3], "./assets/colorstone.xpm");
+	// same twice
+	load_image(data, textures[4], "./assets/eagle.xpm");
+	load_image(data, textures[5], "./assets/bluestone.xpm");
+	load_image(data, textures[6], "./assets/barrel.xpm");
+	load_image(data, textures[7], "./assets/colorstone.xpm");
+}
 
-	// real textures version, have only 4 !, so doublon
-	// unsigned long tw, th;
-	// load_image(textures[0], tw, th, "../assets/eagle.xpm");
-	// load_image(textures[1], tw, th, "../assets/bluestone.xpm");
-	// load_image(textures[2], tw, th, "../assets/barrel.xpm");
-	// load_image(textures[3], tw, th, "../assets/colorstone.xpm");
-	// load_image(textures[4], tw, th, "../assets/eagle.xpm"); //same twice
-	// load_image(textures[5], tw, th, "../assets/bluestone.xpm");
-	// load_image(textures[6], tw, th, "../assets/barrel.xpm");
-	// load_image(textures[7], tw, th, "../assets/colorstone.xpm");
-	// mlx_xpm_file_to_image(data->mlx.mlx_co, pathname, tw, th);
+void	generate_textures(t_data *data,
+	int textures[TEX_NUM][TEX_HEIGHT * TEX_WIDTH])
+{
+	// int		x;
+	// int		y;
+	// int		convert;
+	// t_tex	*tex;
+
+	// tex = &data->tex;
+	// x = -1;
+	// while (++x < TEX_WIDTH)
+	// {
+	// 	y = -1;
+	// 	while (++y < TEX_HEIGHT)
+	// 	{
+	// 		tex->xorcolor = (x * 256 / TEX_WIDTH) ^ (y * 256 / TEX_HEIGHT);
+	// 		// tex->xcolor = x * 256 / TEX_WIDTH; //no need
+	// 		tex->ycolor = y * 256 / TEX_HEIGHT;
+    // 		tex->xycolor = y * 128 / TEX_HEIGHT + x * 128 / TEX_WIDTH;
+	// 		// printf("tex->xorcolor: %d\ntex->ycolor: %d\ntex->xycolor: %d\n",
+	// 		// 	tex->xorcolor, tex->ycolor, tex->xycolor);
+	// 		// once ok with these values, decomment in render() t_screen and tex_buff
+	// 		convert = TEX_WIDTH * y + x;
+	// 		textures[0][convert] = 65536 * 254 * (x != y && x != TEX_WIDTH - y); //flat red texture with black cross
+	// 		textures[1][convert] = tex->xycolor + 256 * tex->xycolor + 65536 * tex->xycolor; //sloped greyscale
+	// 		textures[2][convert] = 256 * tex->xycolor + 65536 * tex->xycolor; //sloped yellow gradient
+	// 		textures[3][convert] = tex->xorcolor + 256 * tex->xorcolor + 65536 * tex->xorcolor; //xor greyscale
+	// 		textures[4][convert] = 256 * tex->xorcolor; //xor green
+	// 		textures[5][convert] = 65536 * 192 * (x % 16 && y % 16); //red bricks
+	// 		textures[6][convert] = 65536 * tex->ycolor; //red gradient
+	// 		textures[7][convert] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
+	// 	}
+	// }
+	// ---
+	load_textures(data, textures);
 }
 
 void	draw_tex_buff(t_data *data, u_int32_t tex_buff[S_HEIGHT][S_WIDTH])
