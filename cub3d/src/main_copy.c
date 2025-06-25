@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 17:27:54 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/25 19:23:56 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:37:00 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,32 @@ int	main(void)
 	void	*win;
 	void	*img;
 	// char	*relative_path = "test.png";
-	// char	*relative_path = "test.xpm";
-	static char *xpm_data[] = {
-		"8 8 2 1",
-		"  c #8B4513",
-		". c #A0522D",
-		"  . .  .",
-		" ... ...",
-		". . . . ",
-		"... ....",
-		"  . .  .",
-		" ... ...",
-		". . . . ",
-		"... ....",
-		NULL};
+	char	*relative_path = "./src/test.xpm";
+	// static char *xpm_data[] = {
+	// 	"8 8 2 1",
+	// 	"  c #8B4513",
+	// 	". c #A0522D",
+	// 	"  . .  .",
+	// 	" ... ...",
+	// 	". . . . ",
+	// 	"... ....",
+	// 	"  . .  .",
+	// 	" ... ...",
+	// 	". . . . ",
+	// 	"... ....",
+	// 	NULL};
 	int		img_width;
 	int		img_height;
 
+	img_width = 0;
+	img_height = 0;
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 800, 600, "xpm test");
 	if (!win)
 		printf("win problem\n");
 	// img = mlx_png_file_to_image(mlx, relative_path, &img_width, &img_height);
-	// img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-	img = mlx_xpm_to_image(mlx, xpm_data, &img_width, &img_height);
+	img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
+	// img = mlx_xpm_to_image(mlx, xpm_data, &img_width, &img_height);
 	if (!img)
 		printf("img problem\n");
 	mlx_put_image_to_window(mlx, win, img, 0, 0);

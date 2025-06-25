@@ -3,13 +3,13 @@ CFLAGS=-Wall -Wextra -Werror -g -Iincludes -I/usr/include -Iminilibx-linux
 LDFLAGS=-lm -Lminilibx-linux -lmlx_Linux -lXext -lX11
 SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR), \
-		main_copy.c)
-		# init.c
-		# render.c
-		# hooks.c
-		# utils.c
-		# errors.c
-		# print.c
+		main.c \
+		init.c \
+		render.c \
+		hooks.c \
+		utils.c \
+		errors.c \
+		print.c)
 OBJS_DIR=obj/
 OBJS=$(SRCS:%.c=$(OBJS_DIR)%.o)
 NAME=cub3D
