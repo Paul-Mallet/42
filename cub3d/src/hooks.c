@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:20:42 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/24 17:35:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/24 20:50:50 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,10 @@ void	handle_right_dir(t_data *data)
 {
 	t_player	*player;
 	t_speed		*speed;
-	t_keys		*keys;
 	t_cam		*cam;
 
 	player = &data->player;
 	speed = &data->speed;
-	keys = &data->keys;
 	cam = &data->cam;
 	player->old_dir_x = player->dir_x;
 	player->dir_x = player->dir_x * cos(-speed->rot)
@@ -135,12 +133,10 @@ void	handle_left_dir(t_data *data)
 {
 	t_player	*player;
 	t_speed		*speed;
-	t_keys		*keys;
 	t_cam		*cam;
 
 	player = &data->player;
 	speed = &data->speed;
-	keys = &data->keys;
 	cam = &data->cam;
 	player->old_dir_x = player->dir_x;
 	player->dir_x = player->dir_x * cos(speed->rot)

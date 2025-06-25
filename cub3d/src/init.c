@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:26:24 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/24 18:14:36 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/25 09:39:38 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ static void	init_data(t_data *data)
 	// time & fps
 	data->time.curr = get_ticks();
 	data->time.old = data->time.curr;
-	// textures array
-	// data->tex.arr = (int *)malloc(3 * sizeof(int));
+	// screen sizes
+	data->screen.x = 0;
+	data->screen.y = 0;
 }
 
 static void	init_mlx(t_data *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 17:41:16 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/24 18:15:13 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/25 11:08:18 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <limits.h>
 # include <float.h>
 # include <math.h>
+# include <inttypes.h>
 # include "../minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <X11/Xlib.h>
@@ -37,7 +38,7 @@
 # define S_HEIGHT	480
 
 // wall, ceil, floor textures and resolutions
-# define TEX_NUM	3
+# define TEX_NUM	8 //change with 3
 # define TEX_WIDTH	64
 # define TEX_HEIGHT	64
 
@@ -200,8 +201,18 @@ typedef struct s_keys
 
 typedef struct s_tex
 {
-	//TEX_WIDTH * TEX_HEIGHT = 64 * 64(memsize?)
-	
+	int			xorcolor;
+	int			xcolor;
+	int			ycolor;
+	int			xycolor;
+	int			tex_index;
+	double		wall_x;
+	int			x;
+	int			y;
+	int			y_tex_buff;
+	double		step;
+	double		pos;
+	u_int32_t	color;
 }	t_tex;
 
 
