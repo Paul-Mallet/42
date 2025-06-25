@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:44:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/25 12:16:57 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/06/25 15:13:55 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,9 @@ void	draw_vert_line(t_data *data, int y_start, int y_end, int color)
     }
 }
 
-void	texturing_vert_line(t_data *data, int textures[TEX_NUM][TEX_HEIGHT * TEX_WIDTH], u_int32_t tex_buff[S_HEIGHT][S_WIDTH])
+void	texturing_vert_line(t_data *data,
+	int textures[TEX_NUM][TEX_HEIGHT * TEX_WIDTH],
+	u_int32_t tex_buff[S_HEIGHT][S_WIDTH])
 {
 	t_tex		*tex;
 	t_grid		*grid;
@@ -143,7 +145,6 @@ void	texturing_vert_line(t_data *data, int textures[TEX_NUM][TEX_HEIGHT * TEX_WI
 	ray = &data->ray;
 	draw = &data->draw;
 	screen = &data->screen;
-
 	// texturing calculations
 	tex->tex_index = world_map[grid->map_x][grid->map_y] - 1;
 	// printf("grid->map_x: %d\ngrid->map_y: %d\ntex->tex_index: %d\n",
@@ -317,6 +318,14 @@ void	clear_lines(t_data *data)
 	ft_memset(data->img.addr, 0, S_HEIGHT * data->img.line_len);
 }
 
+// void	load_textures(t_data *data, char *pathname, int textures[TEX_NUM][TEX_HEIGHT * TEX_WIDTH])
+// {
+// 	int	tex_w;
+// 	int	tex_h;	// store the mlx_xpm_image() return (void *);
+
+// 	mlx_xpm_file_to_image(data->mlx.mlx_co, pathname, &tex_w, &tex_h);
+// }
+
 void	generate_textures(t_data *data, int textures[TEX_NUM][TEX_HEIGHT * TEX_WIDTH])
 {
 	int		x;
@@ -325,8 +334,6 @@ void	generate_textures(t_data *data, int textures[TEX_NUM][TEX_HEIGHT * TEX_WIDT
 	t_tex	*tex;
 
 	tex = &data->tex;
-	// Make sure these match your loop bounds
-	// invalid read of size 4, maybe try malloc?, fix at least textures[][] need it for image.png / .xpm
 	x = -1;
 	while (++x < TEX_WIDTH)
 	{
@@ -353,16 +360,19 @@ void	generate_textures(t_data *data, int textures[TEX_NUM][TEX_HEIGHT * TEX_WIDT
 	}
 	// ---
 	
-	// real textures version
+	// load_texture(data, textures[0], "../assets/eagle.xpm");
+
+	// real textures version, have only 4 !, so doublon
 	// unsigned long tw, th;
-	// loadImage(textures[0], tw, th, "../assets/eagle.png");
-	// loadImage(textures[1], tw, th, "../assets/redbrick.png");
-	// loadImage(textures[2], tw, th, "../assets/purplestone.png");
-	// loadImage(textures[3], tw, th, "../assets/greystone.png");
-	// loadImage(textures[4], tw, th, "../assets/bluestone.png");
-	// loadImage(textures[5], tw, th, "../assets/mossy.png");
-	// loadImage(textures[6], tw, th, "../assets/wood.png");
-	// loadImage(textures[7], tw, th, "../assets/colorstone.png");
+	// load_image(textures[0], tw, th, "../assets/eagle.xpm");
+	// load_image(textures[1], tw, th, "../assets/bluestone.xpm");
+	// load_image(textures[2], tw, th, "../assets/barrel.xpm");
+	// load_image(textures[3], tw, th, "../assets/colorstone.xpm");
+	// load_image(textures[4], tw, th, "../assets/eagle.xpm"); //same twice
+	// load_image(textures[5], tw, th, "../assets/bluestone.xpm");
+	// load_image(textures[6], tw, th, "../assets/barrel.xpm");
+	// load_image(textures[7], tw, th, "../assets/colorstone.xpm");
+	// mlx_xpm_file_to_image(data->mlx.mlx_co, pathname, tw, th);
 }
 
 void	draw_tex_buff(t_data *data, u_int32_t tex_buff[S_HEIGHT][S_WIDTH])
