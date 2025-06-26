@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 18:00:27 by pamallet          #+#    #+#             */
-/*   Updated: 2025/06/20 17:13:28 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/06/26 12:49:57 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,10 @@ void	print_data(t_data *data)
 		"time.curr: %f\n"
 		"time.old: %f\n",
 		data->mlx.name,
-		data->player.pos_x,
-		data->player.pos_y,
-		data->player.dir_x,
-		data->player.dir_y,
-		data->cam.plane_x,
-		data->cam.plane_y,
-		data->grid.map_x,
-		data->grid.map_y,
-		data->grid.wall.is_hit,
-		data->grid.wall.which_side,
-		data->time.frame,
-		data->time.curr,
-		data->time.old);
+		data->player.pos_x, data->player.pos_y,
+		data->player.dir_x, data->player.dir_y,
+		data->cam.plane_x, data->cam.plane_y,
+		data->grid.map_x, data->grid.map_y,
+		data->grid.wall.is_hit, data->grid.wall.which_side,
+		data->time.frame, data->time.curr, data->time.old);
 }

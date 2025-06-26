@@ -1,4 +1,12 @@
-"settings, keyboard, compose key(alt + right) for accents"
+
+
+TODO 26/06!!!
+* union with bfiquet part
+* split into subfiles(render.c, hooks.c & utils.c)
+* handle errors
+* norm again(*.c & *.h)
+
+
 
 CUB3D Documentation
 
