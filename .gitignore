@@ -1,0 +1,22 @@
+# current and inner .vscode
+.vscode
+*/.vscode
+
+# all obj folders
+*/obj
+/philo/obj
+
+# all executable files
+*/a.out
+born2beroot/born2beroot
+cub3D/cub3d
+fract_ol/fractol
+ft_printf/ft_printf
+get_next_line/get_next_line
+libft/libft
+philosopher/philo/philo
+pipex/pipex
+push_swap/push_swap
+
+# all libs used
+*/minilibx-linux
