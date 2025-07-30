@@ -1,10 +1,9 @@
 CPP=c++
 C_FLAGS=-Wall -Wextra -Werror -g
 CPP_FLAG=-std=c++98
-SRC_DIR=src/
-SRC=$(addprefix $(SRC_DIR), megaphone.cpp)
+SRC=megaphone.cpp
 OBJS_DIR=obj/
-OBJS=$(SRC:$(SRC_DIR)%.cpp=$(OBJS_DIR)%.o)
+OBJS=$(SRC:%.cpp=$(OBJS_DIR)%.o)
 NAME=megaphone
 
 all: $(NAME)
