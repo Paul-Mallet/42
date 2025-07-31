@@ -6,17 +6,25 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 16:13:21 by pamallet          #+#    #+#             */
-/*   Updated: 2025/07/31 15:32:36 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/07/31 16:01:10 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream> //iostream
-#include <cctype> //char approach with toupper
+#include <iostream>
+#include <cctype>
+
 using std::cout;
+namespace MyNamespace {
+	int value = 42;
+	namespace MyInnerNamespace {
+		void function() { cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n"; }
+	}
+}
 
-//namespace not good, don't know if my cout or the std::cout
-//string + transform, work seamlessly together(as standard)
-
+// using: like import in other languages
+// namespace: like struct in C, interfaces in TS
+// iostream: standard input/output stream objects
+// cctype: to classify / transform individual char
 int	main(int ac, char **av)
 {
 	int	i;
@@ -35,5 +43,6 @@ int	main(int ac, char **av)
 		cout << "\n";
 	}
 	else
-		cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
+		MyNamespace::MyInnerNamespace::function();
+	return (0);
 }
