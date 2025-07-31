@@ -1,10 +1,11 @@
 CPP=c++
 C_FLAGS=-Wall -Wextra -Werror -g
 CPP_FLAG=-std=c++98
-SRC=megaphone.cpp
+SRCS_DIR=src/
+SRCS=$(addprefix $(SRCS_DIR), main.cpp)
 OBJS_DIR=obj/
-OBJS=$(SRC:%.cpp=$(OBJS_DIR)%.o)
-NAME=megaphone
+OBJS=$(SRCS:%.cpp=$(OBJS_DIR)%.o)
+NAME=phonebook
 
 all: $(NAME)
 	@echo "\033[1;32m✔ megaphone compiled"
