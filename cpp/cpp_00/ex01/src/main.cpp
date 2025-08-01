@@ -3,34 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 17:41:36 by pamallet          #+#    #+#             */
-/*   Updated: 2025/07/31 19:19:32 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/01 13:56:44 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <iomanip>
+#include "phonebook.hpp"
 
-using std::cout;
-
-class PhoneBook {
-	int	width, height; //private specifier(auto scope)
-	public:
-		void myFunction(int, int);	//inline class member(method)
-}; //[phonebook] = int [a];
-
-// not inline class member, for possible compiler opti
-void	PhoneBook::myFunction(int a, int b) {
-	width = a;
-	height = b;
-	cout << "test2 " << width*height << "\n";
-}
-
-class Contact {
-		
-};
+/*
+|-----------------PHONEBOOK-----------------|
+|INDEX     |FIRSTNAME |LASTNAME  |NICKNAME  |
+|0         |paul      |mallet    |pamallet  |
+|1         |jean-pier.|chateau   |pchateau  |
+|-------------------------------------------|
+to 8...
+*/
 
 /*
 <iostream>: stream() object
@@ -45,14 +34,22 @@ access specifiers = access rights for instances
 	private: owner class scope,
 	protected: new instance + owner class scope,
 	public: accessible anywhere it is visible
-
-program run -> 3 cmds(ADD, SEARCH, EXIT)
+Rules:
+	program run -> 3 cmds(ADD, SEARCH, EXIT)
 */
 int	main(void)
 {
-	PhoneBook	phonebook;
-	Contact		contact;
+	// Contact		contact;
+	// PhoneBook	phonebook;
+	string	str;
 
-	phonebook.myFunction(3, 4);
+	cout << "Welcome to your PhoneBook !" << endl;
+	while (str != "EXIT")
+	{
+		cin >> str;
+		if (str == "ADD")
+			cout << "test" << endl;
+			// phonebook.add(str);
+	}
 	return (0);
 }
