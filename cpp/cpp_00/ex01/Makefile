@@ -3,7 +3,10 @@ C_FLAGS=-Wall -Wextra -Werror -g
 CPP_FLAG=-std=c++98
 HEADER_FLAG=-I includes/
 SRCS_DIR=src/
-SRCS=$(addprefix $(SRCS_DIR), main.cpp)
+SRCS=$(addprefix $(SRCS_DIR), \
+		phonebook.cpp\
+		contact.cpp\
+		main.cpp)
 OBJS_DIR=obj/
 OBJS=$(SRCS:%.cpp=$(OBJS_DIR)%.o)
 NAME=phonebook
