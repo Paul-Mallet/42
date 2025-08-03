@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 23:10:40 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/01 14:35:50 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/03 12:32:24 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 
 using std::cin;
 using std::cout;
+using std::cerr;
 using std::string;
+using std::setw;
+using std::left;
 using std::endl;
 
 /*
@@ -43,21 +46,16 @@ using std::endl;
 	QUESTIONS
 	1. if I set myself with cin() class vars values they need to be public?
 	2. private functions means cannot call them outside?
-*/
 
-/*
 	ADD -> Contact(cin / string) -> fill Contact -> add to PhoneBook
 */
-// class Contact {
-// 	string infos[5];
-// 	string firstname;
-// 	string lastname;
-// 	string nickname;
-// 	string phonenumber;
-// 	string darkestsecret;
-// 	public:
-// 		//function members
-// };
+class Contact {
+	public:
+		string infos[5];
+		Contact() {};
+		void add();
+		void display();
+};
 
 /*
 	private specifier(auto scope)
@@ -65,20 +63,16 @@ using std::endl;
 	inline class member(method)
 	class Name {...} phonebook; = Name phonebook;
 */
-// class PhoneBook {
-// 	private:
-// 		Contact contacts[8];
-// 	public:
-// 		void add(contacts) {
-// 			//...
-// 		};
-// 		void search(string) {
-// 			//...
-// 		};
-// 		void exit(PhoneBook[8] phonebook) {
-// 			//...
-// 			//delete[] phonebook;
-// 		};
-// };
+class PhoneBook {
+	private:
+		Contact contacts[8];
+		int addedContact;
+		int maxContact;
+	public:
+		PhoneBook() : addedContact(0), maxContact(0) {};
+		void addContact();
+		void search();
+		void searchIndex();
+};
 
 #endif
