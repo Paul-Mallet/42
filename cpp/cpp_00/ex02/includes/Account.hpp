@@ -12,17 +12,6 @@
 #ifndef __ACCOUNT_H__
 #define __ACCOUNT_H__
 
-# include <iostream>
-# include <string>
-# include <algorithm>
-# include <functional>
-# include <cstdio>
-# include <ctime>
-
-using std::cout;
-using std::string;
-using std::endl;
-using std::time;
 
 // ************************************************************************** //
 //                               Account Class                                //
@@ -35,6 +24,7 @@ public:
 
 	typedef Account		t;
 
+	// get private static int(like in JS)
 	// static int	getNbAccounts( void );
 	// static int	getTotalAmount( void );
 	// static int	getNbDeposits( void );
@@ -46,7 +36,7 @@ public:
 
 	void	makeDeposit( int deposit );
 	bool	makeWithdrawal( int withdrawal );
-	int		checkAmount( void ) const;
+	// int		checkAmount( void ) const;
 	void	displayStatus( void ) const;
 
 
