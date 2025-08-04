@@ -3,10 +3,12 @@ C_FLAGS=-Wall -Wextra -Werror -g
 CPP_FLAG=-std=c++98
 HEADER_FLAG=-I includes/
 SRCS_DIR=src/
-SRCS=$(addprefix $(SRCS_DIR), main.cpp)
+SRCS=$(addprefix $(SRCS_DIR), \
+		Account.cpp\
+		tests.cpp)
 OBJS_DIR=obj/
 OBJS=$(SRCS:%.cpp=$(OBJS_DIR)%.o)
-NAME=phonebook
+NAME=globalbank
 
 all: $(NAME)
 	@echo "\033[1;32m✔ phonebook compiled"
