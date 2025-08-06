@@ -6,11 +6,11 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 17:41:36 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/03 23:16:41 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/06 14:57:52 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Phonebook.hpp"
+#include "Phonebook.class.hpp"
 
 /*
 <iostream>: stream() object
@@ -25,23 +25,20 @@ access specifiers = access rights for instances
 	private: owner class scope,
 	protected: new instance + owner class scope,
 	public: accessible anywhere it is visible
-Norm:
-	extern classes, 1 class / file.cpp/.hpp -> phonebook.hpp + phonebook.cpp + main.cpp
 */
 int	main(void)
 {
 	PhoneBook	phonebook;
-	Contact		contact;
-	string		input;
+	std::string		input;
 
-	cout << "Welcome to your PhoneBook !" << endl;
+	std::cout << "Welcome to your PhoneBook !" << std::endl;
 	while (input != "EXIT")
 	{
-		cin >> input;
+		std::cin >> input;
 		if (input == "ADD")
 			phonebook.addContact();
 		else if (input == "SEARCH")
-			phonebook.search();
+			phonebook.searchContact();
 	}
 	return (0);
 }

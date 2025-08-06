@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Phonebook.hpp                                      :+:      :+:    :+:   */
+/*   Phonebook.class.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 23:10:40 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/04 17:58:10 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/06 15:26:31 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,8 @@
 
 # include <iostream>
 # include <iomanip>
-# include "Contact.hpp"
-
-/* ???
-You should be able to use each of your headers independently from others. Thus,
-they must include all the dependencies they need. However, you must avoid the
-problem of double inclusion by adding include guards. Otherwise, your grade will
-be 0
-*/
-
-// namespace wrong !!!
-using std::cin;
-using std::cout;
-using std::setw;
-using std::left;
-using std::endl;
+# include <ctype.h>
+# include "Contact.class.hpp"
 
 /*
 	private specifier(auto scope)
@@ -40,14 +27,19 @@ using std::endl;
 class PhoneBook {
 	private:
 		Contact contacts[8];
-		int addedContact;
+		int addedContact; //better as static? NO! cause only 1 instance of phonebook needed
 		int maxContact;
+
 	public:
-		PhoneBook() : addedContact(0), maxContact(0) {};
-		//
-		void addContact();
-		void search();
-		void searchIndex();
+		PhoneBook( void );
+		~PhoneBook( void );
+
+		void addContact( void );
+		void searchContact( void ) const;
+		void searchContactIndex( void ) const;
 };
+
+bool isalphastr( std::string str );
+bool isdigitstr( std::string str );
 
 #endif

@@ -4,8 +4,9 @@ CPP_FLAG=-std=c++98
 HEADER_FLAG=-I includes/
 SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR), \
-		Phonebook.cpp\
-		Contact.cpp\
+		Phonebook.class.cpp\
+		Contact.class.cpp\
+		utils.cpp\
 		main.cpp)
 OBJS_DIR=obj/
 OBJS=$(SRCS:%.cpp=$(OBJS_DIR)%.o)
