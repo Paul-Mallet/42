@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.class.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 22:32:50 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/06 15:33:23 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/06 17:35:57 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,28 +95,25 @@ void Contact::addContact( void ) {
 	std::string str;
 
 	std::cout << "First name: ";
-	std::cin >> str;
+	std::getline(std::cin, str);
 	setFirstname(str);
+
 	std::cout << "Last name: ";
-	std::cin >> str;
+	std::getline(std::cin, str);
 	setLastname(str);
+
 	std::cout << "Nickname: ";
-	std::cin >> str;
+	std::getline(std::cin, str);
 	setNickname(str);
+
 	std::cout << "Phone number: ";
-	std::cin >> str;
+	std::getline(std::cin, str);
 	setPhonenum(str);
+
 	std::cout << "Darkest secret: ";
 	std::getline(std::cin, str);
 	setDarksecret(str);
 	std::cout << std::endl;
-
-	if (this->_firstname.empty() || this->_lastname.empty()
-		|| this->_nickname.empty() || this->_phonenumber.empty()
-		|| this->_darksecret.empty())
-		std::cout << "Contact not saved." << std::endl;
-	else
-		std::cout << "Contact saved." << std::endl;
 }
 
 void Contact::displayContactField( std::string Contact::*fieldPtr ) const {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Phonebook.class.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 23:10:40 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/06 15:26:31 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/06 17:41:06 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <iomanip>
 # include <ctype.h>
 # include "Contact.class.hpp"
+
+# define BOOK_CAPACITY 8
 
 /*
 	private specifier(auto scope)

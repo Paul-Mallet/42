@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Phonebook.class.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 22:33:57 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/06 15:00:33 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/06 17:44:40 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,22 @@ PhoneBook::~PhoneBook( void ) {
 };
 
 void PhoneBook::addContact( void ) {
-	contacts[addedContact % 8].addContact();
-	if (maxContact < 8)
-		maxContact++;
-	addedContact++;
+	Contact contact;
+
+	contact = contacts[addedContact % BOOK_CAPACITY];
+	contact.addContact();
+
+	if (contact.getFirstname().empty() || contact.getLastname().empty()
+		|| contact.getNickname().empty() || contact.getPhonenum().empty()
+		|| contact.getDarksecret().empty())
+		std::cout << "Contact not saved." << std::endl;
+	else
+	{
+		std::cout << "Contact saved." << std::endl;
+		if (maxContact < BOOK_CAPACITY)
+			maxContact++;
+		addedContact++;
+	}
 }
 
 void PhoneBook::searchContact( void ) const {
@@ -51,15 +63,16 @@ void PhoneBook::searchContactIndex( void ) const {
 	std::string input;
 	int i;
 
-	while (input != "EXIT")
+	while (std::getline(std::cin, input))
 	{
-		std::cin >> input;
 		i = input[0] - '0';
-		if (input.length() != 1 && isdigit(i))
+		if (input == "EXIT")
+			break ;
+		if (!isdigit(input[0]))
 			std::cout << "Invalid input. Please enter a digit available in the phonebook." << std::endl;
 		else
 		{
-			if (i < 0 || i > maxContact)
+			if (i < 0 || i >= maxContact)
 				std::cout << "Index not found in the Phonebook." << std::endl;
 			else
 				contacts[i].displayContactInfos();
