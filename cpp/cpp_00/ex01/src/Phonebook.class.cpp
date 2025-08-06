@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 22:33:57 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/06 17:44:40 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:03:26 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ PhoneBook::~PhoneBook( void ) {
 };
 
 void PhoneBook::addContact( void ) {
-	Contact contact;
+	Contact &contact = contacts[addedContact % BOOK_CAPACITY];
 
-	contact = contacts[addedContact % BOOK_CAPACITY];
 	contact.addContact();
-
 	if (contact.getFirstname().empty() || contact.getLastname().empty()
 		|| contact.getNickname().empty() || contact.getPhonenum().empty()
 		|| contact.getDarksecret().empty())
@@ -43,7 +41,7 @@ void PhoneBook::searchContact( void ) const {
 	int	i;
 
 	i = -1;
-	std::cout << "|-----------------PHONEBOOK-----------------|" << std::endl;
+	std::cout << std::endl << "|-----------------PHONEBOOK-----------------|" << std::endl;
 	std::cout << "|INDEX     |FIRSTNAME |LASTNAME  |NICKNAME  |" << std::endl;
 	while (++i < maxContact)
 	{
@@ -54,7 +52,7 @@ void PhoneBook::searchContact( void ) const {
 	std::cout << "|-------------------------------------------|" << std::endl;
 
 	if (maxContact == 0)
-		std::cout << "The Phonebook is empty. Please ADD a contact." << std::endl;
+		std::cout << "The Phonebook is empty. Please ADD a contact." << std::endl << std::endl;
 	else
 		searchContactIndex();
 }
@@ -63,6 +61,7 @@ void PhoneBook::searchContactIndex( void ) const {
 	std::string input;
 	int i;
 
+	std::cout << std::endl << "Type an INDEX or EXIT: " << std::endl;
 	while (std::getline(std::cin, input))
 	{
 		i = input[0] - '0';
@@ -77,5 +76,6 @@ void PhoneBook::searchContactIndex( void ) const {
 			else
 				contacts[i].displayContactInfos();
 		}
+		std::cout << std::endl << "Type an INDEX or EXIT: " << std::endl;
 	}
 };

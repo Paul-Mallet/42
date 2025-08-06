@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 22:32:50 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/06 17:35:57 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:02:10 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void Contact::setPhonenum( std::string str ) {
 		this->_phonenumber = str;
 }
 
-// why empty? see how getline() really works #TODO
 void Contact::setDarksecret( std::string str ) {
 	if (str.empty())
 		std::cout << "Invalid darkest secret field: empty" << std::endl;
@@ -94,6 +93,7 @@ void Contact::setDarksecret( std::string str ) {
 void Contact::addContact( void ) {
 	std::string str;
 
+	std::cout << std::endl << "Add a contact" << std::endl;
 	std::cout << "First name: ";
 	std::getline(std::cin, str);
 	setFirstname(str);
@@ -116,9 +116,7 @@ void Contact::addContact( void ) {
 	std::cout << std::endl;
 }
 
-void Contact::displayContactField( std::string Contact::*fieldPtr ) const {
-	const std::string& field = this->*fieldPtr;
-
+void Contact::displayContactField( std::string field ) const {
 	std::cout << std::left << std::setw(9) << field.substr(0, 9);
 	if (field.length() > 9)
 		std::cout << ".";
@@ -128,10 +126,10 @@ void Contact::displayContactField( std::string Contact::*fieldPtr ) const {
 }
 
 void Contact::displayContactStatus( void ) const {
-	std::string Contact::*fields[3] = {
-		&Contact::_firstname,
-		&Contact::_lastname,
-		&Contact::_nickname,
+	std::string fields[3] = {
+		this->_firstname,
+		this->_lastname,
+		this->_nickname,
 	};
 
 	for (int i = 0; i < 3; ++i)

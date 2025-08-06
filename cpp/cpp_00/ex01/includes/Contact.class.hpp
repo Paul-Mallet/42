@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.class.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 11:12:24 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/06 14:50:24 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/06 18:28:16 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ class Contact {
 		void setDarksecret( std::string str );
 
 		void addContact( void );
-		void displayContactField( std::string Contact::*fieldPtr ) const;
+		void displayContactField( std::string field ) const;
 		void displayContactStatus( void ) const;
 		void displayContactInfos( void ) const;
 
