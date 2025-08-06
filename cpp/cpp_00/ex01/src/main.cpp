@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 17:41:36 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/06 18:56:59 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:14:44 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(void)
 	std::string		input;
 
 	std::cout << "Welcome to the PhoneBook !" << std::endl;
-	std::cout << "Type ADD, SEARCH or EXIT" << std::endl;
+	std::cout << std::endl << "Type ADD, SEARCH or EXIT" << std::endl;
 	while (std::getline(std::cin, input))
 	{
 		if (input == "ADD")
@@ -41,7 +41,7 @@ int	main(void)
 			phonebook.searchContact();
 		else if (input == "EXIT")
 			break ;
-		std::cout << "Type ADD, SEARCH or EXIT" << std::endl;
+		std::cout << std::endl << "Type ADD, SEARCH or EXIT" << std::endl;
 	}
 	return (0);
 }

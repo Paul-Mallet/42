@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 22:32:50 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/06 19:02:10 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:08:24 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,18 +98,26 @@ void Contact::addContact( void ) {
 	std::getline(std::cin, str);
 	setFirstname(str);
 
+	if (str.empty())
+		return ;
 	std::cout << "Last name: ";
 	std::getline(std::cin, str);
 	setLastname(str);
 
+	if (str.empty())
+		return ;
 	std::cout << "Nickname: ";
 	std::getline(std::cin, str);
 	setNickname(str);
 
+	if (str.empty())
+		return ;
 	std::cout << "Phone number: ";
 	std::getline(std::cin, str);
 	setPhonenum(str);
 
+	if (str.empty())
+		return ;
 	std::cout << "Darkest secret: ";
 	std::getline(std::cin, str);
 	setDarksecret(str);
