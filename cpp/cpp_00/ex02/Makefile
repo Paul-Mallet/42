@@ -11,7 +11,7 @@ OBJS=$(SRCS:%.cpp=$(OBJS_DIR)%.o)
 NAME=globalbank
 
 all: $(NAME)
-	@echo "\033[1;32m✔ phonebook compiled"
+	@echo "\033[1;32m✔ globalbank compiled"
 
 $(NAME): $(OBJS)
 	@$(CPP) $(C_FLAGS) $(HEADER_FLAG) $(CPP_FLAG) -o $@ $(OBJS)
