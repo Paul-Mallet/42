@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 16:13:21 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/05 11:12:13 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/08 14:49:34 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@
 int	main(int ac, char **av)
 {
 	int i = 0;
-	std::locale loc;
 	std::string str = "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
 
 	if (ac < 2)
@@ -58,7 +57,7 @@ int	main(int ac, char **av)
 		{
 			str = av[i];
 			for (std::string::iterator it = str.begin(); it != str.end(); ++it)
-				*it = std::toupper(*it, loc);
+				*it = std::toupper(*it);
 			std::cout << str;
 		}
 		std::cout << std::endl;
