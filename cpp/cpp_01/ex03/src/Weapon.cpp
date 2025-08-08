@@ -3,13 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:54:32 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/07 17:54:44 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/08 11:22:15 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Weapon.hpp"
 
-//...
+Weapon::Weapon( std::string type ) : _type(type) {
+	std::cout << this->_type << " forged" << std::endl;
+};
+
+Weapon::~Weapon( void ) {
+	std::cout << std::endl << this->_type << " disassembled" << std::endl << std::endl;
+};
+
+const std::string &Weapon::getType( void ) {
+	return this->_type;
+};
+
+void Weapon::setType( std::string newType ) {
+	std::cout << std::endl << this->_type << " disassembled" << std::endl;
+	this->_type = newType;
+	std::cout << this->_type << " forged instead" << std::endl << std::endl;
+};

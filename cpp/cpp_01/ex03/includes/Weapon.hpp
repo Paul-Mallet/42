@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:55:01 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/07 19:01:28 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/08 10:06:53 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class Weapon {
 
 	public:
-		Weapon( void );
+		Weapon( std::string type );
 		~Weapon( void );
 
 		const std::string &getType( void );
