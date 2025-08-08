@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 09:51:16 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/08 11:40:47 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/08 15:01:07 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 	can play with stack / heap alloc,
 	but think as if the OBJECT should ALWAYS have some attributes or not(ref or ptr)
 */
+
+// not std::endl; each time, << "\n" better for ressources
+
 // int	main( void ) {
 // 	Weapon weapon1("axe");
 // 	Weapon *weapon2 = new Weapon("bow");
