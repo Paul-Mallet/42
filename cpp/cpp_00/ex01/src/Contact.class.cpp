@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 22:32:50 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/06 19:08:24 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/08 16:32:24 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,46 +42,116 @@ std::string Contact::getDarksecret( void ) const {
 }
 
 void Contact::setFirstname( std::string str ) {
-	if (str.empty())
-		std::cout << "Invalid firstname field: empty" << std::endl;
-	else if (!isalphastr(str))
-		std::cout << "Invalid firstname field: non alphabetic" << std::endl;
-	else
-		this->_firstname = str;
+	while (1)
+	{
+		std::cout << "First name: ";
+		std::getline(std::cin, str);
+		if (std::cin.eof())
+			break ;
+		if (std::cin.fail())
+			std::cout << "Invalid firstname field. Try again" << std::endl;
+		if (std::cin.bad())
+			break ;
+		if (str.empty())
+			std::cout << "Invalid firstname field: empty" << std::endl;
+		else if (!isalphastr(str))
+			std::cout << "Invalid firstname field: non alphabetic" << std::endl;
+		else
+		{
+			this->_firstname = str;
+			break ;
+		}
+	}
 }
 
 void Contact::setLastname( std::string str ) {
-	if (str.empty())
-		std::cout << "Invalid lastname field: empty" << std::endl;
-	else if (!isalphastr(str))
-		std::cout << "Invalid firstname field: non alphabetic" << std::endl;
-	else
-		this->_lastname = str;
+	while (1)
+	{
+		std::cout << "Last name: ";
+		std::getline(std::cin, str);
+		if (std::cin.eof())
+			break ;
+		if (std::cin.fail())
+			std::cout << "Invalid lastname field. Try again" << std::endl;
+		if (std::cin.bad())
+			break ;
+		if (str.empty())
+			std::cout << "Invalid lastname field: empty" << std::endl;
+		else if (!isalphastr(str))
+			std::cout << "Invalid larstname field: non alphabetic" << std::endl;
+		else
+		{
+			this->_lastname = str;
+			break ;
+		}
+	}
 }
 
 void Contact::setNickname( std::string str ) {
-	if (str.empty())
-		std::cout << "Invalid nickname field: empty" << std::endl;
-	else if (!isalphastr(str))
-		std::cout << "Invalid firstname field: non alphabetic" << std::endl;
-	else
-		this->_nickname = str;
+	while (1)
+	{
+		std::cout << "Nickname: ";
+		std::getline(std::cin, str);
+		if (std::cin.eof())
+			break ;
+		if (std::cin.fail())
+			std::cout << "Invalid nickname field. Try again" << std::endl;
+		if (std::cin.bad())
+			break ;
+		if (str.empty())
+			std::cout << "Invalid nickname field: empty" << std::endl;
+		else if (!isalphastr(str))
+			std::cout << "Invalid nickname field: non alphabetic" << std::endl;
+		else
+		{
+			this->_nickname = str;
+			break ;
+		}
+	}
 }
 
 void Contact::setPhonenum( std::string str ) {
-	if (str.empty())
-		std::cout << "Invalid phone number field: empty" << std::endl;
-	else if (!isdigitstr(str))
-		std::cout << "Invalid firstname field: non digit" << std::endl;
-	else
-		this->_phonenumber = str;
+	while (1)
+	{
+		std::cout << "Phone number: ";
+		std::getline(std::cin, str);
+		if (std::cin.eof())
+			break ;
+		if (std::cin.fail())
+			std::cout << "Invalid phone number field. Try again" << std::endl;
+		if (std::cin.bad())
+		break ;
+		if (str.empty())
+			std::cout << "Invalid phone number field: empty" << std::endl;
+		else if (!isdigitstr(str))
+			std::cout << "Invalid phone number field: non digit" << std::endl;
+		else
+		{
+			this->_phonenumber = str;
+			break ;
+		}
+	}
 }
 
 void Contact::setDarksecret( std::string str ) {
-	if (str.empty())
-		std::cout << "Invalid darkest secret field: empty" << std::endl;
-	else
-		this->_darksecret = str;
+	while (1)
+	{
+		std::cout << "Darkest secret: ";
+		std::getline(std::cin, str);
+		if (std::cin.eof())
+			break ;
+		if (std::cin.fail())
+			std::cout << "Invalid darkest secret field. Try again" << std::endl;
+		if (std::cin.bad())
+		break ;
+		if (str.empty())
+			std::cout << "Invalid darkest secret field: empty" << std::endl;
+		else
+		{
+			this->_darksecret = str;
+			break ;
+		}
+	}
 }
 
 /*
@@ -94,32 +164,18 @@ void Contact::addContact( void ) {
 	std::string str;
 
 	std::cout << std::endl << "Add a contact" << std::endl;
-	std::cout << "First name: ";
-	std::getline(std::cin, str);
 	setFirstname(str);
-
-	if (str.empty())
+	if (this->_firstname.empty())
 		return ;
-	std::cout << "Last name: ";
-	std::getline(std::cin, str);
 	setLastname(str);
-
-	if (str.empty())
+	if (this->_lastname.empty())
 		return ;
-	std::cout << "Nickname: ";
-	std::getline(std::cin, str);
 	setNickname(str);
-
-	if (str.empty())
+	if (this->_nickname.empty())
 		return ;
-	std::cout << "Phone number: ";
-	std::getline(std::cin, str);
 	setPhonenum(str);
-
-	if (str.empty())
+	if (this->_phonenumber.empty())
 		return ;
-	std::cout << "Darkest secret: ";
-	std::getline(std::cin, str);
 	setDarksecret(str);
 	std::cout << std::endl;
 }
@@ -139,7 +195,6 @@ void Contact::displayContactStatus( void ) const {
 		this->_lastname,
 		this->_nickname,
 	};
-
 	for (int i = 0; i < 3; ++i)
 		displayContactField(fields[i]);
 }
