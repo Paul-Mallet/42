@@ -6,11 +6,11 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 10:12:51 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/07 11:15:44 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/16 11:56:29 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "../includes/Zombie.hpp"
 
 /*
 	new(): combine void *mem = operator new(size_t) + new(mem) ClassName();
@@ -31,9 +31,15 @@
 
 		delete zombie2;
 		delete zombie3;
+	instances scope in functions, destruct right after the exec of it !
 */
 int	main( void ) {
+	Zombie david = Zombie();
 	Zombie *bob = newZombie("Bob");
+
+	david.setName("David");
+	david.announce();
+	bob->announce();
 
 	randomChump("Dylan");
 

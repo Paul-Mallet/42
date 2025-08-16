@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:57:13 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/08 11:38:48 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/16 12:06:35 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class HumanA {
 
 	public:
 		HumanA( std::string name, Weapon &weapon );
-		~HumanA( void );
+		~HumanA();
 
 		void attack( void );
 

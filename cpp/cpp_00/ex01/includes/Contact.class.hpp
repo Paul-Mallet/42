@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.class.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 11:12:24 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/06 18:28:16 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/16 10:35:39 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@
 						useful for a collection of instances(array, vector, list, map, set...) !!!
 						(DRY Principle: instead of writing 1 func/member, write 1 func/generical feature and recall it)
 		1. declare pointers for instances 1rst, then members(attr, func) too
-		2. init member's pointers by given them addresses of current Class members
-		3. by dereferencing those pointers, given them the value needed or calling them(if function without params)
+		2. init member's pointers by giving them addresses of current Class members
+		3. by dereferencing those pointers, give them the value needed or calling them(if function without params)
 		ex:
 		Class ClassName {
 			public:

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/08 09:51:16 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/08 15:01:07 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/16 11:58:32 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "../includes/Weapon.hpp"
+#include "../includes/HumanA.hpp"
+#include "../includes/HumanB.hpp"
 
 /*
 	can init list at NULL ptr to another OBJECT in constructor without its param
@@ -20,31 +20,10 @@
 	can play with stack / heap alloc,
 	but think as if the OBJECT should ALWAYS have some attributes or not(ref or ptr)
 */
-
-// not std::endl; each time, << "\n" better for ressources
-
-// int	main( void ) {
-// 	Weapon weapon1("axe");
-// 	Weapon *weapon2 = new Weapon("bow");
-
-// 	weapon1.setType("sword");
-// 	HumanA human1("Georges", weapon1);
-// 	HumanB human2("Sabrina");
-
-// 	human1.attack();
-// 	human2.attack();
-
-// 	human2.setWeapon(weapon2);
-// 	human2.attack();
-
-// 	human2.setWeapon(NULL);
-// 	delete weapon2;
-// 	return 0;
-// }
-
 int main()
 {
 	{
+		// OK
 		Weapon club = Weapon("crude spiked club");
 		HumanA bob("Bob", club);
 		bob.attack();
@@ -59,5 +38,5 @@ int main()
 		club.setType("some other type of club");
 		jim.attack();
 	}
-return 0;
+	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:54:32 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/08 11:22:15 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/16 12:11:38 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ Weapon::~Weapon( void ) {
 };
 
 const std::string &Weapon::getType( void ) {
-	return this->_type;
+	if (!this->_type.empty())
+		return this->_type;
+	return "nothing"; //must be alloc to ref it...
 };
 
 void Weapon::setType( std::string newType ) {
