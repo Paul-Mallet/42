@@ -4,6 +4,7 @@ CPPFLAGS=-std=c++98
 INCLUDES=-I includes/
 SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR), \
+			Filestream.cpp\
 			main.cpp)
 OBJS_DIR=obj/
 OBJS=$(patsubst $(SRCS_DIR)%.cpp, $(OBJS_DIR)%.o, $(SRCS))
