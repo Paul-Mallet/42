@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 19:43:34 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/17 20:17:30 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/18 10:07:24 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ Filestream::~Filestream() {
 
 const std::string Filestream::inContent( void ) {
 	this->_ifs.open(this->_filename.c_str(), std::ifstream::in);
-	// check_open();
 	if (!this->_ifs.is_open())
 	{
 		std::cerr << "Error: Ifs: Cannot open file.\n";
@@ -40,9 +39,7 @@ const std::string Filestream::inContent( void ) {
 		std::cerr << "Error: Ifs: Low-level I/O.\n";
 		return "";
 	}
-
 	this->_buff << this->_ifs.rdbuf();
-	// check_read();
 	if (this->_ifs.bad())
 	{
 		std::cerr << "Error: Ifs filebuf: Low-level I/O.\n";
@@ -53,15 +50,14 @@ const std::string Filestream::inContent( void ) {
 		std::cerr << "Error: buff: File is empty.\n";
 		return "";
 	}
-
 	if (this->_ifs.eof())
 		this->_ifs.close();
-
+	std::cout << "Content successfully read from a <filename>.\n";
 	const std::string content = this->_buff.str();
 	return content;
 }
 
-const std::string Filestream::replaceContent( const std::string content ) {
+const std::string Filestream::replaceContent( const std::string &content ) {
 	std::string				res;
 	std::string::size_type	found;
 	std::string::size_type	pos;
@@ -74,35 +70,32 @@ const std::string Filestream::replaceContent( const std::string content ) {
 		pos = found + this->_s1.length();
 	}
 	res += content.substr(pos, std::string::npos);
-
-	const std::string result = res;
-	return result;
+	std::cout << "Content successfully replace.\n";
+	return res;
 }
 
-// result gives nothing, use ref to keep the proper value in memory?
 void Filestream::outContent( const std::string result ) {
 	std::string filename;
 
 	filename = this->_filename;
 	filename.append(".replace");
-	std::ofstream ofs(filename.c_str(), std::ofstream::out);
-	// check_open();
-	if (ofs.fail())
+	this->_ofs.open(filename.c_str(), std::ofstream::out);
+	if (!this->_ofs.is_open())
 	{
 		std::cout << "Error: Ofs: Cannot open file.\n";
 		return ;
 	}
-	if (ofs.fail())
+	if (this->_ofs.fail())
 	{
 		std::cerr << "Error: Ofs: Cannot open file.\n";
 		return ;
 	}
-	if (ofs.bad())
+	if (this->_ofs.bad())
 	{
 		std::cerr << "Error: Ofs: Low-level I/O.\n";
 		return ;
 	}
-
 	this->_ofs << result;
 	this->_ofs.close();
+	std::cout << "Content successfully write in a new <filename>.replace.\n";
 }

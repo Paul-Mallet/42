@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 09:44:50 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/17 20:15:32 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/18 10:12:20 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,120 +53,17 @@ int main( int ac, char **av )
 		std::cout << "Format required: ./streamfile <filename> s1 s2\n";
 		return 0;
 	}
-
 	filename = av[1];
 	s1 = av[2];
 	s2 = av[3];
+
 	Filestream file(filename, s1, s2);
 
-	const std::string content = file.inContent();
+	const std::string &content = file.inContent();
 	if (content.empty())
 		return 0;
+
 	const std::string result = file.replaceContent(content);
 	file.outContent(result);
 	return 0;
 }
-
-// int main( int ac, char **av )
-// {
-// 	std::ifstream ifs;
-// 	std::string filename;
-// 	std::string s1;
-// 	std::string s2;
-// 	std::stringstream buff;
-// 	std::string content;
-// 	std::string result;
-// 	std::string::size_type found;
-// 	std::string::size_type pos;
-
-// 	// check input basic formats
-// 	if (ac != 4)
-// 	{
-// 		std::cout << "Format required: ./streamfile <filename> s1 s2\n";
-// 		return 0;
-// 	}
-
-// 	//stock in vars for better readability
-// 	filename = av[1];
-// 	s1 = av[2];
-// 	s2 = av[3];
-
-// 	// -------------- .getContent() ----------------
-
-// 	// check stream state after opened file
-// 	ifs.open(filename.c_str(), std::ifstream::in);
-// 	if (!ifs.is_open())
-// 	{
-// 		std::cerr << "Error: Ifs: Cannot open file.\n";
-// 		return 0;
-// 	}
-// 	if (ifs.fail())
-// 	{
-// 		std::cerr << "Error: Ifs: Cannot open file.\n";
-// 		return 0;
-// 	}
-// 	if (ifs.bad())
-// 	{
-// 		std::cerr << "Error: Ifs: Low-level I/O.\n";
-// 		return 0;
-// 	}
-
-// 	// check read accross file(eof)
-// 	buff << ifs.rdbuf();
-// 	if (ifs.bad())
-// 	{
-// 		std::cerr << "Error: Ifs filebuf: Low-level I/O.\n";
-// 		return 0;
-// 	}
-// 	if (!buff)
-// 	{
-// 		std::cerr << "Error: buff: File is empty.\n";
-// 		return 0;
-// 	}
-
-// 	// close opened file AFTER reading(eof flag set) succeed
-// 	// ifs error state loop based on
-// 	if (ifs.eof())
-// 		ifs.close();
-
-// 	// stock buff string into real one
-// 	content = buff.str();
-
-// 	// -------------- .replaceContent() ----------------
-
-// 	// loop over content to replace each occurences if found | pos, found, result
-// 	pos = 0;
-// 	while ((found = content.find(s1, pos)) != std::string::npos)
-// 	{
-// 		result += content.substr(pos, found - pos);
-// 		result += s2;
-// 		pos = found + s1.length();
-// 	}
-// 	result += content.substr(pos, std::string::npos);
-
-// 	// -------------- .outContent() ----------------
-
-// 	// open/create another file to output result within it
-// 	filename.append(".replace");
-// 	std::ofstream ofs(filename.c_str(), std::ofstream::out);
-// 	if (ofs.fail())
-// 	{
-// 		std::cout << "Error: Ofs: Cannot open file.\n";
-// 		return 0;
-// 	}
-// 	if (ofs.fail())
-// 	{
-// 		std::cerr << "Error: Ofs: Cannot open file.\n";
-// 		return 0;
-// 	}
-// 	if (ofs.bad())
-// 	{
-// 		std::cerr << "Error: Ofs: Low-level I/O.\n";
-// 		return 0;
-// 	}
-
-// 	// close currently open file stream
-// 	ofs << result;
-// 	ofs.close();
-// 	return 0;
-// }

@@ -6,11 +6,11 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:54:32 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/16 12:18:17 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/17 09:20:40 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanB.hpp"
+#include "../includes/HumanB.hpp"
 
 HumanB::HumanB( std::string name ) : _name(name), _weapon(NULL) {
 	std::cout << this->_name << " spawned" << std::endl;
@@ -23,9 +23,7 @@ HumanB::~HumanB( void ) {
 		std::cout << this->_name << " died and has no weapon" << std::endl;
 }
 
-// pass to mem_attr the address of the Object Weapon
-// cannot change the function declaration...
-void HumanB::setWeapon( Weapon weapon ) {
+void HumanB::setWeapon( Weapon &weapon ) {
 	this->_weapon = &weapon;
 	if (this->_weapon)
 		std::cout << this->_name << " takes a " << this->_weapon->getType() << std::endl;
