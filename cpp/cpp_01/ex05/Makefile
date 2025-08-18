@@ -4,14 +4,14 @@ CPPFLAGS=-std=c++98
 INCLUDES=-I includes/
 SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR), \
-			Filestream.cpp\
+			Harl.cpp\
 			main.cpp)
 OBJS_DIR=obj/
 OBJS=$(patsubst $(SRCS_DIR)%.cpp, $(OBJS_DIR)%.o, $(SRCS))
-NAME=streamfile
+NAME=harl2.0
 
 all: $(NAME)
-	@echo "\033[1;32m✔ streamfile compiled"
+	@echo "\033[1;32m✔ harl2.0 compiled"
 
 $(NAME): $(OBJS)
 	@$(CPP) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -o $@ $(OBJS)
