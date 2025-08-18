@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/18 11:14:16 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/18 15:28:09 by pamallet         ###   ########.fr       */
+/*   Created: 2025/08/18 14:39:56 by pamallet          #+#    #+#             */
+/*   Updated: 2025/08/18 14:42:17 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Harl.hpp"
+#ifndef HARL_HPP
+# define HARL_HPP
 
-int main( void )
-{
-	Harl *harl2_0 = new Harl();
-	Harl harl2_00;
+# include <iostream>
 
-	harl2_0->complain("DEBUG");
-	harl2_0->complain("INFO");
-	harl2_0->complain("WARNING");
-	harl2_0->complain("ERROR");
+class Harl {
 
-	std::cout << std::endl;
+	public:
+		Harl( void );
+		~Harl();
 
-	harl2_00.complain("DEBUG");
-	harl2_00.complain("INFO");
-	harl2_00.complain("WARNING");
-	harl2_00.complain("ERROR");
+		void complain( std::string level );
 
-	delete harl2_0;
-	return 0;
-}
+	private:
+		void debug( void );
+		void info( void );
+		void warning( void );
+		void error( void );
+
+};
+
+int stringHash( std::string level );
+
+#endif

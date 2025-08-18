@@ -5,30 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/18 11:14:16 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/18 15:28:09 by pamallet         ###   ########.fr       */
+/*   Created: 2025/08/18 14:38:08 by pamallet          #+#    #+#             */
+/*   Updated: 2025/08/18 14:48:41 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Harl.hpp"
 
-int main( void )
+// ./harlFilter "WARNING" || ./harlFilter "other than level" -> return same string
+int main ( int ac, char **av )
 {
-	Harl *harl2_0 = new Harl();
-	Harl harl2_00;
+	if (ac != 2)
+	{
+		std::cout << "Valid format: ./harlFilter \"WARNING\"\n";
+		return 0;
+	}
 
-	harl2_0->complain("DEBUG");
-	harl2_0->complain("INFO");
-	harl2_0->complain("WARNING");
-	harl2_0->complain("ERROR");
+	Harl harl2_0;
+	Harl *harl2_00 = new Harl();
 
-	std::cout << std::endl;
+	harl2_0.complain(av[1]);
+	harl2_00->complain(av[1]);
 
-	harl2_00.complain("DEBUG");
-	harl2_00.complain("INFO");
-	harl2_00.complain("WARNING");
-	harl2_00.complain("ERROR");
-
-	delete harl2_0;
+	delete harl2_00;
 	return 0;
 }

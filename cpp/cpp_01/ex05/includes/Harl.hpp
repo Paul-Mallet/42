@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 10:24:01 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/18 11:08:58 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/18 16:03:41 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define HARL_HPP
 
 # include <iostream>
+# include <string>
 
 class Harl {
 
@@ -30,7 +31,5 @@ class Harl {
 		void error( void );
 
 };
-
-int stringHash( std::string level );
 
 #endif
