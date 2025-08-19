@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 09:31:17 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/19 11:55:19 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/19 18:31:24 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 int main ( void )
 {
 	Fixed a;
-	Fixed (b, a);
+	Fixed b(a);
 	Fixed c;
 
 	c = b;
