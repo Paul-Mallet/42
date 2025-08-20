@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 10:07:21 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/19 18:38:23 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/20 09:39:13 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,4 @@ void Fixed::setRawBits( int const raw ) {
 	this->_raw = raw;
 }
 
-// std::ostream &operator<<( std::ostream &o, Fixed const &i ) {
-// 	return o << i; //?
-// }
+const int Fixed::_fracb = 8;

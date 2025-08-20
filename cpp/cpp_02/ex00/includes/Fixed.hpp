@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 09:57:20 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/19 18:40:19 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/20 09:38:08 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ class Fixed {
 
 	private:
 		int 				_raw;
-		static const int	_fracb = 8; //?
+		static const int	_fracb;
 
 };
 
