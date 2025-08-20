@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 10:01:57 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/20 11:50:35 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/20 11:55:31 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int Fixed::toInt( void ) const {
 float Fixed::toFloat( void ) const {
 	float f;
 
-	f = (this->_raw * 1.0f) / (1 << this->_fracb);
+	f = this->_raw / (1 << this->_fracb);
 	return f;
 }
 
