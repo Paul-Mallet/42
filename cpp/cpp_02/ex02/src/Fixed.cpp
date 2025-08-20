@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 10:01:57 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/20 12:01:09 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/20 12:11:34 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ Fixed &Fixed::operator=( Fixed const &rhs ) {
 }
 
 Fixed Fixed::operator+( Fixed const &rhs ) const {
+	Fixed addition;
+
 	std::cout << "Addition arithmetic operator called\n";
-	return Fixed(this->_raw + rhs._raw);
+	addition.setRawBits(this->_raw + rhs._raw);
+	return addition;
 }
 
 int Fixed::getRawBits( void ) const {
