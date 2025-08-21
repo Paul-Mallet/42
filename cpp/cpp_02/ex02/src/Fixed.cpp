@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 10:01:57 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/20 18:47:47 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/21 09:50:18 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,14 @@ Fixed::Fixed( void ): _raw(0) {
 }
 
 Fixed::Fixed( int const value ) {
-	// std::cout << "Int constructor called\n";
 	this->_raw = value * (1 << this->_fracb);
 }
 
 Fixed::Fixed( float const value ) {
-	// std::cout << "Float constructor called\n";
 	this->_raw = roundf(value * (1 << this->_fracb));
 }
 
 Fixed::Fixed( Fixed const &src ) {
-	// std::cout << "Copy constructor called\n";
-	// std::cout << "Copy assignment operator called\n";
 	if (this != &src)
 		this->_raw = src._raw;
 }
@@ -41,7 +37,6 @@ Fixed::~Fixed() {
 	assignment operator
 */
 Fixed &Fixed::operator=( Fixed const &rhs ) {
-	// std::cout << "Copy assignment operator called\n";
 	if (this != &rhs)
 		this->_raw = rhs._raw;
 	return *this;
@@ -53,7 +48,6 @@ Fixed &Fixed::operator=( Fixed const &rhs ) {
 bool Fixed::operator>( Fixed const &rhs ) const {
 	bool greater;
 
-	// std::cout << "Greater than comparison operator called\n";
 	if (this->_raw > rhs._raw)
 		greater = true;
 	else
@@ -64,7 +58,6 @@ bool Fixed::operator>( Fixed const &rhs ) const {
 bool Fixed::operator<( Fixed const &rhs ) const {
 	bool less;
 
-	// std::cout << "Greater than comparison operator called\n";
 	if (this->_raw < rhs._raw)
 		less = true;
 	else
@@ -75,7 +68,6 @@ bool Fixed::operator<( Fixed const &rhs ) const {
 bool Fixed::operator>=( Fixed const &rhs ) const {
 	bool gOrEq;
 
-	// std::cout << "Greater than comparison operator called\n";
 	if (this->_raw >= rhs._raw)
 		gOrEq = true;
 	else
@@ -86,7 +78,6 @@ bool Fixed::operator>=( Fixed const &rhs ) const {
 bool Fixed::operator<=( Fixed const &rhs ) const {
 	bool lOrEq;
 
-	// std::cout << "Greater than comparison operator called\n";
 	if (this->_raw <= rhs._raw)
 		lOrEq = true;
 	else
@@ -97,7 +88,6 @@ bool Fixed::operator<=( Fixed const &rhs ) const {
 bool Fixed::operator==( Fixed const &rhs ) const {
 	bool equal;
 
-	// std::cout << "Equal to comparison operator called\n";
 	if (this->_raw == rhs._raw)
 		equal = true;
 	else
@@ -108,7 +98,6 @@ bool Fixed::operator==( Fixed const &rhs ) const {
 bool Fixed::operator!=( Fixed const &rhs ) const {
 	bool notEqual;
 
-	// std::cout << "Not equal to comparison operator called\n";
 	if (this->_raw != rhs._raw)
 		notEqual = true;
 	else
@@ -122,7 +111,6 @@ bool Fixed::operator!=( Fixed const &rhs ) const {
 Fixed Fixed::operator+( Fixed const &rhs ) const {
 	Fixed addition;
 
-	// std::cout << "Addition arithmetic operator called\n";
 	addition.setRawBits(this->_raw + rhs._raw);
 	return addition;
 }
@@ -130,7 +118,6 @@ Fixed Fixed::operator+( Fixed const &rhs ) const {
 Fixed Fixed::operator-( Fixed const &rhs ) const {
 	Fixed substract;
 
-	// std::cout << "Substraction arithmetic operator called\n";
 	substract.setRawBits(this->_raw - rhs._raw);
 	return substract;
 }
@@ -138,7 +125,6 @@ Fixed Fixed::operator-( Fixed const &rhs ) const {
 Fixed Fixed::operator*( Fixed const &rhs ) const {
 	Fixed multi;
 
-	std::cout << "Multiplication arithmetic operator called\n";
 	multi.setRawBits((this->_raw * rhs._raw) >> this->_fracb);
 	return multi;
 }
@@ -146,7 +132,6 @@ Fixed Fixed::operator*( Fixed const &rhs ) const {
 Fixed Fixed::operator/( Fixed const &rhs ) const {
 	Fixed division;
 
-	// std::cout << "Division arithmetic operator called\n";
 	division.setRawBits((this->_raw << this->_fracb) / rhs._raw);
 	return division;
 }
