@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 09:43:15 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/21 16:59:02 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/21 20:56:59 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 int main( void )
 {
-	Point p(0.0f, 10.10f);
-	Point a;
-	Point b(10.10f, 0.0f);
-	Point c(0.0f, 10.10f);
+	Point p(0.3f, 0.3f);
+	Point a(1.0f, 1.0f);
+	Point b(2.0f, 1.0f);
+	Point c(1.0f, 2.0f);
 
 	std::cout << bsp( a, b, c, p ) << std::endl;
 

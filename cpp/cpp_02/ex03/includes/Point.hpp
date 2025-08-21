@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 11:52:34 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/21 17:11:09 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/21 20:51:32 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ class Point {
 	public:
 		Point( void );
 		Point( float const x, float const y );
-		Point( Fixed const x, Fixed const y );
 		Point( Point const &src );
 		~Point();
 
