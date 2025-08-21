@@ -5,6 +5,8 @@ INCLUDES=-I includes/
 SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR), \
 			Fixed.cpp\
+			Point.cpp\
+			bsp.cpp\
 			main.cpp)
 OBJS_DIR=obj/
 OBJS=$(patsubst $(SRCS_DIR)%.cpp, $(OBJS_DIR)%.o, $(SRCS))
@@ -14,7 +16,7 @@ all: $(NAME)
 	@echo "\033[1;32m✔ fixedPoint compiled"
 
 $(NAME): $(OBJS)
-	@$(CPP) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -o $@ $(OBJS)
+	@$(CPP) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -o $@ $^
 
 $(OBJS_DIR)%.o:$(SRCS_DIR)%.cpp
 	@mkdir -p $(dir $@)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 09:48:49 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/21 11:57:45 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/21 17:04:05 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include <iostream>
 # include <cmath>
-# include "./Point.hpp"
+
+class Point;
 
 class Fixed {
 
@@ -49,19 +50,19 @@ class Fixed {
 
 		int		toInt( void ) const;
 		float	toFloat( void ) const;
-		// bool bsp( Point const a, Point const b, Point const c, Point const point);
-		// static bool	BSP( Fixed p[2], Fixed va[2], Fixed vb[2], Fixed vc[2] );
-
+		
 		static	Fixed &min( Fixed &raw1, Fixed &raw2 );
 		static	Fixed const &min( Fixed const &raw1, Fixed const &raw2 );
 		static	Fixed &max( Fixed &raw1, Fixed &raw2 );
 		static	Fixed const &max( Fixed const &raw1, Fixed const &raw2 );
-
+		
 	private:
 		int					_raw;
 		static const int	_fracb;
-};
 
-std::ostream &operator<<( std::ostream &o, Fixed const &i );
+};
+	
+std::ostream	&operator<<( std::ostream &o, Fixed const &i );
+bool			bsp( Point const a, Point const b, Point const c, Point const point);
 
 #endif
