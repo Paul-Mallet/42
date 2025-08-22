@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 10:03:38 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/22 12:31:50 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/22 17:14:35 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,6 @@ unsigned int ClapTrap::getAttackDamage( void ) const {
 	return this->_ad;
 }
 
-/*
-	the ClapTrap
-	instances should not interact directly with one another, and the parameters will not refer
-	to another instance of ClapTrap.
-*/
 void ClapTrap::attack( const std::string &target ) {
 	if (this->_ep == 0)
 	{
