@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:35:03 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/22 17:15:25 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/22 17:23:05 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void ScavTrap::attack( const std::string& target ) {
 		this->_ep--;
 
 	// focus target cause ScavTrap have ad !
+	// refactor ClapTrap too !
 	std::cout << "ScavTrap " << this->_name << " attacks " << target
 		<< ", causing " << this->_ad << " points of damage!\n";
 }
