@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 09:58:17 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/22 12:00:27 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/22 12:31:40 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,13 @@ int main( void ) {
 	clap2.beRepaired(2);
 	clap2.beRepaired(2);
 	clap2.beRepaired(2);
+
+	clap2.takeDamage(2);
 	clap2.beRepaired(2);
-	clap2.beRepaired(2);
+
+	clap2.takeDamage(1);
+	clap2.beRepaired(1);
+	// clap2.takeDamage(100);
 	std::cout << clap << std::endl;
 	std::cout << "hp: " << clap.getHitPoint() << std::endl;
 	std::cout << "ep: " << clap.getEnergyPoint() << std::endl;
