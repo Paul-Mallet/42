@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 16:52:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/22 17:22:40 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/24 11:17:21 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/FragTrap.hpp"
+
+FragTrap::FragTrap( void ) : ClapTrap() {
+	std::cout << "Default inherited FragTrap constructor called\n";
+}
 
 FragTrap::FragTrap( std::string const &name ) : ClapTrap(name) {
 	std::cout << "Parameterized inherited FragTrap constructor called\n";
@@ -23,6 +27,7 @@ FragTrap::~FragTrap(){
 	std::cout << "Default inherited FragTrap destructor called\n";
 }
 
+// Not ask for attack() msg modif
 void FragTrap::highFivesGuys( void ) {
 	std::cout << "FragTrap " << this->_name << " requests a positive high five!\n";
 }

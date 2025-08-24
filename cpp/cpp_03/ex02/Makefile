@@ -10,7 +10,7 @@ SRCS=$(addprefix $(SRCS_DIR),\
 			main.cpp)
 OBJS_DIR=obj/
 OBJS=$(patsubst $(SRCS_DIR)%.cpp, $(OBJS_DIR)%.o, $(SRCS))
-NAME=ScavTrap
+NAME=FragTrap
 
 all: $(NAME)
 	@echo "\033[1;32m✔ FragTrap compiled"

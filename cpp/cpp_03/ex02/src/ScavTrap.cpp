@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:35:03 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/22 17:24:14 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/08/24 08:42:24 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ScavTrap.hpp"
 
 ScavTrap::ScavTrap( std::string const &name ) : ClapTrap(name) {
-	std::cout << "Parameterized inherited constructor called\n";
+	std::cout << "Parameterized inherited SvacTrap constructor called\n";
 	this->_hp = 100;
 	this->_ep = 50;
 	this->_ad = 20;
 }
 
 ScavTrap::~ScavTrap(){
-	std::cout << "Default inherited destructor called\n";
+	std::cout << "Default inherited ScavTrap destructor called\n";
 }
 
 // #TODO
