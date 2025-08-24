@@ -22,7 +22,7 @@ $(OBJS_DIR)%.o:$(SRCS_DIR)%.cpp
 	@mkdir -p $(dir $@)
 	@$(CPP) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -c $< -o $@
 
-clean:
+clean: $(OBJS_DIR)
 	@rm -rf $(OBJS_DIR)
 	@echo "\033[0;33mobjs cleaned"
 
