@@ -6,26 +6,27 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:20:36 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/24 11:29:17 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/24 21:57:04 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap( void ) : ClapTrap("Clapa"), ScavTrap(), FragTrap() {
+DiamondTrap::DiamondTrap( void ) : ClapTrap(), ScavTrap(), FragTrap() {
 	std::cout << "Default inherited DiamondTrap constructor called\n";
 	this->_name = "Diamonda";
-	this->_hp = 100;
-	this->_ep = 50;
-	this->_ad = 30;
+	this->_hp = FragTrap::getHitPoint();
+	this->_ep = ScavTrap::getEnergyPoint();
+	this->_ad = FragTrap::getAttackDamage();
 }
 
-DiamondTrap::DiamondTrap( std::string const &name ) : ClapTrap(name + "_clap_name"), ScavTrap(), FragTrap() {
+// continue to test initializers
+DiamondTrap::DiamondTrap( std::string const &name ) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name) {
 	std::cout << "Parameterized inherited DiamondTrap constructor called\n";
 	this->_name = name;
-	this->_hp = 100;
-	this->_ep = 50;
-	this->_ad = 30;
+	this->_hp = FragTrap::getHitPoint();
+	this->_ep = ScavTrap::getEnergyPoint();
+	this->_ad = FragTrap::getAttackDamage();
 }
 
 DiamondTrap::DiamondTrap( DiamondTrap const &src ) : ClapTrap(src), ScavTrap(src), FragTrap(src) {

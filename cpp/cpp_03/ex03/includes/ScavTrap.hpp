@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:35:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/24 11:13:29 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/24 21:45:19 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "./ClapTrap.hpp"
 
-class ScavTrap : virtual public ClapTrap {
+class ScavTrap : public virtual ClapTrap {
 
 	public:
 		ScavTrap( void );

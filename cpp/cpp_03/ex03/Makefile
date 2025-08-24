@@ -1,6 +1,6 @@
 CPP=c++
 CFLAGS=-Wall -Wextra -Werror -g
-CPPFLAGS=-std=c++98
+CPPFLAGS=-std=c++98 -Wno-shadow
 INCLUDES=-I includes/
 SRCS_DIR=src/
 SRCS=$(addprefix $(SRCS_DIR),\
