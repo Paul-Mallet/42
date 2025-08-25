@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:20:36 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/24 21:57:04 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/25 08:37:00 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ DiamondTrap::DiamondTrap( void ) : ClapTrap(), ScavTrap(), FragTrap() {
 	this->_ad = FragTrap::getAttackDamage();
 }
 
-// continue to test initializers
+// continue to test initializers, ask Jerome for it
 DiamondTrap::DiamondTrap( std::string const &name ) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name) {
 	std::cout << "Parameterized inherited DiamondTrap constructor called\n";
 	this->_name = name;

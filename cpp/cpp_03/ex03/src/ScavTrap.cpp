@@ -6,14 +6,14 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:35:03 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/24 11:18:44 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/25 08:33:34 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ScavTrap.hpp"
 
 ScavTrap::ScavTrap( void ) : ClapTrap() {
-	std::cout << "Default inherited SvacTrap constructor called\n";
+	std::cout << "Default inherited ScavTrap constructor called\n";
 	this->_name = "Scava";
 	this->_hp = 100;
 	this->_ep = 50;
@@ -21,7 +21,7 @@ ScavTrap::ScavTrap( void ) : ClapTrap() {
 }
 
 ScavTrap::ScavTrap( std::string const &name ) : ClapTrap(name) {
-	std::cout << "Parameterized inherited SvacTrap constructor called\n";
+	std::cout << "Parameterized inherited ScavTrap constructor called\n";
 	this->_name = name;
 	this->_hp = 100;
 	this->_ep = 50;
@@ -29,7 +29,7 @@ ScavTrap::ScavTrap( std::string const &name ) : ClapTrap(name) {
 }
 
 ScavTrap::ScavTrap( ScavTrap const &src ) : ClapTrap(src) {
-	std::cout << "Inherited SvacTrap copy constructor called\n";
+	std::cout << "Inherited ScavTrap copy constructor called\n";
 	if (this != &src)
 	{
 		this->_name = src._name;
