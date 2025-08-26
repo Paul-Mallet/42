@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:04:26 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/25 09:23:26 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/26 08:55:43 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,21 @@
 
 int main( void )
 {
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	const WrongAnimal* k = new WrongAnimal();
-	const WrongAnimal* l = new WrongCat();
+	const int size = 10;
+	Animal *animals[size];
 
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	std::cout << k->getType() << " " << std::endl;
-	std::cout << l->getType() << " " << std::endl;
-	i->makeSound();
-	j->makeSound();
-	meta->makeSound();
-	k->makeSound();
-	l->makeSound();
+	for (int i = 0; i < (size / 2); ++i)
+		animals[i] = new Dog();
+	for (int i = (size / 2); i < size; ++i)
+		animals[i] = new Cat();
 
-	delete meta;
-	delete j;
-	delete i;
-	delete k;
-	delete l;
+	std::cout << std::endl;
+	Dog dog1;
+	Dog dog2( dog1 );
+	std::cout << std::endl;
+
+	for (int i = 0; i < size; ++i)
+		delete animals[i];
 
 	return 0;
 }

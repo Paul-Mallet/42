@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 08:55:16 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/25 09:13:28 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/26 08:39:36 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DOG_HPP
 
 # include "Animal.hpp"
+# include "Brain.hpp"
 
 class Dog : public Animal {
 
@@ -26,6 +27,9 @@ class Dog : public Animal {
 		Dog &operator=( Dog const &rhs );
 
 		void makeSound( void ) const;
+
+	private:
+		Brain *_brain;
 
 };
 

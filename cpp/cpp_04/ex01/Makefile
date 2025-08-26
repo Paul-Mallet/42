@@ -9,6 +9,7 @@ SRCS=$(addprefix $(SRCS_DIR),\
 			Cat.cpp\
 			WrongAnimal.cpp\
 			WrongCat.cpp\
+			Brain.cpp\
 			main.cpp)
 OBJS_DIR=obj/
 OBJS=$(patsubst $(SRCS_DIR)%.cpp, $(OBJS_DIR)%.o, $(SRCS))
