@@ -6,15 +6,13 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 09:04:26 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/26 08:55:43 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/08/26 09:09:29 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Animal.hpp"
 #include "../includes/Dog.hpp"
 #include "../includes/Cat.hpp"
-#include "../includes/WrongAnimal.hpp"
-#include "../includes/WrongCat.hpp"
 
 int main( void )
 {
