@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:44:32 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/01 15:52:13 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:56:29 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # include "AMateria.hpp"
 
-class ICharacter
-{
+class ICharacter {
 
 	public:
 		virtual ~ICharacter() {}

@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 14:51:19 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/01 15:54:40 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/09/01 18:52:18 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../includes/ICharacter.hpp"
 
 class AMateria {
+
 	protected:
 		std::string type;
 
@@ -32,6 +33,7 @@ class AMateria {
 
 		virtual AMateria* clone( void ) const = 0;
 		virtual void use( ICharacter& target );
+
 };
 
 #endif

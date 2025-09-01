@@ -6,29 +6,35 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 16:11:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/01 16:15:33 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/09/01 18:35:27 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Cure.hpp"
-#include <iostream>
 
 Cure::Cure(void) : AMateria("cure") {
     std::cout << "Cure default constructor called" << std::endl;
 }
 
-Cure::Cure(Cure const &src) : AMateria(src) {
+Cure::Cure(std::string const &type) : AMateria(type) {
+    std::cout << "Cure parameterized constructor called" << std::endl;
+}
+
+Cure::Cure(Cure const &src) {
     std::cout << "Cure copy constructor called" << std::endl;
+    if (this != &src)
+		this->type = src.type;
 }
 
 Cure::~Cure() {
     std::cout << "Cure destructor called" << std::endl;
 }
 
+// AMateria::operator=(rhs) because type is an inherent property of the class
 Cure &Cure::operator=(Cure const &rhs) {
     std::cout << "Cure assignment operator called" << std::endl;
     if (this != &rhs)
-        AMateria::operator=(rhs); //?
+        AMateria::operator=(rhs);
     return *this;
 }
 

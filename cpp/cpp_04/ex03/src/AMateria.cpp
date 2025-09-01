@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 14:56:24 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/01 15:57:12 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/09/01 17:57:44 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ AMateria::~AMateria() {
 AMateria &AMateria::operator=( AMateria const &rhs ) {
 	std::cout << "AMateria copy assignment called\n";
 	if (this != &rhs)
-		this->type = rhs.type;
+		AMateria::operator=(rhs);
 	return *this;
 }
 
