@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:20:36 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/25 08:37:00 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/09/02 17:41:20 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap( void ) : ClapTrap(), ScavTrap(), FragTrap() {
+DiamondTrap::DiamondTrap( void ) {
 	std::cout << "Default inherited DiamondTrap constructor called\n";
 	this->_name = "Diamonda";
 	this->_hp = FragTrap::getHitPoint();
@@ -20,8 +20,10 @@ DiamondTrap::DiamondTrap( void ) : ClapTrap(), ScavTrap(), FragTrap() {
 	this->_ad = FragTrap::getAttackDamage();
 }
 
-// continue to test initializers, ask Jerome for it
-DiamondTrap::DiamondTrap( std::string const &name ) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name) {
+// diamond inheritance c++ -> learncpp.com
+// direct assign attr: this->_hp = FragTrap::_hp;
+// draw diamond inheritance VS 2ble single inheritance, then 1 join(U)
+DiamondTrap::DiamondTrap( std::string const &name ) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name) { //+ name(name)
 	std::cout << "Parameterized inherited DiamondTrap constructor called\n";
 	this->_name = name;
 	this->_hp = FragTrap::getHitPoint();
@@ -40,7 +42,7 @@ DiamondTrap::DiamondTrap( DiamondTrap const &src ) : ClapTrap(src), ScavTrap(src
 	}
 }
 
-DiamondTrap::~DiamondTrap(){
+DiamondTrap::~DiamondTrap() {
 	std::cout << "Default inherited DiamondTrap destructor called\n";
 }
 
@@ -64,7 +66,6 @@ void DiamondTrap::attack( const std::string& target ) {
 	}
 	else
 		this->_ep--;
-
 	std::cout << "DiamondTrap " << this->_name << " attacks " << target
 		<< ", causing " << this->_ad << " points of damage!\n";
 }

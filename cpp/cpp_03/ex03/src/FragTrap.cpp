@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 16:52:40 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/24 11:20:03 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/09/02 16:57:40 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ FragTrap &FragTrap::operator=( FragTrap const &rhs ) {
 	return *this;
 }
 
-// Not ask for attack() msg modif
 void FragTrap::highFivesGuys( void ) {
 	std::cout << "FragTrap " << this->_name << " requests a positive high five!\n";
 }

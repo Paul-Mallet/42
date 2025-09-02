@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:35:03 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/25 08:33:34 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/09/02 17:21:37 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ ScavTrap::ScavTrap( ScavTrap const &src ) : ClapTrap(src) {
 	}
 }
 
-ScavTrap::~ScavTrap(){
+ScavTrap::~ScavTrap() {
 	std::cout << "Default inherited ScavTrap destructor called\n";
 }
 
