@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:44:32 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/01 18:53:24 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/09/02 10:32:03 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ class Character : public ICharacter {
 	private:
 		std::string	 _name;
 		AMateria 	*_slot[4];
-		
+
 	public:
 		Character( void );
 		Character( std::string const &name );
-		Character( Character const &src ); //deep copy, deleted prev
+		Character( Character const &src );
 		~Character();
 
-		Character &operator=( Character const &rhs ); // deep copy, deleted prev
+		Character &operator=( Character const &rhs );
 
 		std::string const &getName( void ) const;
 

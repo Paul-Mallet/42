@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Ice.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 16:11:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/01 18:35:18 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/09/02 10:29:23 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Ice::Ice(std::string const &type) : AMateria(type) {
     std::cout << "Ice parameterized constructor called" << std::endl;
 }
 
-Ice::Ice(Ice const &src) {
+Ice::Ice(Ice const &src) : AMateria() {
     std::cout << "Ice copy constructor called" << std::endl;
     if (this != &src)
 		this->type = src.type;

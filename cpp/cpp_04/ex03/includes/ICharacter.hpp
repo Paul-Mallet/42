@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ICharacter.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 15:44:32 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/01 17:56:29 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/09/02 10:28:42 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ICHARACTER_HPP
 # define ICHARACTER_HPP
 
-# include "AMateria.hpp"
+// # include "AMateria.hpp"
+
+class AMateria;
 
 class ICharacter {
 

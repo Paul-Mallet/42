@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 16:11:43 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/01 18:35:27 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/09/02 10:32:15 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Cure::Cure(std::string const &type) : AMateria(type) {
     std::cout << "Cure parameterized constructor called" << std::endl;
 }
 
-Cure::Cure(Cure const &src) {
+Cure::Cure(Cure const &src) : AMateria() {
     std::cout << "Cure copy constructor called" << std::endl;
     if (this != &src)
 		this->type = src.type;

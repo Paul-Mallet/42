@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Character.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:29:02 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/01 19:10:41 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/09/02 10:32:51 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ void Character::equip( AMateria *m ) {
 }
 
 void Character::unequip( int idx ) {
-	if (idx < 0 && idx > 3)
+	if (idx < 0 || idx > 3)
 	{
-		std::cout << "Invalid index slot, cannot unequip\n";
+		std::cout << "Invalid slot index, cannot unequip\n";
 		return ;
 	}
 	if (!this->_slot[idx])
 	{
-		std::cout << "Slot already empty, cannot unequip\n";
+		std::cout << "Already empty slot, cannot unequip non-existent materia\n";
 		return ;
 	}
 	std::cout << _name << " unequipped "
@@ -89,7 +89,17 @@ void Character::unequip( int idx ) {
 }
 
 void Character::use( int idx, ICharacter &target ) {
-	//...
+	if (idx < 0 || idx > 3)
+	{
+        std::cout << "Invalid slot index: " << idx << std::endl;
+        return;
+    }
+	if (!this->_slot[idx])
+	{
+		std::cout << "Empty slot, cannot use non-existent materia\n";
+		return ;
+	}
+	_slot[idx]->use(target);
 }
 
 void Character::clearInventory( void ) {

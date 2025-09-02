@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 14:47:29 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/01 15:59:55 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/09/02 10:25:10 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/AMateria.hpp"
-#include "../includes/IMateriaSource.hpp"
+#include "../includes/Ice.hpp"
+#include "../includes/Cure.hpp"
+#include "../includes/Character.hpp"
 #include "../includes/ICharacter.hpp"
+#include "../includes/MateriaSource.hpp"
+#include "../includes/IMateriaSource.hpp"
 
 int main( void )
 {

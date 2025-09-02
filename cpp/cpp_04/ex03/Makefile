@@ -7,15 +7,15 @@ SRCS=$(addprefix $(SRCS_DIR),\
 			AMateria.cpp\
 			Ice.cpp\
 			Cure.cpp\
-			ICharacter.cpp\
-			IMateriaSource.cpp\
+			Character.cpp\
+			MateriaSource.cpp\
 			main.cpp)
 OBJS_DIR=obj/
 OBJS=$(patsubst $(SRCS_DIR)%.cpp, $(OBJS_DIR)%.o, $(SRCS))
-NAME=Interfaces
+NAME=Materias
 
 all: $(NAME)
-	@echo "\033[1;32m✔ Interfaces compiled"
+	@echo "\033[1;32m✔ Materias compiled"
 
 $(NAME): $(OBJS)
 	@$(CPP) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -o $@ $^
