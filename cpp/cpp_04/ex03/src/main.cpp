@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 14:47:29 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/02 10:25:10 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/09/02 16:20:31 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,20 @@ int main( void )
 	me->equip(tmp);
 	tmp = src->createMateria("cure");
 	me->equip(tmp);
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
 
 	ICharacter* bob = new Character("bob");
 
 	me->use(0, *bob);
 	me->use(1, *bob);
+	me->use(2, *bob);
+	me->use(3, *bob);
+	me->use(4, *bob);
 
 	delete bob;
 	delete me;

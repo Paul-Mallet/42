@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MateriaSource.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 14:56:24 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/02 10:30:54 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/09/02 16:06:25 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,18 @@ void MateriaSource::learnMateria( AMateria *m ) {
 	if (!m)
 	{
 		std::cout << "Cannot learn NULL materia\n";
-        return;
+        return ;
 	}
 	int slot = findEmptySlot();
     if (slot == -1)
 	{
         std::cout << "MateriaSource memory is full, cannot learn " << m->getType() << std::endl;
-        return;
+        delete m;
+        return ;
     }
     _templates[slot] = m->clone();
     std::cout << "MateriaSource learned " << m->getType() << " in slot " << slot << std::endl;
+    delete m;
 }
 
 AMateria* MateriaSource::createMateria(std::string const &type) {

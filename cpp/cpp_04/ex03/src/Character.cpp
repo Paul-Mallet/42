@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Character.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:29:02 by pamallet          #+#    #+#             */
-/*   Updated: 2025/09/02 10:32:51 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/09/02 16:19:03 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void Character::equip( AMateria *m ) {
 	}
 	std::cout << this->_name << " inventory's is full, cannot equip "
 		<< m->getType() << std::endl;
+	delete m;
 }
 
 void Character::unequip( int idx ) {
@@ -80,7 +81,7 @@ void Character::unequip( int idx ) {
 	}
 	if (!this->_slot[idx])
 	{
-		std::cout << "Already empty slot, cannot unequip non-existent materia\n";
+		std::cout << "Empty slot, cannot unequip non-existent materia\n";
 		return ;
 	}
 	std::cout << _name << " unequipped "
@@ -92,7 +93,7 @@ void Character::use( int idx, ICharacter &target ) {
 	if (idx < 0 || idx > 3)
 	{
         std::cout << "Invalid slot index: " << idx << std::endl;
-        return;
+        return ;
     }
 	if (!this->_slot[idx])
 	{
