@@ -6,33 +6,36 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:20:36 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/09/02 17:41:20 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/09/03 17:59:43 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap( void ) {
-	std::cout << "Default inherited DiamondTrap constructor called\n";
+	ScavTrap scav("Diamonda");
+
+	std::cout << "DiamondTrap default constructor called\n";
 	this->_name = "Diamonda";
 	this->_hp = FragTrap::getHitPoint();
-	this->_ep = ScavTrap::getEnergyPoint();
+	this->_ep = scav.getEnergyPoint();
 	this->_ad = FragTrap::getAttackDamage();
 }
 
-// diamond inheritance c++ -> learncpp.com
-// direct assign attr: this->_hp = FragTrap::_hp;
-// draw diamond inheritance VS 2ble single inheritance, then 1 join(U)
-DiamondTrap::DiamondTrap( std::string const &name ) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name) { //+ name(name)
-	std::cout << "Parameterized inherited DiamondTrap constructor called\n";
+DiamondTrap::DiamondTrap( std::string const &name ) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name) {
+	ScavTrap scav(name);
+
+	std::cout << "DiamondTrap parameterized constructor called\n";
 	this->_name = name;
-	this->_hp = FragTrap::getHitPoint();
-	this->_ep = ScavTrap::getEnergyPoint();
-	this->_ad = FragTrap::getAttackDamage();
+	this->_hp = FragTrap::_hp;
+	this->_ep = scav.getEnergyPoint();
+	this->_ad = FragTrap::_ad;
 }
 
-DiamondTrap::DiamondTrap( DiamondTrap const &src ) : ClapTrap(src), ScavTrap(src), FragTrap(src) {
-	std::cout << "Inherited DiamondTrap copy constructor called\n";
+DiamondTrap::DiamondTrap( DiamondTrap const &src ) : ClapTrap(src._name + "_clap_name"), ScavTrap(src._name), FragTrap(src._name) {
+	ScavTrap scav(src._name);
+
+	std::cout << "DiamondTrap copy constructor called\n";
 	if (this != &src)
 	{
 		this->_name = src._name;
@@ -43,7 +46,7 @@ DiamondTrap::DiamondTrap( DiamondTrap const &src ) : ClapTrap(src), ScavTrap(src
 }
 
 DiamondTrap::~DiamondTrap() {
-	std::cout << "Default inherited DiamondTrap destructor called\n";
+	std::cout << "DiamondTrap destructor called\n";
 }
 
 DiamondTrap &DiamondTrap::operator=( DiamondTrap const &rhs ) {
@@ -71,6 +74,8 @@ void DiamondTrap::attack( const std::string& target ) {
 }
 
 void DiamondTrap::whoAmI( void ) {
+	ClapTrap clap(this->_name + "_clap_name");
+
     std::cout << "I am " << this->_name << " and my ClapTrap name is " 
-    	<< ClapTrap::_name << std::endl;
+    	<< clap.getName() << std::endl;
 }

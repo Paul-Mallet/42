@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 10:03:38 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/24 11:30:46 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/09/03 15:58:46 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ClapTrap.hpp"
 
 ClapTrap::ClapTrap( void ) : _name("Clapa"), _hp(10), _ep(10), _ad(0) {
-	std::cout << "Default constructor called\n";
+	std::cout << "ClapTrap default constructor called\n";
 }
 
 ClapTrap::ClapTrap( std::string const &name ) : _name(name), _hp(10), _ep(10), _ad(0) {
-	std::cout << "Parameterized constructor called\n";
+	std::cout << "ClapTrap parameterized constructor called\n";
 }
 
 ClapTrap::ClapTrap( ClapTrap const &src ) {
-	std::cout << "Copy constructor called\n";
+	std::cout << "Claptrap copy constructor called\n";
 	if (this != &src)
 	{
 		this->_name = src._name;
@@ -32,7 +32,7 @@ ClapTrap::ClapTrap( ClapTrap const &src ) {
 }
 
 ClapTrap::~ClapTrap() {
-	std::cout << "Destructor called\n";
+	std::cout << "ClapTrap destructor called\n";
 }
 
 ClapTrap &ClapTrap::operator=( ClapTrap const &rhs ) {

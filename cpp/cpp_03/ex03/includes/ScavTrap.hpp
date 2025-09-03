@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:35:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/24 21:45:19 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/09/03 15:29:37 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "./ClapTrap.hpp"
 
-class ScavTrap : public virtual ClapTrap {
+class ScavTrap : virtual public ClapTrap {
 
 	public:
 		ScavTrap( void );

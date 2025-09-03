@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 16:53:49 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/24 21:45:35 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/09/03 15:29:30 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ScavTrap.hpp"
 
-class FragTrap : public virtual ClapTrap {
+class FragTrap : virtual public ClapTrap {
 
 	public:
 		FragTrap( void );
