@@ -28,38 +28,53 @@ MANDATORY:
 	.env: credentials, API keys, env vars saved locally + .gitignore -> not on github
 
 
+
+
+
 MODULES:
-7 majors = 100
-2 minors = 1 major = 10 points(after 100 reached)
+Mandatory = 30%, Modules >= 70%
+2 minors = 1 major = 10 points
+7 majors = 14 minors = 100%(6 + 2 fonctionne aussi)
 
 * Web:
-	Majors x2:
-		back framework(Fastify)
-		front framework / toolkit(React)
-	Minor x1: db for backend
+	Major x1:
+		back framework(Node.js + Fastify pour API Rest)
+		front React(plus rapide pour gerer la SPA et les states) + tailwindCSS avec extension VSCode(pour la lisibilite)
+	Minor x1: db for backend(SQLite avec SQL)
 
 * User Management:
 	Majors x2:
-		Authentication(Register / Login Pages, Input Form Validations)
-		Remote Auth(OAuth via Google..., API-based auth)
+		Authentication(Register / Login Pages(HTML Tags), Input Form Validations(zod), ORM(SQL compatible))
+		Remote Auth(OAuth2.0 Google, via un button dans le form)
 
 * Gameplay & User XP:
-	See with others(Remote 1V1, 2V2...) but could be longer to implement
+	Voir ci ca vous chauffe(Remote 1V1, 2V2, Tournoi...) mais long a implementer(d'apres les infos d'anciens transcendeurs)
 
 * AI-Algo:
-	Major: AI Opponent
+	Major x1: AI Opponent(pas encore fait de recherches dessus...)
 
 * Cyber:
-	Majors x2: WAF/ModSecurity + HashiCorp?, JWT + 2FA
-		JWT(+ 2FA): access / refresh token(1 week / month duration, req header)
+	Majors x2:
+		WAF/ModSecurity: pour les SQL Injections, XSS attacks, rate limiting bypass etc.
+		+ HashiCorp(node-vault): pour le serv Nginx, les Firewalls et les secrets (sensitive data
+								 that need secure storage = pwd, API key...) en ne les exposants pas directement.
+		JWT(+ 2FA): access / refresh token(set duration, in req header...)
 
 * Graphics:
-	Major: 3D techniques(Babilon.js, particle sufficient?)
+	Major x1: 3D techniques(Babilon.js, uniquement des particules 3D suffisent sur une scene)
 
 * Accessibility:
-	Minors x2: expand browsers compatibility, supp multiple languages
+	Minors x2:
+		expand browsers compatibility(selon versions des dependances du projet, a faire des le debut)
+		supp multiple languages(3 langues suffisent, dans des locale.json)
 
-TOTAL: 8 majors + 3 minors
+TOTAL: 7 majors + 3 minors
+
+
+
+
+
+
 
 LIBRARIES LIST:
 Web:
