@@ -29,8 +29,6 @@ MANDATORY:
 
 
 
-
-
 MODULES:
 Mandatory = 30%, Modules >= 70%
 2 minors = 1 major = 10 points
@@ -69,10 +67,6 @@ Mandatory = 30%, Modules >= 70%
 		supp multiple languages(3 langues suffisent, dans des locale.json)
 
 TOTAL: 7 majors + 3 minors
-
-
-
-
 
 
 
