@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 14:35:53 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/22 16:36:26 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/12/08 23:06:55 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@
 # include "./ClapTrap.hpp"
 
 class ScavTrap : public ClapTrap {
-	
+
 	public:
+		ScavTrap( void );
 		ScavTrap( std::string const &name );
+		ScavTrap( ScavTrap const &src );
 		~ScavTrap();
 
-		void 	attack(const std::string& target);
+		ScavTrap &operator=( ScavTrap const &rhs );
 
+		void 	attack(const std::string& target);
 		void	guardGate();
 
 };

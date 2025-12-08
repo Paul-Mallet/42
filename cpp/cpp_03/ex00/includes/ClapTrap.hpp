@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 09:58:41 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/22 12:27:32 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/12/08 22:40:52 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ class ClapTrap {
 		unsigned int	_hp;
 		unsigned int	_ep;
 		unsigned int	_ad;
+		unsigned int	_hp_max;
+		unsigned int	_ep_max;
 };
 
 std::ostream &operator<<( std::ostream &o, ClapTrap const &i );

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 09:58:41 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/22 16:38:41 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/12/08 23:06:34 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ class ClapTrap {
 		unsigned int	_hp;
 		unsigned int	_ep;
 		unsigned int	_ad;
+		unsigned int	_hp_max;
+		unsigned int	_ep_max;
 };
 
 std::ostream &operator<<( std::ostream &o, ClapTrap const &i );

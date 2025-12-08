@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 09:58:17 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/22 16:41:31 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/12/08 23:02:51 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ int main( void ) {
 	ClapTrap clap2("Clapi");
 	ClapTrap clapCopy( clap );
 	ScavTrap scav("Scavi");
+	ClapTrap *ptr = new ScavTrap("Scavo");
 
+	delete(ptr);
 	clapCopy = clap2;
 
 	std::cout << clap << std::endl;
@@ -36,70 +38,12 @@ int main( void ) {
 	std::cout << "ep: " << clapCopy.getEnergyPoint() << std::endl;
 	std::cout << "ad: " << clapCopy.getAttackDamage() << std::endl << std::endl;
 
-	// attack & beRepaired phase
-	clap.attack("Clapi");
-	clap2.beRepaired(2);
-	std::cout << clap << std::endl;
-	std::cout << "hp: " << clap.getHitPoint() << std::endl;
-	std::cout << "ep: " << clap.getEnergyPoint() << std::endl;
-	std::cout << "ad: " << clap.getAttackDamage() << std::endl << std::endl;
-
-	std::cout << clap2 << std::endl;
-	std::cout << "hp: " << clap2.getHitPoint() << std::endl;
-	std::cout << "ep: " << clap2.getEnergyPoint() << std::endl;
-	std::cout << "ad: " << clap2.getAttackDamage() << std::endl << std::endl;
-
-	// attack 2nd phase
-	clap.attack("Clapi");
-	clap.attack("Clapi");
-	clap.attack("Clapi");
-	clap.attack("Clapi");
-	clap.attack("Clapi");
-	clap.attack("Clapi");
-	clap.attack("Clapi");
-	clap.attack("Clapi");
-	clap.attack("Clapi");
-	clap.attack("Clapi");
-	std::cout << clap << std::endl;
-	std::cout << "hp: " << clap.getHitPoint() << std::endl;
-	std::cout << "ep: " << clap.getEnergyPoint() << std::endl;
-	std::cout << "ad: " << clap.getAttackDamage() << std::endl << std::endl;
-
-	std::cout << clap2 << std::endl;
-	std::cout << "hp: " << clap2.getHitPoint() << std::endl;
-	std::cout << "ep: " << clap2.getEnergyPoint() << std::endl;
-	std::cout << "ad: " << clap2.getAttackDamage() << std::endl << std::endl;
-
-	// beRepaired 2nd phase
-	clap2.beRepaired(2);
-	clap2.beRepaired(2);
-	clap2.beRepaired(2);
-	clap2.beRepaired(2);
-	clap2.beRepaired(2);
-	clap2.beRepaired(2);
-	clap2.beRepaired(2);
-	clap2.beRepaired(2);
-
-	clap2.takeDamage(2);
-	clap2.beRepaired(2);
-
-	clap2.takeDamage(1);
-	clap2.beRepaired(1);
-	// clap2.takeDamage(100);
-	std::cout << clap << std::endl;
-	std::cout << "hp: " << clap.getHitPoint() << std::endl;
-	std::cout << "ep: " << clap.getEnergyPoint() << std::endl;
-	std::cout << "ad: " << clap.getAttackDamage() << std::endl << std::endl;
-
-	std::cout << clap2 << std::endl;
-	std::cout << "hp: " << clap2.getHitPoint() << std::endl;
-	std::cout << "ep: " << clap2.getEnergyPoint() << std::endl;
-	std::cout << "ad: " << clap2.getAttackDamage() << std::endl << std::endl;
-	
-	// ScavTrap phase
+	// ScavTrap
 	std::cout << scav << std::endl;
 	std::cout << "hp: " << scav.getHitPoint() << std::endl;
 	std::cout << "ep: " << scav.getEnergyPoint() << std::endl;
 	std::cout << "ad: " << scav.getAttackDamage() << std::endl << std::endl;
+	scav.attack("Clapi");
+	scav.guardGate();
 	return 0;
 }

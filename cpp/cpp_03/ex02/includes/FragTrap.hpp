@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 16:53:49 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/24 09:03:20 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/12/08 23:12:40 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ class FragTrap : public ClapTrap {
 	public:
 		FragTrap( void );
 		FragTrap( std::string const &name );
+		FragTrap( FragTrap const &src );
 		~FragTrap();
+
+		FragTrap &operator=( FragTrap const &rhs );
 
 		void highFivesGuys( void );
 };
