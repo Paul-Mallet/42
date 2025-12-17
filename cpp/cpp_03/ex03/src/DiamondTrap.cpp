@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 09:20:36 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/09/03 17:59:43 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:31:35 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void DiamondTrap::attack( const std::string& target ) {
 }
 
 void DiamondTrap::whoAmI( void ) {
-	ClapTrap clap(this->_name + "_clap_name");
-
     std::cout << "I am " << this->_name << " and my ClapTrap name is " 
-    	<< clap.getName() << std::endl;
+    	<< ClapTrap::getName() << std::endl;
 }
