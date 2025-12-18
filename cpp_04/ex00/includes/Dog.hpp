@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 17:38:05 by pamallet          #+#    #+#             */
-/*   Updated: 2025/12/17 17:53:07 by pamallet         ###   ########.fr       */
+/*   Created: 2025/12/18 17:10:41 by paul_mallet       #+#    #+#             */
+/*   Updated: 2025/12/18 17:54:51 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ class Dog : public Animal {
 
 	public:
 		Dog( void );
-		Dog( std::string name );
-		Dog( Dog &src );
+		Dog( std::string type );
+		Dog( Dog const &src);
 		~Dog();
 
-		Dog &operator=( Dog &rhs );
+		Dog		&operator=( Dog const &rhs );
 
-		Dog makeSound( void );
+		void	makeSound( void ) const;
+
 };
 
 #endif

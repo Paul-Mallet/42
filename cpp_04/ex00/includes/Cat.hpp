@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 17:29:02 by pamallet          #+#    #+#             */
-/*   Updated: 2025/12/18 19:18:49 by paul_mallet      ###   ########.fr       */
+/*   Created: 2025/12/18 18:40:26 by paul_mallet       #+#    #+#             */
+/*   Updated: 2025/12/18 18:45:00 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef CAT_HPP
+# define CAT_HPP
 
-# include <iostream>
-# include <string>
+# include "Animal.hpp"
 
-class Animal
-{
-	protected:
-		std::string type;
+class Cat : public Animal {
 
 	public:
-		Animal( void );
-		Animal( std::string type );
-		Animal( Animal const &src );
-		virtual ~Animal	();
+		Cat( void );
+		Cat( std::string type );
+		Cat( Cat const &src);
+		~Cat();
 
-		Animal			&operator=( Animal const &rhs );
+		Cat		&operator=( Cat const &rhs );
 
-		std::string		getType( void ) const;
+		void	makeSound( void ) const;
 
-		virtual void	makeSound( void ) const;
 };
-
-std::ostream &operator<<( std::ostream &o, Animal const &i);
 
 #endif

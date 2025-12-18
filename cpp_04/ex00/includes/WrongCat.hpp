@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 17:29:02 by pamallet          #+#    #+#             */
-/*   Updated: 2025/12/18 19:18:49 by paul_mallet      ###   ########.fr       */
+/*   Created: 2025/12/18 18:40:26 by paul_mallet       #+#    #+#             */
+/*   Updated: 2025/12/18 19:05:56 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
-# include <iostream>
-# include <string>
+# include "WrongAnimal.hpp"
 
-class Animal
-{
-	protected:
-		std::string type;
+class WrongCat : public WrongAnimal {
 
 	public:
-		Animal( void );
-		Animal( std::string type );
-		Animal( Animal const &src );
-		virtual ~Animal	();
+		WrongCat( void );
+		WrongCat( std::string type );
+		WrongCat( WrongCat const &src);
+		~WrongCat();
 
-		Animal			&operator=( Animal const &rhs );
+		WrongCat	&operator=( WrongCat const &rhs );
 
-		std::string		getType( void ) const;
+		void		makeSound( void ) const;
 
-		virtual void	makeSound( void ) const;
 };
-
-std::ostream &operator<<( std::ostream &o, Animal const &i);
 
 #endif

@@ -1,0 +1,29 @@
+# --- Informations sur le projet ---
+PROJECT_NAME           = "polymorphism"
+PROJECT_NUMBER         = 1.0.0
+OUTPUT_DIRECTORY       = doc/
+OUTPUT_LANGUAGE        = english
+
+# --- Fichiers à analyser ---
+# Indique ici tes dossiers de sources et de headers
+INPUT                  = src/ includes/
+RECURSIVE              = YES
+FILE_PATTERNS          = *.cpp *.hpp *.h
+
+# --- Extraction de la doc ---
+# Force l'extraction même si les classes ne sont pas documentées
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+
+# --- Format de sortie ---
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+HTML_OUTPUT            = html
+
+# --- Graphiques (nécessite Graphviz 'dot') ---
+# Très utile pour voir les diagrammes de classes
+HAVE_DOT               = YES
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+INCLUDE_GRAPH          = YES

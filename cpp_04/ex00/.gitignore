@@ -1,0 +1,8 @@
+# Exec file
+./polymorphism
+
+# Object files
+/obj
+
+# Doxygen
+/doc
