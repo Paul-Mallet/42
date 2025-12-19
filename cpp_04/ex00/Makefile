@@ -15,7 +15,7 @@ DOCDIR=doc/
 NAME=polymorphism
 
 all: $(NAME)
-	@echo "\033[1;32m✔ Polymorphism compiled"
+	@echo "\033[1;32m✔ polymorphism compiled"
 
 $(NAME): $(OBJS)
 	@$(CPP) $(CFLAGS) $(INCLUDES) -o $@ $^
@@ -39,4 +39,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all doc clean fclean re
