@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 12:19:25 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/12/19 12:43:11 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/12/19 18:29:05 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Brain {
 		Brain( Brain const &src );
 		~Brain();
 
-		Brain	&operator=( Brain const &rhs );
+		Brain				&operator=( Brain const &rhs );
 
 };
 

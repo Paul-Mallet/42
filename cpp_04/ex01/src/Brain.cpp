@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 12:24:22 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/12/19 12:36:09 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/12/19 18:28:49 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ Brain::Brain( std::string ideas[100] ) {
 	std::cout << "Brain: Parameterized Constructor" << std::endl;
 }
 
+// #TODO !!!
 Brain::Brain( Brain const &src ) {
 	std::cout << "Brain: Copy Constructor" << std::endl;
 	if (this != &src)
@@ -33,6 +34,7 @@ Brain::~Brain() {
 	std::cout << "Brain: Destructor" << std::endl;
 }
 
+// #TODO !!!
 Brain &Brain::operator=( Brain const &rhs ) {
 	std::cout << "Brain: Copy Assignment" << std::endl;
 	if (this != &rhs)
