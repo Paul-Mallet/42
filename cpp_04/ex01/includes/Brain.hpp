@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 12:19:25 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/12/19 18:29:05 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/12/19 19:32:47 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,19 @@
 class Brain {
 
 	private:
-		std::string _ideas[100];
+		std::string		_ideas[100];
+		unsigned int	_inc = 0;
 
 	public:
 		Brain( void );
-		Brain( std::string ideas[100] );
+		Brain( std::string idea );
 		Brain( Brain const &src );
 		~Brain();
 
 		Brain				&operator=( Brain const &rhs );
+
+		std::string	const	getIdea( unsigned int i );
+		void const			setIdea( std::string idea );
 
 };
 

@@ -6,11 +6,11 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 17:41:36 by pamallet          #+#    #+#             */
-/*   Updated: 2025/08/07 14:47:51 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/12/19 19:09:54 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Phonebook.class.hpp"
+#include "Phonebook.hpp"
 
 /*
 <iostream>: stream() object

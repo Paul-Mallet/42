@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 17:21:25 by pamallet          #+#    #+#             */
-/*   Updated: 2025/12/19 18:30:00 by pamallet         ###   ########.fr       */
+/*   Updated: 2025/12/19 19:34:51 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ int	main(int ac, char **av)
 
 	std::cout << std::endl;
 
-	animals[2]->getBrain();
-	animals[5]->getBrain();
+	// within Brain.hpp & .cpp, try to access from Dog and Cat
+	// animals[2]->getBrain();
+	// animals[5]->getBrain();
 
 	animals[0] = animals[5];
 
