@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 18:46:07 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/12/19 14:27:44 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/12/21 15:22:02 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ Cat::Cat( void ) : Animal()
 	const std::string ttype = ("Cat");
 	
 	std::cout << "Cat: Default Constructor" << std::endl;
-	this->type = ttype;
 	this->_brain = new Brain();
+	this->type = ttype;
 }
 
 Cat::Cat( std::string type ) : Animal()
@@ -42,17 +42,15 @@ Cat::Cat( Cat const &src ) : Animal()
 {
 	std::cout << "Cat: Copy Constructor" << std::endl;
 
-	if (this != &src)
-	{
-		this->_brain = src._brain;
-		this->type = src.type;
-	}
+	this->_brain = new Brain();
+	*(this->_brain) = *(src._brain);
+	this->type = src.type;
 }
 
 Cat::~Cat( void )
 {
+	delete (this->_brain);
 	std::cout << "Cat: Destructor" << std::endl;
-	delete this->_brain;
 }
 
 Cat &Cat::operator=( Cat const &rhs )
@@ -60,10 +58,31 @@ Cat &Cat::operator=( Cat const &rhs )
 	std::cout << "Cat: Copy Operator Assignment" << std::endl;
 	if (this != &rhs)
 	{
-		this->_brain = rhs._brain;
+		delete this->_brain;
+		this->_brain = new Brain();
+		*(this->_brain) = *(rhs._brain);
 		this->type = rhs.type;
 	}
 	return (*this);
+}
+
+Animal* Cat::clone( void ) {
+	return (new Cat(*this));
+}
+
+std::string const Cat::getIdea( unsigned int i ) {
+	if (i >= MAX_IDEAS || this->_brain->ideas[i].empty())
+		return ("");
+	return (this->_brain->ideas[i]);
+}
+
+void Cat::setIdea( std::string idea, unsigned int i ) {
+	if (i >= MAX_IDEAS)
+	{
+		std::cout << "This idea is too far away for this " << this->getType() << std::endl;
+		return ;
+	}
+	this->_brain->ideas[i] = idea;
 }
 
 void Cat::makeSound( void ) const

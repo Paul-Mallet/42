@@ -6,11 +6,12 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 14:49:52 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/12/18 17:55:10 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/12/21 13:05:14 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Animal.hpp"
+#include "../includes/Cat.hpp"
 
 Animal::Animal( void ): type("Animal")
 {
@@ -54,7 +55,6 @@ Animal &Animal::operator=( Animal const &rhs )
 
 std::string Animal::getType( void ) const
 {
-	std::cout << "Animal->type: " << this->type << std::endl;
 	return (this->type);
 }
 

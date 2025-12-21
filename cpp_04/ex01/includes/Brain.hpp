@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 12:19:25 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/12/19 19:32:47 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/12/21 10:20:21 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 # include "Animal.hpp"
 
+# define MAX_IDEAS 100
+
 class Brain {
 
-	private:
-		std::string		_ideas[100];
-		unsigned int	_inc = 0;
+	public:
+		std::string		ideas[MAX_IDEAS];
 
 	public:
 		Brain( void );
@@ -27,10 +28,7 @@ class Brain {
 		Brain( Brain const &src );
 		~Brain();
 
-		Brain				&operator=( Brain const &rhs );
-
-		std::string	const	getIdea( unsigned int i );
-		void const			setIdea( std::string idea );
+		Brain	&operator=( Brain const &rhs );
 
 };
 
