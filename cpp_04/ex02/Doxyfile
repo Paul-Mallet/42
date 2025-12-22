@@ -31,3 +31,5 @@ INCLUDE_GRAPH          = NO
 SOURCE_BROWSER         = YES
 INLINE_SOURCES         = YES
 STRIP_CODE_COMMENT     = NO
+
+LAYOUT_FILE = DoxygenLayout.xml
