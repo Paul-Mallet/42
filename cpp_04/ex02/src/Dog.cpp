@@ -6,13 +6,13 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 17:42:29 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/12/22 10:38:41 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2025/12/22 10:38:21 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Dog.hpp"
 
-Dog::Dog( void ) : Animal()
+Dog::Dog( void ) : AAnimal("Dog")
 {
 	const std::string ttype = ("Dog");
 
@@ -21,7 +21,7 @@ Dog::Dog( void ) : Animal()
 	this->type = ttype;
 }
 
-Dog::Dog( std::string type ) : Animal(type) //type?
+Dog::Dog( std::string type ) : AAnimal(type) //type?
 {
 	const std::string ttype = ("Dog");
 
@@ -38,7 +38,7 @@ Dog::Dog( std::string type ) : Animal(type) //type?
 	}
 }
 
-Dog::Dog( Dog const &src ) : Animal()
+Dog::Dog( Dog const &src ) : AAnimal(src.type)
 {
 	std::cout << "Dog: Copy Constructor" << std::endl;
 
@@ -66,7 +66,7 @@ Dog &Dog::operator=( Dog const &rhs )
 	return (*this);
 }
 
-Animal* Dog::clone( void ) {
+AAnimal* Dog::clone( void ) {
 	return (new Dog(*this));
 }
 
