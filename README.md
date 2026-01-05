@@ -28,7 +28,7 @@ A deep dive into low-level programming, memory management, and algorithmic think
       </a>
       <br />
       <h3>📚 Libft</h3>
-      <p>My very first own C library. Recoding standard libc functions (string manipulation, memory handling, linked lists) to understand how they work under the hood.</p>
+      <p>My very first own C library. Recoding <b>standard libc</b> functions (string manipulation, memory handling, linked lists) to understand how they work under the hood.</p>
     </td>
     <td width="33%" align="center" valign="top">
       <a href="./ft_printf">
@@ -36,7 +36,7 @@ A deep dive into low-level programming, memory management, and algorithmic think
       </a>
       <br />
       <h3>🖨️ ft_printf</h3>
-      <p>Recreating the famous <code>printf</code> function. A deep dive into variadic arguments in C and precise output formatting management.</p>
+      <p>Recreating the famous <code>printf</code> function. A deep dive into <b>variadic arguments</b> in C and precise output formatting management.</p>
     </td>
     <td width="33%" align="center" valign="top">
       <a href="./get_next_line">
@@ -44,7 +44,7 @@ A deep dive into low-level programming, memory management, and algorithmic think
       </a>
       <br />
       <h3>📝 Get Next Line</h3>
-      <p>A crucial utility function that reads a file line by line. Teaches mastering static variables and complex buffer management to handle diverse file descriptor inputs.</p>
+      <p>A crucial utility function that reads a file line by line. Teaches mastering <b>static variables</b> and complex buffer management to handle diverse <b>file descriptor</b> inputs.</p>
     </td>
   </tr>
   <tr>
@@ -54,7 +54,7 @@ A deep dive into low-level programming, memory management, and algorithmic think
       </a>
       <br />
       <h3>🐧 Born2beroot</h3>
-      <p>System Administration and Virtualization. Setting up a secure Linux server (Debian), managing partitions (LVM), SUDO policies, UFW firewall, and strong password enforcement.</p>
+      <p>System Administration and <b>Virtualization</b>. Setting up a secure Linux server (Debian), managing <b>partitions</b> (LVM), <b>SUDO</b> policies, UFW <b>firewall</b>, and strong password enforcement.</p>
     </td>
      <td width="33%" align="center" valign="top">
       <a href="./push_swap">
@@ -62,7 +62,7 @@ A deep dive into low-level programming, memory management, and algorithmic think
       </a>
       <br />
       <h3>🔢 Push_swap</h3>
-      <p>A highly optimized data sorting project using two stacks and a limited set of instructions. The goal is to sort integers with the absolute minimum number of operations using complex algorithmic strategies.</p>
+      <p>A highly optimized data sorting project using two <b>stacks</b> and a limited set of instructions. The goal is to sort integers with the absolute minimum number of operations using <b>Turk Sort</b> complex algorithmic strategy.</p>
     </td>
     <td width="33%" align="center" valign="top">
       <a href="./pipex">
@@ -70,7 +70,7 @@ A deep dive into low-level programming, memory management, and algorithmic think
       </a>
       <br />
       <h3>🔄 Pipex</h3>
-      <p>Understanding UNIX mechanisms. Reproducing the behavior of shell pipes (<code>|</code>). Mastering file descriptors, redirections, <code>fork</code>, and inter-process communication.</p>
+      <p>Understanding UNIX mechanisms. Reproducing the behavior of shell <b>pipes</b> (<code>|</code>) executions. Mastering file descriptors, <b>redirections</b>, <b>forking</b>, and inter-process communication.</p>
     </td>
   </tr>
 </table>
@@ -89,7 +89,7 @@ Advanced projects tackling concurrency, graphical rendering, and recreating core
       </a>
       <br />
       <h3>🐚 Minishell</h3>
-      <p>Writing a mini Bash-like shell. A major group project involving parsing complex commands, handling environment variables, signals, processes, and implementing builtins.</p>
+      <p>Writing a mini Bash-like shell. A major group project involving parsing complex commands, handling environment variables, <b>signals</b>, processes, and implementing <b>builtins</b>.</p>
     </td>
     <td width="33%" align="center" valign="top">
       <a href="./philosophers">
@@ -97,7 +97,7 @@ Advanced projects tackling concurrency, graphical rendering, and recreating core
       </a>
       <br />
       <h3>🍝 Philosophers</h3>
-      <p>An introduction to concurrency and threading. Solving the "Dining Philosophers" problem using mutexes and threads to manage shared resources and avoid data races or deadlocks.</p>
+      <p>An introduction to concurrency and threading. Solving the "Dining Philosophers" problem using mutexes and threads to manage shared resources and avoid <b>data races</b> or <b>deadlocks</b>.</p>
     </td>
     <td width="33%" align="center" valign="top">
       <a href="./net_practice">
@@ -105,7 +105,7 @@ Advanced projects tackling concurrency, graphical rendering, and recreating core
       </a>
       <br />
       <h3>🌐 NetPractice</h3>
-      <p>Practical networking challenges. Understanding IP addressing, subnet masks, routing tables, and configuring small networks to establish connectivity.</p>
+      <p>Practical networking challenges. Understanding <b>IP addressing</b>, <b>subnet masks</b>, <b>routing tables</b>, and configuring small networks to establish connectivity.</p>
     </td>
   </tr>
   <tr>
@@ -115,7 +115,7 @@ Advanced projects tackling concurrency, graphical rendering, and recreating core
       </a>
       <br />
       <h3>❄️ Fract-ol</h3>
-      <p>A 2D graphical project using the MiniLibX library. Exploring mathematical fractals (Julia, Mandelbrot) and rendering them interactively with infinite zoom capabilities.</p>
+      <p>A 2D graphical project using the MiniLibX library. Exploring <b>Maths</b> fractals (Julia, Mandelbrot) and rendering them interactively with infinite zoom capabilities.</p>
     </td>
     <td width="33%" align="center" valign="top">
       <a href="./cub3d">
@@ -123,7 +123,7 @@ Advanced projects tackling concurrency, graphical rendering, and recreating core
       </a>
       <br />
       <h3>👾 Cub3d</h3>
-      <p>My first 3D game engine inspired by Wolfenstein 3D made with another student. Implementing Raycasting algorithms to render a dynamic 3D world from a 2D map description, handling textures and player movement.</p>
+      <p>My first 3D game engine inspired by Wolfenstein 3D made with another student. Implementing <b>Raycasting</b> algorithms and <b>Maths</b> logic to render a dynamic 3D world from a 2D map description, handling textures and player movement.</p>
     </td>
      <td width="33%" align="center" valign="top">
       <a href="./ft_transcendence">
