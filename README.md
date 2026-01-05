@@ -140,7 +140,7 @@ Advanced projects tackling concurrency, graphical rendering, and recreating core
 
 ## 🚀 The C++ Shift (Object-Oriented Programming)
 
-Transitioning from procedural C to modern C++98, focusing on rigorous Object-Oriented Programming principles.
+Transitioning from procedural C to more modern <b>C++98</b>, focusing on rigorous <b>Object-Oriented Programming</b> principles and <b>design patterns</b>.
 
 > Click on the modules below to expand details.
 
