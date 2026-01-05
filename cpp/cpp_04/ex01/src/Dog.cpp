@@ -5,49 +5,84 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/25 08:58:35 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/26 08:49:36 by paul_mallet      ###   ########.fr       */
+/*   Created: 2025/12/18 17:42:29 by paul_mallet       #+#    #+#             */
+/*   Updated: 2025/12/22 10:38:41 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Dog.hpp"
 
-Dog::Dog( void ) : Animal() {
-	std::cout << "Default Dog constructor called\n";
-	this->type = "Dog";
+Dog::Dog( void ) : Animal()
+{
+	const std::string ttype = ("Dog");
+
+	std::cout << "Dog: Default Constructor" << std::endl;
 	this->_brain = new Brain();
+	this->type = ttype;
 }
 
-Dog::Dog( std::string type ) : Animal() {
-	std::cout << "Default Dog parameterized constructor called\n";
-	this->type = type;
-	this->_brain = new Brain();
-}
+Dog::Dog( std::string type ) : Animal(type) //type?
+{
+	const std::string ttype = ("Dog");
 
-Dog::Dog( Dog const &src ) : Animal() {
-	std::cout << "Default Dog copy constructor called\n";
-	if (this != &src)
+	std::cout << "Dog: Parameterized Constructor" << std::endl;
+
+	this->_brain = new Brain();
+	if (ttype.compare(type) == 0)
+		this->type = type;
+	else
 	{
-		this->type = src.type;
-		this->_brain = new Brain(*src._brain);
+		std::cout << "Dog: Type is not a Dog" << std::endl;
+		std::cout << "Dog: Dog Type set as default" << std::endl;
+		this->type = ttype;
 	}
 }
 
-Dog::~Dog() {
-	std::cout << "Default Dog destructor called\n";
-	delete this->_brain;
+Dog::Dog( Dog const &src ) : Animal()
+{
+	std::cout << "Dog: Copy Constructor" << std::endl;
+
+	this->_brain = new Brain();
+	*(this->_brain) = *(src._brain);
+	this->type = src.type;
 }
 
-Dog &Dog::operator=( Dog const &rhs ) {
+Dog::~Dog( void )
+{
+	delete (this->_brain);
+	std::cout << "Dog: Destructor" << std::endl;
+}
+
+Dog &Dog::operator=( Dog const &rhs )
+{
+	std::cout << "Dog: Copy Operator Assignment" << std::endl;
 	if (this != &rhs)
 	{
+		delete this-> _brain;
+		this->_brain = new Brain();
+		*(this->_brain) = *(rhs._brain);
 		this->type = rhs.type;
-		delete this->_brain;
-		this->_brain = new Brain(*rhs._brain);
 	}
-	return *this;
+	return (*this);
 }
 
-void Dog::makeSound( void ) const {
-	std::cout << "Bark !!!\n";
+Animal* Dog::clone( void ) {
+	return (new Dog(*this));
+}
+
+std::string const Dog::getIdea( unsigned int i ) {
+	if (i >= MAX_IDEAS || this->_brain->ideas[i].empty())
+		return ("");
+	return (this->_brain->ideas[i]);
+}
+
+void Dog::setIdea( std::string idea, unsigned int i ) {
+	if (i >= MAX_IDEAS)
+		std::cout << "This idea is too far away for this " << this->getType() << std::endl;
+	this->_brain->ideas[i] = idea;
+}
+
+void Dog::makeSound( void ) const
+{
+	std::cout << "Dog->makeSound(): Bark bark !!!" << std::endl;
 }

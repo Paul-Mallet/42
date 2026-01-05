@@ -5,32 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/25 08:43:46 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/25 09:19:30 by paul_mallet      ###   ########.fr       */
+/*   Created: 2025/12/17 17:29:02 by pamallet          #+#    #+#             */
+/*   Updated: 2025/12/18 19:05:52 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRONGANIMAL_HPP
-# define WRONGANIMAL_HPP
+#ifndef WRONGWrongAnimal_HPP
+# define WRONGWrongAnimal_HPP
 
 # include <iostream>
+# include <string>
 
-class WrongAnimal {
+class WrongAnimal
+{
+	protected:
+		std::string type;
 
 	public:
 		WrongAnimal( void );
 		WrongAnimal( std::string type );
 		WrongAnimal( WrongAnimal const &src );
-		virtual ~WrongAnimal();
+		~WrongAnimal();
 
-		WrongAnimal &operator=( WrongAnimal const &rhs );
+		WrongAnimal	&operator=( WrongAnimal const &rhs );
 
-		std::string getType( void ) const;
+		std::string	getType( void ) const;
 
-		void makeSound( void ) const;
-
-	protected:
-		std::string type;
+		void		makeSound( void ) const;
 };
+
+std::ostream &operator<<( std::ostream &o, WrongAnimal const &i);
 
 #endif

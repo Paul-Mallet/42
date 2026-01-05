@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/25 08:43:46 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/25 09:10:14 by paul_mallet      ###   ########.fr       */
+/*   Created: 2025/12/17 17:29:02 by pamallet          #+#    #+#             */
+/*   Updated: 2025/12/18 19:18:49 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,26 @@
 # define ANIMAL_HPP
 
 # include <iostream>
+# include <string>
 
-class Animal {
+class Animal
+{
+	protected:
+		std::string type;
 
 	public:
 		Animal( void );
 		Animal( std::string type );
 		Animal( Animal const &src );
-		virtual ~Animal();
+		virtual ~Animal	();
 
-		Animal &operator=( Animal const &rhs );
+		Animal			&operator=( Animal const &rhs );
 
-		std::string getType( void ) const;
+		std::string		getType( void ) const;
 
-		virtual void makeSound( void ) const;
-
-	protected:
-		std::string type;
+		virtual void	makeSound( void ) const;
 };
+
+std::ostream &operator<<( std::ostream &o, Animal const &i);
 
 #endif

@@ -5,32 +5,97 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/25 09:04:26 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/26 09:09:29 by paul_mallet      ###   ########.fr       */
+/*   Created: 2025/12/17 17:21:25 by pamallet          #+#    #+#             */
+/*   Updated: 2025/12/21 15:23:10 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Animal.hpp"
-#include "../includes/Dog.hpp"
-#include "../includes/Cat.hpp"
+#include "Animal.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 
-int main( void )
+int	main(int ac, char **av)
 {
-	const int size = 10;
-	Animal *animals[size];
+	if (!av || ac > 2)
+	{
+		std::cout << "Invalid input" << std::endl;
+		std::cout << "ex: ./polymorphism \"Animal\"" << std::endl;
+		return (1);
+	}
 
-	for (int i = 0; i < (size / 2); ++i)
-		animals[i] = new Dog();
-	for (int i = (size / 2); i < size; ++i)
+	Animal* animals[6]; //not able to clone if const pointer !
+
+	std::cout << std::endl;
+
+	for (int i = 0; i < 3; i++)
 		animals[i] = new Cat();
+	for (int i = 3; i < 6; i++)
+		animals[i] = new Dog();
 
 	std::cout << std::endl;
-	Dog dog1;
-	Dog dog2( dog1 );
+
+	animals[2]->getType();
+	animals[3]->getType();
+
 	std::cout << std::endl;
 
-	for (int i = 0; i < size; ++i)
-		delete animals[i];
+	std::cout << animals[2]->getType() << std::endl;
+	std::cout << animals[3]->getType() << std::endl;
 
-	return 0;
+	std::cout << std::endl;
+
+	animals[2]->makeSound();
+	animals[3]->makeSound();
+
+	std::cout << std::endl;
+
+	std::cout << animals[2]->getIdea(0) << std::endl;
+	std::cout << animals[5]->getIdea(0) << std::endl;
+	std::cout << animals[2]->getIdea(2) << std::endl;
+	std::cout << animals[5]->getIdea(2) << std::endl;
+
+	if (animals[2]->getIdea(2).empty())
+		std::cout << std::endl << animals[2]->getType() << " has no idea..." << std::endl;
+
+	std::cout << std::endl;
+
+	animals[2]->setIdea("I want some kibbles !", 1);
+	animals[5]->setIdea("I want some kibbles !", 1);
+	animals[5]->setIdea("My gosh, I had poop on the floor !", 1);
+
+	std::cout << std::endl;
+
+	std::cout << animals[2]->getIdea(1) << std::endl;
+	std::cout << animals[5]->getIdea(1) << std::endl;
+
+	// delete (animals[0]);
+	// animals[0] = animals[5];
+
+	std::cout << std::endl;
+
+	delete (animals[0]);
+	animals[0] = animals[5]->clone();
+	std::cout << animals[0]->getType() << std::endl;
+
+	std::cout << std::endl;
+
+	std::cout << animals[0]->getIdea(0);
+
+	std::cout << std::endl;
+
+	std::cout << animals[0]->getIdea(1);
+
+	std::cout << std::endl;
+
+	animals[0]->setIdea("Give me more biscuits !", 1);
+	std::cout << animals[0]->getIdea(1);
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	for (int i = 0; i < 6; i++)
+		delete (animals[i]);
+	return (0);
 }

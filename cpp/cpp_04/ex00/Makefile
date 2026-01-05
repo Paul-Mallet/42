@@ -1,31 +1,36 @@
 CPP=c++
-CFLAGS=-Wall -Wextra -Werror -g
-CPPFLAGS=-std=c++98
+CFLAGS=-Wall -Wextra -Werror -g -std=c++98
 INCLUDES=-I includes/
-SRCS_DIR=src/
-SRCS=$(addprefix $(SRCS_DIR),\
-			Animal.cpp\
-			Dog.cpp\
-			Cat.cpp\
-			WrongAnimal.cpp\
-			WrongCat.cpp\
-			main.cpp)
-OBJS_DIR=obj/
-OBJS=$(patsubst $(SRCS_DIR)%.cpp, $(OBJS_DIR)%.o, $(SRCS))
-NAME=Polymorphism
+SRCSDIR=src/
+SRCS=$(addprefix $(SRCSDIR),\
+		Animal.cpp\
+		Cat.cpp\
+		Dog.cpp\
+		WrongAnimal.cpp\
+		WrongCat.cpp\
+		main.cpp)
+OBJSDIR=obj/
+OBJS=$(patsubst $(SRCSDIR)%.cpp, $(OBJSDIR)%.o, $(SRCS))
+DOCDIR=doc/
+NAME=polymorphism
 
 all: $(NAME)
-	@echo "\033[1;32m✔ Polymorphism compiled"
+	@echo "\033[1;32m✔ polymorphism compiled"
 
 $(NAME): $(OBJS)
-	@$(CPP) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -o $@ $^
+	@$(CPP) $(CFLAGS) $(INCLUDES) -o $@ $^
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp
+$(OBJSDIR)%.o: $(SRCSDIR)%.cpp
 	@mkdir -p $(dir $@)
-	@$(CPP) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CPP) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-clean: $(OBJS_DIR)
-	@rm -rf $(OBJS_DIR)
+doc:
+	@doxygen Doxyfile
+	@echo "\033[1;32m✔ Documentation generated"
+
+clean:
+	@rm -rf $(OBJSDIR)
+	@rm -rf $(DOCDIR)
 	@echo "\033[0;33mobjs cleaned"
 
 fclean: clean
@@ -34,4 +39,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all doc clean fclean re

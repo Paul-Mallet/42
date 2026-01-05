@@ -5,39 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/25 08:43:27 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/26 08:36:59 by paul_mallet      ###   ########.fr       */
+/*   Created: 2025/12/19 12:24:22 by paul_mallet       #+#    #+#             */
+/*   Updated: 2025/12/22 10:39:10 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Brain.hpp"
+#include "../includes/Brain.hpp"
 
 Brain::Brain( void ) {
-	std::cout << "Default Brain constructor called\n";
-	for (int i = 0; i < 100; ++i)
-		this->ideas[i] = "";
+	std::cout << "Brain: Default Constructor" << std::endl;
+	this->ideas[0] = "...";
 }
 
-Brain::Brain( std::string ideas[100] ) {
-	std::cout << "Default Brain parameterized constructor called\n";
-	for (int i = 0; i < 100; ++i)
-		this->ideas[i] = ideas[i];
+Brain::Brain( std::string idea ) {
+	std::cout << "Brain: Parameterized Constructor" << std::endl;
+	this->ideas[0] = idea;
 }
 
 Brain::Brain( Brain const &src ) {
-	std::cout << "Default Brain copy constructor called\n";
+	std::cout << "Brain: Copy Constructor" << std::endl;
 	if (this != &src)
-		for (int i = 0; i < 100; ++i)
+	{
+		for (int i = 0; i < MAX_IDEAS; i++)
 			this->ideas[i] = src.ideas[i];
+	}
 }
 
 Brain::~Brain() {
-	std::cout << "Default Brain destructor called\n";
+	std::cout << "Brain: Destructor" << std::endl;
 }
 
 Brain &Brain::operator=( Brain const &rhs ) {
+	std::cout << "Brain: Copy Assignment" << std::endl;
 	if (this != &rhs)
-		for (int i = 0; i < 100; ++i)
+	{
+		for (int i = 0; i < MAX_IDEAS; i++)
 			this->ideas[i] = rhs.ideas[i];
-	return *this;
+	}
+	return (*this);
 }

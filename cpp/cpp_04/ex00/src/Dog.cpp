@@ -5,39 +5,61 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/25 08:58:35 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/25 09:21:23 by paul_mallet      ###   ########.fr       */
+/*   Created: 2025/12/18 17:42:29 by paul_mallet       #+#    #+#             */
+/*   Updated: 2025/12/18 17:55:32 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Dog.hpp"
+#include "Dog.hpp"
 
-Dog::Dog( void ) : Animal() {
-	std::cout << "Default Dog constructor called\n";
-	this->type = "Dog";
+Dog::Dog( void ) : Animal()
+{
+	const std::string ttype = ("Dog");
+
+	std::cout << "Dog: Default Constructor" << std::endl;
+	this->type = ttype;
 }
 
-Dog::Dog( std::string type ) : Animal() {
-	std::cout << "Default Dog parameterized constructor called\n";
-	this->type = type;
+Dog::Dog( std::string type ) : Animal()
+{
+	const std::string ttype = ("Dog");
+
+	std::cout << "Dog: Parameterized Constructor" << std::endl;
+
+	if (ttype.compare(type) == 0)
+	{
+		this->type = type;
+	}
+	else
+	{
+		std::cout << "Dog: Type is not a Dog" << std::endl;
+		std::cout << "Dog: Dog Type set as default" << std::endl;
+		this->type = ttype;
+	}
 }
 
-Dog::Dog( Dog const &src ) : Animal() {
-	std::cout << "Default Dog copy constructor called\n";
+Dog::Dog( Dog const &src ) : Animal()
+{
+	std::cout << "Dog: Copy Constructor" << std::endl;
+
 	if (this != &src)
 		this->type = src.type;
 }
 
-Dog::~Dog() {
-	std::cout << "Default Dog destructor called\n";
+Dog::~Dog( void )
+{
+	std::cout << "Dog: Destructor" << std::endl;
 }
 
-Dog &Dog::operator=( Dog const &rhs ) {
+Dog &Dog::operator=( Dog const &rhs )
+{
+	std::cout << "Dog: Copy Operator Assignment" << std::endl;
 	if (this != &rhs)
 		this->type = rhs.type;
-	return *this;
+	return (*this);
 }
 
-void Dog::makeSound( void ) const {
-	std::cout << "Bark !!!\n";
+void Dog::makeSound( void ) const
+{
+	std::cout << "Dog->makeSound(): Bark bark !!!" << std::endl;
 }

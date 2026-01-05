@@ -5,39 +5,61 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/25 08:58:35 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/08/25 09:21:26 by paul_mallet      ###   ########.fr       */
+/*   Created: 2025/12/18 18:46:07 by paul_mallet       #+#    #+#             */
+/*   Updated: 2025/12/18 18:47:41 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Cat.hpp"
 
-Cat::Cat( void ) : Animal() {
-	std::cout << "Default Cat constructor called\n";
-	this->type = "Cat";
+Cat::Cat( void ) : Animal()
+{
+	const std::string ttype = ("Cat");
+
+	std::cout << "Cat: Default Constructor" << std::endl;
+	this->type = ttype;
 }
 
-Cat::Cat( std::string type ) : Animal() {
-	std::cout << "Default Cat parameterized constructor called\n";
-	this->type = type;
+Cat::Cat( std::string type ) : Animal()
+{
+	const std::string ttype = ("Cat");
+
+	std::cout << "Cat: Parameterized Constructor" << std::endl;
+
+	if (ttype.compare(type) == 0)
+	{
+		this->type = type;
+	}
+	else
+	{
+		std::cout << "Cat: Type is not a Cat" << std::endl;
+		std::cout << "Cat: Cat Type set as default" << std::endl;
+		this->type = ttype;
+	}
 }
 
-Cat::Cat( Cat const &src ) : Animal() {
-	std::cout << "Default Cat copy constructor called\n";
+Cat::Cat( Cat const &src ) : Animal()
+{
+	std::cout << "Cat: Copy Constructor" << std::endl;
+
 	if (this != &src)
 		this->type = src.type;
 }
 
-Cat::~Cat() {
-	std::cout << "Default Cat destructor called\n";
+Cat::~Cat( void )
+{
+	std::cout << "Cat: Destructor" << std::endl;
 }
 
-Cat &Cat::operator=( Cat const &rhs ) {
+Cat &Cat::operator=( Cat const &rhs )
+{
+	std::cout << "Cat: Copy Operator Assignment" << std::endl;
 	if (this != &rhs)
 		this->type = rhs.type;
-	return *this;
+	return (*this);
 }
 
-void Cat::makeSound( void ) const {
-	std::cout << "Miaou !\n";
+void Cat::makeSound( void ) const
+{
+	std::cout << "Cat->makeSound(): Miaou miaou !!!" << std::endl;
 }

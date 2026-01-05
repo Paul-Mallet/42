@@ -1,9 +1,0 @@
-PS
----rules---
-ui
-ux
-win condition
----resume---
-pow-s
-f-off
-pow-l
