@@ -123,7 +123,7 @@ Advanced projects tackling concurrency, graphical rendering, and recreating core
       </a>
       <br />
       <h3>👾 Cub3d</h3>
-      <p>My first 3D game engine inspired by Wolfenstein 3D. Implementing Raycasting algorithms to render a dynamic 3D world from a 2D map description, handling textures and player movement.</p>
+      <p>My first 3D game engine inspired by Wolfenstein 3D made with another student. Implementing Raycasting algorithms to render a dynamic 3D world from a 2D map description, handling textures and player movement.</p>
     </td>
      <td width="33%" align="center" valign="top">
       <a href="./ft_transcendence">
@@ -131,7 +131,7 @@ Advanced projects tackling concurrency, graphical rendering, and recreating core
       </a>
       <br />
       <h3>🏆 ft_transcendence</h3>
-      <p>A Fullstack Single Page Application (SPA) featuring a local real-time 1VS1 Pong game in ©Rick&Morty theme. Built with <b>Fastify</b>, <b>React</b>, and <b>SQLite3</b> in team. It includes OAuth 2.0 authentication, 2FA, Avatars selection and a matchmaking system via WebSockets continuous connection.</p>
+      <p>A Fullstack Single Page Application (SPA) featuring a local real-time 1VS1 Pong game in ©Rick&Morty theme. Built with <b>Fastify</b>, <b>React</b>, and <b>SQLite3</b> in team. It includes OAuth 2.0 authentication, 2FA, Avatars selection and a matchmaking system via <b>WebSockets</b> continuous connection.</p>
     </td>
   </tr>
 </table>
