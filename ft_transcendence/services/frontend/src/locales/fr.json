@@ -1,0 +1,95 @@
+{
+	"register": {
+		"name": "NOM UTILISATEUR",
+		"email": "ADRESSE MAIL",
+		"pwd": "MOT DE PASSE",
+		"cta": "S'INSCRIRE",
+		"extra": "Déjà un compte?",
+		"link": "Connectez-vous",
+		"oauth2": "S'inscrire avec Google"
+	},
+	"login": {
+		"name": "NOM UTILISATEUR",
+		"pwd": "MOT DE PASSE",
+		"cta": "SE CONNECTER",
+		"extra": "Pas encore de compte?",
+		"link": "Enregistrez-vous",
+		"oauth2": "Se connecter avec Google"
+	},
+	"board": {
+		"stats": "STATISTIQUES",
+		"logout": "DECONNEXION",
+		"1vs1": "DUEL DIMENSIONNEL",
+		"2vs2": "CLASH CITADEL",
+		"1vsia": "VS Jerry le leurre",
+		"tournament": "COUPE RICK CORNICHON",
+		"billiard": "Billiard Multidimensionnel",
+		"friend-list": {
+			"title": "Liste de Contacts",
+			"withoutFriendMessage": "t'es tout seul, c'est triste :)",
+			"searchingForFriends": "recherche d'utilisateurs..."
+		}
+	},
+	"AIOpponent":"Jerry le leurre",
+	"profile": {
+		"title": "PROFILE",
+		"name": "NOM UTILISATEUR",
+		"email": "ADRESSE MAIL",
+		"pwd": "MOT DE PASSE",
+		"2fa": "2FA AUTH"
+	},
+	"statistics": {
+		"title": "HISTORIQUE DES MATCHS",
+		"table": {
+			"modes": "MODES",
+			"scores": "SCORES",
+			"opponents": "ADVERSAIRES",
+			"ally": "ALLIÉ",
+			"date": "DATE"
+		},
+		"cards": {
+			"1vs1": {
+				"title": "1VS1",
+				"wins": "Victoires",
+				"loses": "Defaites"
+			},
+			"1vsia": {
+				"title": "1VSIA",
+				"wins": "Victoires",
+				"loses": "Defaites"
+			},
+			"2vs2": {
+				"title": "2VS2",
+				"wins": "Victoires",
+				"loses": "Defaites"
+			},
+			"tournament": {
+				"title": "TOURNOI",
+				"wins": "Victoires",
+				"loses": "Defaites"
+			}
+		}
+	},
+	"friend-request": {
+		"title": "Demande d'amis",
+		"table": {
+			"received": "Demande reçu",
+			"send": ""
+		}
+	},
+	"games": {
+		"keys": {
+			"up": "HAUT",
+			"down": "BAS"
+		}
+	},
+	"tournament": {
+		"winner": "VAINQUEUR",
+		"eliminated": "ÉLIMINÉ"
+	},
+	"portal-gun": {
+		"username": "NOM UTILISATEUR",
+		"ally": "ALLIÉ",
+		"opponent": "ADVERSAIRE"
+	}
+}

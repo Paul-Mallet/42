@@ -1,0 +1,18 @@
+# front dependencies
+/services/frontend/node_modules
+
+# back dependencies
+/services/user-profile/node_modules
+/services/game/node_modules
+/services/tournament/node_modules
+/services/user-stats/node_modules
+
+# server ssl
+/infra/nginx/ssl/*.pem
+
+# global .env
+/infra/.env
+
+# db data
+services/*/*/data
+services/*/data

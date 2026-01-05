@@ -1,0 +1,110 @@
+services:
+  reverse-proxy:
+    build:
+      context: ../services/frontend
+      dockerfile: Dockerfile
+    container_name: reverse-proxy
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    ports:
+      - "8080:80"
+      - "8443:443"
+    depends_on:
+      - user-profile
+      - init-ssl
+    networks:
+      - web
+
+  init-ssl:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    networks:
+      - web
+      - backend
+    volumes:
+      - ./nginx/ssl:/etc/nginx/ssl
+    restart: "no"
+
+  vault:
+    build:
+      context: ./vault
+      dockerfile: Dockerfile
+    container_name: vault
+    healthcheck:
+      test: ["CMD", "vault", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    cap_add:
+      - IPC_LOCK
+    env_file:
+      - .env
+    ports:
+      - "8200:8200"
+    volumes:
+      - ./vault/policies:/vault/policies
+      - ./vault/init.sh:/vault/init.sh
+    networks:
+      - backend
+
+  frontend:
+    build:
+      context: ../services/frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    networks:
+      - web
+    depends_on:
+      - user-profile
+
+  user-profile:
+    build:
+      context: ../services/user-profile
+      dockerfile: Dockerfile
+    container_name: user-profile
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+    networks:
+      - web
+      - backend
+    volumes:
+      - ../services/user-profile/src:/usr/src/app/src   # monte ton code
+      - ../services/user-profile/src/data/user-profile.sqlite:/data/user-profile.sqlite  # monte la DB
+    depends_on:
+      vault:
+        condition: service_healthy
+
+  game:
+    build:
+      context: ../services/game
+      dockerfile: Dockerfile
+    container_name: game
+    ports:
+      - "3002:3002"
+    env_file:
+      - .env
+    networks:
+      - web
+      - backend
+    volumes:
+      - ../services/game/src:/usr/src/app/src   # monte ton code
+      - ../services/game/src/data/game.sqlite:/data/game.sqlite  # monte la DB
+    depends_on:
+      vault:
+        condition: service_healthy
+
+volumes:
+  user-profile-data:
+  user-stats-data:
+  game-data:
+
+networks:
+  web:
+    driver: bridge
+  backend:
+    driver: bridge

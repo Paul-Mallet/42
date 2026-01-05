@@ -1,0 +1,20 @@
+.billiard-container {
+	display: flex;
+	justify-content: center;
+	place-items: center;
+	background-size: contain;
+	background-position: center;
+	background-size: contain;
+	background: url("../../../public/bar1.png") no-repeat;
+	background-size: 100%;
+}
+
+.billiard-frame {
+	aspect-ratio: 16 / 9;
+	height: 900px;
+	width: 1920px;
+	border: none;
+	overflow: hidden;
+	border-radius: 12px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}

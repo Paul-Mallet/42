@@ -1,0 +1,109 @@
+.tournament-page {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+
+.tournament-board {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	width: 64%;
+	z-index: 1;
+	flex: 0 0 64%;	 /* fixe la colonne centrale à 64% */
+}
+
+.portal-gun-tournament-page {
+	flex: 1 1 0;
+	min-width: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+}
+
+.portal-gun-tournament-page > * {
+	width: min(100%, 420px);
+	max-height: 80vh;
+	overflow: auto;
+	pointer-events: auto;
+}
+
+.demis, .finals, .winner {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.demis .match, .finals .match {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 24dvh;
+}
+
+.progressive-line-demis {
+	position: absolute;
+	left: 280px;
+	width: calc(((100% - (2 * 288px + 360px)) / 2) + 146px);
+}
+
+.top {
+	border-top: 4px solid var(--color-computer-300);
+	border-right: 4px solid var(--color-computer-300);
+}
+
+.player1 {
+	top: 42px;
+	height: calc(24dvh - 42px);
+}
+
+.player2 {
+	top: calc(((24dvh - 88px * 2) + 88px) + 42px);
+	height: 46px;
+}
+
+.bot {
+	border-bottom: 4px solid var(--color-computer-300);
+	border-right: 4px solid var(--color-computer-300);
+}
+
+.player3 {
+	bottom: calc(((24dvh - 88px * 2) + 88px) + 42px);
+	height: 46px;
+}
+
+.player4 {
+	bottom: 42px;
+	height: calc(24dvh - 42px);
+}
+
+.progressive-line-finals {
+	position: absolute;
+	left: calc(560px + (100% - 860px)/2);
+	width: calc((100% - 860px)/2);
+}
+
+.player1-game3 {
+	height: 46px;
+}
+
+.player2-game3 {
+	height: calc(24dvh - 42px);
+}
+
+.mid {
+	border-bottom: 4px solid var(--color-computer-300);
+}
+
+.demis .match:nth-child(1) {
+	margin-bottom: 24dvh;
+}
+
+.invisible {
+	display: none;
+}

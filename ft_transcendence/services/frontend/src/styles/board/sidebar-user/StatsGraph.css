@@ -1,0 +1,9 @@
+.stats-graph {
+	position: relative;
+	display: flex;
+	place-items: center;
+	justify-content: space-around;
+	width: 90%;
+	height: var();
+	margin: 12px 16px;
+}

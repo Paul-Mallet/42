@@ -1,0 +1,100 @@
+{
+	"register": {
+		"name": "USERNAME",
+		"email": "EMAIL",
+		"pwd": "PASSWORD",
+		"cta": "SIGN UP",
+		"extra": "Already have an account?",
+		"link": "Log in",
+		"oauth2": "Sign in with Google"
+	},
+	"login": {
+		"name": "USERNAME",
+		"pwd": "PASSWORD",
+		"cta": "LOG IN",
+		"extra": "Don't have an account yet?",
+		"link": "Sign up",
+		"oauth2": "Log in with Google"
+	},
+	"board": {
+        "stats": "STATISTICS",
+        "logout": "LOGOUT",
+        "1vs1": "DIMENSIONAL DUEL",
+        "2vs2": "CITADEL CLASH",
+        "1vsia": "VS Decoy Jerry",
+        "tournament": "PICKLE RICK CUP",
+        "billiard": "Multidimensional Pool",
+        "friend-list": {
+            "title": "Contact List",
+			"withoutFriendMessage": "Your alone, it's sad :)",
+			"searchingForFriends": "Searching for users..."
+        }
+    },
+	"AIOpponent":"Decoy Jerry",
+    "profile": {
+        "title": "PROFILE",
+        "name": "USERNAME",
+        "email": "EMAIL",
+        "pwd": "PASSWORD",
+        "2fa": "2FA AUTH"
+    },
+    "statistics": {
+        "title": "MATCH HISTORY",
+        "table": {
+            "modes": "MODES",
+            "scores": "SCORES",
+            "opponents": "OPPONENTS",
+            "ally": "ALLY",
+            "date": "DATE"
+        },
+        "cards": {
+            "1vs1": {
+                "title": "1VS1",
+                "wins": "Wins",
+                "loses": "Losses"
+            },
+            "1vsia": {
+                "title": "1VSIA",
+                "wins": "Wins",
+                "loses": "Losses"
+            },
+            "2vs2": {
+                "title": "2VS2",
+                "wins": "Wins",
+                "loses": "Losses"
+            },
+            "tournament": {
+                "title": "TOURNAMENT",
+                "wins": "Wins",
+                "loses": "Losses"
+            },
+			 "billiard": {
+                "title": "BILLIARD",
+                "wins": "Wins",
+                "loses": "Losses"
+            }
+        }
+    },
+	"friend-request": {
+		"title": "Friends requests",
+		"table": {
+			"received": "Requests received",
+			"send": "Requests sent"
+		}
+	},
+    "games": {
+        "keys": {
+            "up": "UP",
+            "down": "DOWN"
+        }
+    },
+    "tournament": {
+        "winner": "WINNER",
+        "eliminated": "ELIMINATED"
+    },
+    "portal-gun": {
+        "username": "USERNAME",
+        "ally": "ALLY",
+        "opponent": "OPPONENT"
+    }
+}

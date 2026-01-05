@@ -1,0 +1,95 @@
+{
+	"register": {
+		"name": "NOMBRE DE USUARIO",
+		"email": "CORREO ELECTRÓNICO",
+		"pwd": "CONTRASEÑA",
+		"cta": "REGISTRARSE",
+		"extra": "¿Ya tienes una cuenta?",
+		"link": "Inicia sesión",
+		"oauth2": "Inicia sesión con Google"
+	},
+	"login": {
+		"name": "NOMBRE DE USUARIO",
+		"pwd": "CONTRASEÑA",
+		"cta": "INICIAR SESIÓN",
+		"extra": "¿Aún no tienes cuenta?",
+		"link": "Regístrate",
+		"oauth2": "Inicia sesión con Google"
+	},
+	"board": {
+        "stats": "ESTADÍSTICAS",
+        "logout": "CERRAR SESIÓN",
+        "1vs1": "DUELO DIMENSIONAL",
+        "2vs2": "CHOQUE DE LA CIUDADELA",
+        "1vsia": "VS Jerry señuelo",
+        "tournament": "COPA RICK PEPINILLO",
+        "billiard": "Billar Multidimensional",
+        "friend-list": {
+            "title": "Lista de Contactos",
+			"withoutFriendMessage": "Estás solo, es triste :)",
+			"searchingForFriends": "Buscando usuarias..."
+        }
+    },
+	"AIOpponent":"Jerry señuelo",
+    "profile": {
+        "title": "PERFIL",
+        "name": "NOMBRE DE USUARIO",
+        "email": "CORREO ELECTRÓNICO",
+        "pwd": "CONTRASEÑA",
+        "2fa": "AUTH 2FA"
+    },
+    "statistics": {
+        "title": "HISTORIAL DE PARTIDAS",
+        "table": {
+            "modes": "MODOS",
+            "scores": "PUNTUACIONES",
+            "opponents": "OPONENTES",
+            "ally": "ALIADO",
+            "date": "FECHA"
+        },
+        "cards": {
+            "1vs1": {
+                "title": "1VS1",
+                "wins": "Victorias",
+                "loses": "Derrotas"
+            },
+            "1vsia": {
+                "title": "1VSIA",
+                "wins": "Victorias",
+                "loses": "Derrotas"
+            },
+            "2vs2": {
+                "title": "2VS2",
+                "wins": "Victorias",
+                "loses": "Derrotas"
+            },
+            "tournament": {
+                "title": "TORNEO",
+                "wins": "Victorias",
+                "loses": "Derrotas"
+            }
+        }
+    },
+	"friend-request": {
+		"title": "Solicitud de amistad",
+		"table": {
+			"received": "Solicitud recibida",
+			"send": "Solicitud enviada"
+		}
+	},
+    "games": {
+        "keys": {
+            "up": "ARRIBA",
+            "down": "ABAJO"
+        }
+    },
+    "tournament": {
+        "winner": "GANADOR",
+        "eliminated": "ELIMINADO"
+    },
+    "portal-gun": {
+        "username": "NOMBRE DE USUARIO",
+        "ally": "ALIADO",
+        "opponent": "OPONENTE"
+    }
+}
