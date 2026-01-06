@@ -1,0 +1,8 @@
+# doxygen
+docs/
+
+# objects
+objs/
+
+# executive
+./bureaucrat
