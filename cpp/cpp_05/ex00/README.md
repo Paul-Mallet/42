@@ -5,6 +5,8 @@
 * #pragma once, [cplusplus.com - forum](https://cplusplus.com/forum/beginner/7877/)
 * try - catch blocks, see [1]
 * throw keyword, see [1]
+* std::exception &e
+* virtual MyException::what() const throw() overriding
 
 ## Already seen
 * Fields
