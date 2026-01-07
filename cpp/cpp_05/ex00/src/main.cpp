@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:03:55 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/07 19:09:03 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/07 19:11:49 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	main(int ac, char **av)
 	(void)av;
 	Bureaucrat* eva = NULL;
 	try {
-		// Bureaucrat god("god", 0);
+		Bureaucrat god("god", 0);
 		Bureaucrat ceo("ceo", 1);
 		Bureaucrat philipp("philipp", 150);
-		// Bureaucrat me("me", 151);
+		Bureaucrat me("me", 151);
 		Bureaucrat bureaucrat;
 		Bureaucrat bureaucrat2( bureaucrat );
 		eva = new Bureaucrat("eva", 20);

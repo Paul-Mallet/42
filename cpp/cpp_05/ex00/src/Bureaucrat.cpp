@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 12:29:18 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/07 18:59:05 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/07 19:18:05 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ Bureaucrat::Bureaucrat() : _name("Bureaucrat"), _grade(150) {
 Bureaucrat::Bureaucrat( std::string name, unsigned int grade ) : _name(name) {
 	std::cout << "Parameterized constructor" << std::endl;
 	if (grade < 1)
-		throw tooHigh;
+		throw Bureaucrat::GradeTooHighException();
 	if (grade > 150)
-		throw tooLow;
+		throw Bureaucrat::GradeTooLowException();
 	this->_grade = grade;
 }
 
@@ -38,9 +38,9 @@ Bureaucrat &Bureaucrat::operator=( Bureaucrat const &rhs ) {
 	if (this != &rhs)
 	{
 		if (rhs._grade < 1)
-			throw tooHigh;
+			throw Bureaucrat::GradeTooHighException();
 		if (rhs._grade > 150)
-			throw tooLow;
+			throw Bureaucrat::GradeTooLowException();
 		this->_grade = rhs._grade;
 	}
 	return (*this);
@@ -57,17 +57,15 @@ unsigned int Bureaucrat::getGrade( void ) const {
 void Bureaucrat::incrementGrade( void ) {
 	this->_grade--;
 	if (this->_grade < 1)
-		throw tooHigh;
+		throw Bureaucrat::GradeTooHighException();
 }
 
 void Bureaucrat::decrementGrade( void ) {
 	this->_grade++;
 	if (this->_grade > 150)
-		throw tooLow;
+		throw Bureaucrat::GradeTooLowException();
 }
 
-// without &, slicing trap !
-// exception& e 
 const char* Bureaucrat::GradeTooHighException::what( void ) const throw() {
 	return ("Grade is too high.");
 }
