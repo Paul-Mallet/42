@@ -25,11 +25,11 @@ docs:
 	@echo "\033[1;32mDocumentation generated"
 
 clean:
+	@rm -rf $(DOCS_DIR)
 	@rm -rf $(OBJS_DIR)
-	@echo "\033[0;33mobjs cleaned"
+	@echo "\033[0;33mdocs & objs cleaned"
 
 fclean: clean
-	@rm -rf $(DOCS_DIR)
 	@rm -f $(NAME)
 	@echo "\033[0;33mbin cleaned"
 
