@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:03:55 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/07 19:11:49 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/09 11:28:05 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	main(int ac, char **av)
 		delete eva;
 	}
 	catch (std::exception& e) {
-		delete eva;
 		std::cout << e.what() << std::endl;
+		delete eva;
 	}
 
 	return (0);

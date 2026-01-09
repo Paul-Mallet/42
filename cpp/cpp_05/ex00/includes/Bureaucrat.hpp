@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 12:05:28 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/07 19:20:14 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/09 11:01:29 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ class Bureaucrat {
 
 		Bureaucrat &operator=( Bureaucrat const &rhs );
 
-		std::string		const getName( void ) const;
-		unsigned int	getGrade( void ) const;
+		std::string		getName( void ) const;
+		unsigned int	getGrade( void );
 
 		/**
 		 * @brief Augmente le grade (diminue la valeur numérique).
@@ -68,4 +68,4 @@ class Bureaucrat {
 };
 
 // friend within Class, i._name and i._grade directly !
-std::ostream &operator<<( std::ostream &o, Bureaucrat const &i );
+std::ostream &operator<<( std::ostream &o, Bureaucrat &i );

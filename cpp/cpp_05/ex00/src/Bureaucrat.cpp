@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 12:29:18 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/07 19:18:05 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/09 11:01:16 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,15 @@ Bureaucrat::~Bureaucrat() {
 Bureaucrat &Bureaucrat::operator=( Bureaucrat const &rhs ) {
 	std::cout << "Assignment operator" << std::endl;
 	if (this != &rhs)
-	{
-		if (rhs._grade < 1)
-			throw Bureaucrat::GradeTooHighException();
-		if (rhs._grade > 150)
-			throw Bureaucrat::GradeTooLowException();
 		this->_grade = rhs._grade;
-	}
 	return (*this);
 }
 
-std::string const Bureaucrat::getName( void ) const {
+std::string Bureaucrat::getName( void ) const {
 	return (this->_name);
 }
 
-unsigned int Bureaucrat::getGrade( void ) const {
+unsigned int Bureaucrat::getGrade( void ) {
 	return (this->_grade);
 }
 
@@ -74,7 +68,7 @@ const char* Bureaucrat::GradeTooLowException::what( void ) const throw() {
 	return ("Grade is too low.");
 }
 
-std::ostream &operator<<( std::ostream &o, Bureaucrat const &i ) {
+std::ostream &operator<<( std::ostream &o, Bureaucrat &i ) {
 	o << i.getName() << ", bureaucrat grade " << i.getGrade() << "." << std::endl;
 	return (o);
 }
