@@ -10,10 +10,14 @@ SRCS=$(addprefix $(SRCS_DIR),\
 		ShrubberyCreationForm.cpp\
 		main.cpp)
 DOCS_DIR=docs/
+SHRUB_FILES=$(shell ls | grep "_shrubbery")
+GREEN=\033[1;32m
+YELLOW=\033[0;33m
+RED=\033[0;31m
 NAME=bureaucrat
 
 all: $(NAME)
-	@echo "\033[1;32m✔ bureaucrat compiled"
+	@echo "$(GREEN)✔ bureaucrat compiled"
 
 $(NAME): $(OBJS)
 	@$(CPP) $(FLAGS) $(INCLUDES) -o $@ $^
@@ -24,16 +28,17 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp
 
 docs:
 	@doxygen Doxyfile
-	@echo "\033[1;32mDocumentation generated"
+	@echo "$(GREEN)Documentation generated"
 
 clean:
 	@rm -rf $(DOCS_DIR)
 	@rm -rf $(OBJS_DIR)
-	@echo "\033[0;33mdocs & objs cleaned"
+	@rm -f $(SHRUB_FILES)
+	@echo "$(YELLOW)Documentation, objects and _shrubbery files cleaned"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\033[0;33mbin cleaned"
+	@echo "$(YELLOW)Executive file cleaned"
 
 re: fclean all
 
