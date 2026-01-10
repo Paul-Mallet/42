@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 12:05:28 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/09 11:01:29 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/09 18:18:28 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Bureaucrat {
 		unsigned int		_grade;
 
 	public:
-		Bureaucrat();
+		Bureaucrat( void );
 		/**
 		 * @brief Construit un nouveau Bureaucrat.
 		 * @param name Nom unique du bureaucrate.

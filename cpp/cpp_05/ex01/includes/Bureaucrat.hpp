@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 22:36:00 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/09 11:13:54 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/09 18:18:23 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include <exception>
 # include "./Form.hpp"
 
+/**
+ * @brief Représente un bureaucrate avec un nom immuable et un grade évolutif.
+ * * Le grade est compris strictement entre 1 (plus haut) et 150 (plus bas).
+ * @warning Toute tentative de créer ou modifier un grade hors de ces limites lève une exception.
+ */
 class Bureaucrat {
 
 	private:
@@ -26,6 +31,13 @@ class Bureaucrat {
 
 	public:
 		Bureaucrat( void );
+		/**
+		 * @brief Construit un nouveau Bureaucrat.
+		 * @param name Nom unique du bureaucrate.
+		 * @param grade Niveau hiérarchique initial (1 à 150).
+		 * @throw Bureaucrat::GradeTooHighException Si le grade est < 1.
+		 * @throw Bureaucrat::GradeTooLowException Si le grade est > 150.
+		 */
 		Bureaucrat( std::string name, unsigned int grade );
 		Bureaucrat( Bureaucrat const &src );
 		~Bureaucrat();
