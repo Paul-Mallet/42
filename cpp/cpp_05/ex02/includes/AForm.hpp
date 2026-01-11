@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:38:25 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/11 10:51:18 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/11 12:40:18 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ class AForm {
 		 * @brief ...
 		 */
 		virtual void		executeAction( void ) const = 0;
-
 		/**
+
 		 * @brief ...
 		 */
 		void 				execute(Bureaucrat const &executor) const;

@@ -6,13 +6,13 @@
 * try - catch blocks, see [1]
 * throw keyword, see [1]
 * std::exception &e
-* virtual MyException::what() const throw() overriding
+* exception::what() overriding
 
 ## Already seen
 * Fields
-* Private visibility
-* Getter / Setter
 * Methods
+* Scope Visibility
+* Getter / Setter
 
 ```mermaid
 classDiagram
