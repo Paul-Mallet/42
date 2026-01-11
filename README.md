@@ -174,6 +174,12 @@ The pillars of OOP. Exploring class inheritance, base and derived classes, prote
 Advanced polymorphism. Understanding virtual functions, pure virtual functions, abstract classes, and how to implement interfaces to achieve true subtype polymorphism.
 </details>
 
+<details>
+<summary><h3>🟤 CPP Module 05: Exceptions & Forms</h3></summary>
+<br>
+Introduction to professional error handling. Learning the <b>try/throw/catch</b> mechanism to manage exceptional states. Deepening class hierarchies with abstract base classes.
+</details>
+
 ---
 <p align="center">
   <sub>Created by a 42 Student.</sub>
