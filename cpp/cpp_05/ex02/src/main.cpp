@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 17:48:35 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/11 12:17:00 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/11 16:08:20 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	main( int ac, char **av )
 		delete robot_form;
 		delete presi_form;
 	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
 		delete random;
 		delete jenna;
 		delete fujiro;
@@ -84,7 +85,6 @@ int	main( int ac, char **av )
 		delete fujiro_shrub_form;
 		delete robot_form;
 		delete presi_form;
-		std::cout << e.what() << std::endl;
 	}
 	return (0);
 }
