@@ -179,8 +179,3 @@ Advanced polymorphism. Understanding virtual functions, pure virtual functions, 
 <br>
 Introduction to professional error handling. Learning the <b>try/throw/catch</b> mechanism to manage exceptional states. Deepening class hierarchies with abstract base classes.
 </details>
-
----
-<p align="center">
-  <sub>Created by a 42 Student.</sub>
-</p>
