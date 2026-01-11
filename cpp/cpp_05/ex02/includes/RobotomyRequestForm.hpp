@@ -1,42 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:38:25 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/11 10:54:53 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/11 11:52:30 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATIONFORM_HPP
-# define SHRUBBERYCREATIONFORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 
-# include <fstream>
+# include <cstdlib>
 # include "./AForm.hpp"
 
 /**
- * @class AForm
- * @brief Abstract Classe représentant un formulaire administratif.
- * * Un formulaire possède un nom, un statut (signé ou non) et des grades requis
- * pour la signature et l'exécution. Les grades sont immuables et doivent être
- * compris entre 1 et 150.
+ * @class RobotomyRequestForm
+ * ...
  */
-class ShrubberyCreationForm: public AForm {
+class RobotomyRequestForm: public AForm {
 
 	private:
 		std::string _target;
 
 	public:
-		ShrubberyCreationForm( void );
-		ShrubberyCreationForm( std::string const target );
-		ShrubberyCreationForm( ShrubberyCreationForm const &src );
-		~ShrubberyCreationForm();
+		RobotomyRequestForm( void );
+		RobotomyRequestForm( std::string const target );
+		RobotomyRequestForm( RobotomyRequestForm const &src );
+		~RobotomyRequestForm();
 
-		ShrubberyCreationForm &operator=( ShrubberyCreationForm const &rhs );
+		RobotomyRequestForm &operator=( RobotomyRequestForm const &rhs );
 
 		void	executeAction( void ) const;
+
 };
 
 #endif

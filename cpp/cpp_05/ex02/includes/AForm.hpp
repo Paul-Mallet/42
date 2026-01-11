@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:38:25 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/10 23:11:15 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/11 10:51:18 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,16 @@ class AForm {
 		void				beSigned( Bureaucrat const &b );
 
 		/**
+		 * @brief ...
+		 */
+		virtual void		executeAction( void ) const = 0;
+
+		/**
+		 * @brief ...
+		 */
+		void 				execute(Bureaucrat const &executor) const;
+
+		/**
          * @exception GradeTooHighException
          * @brief Lancée quand un grade est supérieur à 1.
          */
@@ -77,6 +87,15 @@ class AForm {
          * @brief Lancée quand un grade est inférieur à 150 ou insuffisant.
          */
 		class GradeTooLowException : public std::exception {
+			public:
+				virtual const char* what( void ) const throw();
+		};
+
+		/**
+         * @exception FormNotSignedException
+         * @brief Lancée quand un form n'est pas signed.
+         */
+		class FormNotSignedException : public std::exception {
 			public:
 				virtual const char* what( void ) const throw();
 		};

@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 22:36:00 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/10 23:11:40 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/11 11:33:56 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ class Bureaucrat {
 
 		void				incrementGrade( void );
 		void				decrementGrade( void );
-		void				signForm( AForm &f );
+		void				signForm( AForm &form );
+		void				executeForm( AForm const &form ) const;
 
 		class GradeTooHighException: public std::exception {
 			public:

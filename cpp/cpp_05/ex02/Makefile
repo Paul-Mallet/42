@@ -8,6 +8,8 @@ SRCS=$(addprefix $(SRCS_DIR),\
 		Bureaucrat.cpp\
 		AForm.cpp\
 		ShrubberyCreationForm.cpp\
+		RobotomyRequestForm.cpp\
+		PresidentialPardonForm.cpp\
 		main.cpp)
 DOCS_DIR=docs/
 SHRUB_FILES=$(shell ls | grep "_shrubbery")

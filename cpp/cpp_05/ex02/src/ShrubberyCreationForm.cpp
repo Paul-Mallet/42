@@ -6,20 +6,20 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/10 18:12:11 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/11 00:00:39 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/11 12:05:26 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm( void ) :
-	AForm("Shrubbery", 145, 137),
+	AForm("Shrubbery form", 145, 137),
 	_target("home") {
 	std::cout << "Default Constructor - ShrubberyCreationForm" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm( std::string target ) :
-	AForm("Shrubbery", 145, 137),
+	AForm("Shrubbery form", 145, 137),
 	_target(target) {
 	std::cout << "Parameterized Constructor - ShrubberyCreationForm" << std::endl;
 }
@@ -41,7 +41,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=( ShrubberyCreationForm c
 	return (*this);
 }
 
-void ShrubberyCreationForm::createShrubbery( void ) {
+void ShrubberyCreationForm::executeAction( void ) const {
 	std::ofstream ofs;
 
 	std::string filename = this->_target + "_shrubbery";

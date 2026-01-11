@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:56:00 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/10 23:11:45 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/11 10:52:15 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,6 @@ AForm &AForm::operator=( AForm const &rhs ) {
 	return (*this);
 }
 
-void AForm::beSigned( Bureaucrat const &b ) {
-	if (b.getGrade() > this->getSignedGrade())
-		throw AForm::GradeTooLowException();
-	this->_isSigned = true;
-}
-
 std::string AForm::getName( void ) const {
 	return (this->_name);
 }
@@ -70,12 +64,33 @@ unsigned int AForm::getExecutedGrade( void ) const {
 	return (this->_executedGrade);
 }
 
+void AForm::beSigned( Bureaucrat const &b ) {
+	if (b.getGrade() > this->getSignedGrade())
+		throw AForm::GradeTooLowException();
+	this->_isSigned = true;
+}
+
+/**
+ * @brief ...
+ */
+void AForm::execute( Bureaucrat const &executor ) const {
+	if (this->_isSigned == false)
+		throw AForm::FormNotSignedException();
+	if (executor.getGrade() > this->_executedGrade)
+		throw AForm::GradeTooLowException();
+	this->executeAction();
+}
+
 const char* AForm::GradeTooHighException::what( void ) const throw() {
 	return ("Grade is too high");
 }
 
 const char* AForm::GradeTooLowException::what( void ) const throw() {
 	return ("Grade is too low");
+}
+
+const char* AForm::FormNotSignedException::what( void ) const throw() {
+	return ("Form is not signed");
 }
 
 std::ostream &operator<<( std::ostream &o, AForm const &i ) {

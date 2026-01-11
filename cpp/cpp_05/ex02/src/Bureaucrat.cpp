@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 22:49:57 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/10 23:02:33 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/11 12:21:44 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,22 @@ void Bureaucrat::decrementGrade( void ) {
 		throw Bureaucrat::GradeTooLowException();
 }
 
-void Bureaucrat::signForm( AForm &f ) {
+void Bureaucrat::signForm( AForm &form ) {
 	try {
-		f.beSigned(*this);
-		std::cout << this->_name << " signed " << f.getName() << std::endl;
+		form.beSigned(*this);
+		std::cout << this->_name << " signed " << form.getName() << std::endl;
 	} catch (std::exception &e) {
-		std::cout << this->_name << " couldn’t sign " << f.getName()
+		std::cout << this->_name << " couldn’t sign " << form.getName()
+			<< " because " << e.what() << std::endl;
+	}
+}
+
+void Bureaucrat::executeForm( AForm const &form ) const {
+	try {
+		form.execute(*this);
+		std::cout << this->_name << " executed " << form.getName() << std::endl;
+	} catch (std::exception &e) {
+		std::cout << this->_name << " couldn’t execute " << form.getName()
 			<< " because " << e.what() << std::endl;
 	}
 }
