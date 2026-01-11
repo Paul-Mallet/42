@@ -175,7 +175,7 @@ Advanced polymorphism. Understanding virtual functions, pure virtual functions, 
 </details>
 
 <details>
-<summary><h3>🟤 CPP Module 05: Exceptions & Forms</h3></summary>
+<summary><h3>🟤 CPP Module 05: Exceptions Scopes</h3></summary>
 <br>
 Introduction to professional error handling. Learning the <b>try/throw/catch</b> mechanism to manage exceptional states. Deepening class hierarchies with abstract base classes.
 </details>
