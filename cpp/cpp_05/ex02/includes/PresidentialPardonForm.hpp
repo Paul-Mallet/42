@@ -3,17 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 11:45:54 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/11 11:52:31 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/12 15:31:56 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRESIDENTIALPARDONFORM_HPP
 # define PRESIDENTIALPARDONFORM_HPP
 
-# include "AForm.hpp"
+# include <iostream>
+# include <string>
+# include <exception>
+
+class AForm;
 
 class PresidentialPardonForm: public AForm {
 

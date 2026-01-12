@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 15:08:18 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/11 15:28:31 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/12 15:30:12 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INTERN_HPP
 # define INTERN_HPP
 
+# include <iostream>
+# include <string>
+# include <exception>
 # include <cstring>
-# include "./AForm.hpp"
-# include "./ShrubberyCreationForm.hpp"
-# include "./RobotomyRequestForm.hpp"
-# include "./PresidentialPardonForm.hpp"
+
+class AForm;
 
 class Intern {
 

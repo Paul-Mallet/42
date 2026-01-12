@@ -9,10 +9,12 @@ SRCS=$(addprefix $(SRCS_DIR),\
 		Form.cpp\
 		main.cpp)
 DOCS_DIR=docs/
+VALID=\033[1;32m
+INFO=\033[0;33m
 NAME=bureaucrat
 
 all: $(NAME)
-	@echo "\033[1;32m✔ bureaucrat compiled"
+	@echo "$(VALID)✔ bureaucrat compiled"
 
 $(NAME): $(OBJS)
 	@$(CPP) $(FLAGS) $(INCLUDES) -o $@ $^
@@ -23,16 +25,16 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp
 
 docs:
 	@doxygen Doxyfile
-	@echo "\033[1;32mDocumentation generated"
+	@echo "$(VALID)documentation compiled"
 
 clean:
 	@rm -rf $(DOCS_DIR)
 	@rm -rf $(OBJS_DIR)
-	@echo "\033[0;33mdocs & objs cleaned"
+	@echo "$(INFO)documentation & objs cleaned"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\033[0;33mbin cleaned"
+	@echo "$(INFO)execute file cleaned"
 
 re: fclean all
 

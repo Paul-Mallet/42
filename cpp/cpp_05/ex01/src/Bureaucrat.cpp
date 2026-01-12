@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 22:49:57 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/09 11:24:21 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/12 15:25:13 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Bureaucrat.hpp"
+#include "../includes/Form.hpp"
 
 Bureaucrat::Bureaucrat( void ) : _name("Stagiaire"), _grade(150) {
 	std::cout << "Default Constructor - Bureaucrat" << std::endl;

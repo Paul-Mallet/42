@@ -13,13 +13,12 @@ SRCS=$(addprefix $(SRCS_DIR),\
 		main.cpp)
 DOCS_DIR=docs/
 SHRUB_FILES=$(shell ls | grep "_shrubbery")
-GREEN=\033[1;32m
-YELLOW=\033[0;33m
-RED=\033[0;31m
+VALID=\033[1;32m
+INFO=\033[0;33m
 NAME=bureaucrat
 
 all: $(NAME)
-	@echo "$(GREEN)✔ bureaucrat compiled"
+	@echo "$(VALID)✔ bureaucrat compiled"
 
 $(NAME): $(OBJS)
 	@$(CPP) $(FLAGS) $(INCLUDES) -o $@ $^
@@ -30,17 +29,17 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp
 
 docs:
 	@doxygen Doxyfile
-	@echo "$(GREEN)Documentation generated"
+	@echo "$(VALID)documentation generated"
 
 clean:
 	@rm -rf $(DOCS_DIR)
 	@rm -rf $(OBJS_DIR)
 	@rm -f $(SHRUB_FILES)
-	@echo "$(YELLOW)Documentation, objects and _shrubbery files cleaned"
+	@echo "$(INFO)documentation, objects and _shrubbery files cleaned"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(YELLOW)Executive file cleaned"
+	@echo "$(INFO)executive file cleaned"
 
 re: fclean all
 

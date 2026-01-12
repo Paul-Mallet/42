@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:38:25 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/11 12:40:18 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/12 15:28:26 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AFORM_HPP
 # define AFORM_HPP
 
-# include "./Bureaucrat.hpp"
+# include <iostream>
+# include <string>
+# include <exception>
 
 class Bureaucrat;
 

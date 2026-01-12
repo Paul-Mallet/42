@@ -3,18 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 12:38:25 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/11 11:52:30 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/12 15:32:03 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ROBOTOMYREQUESTFORM_HPP
 # define ROBOTOMYREQUESTFORM_HPP
 
+# include <iostream>
+# include <string>
+# include <exception>
 # include <cstdlib>
-# include "./AForm.hpp"
+
+class AForm;
 
 /**
  * @class RobotomyRequestForm

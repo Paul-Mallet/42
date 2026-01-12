@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 22:36:00 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/09 18:18:23 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/12 15:20:44 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include <iostream>
 # include <string>
 # include <exception>
-# include "./Form.hpp"
+
+class Form;
 
 /**
  * @brief Représente un bureaucrate avec un nom immuable et un grade évolutif.
