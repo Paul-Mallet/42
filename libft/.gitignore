@@ -1,4 +1,10 @@
+# objects
 *.o
+
+# executable files
+libft
 *.a
 *.out
+
+# swap files
 *.swp
