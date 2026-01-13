@@ -16,9 +16,45 @@
 
 ---
 
-## 🛠️ The C Foundation & Algorithms
+## 🛠️ Installation & Setup
+To compile and test these Common Core projects, you must use a Unix-based environment (Linux or macOS). All projects are developed following C99 or C++98 standards and strictly adhere to the 42 School Norm. And because they are different requirements, every one of them have its own README.md. Feel free to install and test the ones you want.
 
-A deep dive into low-level programming, memory management, and algorithmic thinking.
+### 🧰 Prerequisites
+Before starting, ensure your system is equipped with the following tools & packages:
+
+* MacOS :
+```bash
+xcode-select --install
+```
+
+* Windows(WSL2) :
+```bash
+sudo apt update && sudo apt install -y build-essential git valgrind
+```
+
+* Linux(any distribution) :
+```bash
+sudo apt update && sudo apt install -y build-essential git valgrind
+```
+
+### 🚀 Quick Start (Compilation)
+Clone the repository:
+
+```bash
+git clone https://github.com/Paul-Mallet/42.git repo-name-you-want
+cd repo-name-you-want
+```
+
+<table data-path-to-node="6"><thead><tr><td><span data-path-to-node="6,0,0,0">Component</span></td><td><span data-path-to-node="6,0,1,0">Requirement</span></td><td><span data-path-to-node="6,0,2,0">Purpose</span></td></tr></thead><tbody><tr><td><span data-path-to-node="6,1,0,0"><b data-path-to-node="6,1,0,0" data-index-in-node="0">Compiler</b></span></td><td><span data-path-to-node="6,1,1,0"><code data-path-to-node="6,1,1,0" data-index-in-node="0">gcc</code> or <code data-path-to-node="6,1,1,0" data-index-in-node="7">clang</code></span></td><td><span data-path-to-node="6,1,2,0">To compile C and C++ source files.</span></td></tr><tr><td><span data-path-to-node="6,2,0,0"><b data-path-to-node="6,2,0,0" data-index-in-node="0">Build Tool</b></span></td><td><span data-path-to-node="6,2,1,0"><code data-path-to-node="6,2,1,0" data-index-in-node="0">make</code></span></td><td><span data-path-to-node="6,2,2,0">To automate the compilation process via Makefiles.</span></td></tr><tr><td><span data-path-to-node="6,3,0,0"><b data-path-to-node="6,3,0,0" data-index-in-node="0">System Libs</b></span></td><td><span data-path-to-node="6,3,1,0"><code data-path-to-node="6,3,1,0" data-index-in-node="0">libc</code> &amp; <code data-path-to-node="6,3,1,0" data-index-in-node="7">ar</code></span></td><td><span data-path-to-node="6,3,2,0">Standard C library and archive tool for <code data-path-to-node="6,3,2,0" data-index-in-node="40">.a</code> files.</span></td></tr><tr><td><span data-path-to-node="6,4,0,0"><b data-path-to-node="6,4,0,0" data-index-in-node="0">Virtualization</b></span></td><td><span data-path-to-node="6,4,1,0"><response-element class="" ng-version="0.0.0-PLACEHOLDER"><link-block _nghost-ng-c3214560500="" class="ng-star-inserted"><a _ngcontent-ng-c3214560500="" target="_blank" rel="noopener" externallink="" _nghost-ng-c404503337="" jslog="197247;track:generic_click,impression,attention;BardVeMetadataKey:[[&quot;r_23e3a7dfd253f463&quot;,&quot;c_df27b05b87149c20&quot;,null,&quot;rc_fb8813ee9330cc58&quot;,null,null,&quot;en&quot;,null,1,null,null,1,0]]" href="https://www.virtualbox.org/" class="ng-star-inserted" data-hveid="0" decode-data-ved="1" data-ved="0CAAQ_4QMahgKEwju4IH8iYiSAxUAAAAAHQAAAAAQvgI">VirtualBox</a></link-block></response-element></span></td><td><span data-path-to-node="6,4,2,0">Required specifically for the <b data-path-to-node="6,4,2,0" data-index-in-node="30">Born2beRoot</b> project.</span></td></tr></tbody></table>
+
+## 🏗️ The C Language Foundation (1)
+
+A deep dive into <b>low-level</b> programming, <b>memory management</b>, <b>concurrent programmation</b> and <b>algorithmic thinking</b> using C Language (C99).
+
+### Paradigms
+1. Imperative
+2. Procedural
+3. Parallel Processing
 
 <table border="0">
   <tr>
@@ -77,7 +113,7 @@ A deep dive into low-level programming, memory management, and algorithmic think
 
 ---
 
-## 🎮 Graphics, System & Networking
+## 🎮 Graphics, System & Networking (2)
 
 Advanced projects tackling concurrency, graphical rendering, and recreating core system components.
 
@@ -138,9 +174,15 @@ Advanced projects tackling concurrency, graphical rendering, and recreating core
 
 ---
 
-## 🚀 The C++ Shift (Object-Oriented Programming)
+## 🤖 The C++ Objects Shift
 
-Transitioning from procedural C to more modern <b>C++98</b>, focusing on rigorous <b>Object-Oriented Programming</b> principles and <b>design patterns</b>.
+Transitioning from procedural C to C++, focusing on rigorous <b>Object-Oriented Programming</b> principles, <b>classes</b>, <b>templates</b> and <b>design patterns</b> using C++ Language (C++98).
+
+### Paradigms
+1. ==== Imperative ====
+2. Procedural
+3. Object-Oriented
+4. Parallel Processing
 
 > Click on the modules below to expand details.
 
