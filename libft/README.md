@@ -1,4 +1,4 @@
-# Libft - Project_00 @42
+# Libft - Project_00
 
 ## 📝 Overview
 **Libft** is the first project of the 42 School common core. The goal is to recreate a set of functions from the standard C library (`libc`) along with additional utility functions. Mastering this project is essential as this library will become a foundation for most of our future C projects at 42.
