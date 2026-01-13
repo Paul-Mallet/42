@@ -1,0 +1,8 @@
+# documentation
+docs/
+
+# objs
+obj/
+
+# execute file
+./converter
