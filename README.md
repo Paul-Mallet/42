@@ -52,9 +52,11 @@ cd repo-name-you-want
 A deep dive into <b>low-level</b> programming, <b>memory management</b>, <b>concurrent programmation</b> and <b>algorithmic thinking</b> using C Language (C99).
 
 ### Paradigms
-1. Imperative
-2. Procedural
-3. Parallel Processing
+
+#### Imperative
+
+1. Procedural
+2. Parallel Processing
 
 <table border="0">
   <tr>
@@ -179,10 +181,12 @@ Advanced projects tackling concurrency, graphical rendering, and recreating core
 Transitioning from procedural C to C++, focusing on rigorous <b>Object-Oriented Programming</b> principles, <b>classes</b>, <b>templates</b> and <b>design patterns</b> using C++ Language (C++98).
 
 ### Paradigms
-1. ==== Imperative ====
-2. Procedural
-3. Object-Oriented
-4. Parallel Processing
+
+#### Imperative
+
+1. Procedural
+2. Object-Oriented
+3. Parallel Processing
 
 > Click on the modules below to expand details.
 
