@@ -1,0 +1,11 @@
+# objects
+*.o
+
+# executable files
+ft_printf
+libft
+*.a
+*.out
+
+# swap files
+*.swp
