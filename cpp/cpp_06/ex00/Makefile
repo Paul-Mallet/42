@@ -5,14 +5,15 @@ OBJ_DIR=obj/
 OBJ=$(patsubst $(SRC_DIR)%.cpp, $(OBJ_DIR)%.o, $(SRC))
 SRC_DIR=src/
 SRC=$(addprefix $(SRC_DIR),\
+		ScalarConverter.cpp\
 		main.cpp)
-DOC_DIR=doc/
+DOC_DIR=docs/
 VALID=\033[1;32m
 INFO=\033[0;33m
-NAME=type_casting
+NAME=converter
 
 all: $(NAME)
-	@echo "$(VALID)✔ type_casting compiled"
+	@echo "$(VALID)✔ converter compiled"
 
 $(NAME): $(OBJ)
 	@$(CPP) $(FLAGS) $(INCLUDES) -o $@ $^
