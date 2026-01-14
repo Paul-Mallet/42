@@ -10,19 +10,22 @@ This project covers essential concepts such as **IP Addressing** (IPv4), **Subne
 
 To solve the levels, you must master the following rules:
 
-1. IP Address & Subnet Mask
+### 1. IP Address & Subnet Mask
+
 The Subnet Mask determines which part of the IP address belongs to the Network and which part belongs to the Host.
 
 **Example** : For 192.168.1.10 /24, the mask is 255.255.255.0. The first 24 bits are the network.
 
-2. Network & Broadcast Addresses
+### 2. Network & Broadcast Addresses
+
 * **Network Address** : The first address of a range (e.g., 192.168.1.0).
 
 * **Broadcast Address** : The last address of a range (e.g., 192.168.1.255).
 
 * **Usable IPs** : All addresses between these two.
 
-3. Routing & Gateways
+### 3. Routing & Gateways
+
 For two devices on different networks to communicate, they must go through a **Router** (Gateway). The routing table must have a rule that directs the traffic to the correct interface.
 
 ---
