@@ -1,9 +1,11 @@
+#minilibx
+minilibx-linux/
+
 # objects
 *.o
 
-# executable files
-ft_printf
-libft
+# library & executable files
+fractol
 *.a
 *.out
 

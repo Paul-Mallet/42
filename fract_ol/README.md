@@ -1,20 +1,38 @@
 # fract-ol - Project_04
 
 ## 📝 Overview
-Le projet **fract-ol** est une introduction graphique au monde des fractales. L'objectif est de créer un petit logiciel capable de générer des ensembles de **Mandelbrot**, **Julia**.
+The **fract-ol** project is a graphical introduction to the world of fractals. The objective is to create a small software capable of generating **Mandelbrot** and **Julia** sets.
 
-Ce projet permet d'approfondir la gestion de la bibliothèque graphique **MiniLibX**, de manipuler les nombres complexes, de comprendre le rendu de pixels optimisé et d'implémenter des fonctionnalités interactives comme le zoom, le déplacement à la souris et la pression des touches du clavier.
+This project allows for a deeper exploration of the **MiniLibX** graphical library, the manipulation of **complex numbers**, an understanding of optimized pixel rendering, and the implementation of interactive features such as zooming, mouse movement, and keyboard input handling.
+
+## 🔍 About Fractals
+
+The calculation is about iterate over complex numbers, by applying this formula :
+
+$$z_{n+1} = z_n^2 + c$$
+
+Mandelbrot : We needs to alterate $c$ (the pixel position) and then, start with $z_0 = 0$.
+Julia : We set $c$ (passed as argument) and we start with $z_0$ egal to the pixel's position.
 
 ---
 
 ## 📥 Installation
 
-Clone the repository and navigate to the project folder:
+Clone the repository and navigate to the project folder :
 
 ```bash
    git clone https://github.com/Paul-Mallet/42.git repo-name-you-want
    cd repo-name-you-want
    cd fract-ol
+```
+
+Then you must clone the minilibx library on the 42 Paris official repo, build the inner project and backward to your last path working directory :
+
+```bash
+   git clone git@github.com:42paris/minilibx-linux.git minilibx-linux
+   cd minilibx-linux
+   make
+   cd ..
 ```
 
 ## Building the Project
@@ -25,22 +43,15 @@ Clone the repository and navigate to the project folder:
 
 ### 1. To use the library in your own program
 
-The main.c file is given for this project.
+The main.c file is given for this project and already built after run make.
 
-### 2. Link & compile the project
-
-```bash
-   
-```
-
-<i>Note: The -D BUFFER_SIZE=n flag tells the compiler how many bytes to read at each read() call.</i>
-
-### 3. Run the programm & Check for Memory Leaks
+### 2. Run the programm & Check for Memory Leaks
 
 To ensure your functions (like ft_strdup or ft_calloc) handle memory correctly without leaks, run with Valgrind:
 
 ```bash
-   [valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=all] ./get_next_line "files/path_to_file_to_read.txt"
+   [valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=all] ./fractol "mandelbrot"
+   [valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=all] ./fractol "julia" "000000.8" "0.156"
 ```
 
 If you see those kind of lines at the end of the runtime:
@@ -54,6 +65,18 @@ HEAP SUMMARY:
 ```
 
 It means the programm ran properly without leaks, well done !
+
+### 3. Interactive Controls
+
+Once the window is open, you can use the following commands:
+
+**Mouse wheel**: Zoom in / Zoom out at the cursor's position.
+
+**Arrow keys**: Move across the complex plane.
+
+**ESC**: Exit the program cleanly.
+
+**Window cross**: Exit the program cleanly.
 
 ## 🔍 Installing Valgrind
 
