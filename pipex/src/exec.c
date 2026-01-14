@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 20:26:00 by paul_mallet       #+#    #+#             */
-/*   Updated: 2025/03/19 02:48:11 by pamallet         ###   ########.fr       */
+/*   Updated: 2026/01/14 17:54:28 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ void	exec_first_cmd(t_data *data, t_cmd *cmd, char **envp)
 		data->infile = open(data->file_names[0], O_RDONLY);
 		if (data->infile == -1)
 			handle_errors(data, NULL, OPEN_FILE_ERR, path);
-		dup2(data->infile, STDIN_FILENO);
+		if (dup2(data->infile, STDIN_FILENO) < 0)
+			handle_errors(data, NULL, OPEN_FILE_ERR, path);
+		if (dup2(data->pipe_fd[1], STDOUT_FILENO) < 0)
+			handle_errors(data, NULL, OPEN_FILE_ERR, path);
 		close(data->infile);
-		dup2(data->pipe_fd[1], STDOUT_FILENO);
 		close(data->pipe_fd[1]);
 		execve(path, cmd->args, envp);
 		handle_errors(data, NULL, -1, NULL);

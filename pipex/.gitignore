@@ -1,0 +1,11 @@
+# objects
+obj/
+*.o
+
+# library & executable files
+pipex
+*.a
+*.out
+
+# swap files
+*.swp
