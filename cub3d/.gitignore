@@ -1,0 +1,13 @@
+#minilibx
+minilibx-linux/
+
+# objects
+*.o
+
+# library & executable files
+fractol
+*.a
+*.out
+
+# swap files
+*.swp
