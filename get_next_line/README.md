@@ -60,7 +60,7 @@ You must include the headers in your main.c file :
 To ensure your functions (like ft_strdup or ft_calloc) handle memory correctly without leaks, run with Valgrind:
 
 ```bash
-   [valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes] ./get_next_line "files/path_to_file_to_read.txt"
+   [valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=all] ./get_next_line "files/path_to_file_to_read.txt"
 ```
 
 If you see those kind of lines at the end of the runtime:
