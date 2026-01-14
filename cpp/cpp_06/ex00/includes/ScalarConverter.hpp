@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 10:35:20 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/13 13:59:35 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/14 11:41:31 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <string>
+# include <exception>
 
 /**
  * @brief 
@@ -36,6 +37,15 @@ class ScalarConverter {
 		 */
 		static void convert( std::string literal );
 
+		class NonDisplayableCharException : public std::exception {
+			public:
+				virtual const char* what( void ) const throw();
+		};
+};
+
+class ScalarConverterDerived : public ScalarConverter {
+	public:
+		~ScalarConverterDerived();
 };
 
 #endif

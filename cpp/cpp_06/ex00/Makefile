@@ -13,10 +13,10 @@ INFO=\033[0;33m
 NAME=converter
 
 all: $(NAME)
-	@echo "$(VALID)✔ converter compiled"
 
 $(NAME): $(OBJ)
 	@$(CPP) $(FLAGS) $(INCLUDES) -o $@ $^
+	@echo "$(VALID)✔ converter compiled"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
 	@mkdir -p $(dir $@)
