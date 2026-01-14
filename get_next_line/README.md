@@ -1,4 +1,4 @@
-# Libft - Project_00
+# get_next_line - Project_02
 
 ## 📝 Overview
 The **get_next_line** project is a fundamental exercise that teaches you how to read content from a **file descriptor**, line by line. It introduces the crucial concept of **Static Variables** in C and deepens your understanding of memory allocation and buffer management.
