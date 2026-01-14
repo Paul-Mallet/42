@@ -1,4 +1,4 @@
-# philosophers - Project_06
+# philosophers - Project_07
 
 ## 📝 Overview
 
