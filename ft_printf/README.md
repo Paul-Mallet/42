@@ -2,7 +2,7 @@
 
 ## 📝 Overview
 
-The ft_printf project is a key milestone in the 42 curriculum. The goal is to mimic the behavior of the standard C printf function. This project introduces a fundamental concept in C programming: **Variadic Functions**.
+The **ft_printf** project is a key milestone in the 42 curriculum. The goal is to mimic the behavior of the standard C printf function. This project introduces a fundamental concept in C programming: **Variadic Functions**.
 
 By re-coding this function, you learn how to handle a variable number of **arguments** and how to parse format strings to display various data types efficiently.
 
