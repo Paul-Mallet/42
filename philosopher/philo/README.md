@@ -26,7 +26,7 @@ Clone the repository and navigate to the project folder :
 
 ### 1. How to run the program
 
-The program takes the following arguments: &number_of_philosophers& &time_to_die& &time_to_eat& &time_to_sleep& &[number_of_times_each_philosopher_must_eat]&
+The program takes the following arguments: <code data-path-to-node="12,1,1,0" data-index-in-node="41">number_of_philosophers</code> &time_to_die& &time_to_eat& &time_to_sleep& &[number_of_times_each_philosopher_must_eat]&
 
 ```bash
    ./philo 5 800 200 200
@@ -54,9 +54,9 @@ So when you need to check for :
 
 ```bash
    [valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --tool=helgrind] ./philo 5 800 200 200
-```Valgrind with a small amount of philos (< 10)
+```
 
-If you see those kind of lines at the end of the runtime:
+If you see those kind of lines at the end of the runtime :
 
 ```bash
 HEAP SUMMARY:
