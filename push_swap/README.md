@@ -73,8 +73,11 @@ It means the programm ran properly without leaks, well done !
 Once your visualizer is open, you will be able to setup the same metrics as follow :
 
 **values to generate** : < 1000 (to avoid lags)
+
 **shuffle** : click on it
+
 **push_swap file path** : ../../../push_swap **!IMPORTANT!**
+
 **compute** : click on it, must show OK
 
 ### 4. Available Operations Meaning
@@ -82,8 +85,11 @@ Once your visualizer is open, you will be able to setup the same metrics as foll
 The algorithm uses two stacks, **Stack A** and **Stack B**, with the following operations:
 
 **sa, sb, ss** : Swap the first 2 elements (ss - both at same time).
+
 **pa, pb** : Push an element from one stack to another.
+
 **ra, rb, rr** : Rotate all elements up by 1 (rr - both).
+
 **rra, rrb, rrr** : Reverse rotate all elements down by 1 (rrr - both).
 
 ## 🔍 Installing Valgrind
