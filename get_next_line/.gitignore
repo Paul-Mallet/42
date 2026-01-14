@@ -1,0 +1,10 @@
+# objects
+*.o
+
+# library & executable files
+get_next_line
+*.a
+*.out
+
+# swap files
+*.swp
