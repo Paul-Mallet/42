@@ -1,2 +1,15 @@
-/push_swap_visualizer
-/checker_linux
+#visualizer
+push_swap_visualizer/
+imgui.ini
+
+# objects
+obj/
+*.o
+
+# library & executable files
+push_swap
+*.a
+*.out
+
+# swap files
+*.swp
