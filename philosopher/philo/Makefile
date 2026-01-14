@@ -18,13 +18,15 @@ SRCS=$(addprefix $(SRCS_DIR), \
 		utils_routine.c)
 OBJS_DIR=obj/
 OBJS=$(SRCS:%.c=$(OBJS_DIR)%.o)
+VALID=\033[1;32m
+INFO=\033[0;33m
 NAME=philo
 
 all: $(NAME)
-	@echo "philo compiled"
 
 $(NAME): $(OBJS)
 	@$(CC) -rdynamic -Xlinker -export-dynamic $(FLAGS) $(T_FLAG) -o $@ $(OBJS)
+	@echo "$(VALID)philo compiled"
 
 $(OBJS_DIR)%.o: %.c
 	@mkdir -p $(dir $@)
@@ -32,11 +34,11 @@ $(OBJS_DIR)%.o: %.c
 
 clean:
 	@rm -rf $(OBJS_DIR)
-	@echo "objs cleaned"
+	@echo "$(INFO)objs cleaned"
 
 fclean : clean
 	@rm -rf $(NAME)
-	@echo "bin cleaned"
+	@echo "$(INFO)bin cleaned"
 
 re: fclean all
 

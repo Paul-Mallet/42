@@ -1,1 +1,11 @@
-*.txt
+# objects
+obj/
+*.o
+
+# library & executable files
+philo
+*.a
+*.out
+
+# swap files
+*.swp
