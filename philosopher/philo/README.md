@@ -26,7 +26,7 @@ Clone the repository and navigate to the project folder :
 
 ### 1. How to run the program
 
-The program takes the following arguments: <code data-path-to-node="12,1,1,0" data-index-in-node="41">number_of_philosophers</code> &time_to_die& &time_to_eat& &time_to_sleep& &[number_of_times_each_philosopher_must_eat]&
+The program takes the following arguments: <code data-path-to-node="12,1,1,0" data-index-in-node="41">number_of_philosophers</code> <code data-path-to-node="12,1,1,0" data-index-in-node="41">time_to_die</code> <code data-path-to-node="12,1,1,0" data-index-in-node="41">time_to_eat</code> <code data-path-to-node="12,1,1,0" data-index-in-node="41">time_to_sleep</code> <code data-path-to-node="12,1,1,0" data-index-in-node="41">[number_of_times_each_philosopher_must_eat]</code>
 
 ```bash
    ./philo 5 800 200 200
@@ -44,13 +44,13 @@ The program takes the following arguments: <code data-path-to-node="12,1,1,0" da
 
 ### 2. Run the programm & Check for Data Races
 
-In addition to Valgrind, it is highly recommended to compile with the **Thread Sanitizer** &-fsanitize=thread& to detect race conditions.
+In addition to Valgrind, it is highly recommended to compile with the **Thread Sanitizer** <code data-path-to-node="12,1,1,0" data-index-in-node="41">-fsanitize=thread</code> to detect race conditions.
 
 But because of the serialization of Valgrind, you **MUST** avoid to use them together ! (this is why I've already put in the Makefile in commentary):
 
 So when you need to check for :
 * **Memory leaks** : Valgrind with a small amount of philos (< 10)
-* &-fsanitize=thread& : To test a high amount of philos to be + precise
+* <code data-path-to-node="12,1,1,0" data-index-in-node="41">-fsanitize=thread</code> : To test a high amount of philos to be + precise
 
 ```bash
    [valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --tool=helgrind] ./philo 5 800 200 200
