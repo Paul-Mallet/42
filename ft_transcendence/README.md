@@ -46,9 +46,55 @@ Immersive Elements:
 
 ### Prerequisites
 
-1. Docker and Docker Compose installed
-2. A Google Cloud Console account (for OAuth 2.0 credentials)
-3. An .env file at the root (*see .env.example)
+Before running the project, ensure you have the following installed and running:
+
+1. **Docker Desktop** setup :
+   * Windows/macOS: Download and install Docker Desktop.
+      * You must launch the app and wait for the "whale" icon on your OS bottom bar to indicate it is running before executing any commands.
+   * Linux: Install docker and docker-compose. Ensure the daemon is active with :
+   ```bash
+      sudo systemctl start docker
+   ```
+
+2. OpenSSL : Usually pre-installed, used for generating security salts.
+3. A Web Browser : (Firefox recommended for compatibility).
+
+4. **Docker CLI** and **Docker Compose** installed on your environment:
+
+1. . Windows and macOS (Recommended Method)
+For these two systems, the all-in-one tool is called Docker Desktop. It installs the Docker Engine (Daemon), the graphical user interface, and Docker Compose simultaneously.
+
+a. Go to the official website and download the version that fit your OS: [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+b. Run the installer and follow the instructions.
+
+**⚠️ Important**: Once the installation is complete, launch the Docker Desktop application. Docker will not function until the small "whale" icon in the taskbar/menu bar is stable.
+
+2. Linux (Ubuntu/Debian)
+On Linux, we often install accross the terminal (tty). Docker Compose is now integrated as a plugin of the docker command (we use docker compose without the '-').
+
+Step 1 : Uninstall old versions
+Bash
+
+```bash
+   sudo apt-get remove docker docker-engine docker.io containerd runc
+```
+
+Step 2 : Install Docker from the official script (most faster)
+
+```bash
+   curl -fsSL https://get.docker.com -o get-docker.sh
+   sudo sh get-docker.sh
+```
+
+Step 3 : Use Docker without sudo (Optionnal but recommended)
+To avoid typing sudo on every commands :
+
+```bash
+   sudo usermod -aG docker $USER
+```
+
+5. A Google Cloud Console account (*see **ℹ️ Justification** below)
+6. Two .env files within the root structure (*see .env files below)
 
 ### Step-by-Step Run
 
@@ -59,15 +105,64 @@ Immersive Elements:
    cd ft_transcendence
 ```
 
-2. Setup Secrets: Configure your environment variables in the .env file (API keys, Vault tokens).
+2. Setup Secrets: You will need to configure your environment variables in two .env files at different places in the project structure. (API keys, Vault tokens...).
 
-3. Build and Launch:
+* The first one is within the **./infra/.** folder, behind the docker-compose.yml file and must have the following variables set to your local environment values :
+
+```typescript
+
+```
+
+**ℹ️ Justification** : To get your ENV_VARS, you must :
+a. ...
+b. ...
+c. ...
+
+* The second one must be created at **./services/frontend/.** with the following inner structure, where React components will need some URLs and Client_IDs to doing their own work properly :
+
+```typescript
+# --- DATABASE PATHS ---
+USER_PROFILE_DB_PATH="/usr/src/app/src/data/user-profile.sqlite"
+GAME_DB_PATH="/usr/src/app/src/data/game.sqlite"
+USER_STATS_DB_PATH="/usr/src/app/src/data/user-stats.sqlite"
+
+# --- MICROSERVICES PORTS ---
+USER_PROFILE_PORT=3001
+GAME_PORT=3002
+USER_STATS_PORT=3003
+
+# --- VAULT CONFIG ---
+VAULT_ADDR="http://vault:8200"
+VAULT_ADDR_INTERNAL="http://127.0.0.1:8200"
+VAULT_TOKEN=root
+
+# --- GAME & UI ---
+BASE_IMG_URL=/avatars/
+VITE_API_URL="https://localhost:8443"
+
+# --- SECRETS (TO BE GENERATED) ---
+SECRET_SALT="your_generated_salt_here"
+GOOGLE_CLIENT_ID="your_google_client_id_here"
+```
+
+**ℹ️ Justification** : To get your GOOGLE_CLIENT_ID, you must :
+
+a. Go to the Google Cloud Console.
+b. Create a project and set up an OAuth 2.0 Client ID.
+c. Add https://localhost:8443 to the Authorized Redirect URIs.
+d. Copy the GOOGLE_CLIENT_ID into your .env.
+
+Once your 2 .env files are fully completed, go back into ./intra/. to run the docker container.
+
+3. Build and Launch (it will takes 2min to fully build it the 1rst time):
 
 ```bash
    docker-compose up --build
 ```
 
-4. Access the app: Open https://localhost (Nginx handles the HTTPS/WAF layer).
+4. Then the project must successfully be built, well done 🎉 !
+
+You can access the app by clicking on the URL https://localhost your IDE shares to you (Nginx handles the HTTPS/WAF layer).
 
 ## 👥 Team Information & Contributions
 
@@ -107,7 +202,7 @@ There was 2 Modules categories :
 
 We were enterily free (after completed the MANDATORY part) to choose whatever we wanted.
 
-**Justification** : The number of points visible in the array is higher than our final note and its normal ! We tried to implement more modules to have a reserve in case of errors at the evaluation time.
+**ℹ️ Justification** : The number of points visible in the array is higher than our final note and its normal ! We tried to implement more modules to have a reserve in case of errors at the evaluation time.
 
 Here is which modules we chose and how they where divided :
 
@@ -447,7 +542,7 @@ Here is which modules we chose and how they where divided :
    </tbody>
 </table>
 
-**Justification** : We chose this combination to maximize points while ensuring a high-security standard (Vault/WAF) and a visually impressive experience (Babylon.js).
+**ℹ️ Justification** : We chose this combination to maximize points while ensuring a high-security standard (Vault/WAF) and a visually impressive experience (Babylon.js).
 
 ## ✨ Features List
 
