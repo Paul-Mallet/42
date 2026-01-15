@@ -54,52 +54,31 @@ A deep dive into <b>low-level</b> programming, <b>memory management</b>, <b>conc
 <table border="0">
   <tr>
     <td width="33%" align="center" valign="top">
-      <a href="./libft">
-        <img src="https://via.placeholder.com/400x200/000000/FFFFFF?text=Libft" alt="Libft" width="100%" style="border-radius: 10px" />
-      </a>
-      <br />
       <h3>📚 Libft</h3>
       <p>My very first own C library. Recoding <b>standard libc</b> functions (string manipulation, memory handling, linked lists) to understand how they work under the hood.</p>
+      <br>
     </td>
     <td width="33%" align="center" valign="top">
-      <a href="./ft_printf">
-        <img src="https://via.placeholder.com/400x200/333333/FFFFFF?text=ft_printf" alt="ft_printf" width="100%" style="border-radius: 10px" />
-      </a>
-      <br />
       <h3>🖨️ ft_printf</h3>
       <p>Recreating the famous <code>printf</code> function. A deep dive into <b>variadic arguments</b> in C and precise output formatting management.</p>
     </td>
     <td width="33%" align="center" valign="top">
-      <a href="./get_next_line">
-        <img src="https://via.placeholder.com/400x200/555555/FFFFFF?text=Get_Next_Line" alt="Get Next Line" width="100%" style="border-radius: 10px" />
-      </a>
-      <br />
       <h3>📝 Get Next Line</h3>
       <p>A crucial utility function that reads a file line by line. Teaches mastering <b>static variables</b> and complex buffer management to handle diverse <b>file descriptor</b> inputs.</p>
     </td>
   </tr>
   <tr>
      <td width="33%" align="center" valign="top">
-      <a href="./born2beroot">
-        <img src="https://via.placeholder.com/400x200/224466/FFFFFF?text=Born2beroot+VM" alt="Born2beroot" width="100%" style="border-radius: 10px" />
-      </a>
-      <br />
       <h3>🐧 Born2beroot</h3>
       <p>System Administration and <b>Virtualization</b>. Setting up a secure Linux server (Debian), managing <b>partitions</b> (LVM), <b>SUDO</b> policies, UFW <b>firewall</b>, and strong password enforcement.</p>
+      <br>
     </td>
      <td width="33%" align="center" valign="top">
-      <a href="./push_swap">
-         <img src="https://via.placeholder.com/400x200/662244/FFFFFF?text=Push_swap+Visualizer" alt="Push_swap" width="100%" style="border-radius: 10px" />
-      </a>
-      <br />
       <h3>🔢 Push_swap</h3>
       <p>A highly optimized data sorting project using two <b>stacks</b> and a limited set of instructions. The goal is to sort integers with the absolute minimum number of operations using <b>Turk Sort</b> complex algorithmic strategy.</p>
+      <br>
     </td>
     <td width="33%" align="center" valign="top">
-      <a href="./pipex">
-        <img src="https://via.placeholder.com/400x200/446622/FFFFFF?text=Pipex+Mechanisms" alt="Pipex" width="100%" style="border-radius: 10px" />
-      </a>
-      <br />
       <h3>🔄 Pipex</h3>
       <p>Understanding UNIX mechanisms. Reproducing the behavior of shell <b>pipes</b> (<code>|</code>) executions. Mastering file descriptors, <b>redirections</b>, <b>forking</b>, and inter-process communication.</p>
     </td>
@@ -115,54 +94,32 @@ Advanced projects tackling concurrency, graphical rendering, and recreating core
 <table border="0">
   <tr>
     <td width="33%" align="center" valign="top">
-      <a href="./minishell">
-         <img src="https://via.placeholder.com/400x200/111111/FFFFFF?text=Minishell+Prompt" alt="Minishell" width="100%" style="border-radius: 10px" />
-      </a>
-      <br />
       <h3>🐚 Minishell</h3>
       <p>Writing a mini Bash-like shell. A major group project involving parsing complex commands, handling environment variables, <b>signals</b>, processes, and implementing <b>builtins</b>.</p>
+      <br>
     </td>
     <td width="33%" align="center" valign="top">
-      <a href="./philosophers">
-        <img src="https://via.placeholder.com/400x200/771111/FFFFFF?text=Philosophers+Threads" alt="Philosophers" width="100%" style="border-radius: 10px" />
-      </a>
-      <br />
       <h3>🍝 Philosophers</h3>
       <p>An introduction to concurrency and threading. Solving the "Dining Philosophers" problem using mutexes and threads to manage shared resources and avoid <b>data races</b> or <b>deadlocks</b>.</p>
     </td>
     <td width="33%" align="center" valign="top">
-      <a href="./net_practice">
-         <img src="https://via.placeholder.com/400x200/111177/FFFFFF?text=NetPractice+Topology" alt="NetPractice" width="100%" style="border-radius: 10px" />
-      </a>
-      <br />
       <h3>🌐 NetPractice</h3>
       <p>Practical networking challenges. Understanding <b>IP addressing</b>, <b>subnet masks</b>, <b>routing tables</b>, and configuring small networks to establish connectivity.</p>
     </td>
   </tr>
   <tr>
      <td width="33%" align="center" valign="top">
-      <a href="./fract-ol">
-         <img src="https://via.placeholder.com/400x200/330033/FFFFFF?text=Fract-ol+Render" alt="Fract-ol" width="100%" style="border-radius: 10px" />
-      </a>
-      <br />
       <h3>❄️ Fract-ol</h3>
       <p>A 2D graphical project using the MiniLibX library. Exploring <b>Maths</b> fractals (Julia, Mandelbrot) and rendering them interactively with infinite zoom capabilities.</p>
     </td>
     <td width="33%" align="center" valign="top">
-      <a href="./cub3d">
-         <img src="https://via.placeholder.com/400x200/885500/FFFFFF?text=Cub3D+Raycasting" alt="Cub3d" width="100%" style="border-radius: 10px" />
-      </a>
-      <br />
       <h3>👾 Cub3d</h3>
       <p>My first 3D game engine inspired by Wolfenstein 3D made with another student. Implementing <b>Raycasting</b> algorithms and <b>Maths</b> logic to render a dynamic 3D world from a 2D map description, handling textures and player movement.</p>
     </td>
      <td width="33%" align="center" valign="top">
-      <a href="./ft_transcendence">
-         <img src="https://via.placeholder.com/400x200/003366/FFFFFF?text=ft_transcendence+Fullstack" alt="ft_transcendence" width="100%" style="border-radius: 10px" />
-      </a>
-      <br />
       <h3>🏆 ft_transcendence</h3>
       <p>A Fullstack Single Page Application (SPA) featuring a local real-time 1VS1 Pong game in ©Rick&Morty theme. Built with <b>Fastify</b>, <b>React</b>, and <b>SQLite3</b> in team. It includes OAuth 2.0 authentication, 2FA, Avatars selection and a matchmaking system via <b>WebSockets</b> continuous connection.</p>
+      <br>
     </td>
   </tr>
 </table>
@@ -173,38 +130,48 @@ Advanced projects tackling concurrency, graphical rendering, and recreating core
 
 Transitioning from procedural C to C++, focusing on rigorous <b>Object-Oriented Programming</b> principles, <b>classes</b>, <b>templates</b> and <b>design patterns</b> using C++ Language (C++98).
 
+### Modules 00 to 04
+
+The goal of those exercises are to initiate to the OOP paradigm, by creating many, many, many classes, while discovering concepts such as : Objects creator-destructor, Objects Relations, Design Patterns etc.
+
 <details>
-<summary><h3>🔵 CPP Module 00: The Basics & Namespaces</h3></summary>
+<summary><h4>🔵 CPP_00: The Basics & Namespaces</h4></summary>
 <br>
 Introduction to C++. Comparing procedural programming with OOP concepts. Discovering namespaces, classes, member attributes, standard input/output streams, and the "orthodox canonical form".
 </details>
 
 <details>
-<summary><h3>🟢 CPP Module 01: Memory & References</h3></summary>
+<summary><h4>🟢 CPP_01: Memory & References</h4></summary>
 <br>
 Deeper into memory management in C++. Understanding the difference between stack and heap allocation (`new`/`delete`), mastering references versus pointers, pointers to members, and utilizing the `switch` statement effectively.
 </details>
 
 <details>
-<summary><h3>🟠 CPP Module 02: Ad-hoc Polymorphism & Overloading</h3></summary>
+<summary><h4>🟠 CPP_02: Ad-hoc Polymorphism & Overloading</h4></summary>
 <br>
 Designed to help understand ad-hoc polymorphism. Implementing function overloading, operator overloading, and reinforcing the usage of orthodox canonical classes for robust code.
 </details>
 
 <details>
-<summary><h3>🔴 CPP Module 03: Inheritance</h3></summary>
+<summary><h4>🔴 CPP_03: Inheritance</h4></summary>
 <br>
 The pillars of OOP. Exploring class inheritance, base and derived classes, protected access specifiers, and managing construction/destruction chains in class hierarchies.
 </details>
 
 <details>
-<summary><h3>🟣 CPP Module 04: Subtype Polymorphism & Interfaces</h3></summary>
+<summary><h4>🟣 CPP_04: Subtype Polymorphism & Interfaces</h4></summary>
 <br>
 Advanced polymorphism. Understanding virtual functions, pure virtual functions, abstract classes, and how to implement interfaces to achieve true subtype polymorphism.
 </details>
 
+---
+
+### Modules 05 to 09
+
+The main purpose of those days is to discover a more flexible and robust way to code objects by using : errors handling, type casting, templates and STL containers.
+
 <details>
-<summary><h3>🟤 CPP Module 05: Exceptions Scopes</h3></summary>
+<summary><h4>🟤 CPP_05: Exceptions Scopes</h4></summary>
 <br>
 Introduction to professional error handling. Learning the <b>try/throw/catch</b> mechanism to manage exceptional states. Deepening class hierarchies with abstract base classes.
 </details>
