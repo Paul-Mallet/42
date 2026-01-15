@@ -15,7 +15,9 @@ We decided to break away from standard minimalist designs and adopted a **Rick a
  width="800" alt="Rick and Morty Portal Aesthetic">
 </p>
 
-Visuals: The color palette uses the iconic "Portal Green" and "Council of Ricks Blue" to only mentionned those references.
+Visuals:
+
+The color palette uses the iconic "Portal Green" and "Council of Ricks Blue" to only mentionned those references.
 
 * **Warning Red** : #B23521;  ![ ](https://img.shields.io/badge/-B23521?style=flat-square&color=B23521)
 * **Infos Yellow** : #F3F58F;  ![ ](https://img.shields.io/badge/-F3F58F?style=flat-square&color=F3F58F)
@@ -24,8 +26,9 @@ Visuals: The color palette uses the iconic "Portal Green" and "Council of Ricks 
 * **Hologram Blue** : #007AFF;  ![ ](https://img.shields.io/badge/-007AFF?style=flat-square&color=007AFF)
 
 Immersive Elements:
+
 * The Loading screens feature portal animations.
-* The AI Opponent is represented as a "Meeseeks," programmed to help you practice (but getting increasingly frustrated if the game lasts too long).
+* The AI Opponent is represented as a "Meeseeks," programmed to help you practice... or not.
 * User Avatars and default profiles are based on various characters from the Citadel of Ricks.
 
 ## 🛠 Technical Stack
@@ -472,7 +475,7 @@ Asking LLMs such as **Gemini 2.5** & **Claude Sonnet 4.2** about how core concep
 
 ### Use of AI
 
-As a tight deadline was set because of the blackhole absorptions of my mates (fired if we hadn't successfully validated the project), we only had 1 month to choose a topic and implement the whole app. In this context, AI was the easiest solution to learn faster and implement some extra code as tests to better optimized and organized our time.
+As a tight deadline was set because of the blackhole absorptions of my mates, we only had 1 month to choose the topic and implement the entire webapp. In this context, AI was the best solution to learn faster and testing some extra code to better optimized and organized our time.
 
 * **Code Optimization** : Used Gemini to generate a basic AI ball & pads directions code sample and to refactor Babylon.js particle shaders for better performance.
 
@@ -484,4 +487,4 @@ As a tight deadline was set because of the blackhole absorptions of my mates (fi
 
 * **Challenge**: Implementing Websockets logic accross client and server sides to fluidify the Pong game.
 
-* **Solution**: To ensure a smooth and lag-free experience, we implemented a Server-Authoritative model. Instead of letting the client calculate the game state (which leads to cheating and desync), the Node.js/Fastify backend runs a game loop at 60 FPS. It calculates the physics, ball collisions, and scores, then broadcasts a compressed JSON state to both players via WebSockets. On the client side, we used Client-Side Prediction and Linear Interpolation (Lerp) to smooth out the movement of the paddles and the ball, compensating for network latency (ping) and preventing "jittery" visuals. This ensures that even with a variable connection, the 3D Babylon.js rendering remains fluid for both users.
+* **Solution**: To ensure a smooth and lag-free experience, we implemented a Server-Side model. Instead of letting the client calculate the game state (which leads to cheating and desync), the Node.js/Fastify backend runs a game loop at 60 FPS. It calculates the physics, ball collisions, and scores, then broadcasts a compressed JSON state to both players via WebSockets. On the client side, I used Linear Interpolation (Lerp) to smooth out the movement of the paddles and the ball, compensating for network latency (ping).
