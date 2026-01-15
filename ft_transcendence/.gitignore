@@ -1,5 +1,6 @@
 # front dependencies
 /services/frontend/node_modules
+/services/frontend/.env
 
 # back dependencies
 /services/user-profile/node_modules
@@ -7,11 +8,11 @@
 /services/tournament/node_modules
 /services/user-stats/node_modules
 
+# docker .env
+/infra/.env
+
 # server ssl
 /infra/nginx/ssl/*.pem
-
-# global .env
-/infra/.env
 
 # db data
 services/*/*/data
