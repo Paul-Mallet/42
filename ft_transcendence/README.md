@@ -6,6 +6,28 @@
 
 This project is a massive integration of diverse skills: **Full-stack development** with a microservices architecture, **Cybersecurity** (WAF, Vault, 2FA), **Game Development** (3D with Babylon.js, AI), and **DevOps** (Docker, Nginx). It provides a complete user experience with tournament system, AI opponent, and advanced statistics.
 
+## 🎨 Visual Identity
+
+We decided to break away from standard minimalist designs and adopted a **Rick and Morty multiversal theme**. This choice influenced every part of the user experience:
+
+<p align="center">
+  <img src="https://static.thcdn.com/images/v2/wp-content/uploads/sites/499/2018/09/24160403/rick-and-morty.jpeg?width=700"
+ width="800" alt="Rick and Morty Portal Aesthetic">
+</p>
+
+Visuals: The color palette uses the iconic "Portal Green" and "Council of Ricks Blue" to only mentionned those references.
+
+* **Warning Red** : #B23521;  ![ ](https://img.shields.io/badge/-B23521?style=flat-square&color=B23521)
+* **Infos Yellow** : #F3F58F;  ![ ](https://img.shields.io/badge/-F3F58F?style=flat-square&color=F3F58F)
+* **Hologram Green** : #80FF00;  ![ ](https://img.shields.io/badge/-80FF00?style=flat-square&color=80FF00)
+* **Computer Blue Light** : #00FFF7;  ![ ](https://img.shields.io/badge/-00FFF7?style=flat-square&color=00FFF7)
+* **Hologram Blue** : #007AFF;  ![ ](https://img.shields.io/badge/-007AFF?style=flat-square&color=007AFF)
+
+Immersive Elements:
+* The Loading screens feature portal animations.
+* The AI Opponent is represented as a "Meeseeks," programmed to help you practice (but getting increasingly frustrated if the game lasts too long).
+* User Avatars and default profiles are based on various characters from the Citadel of Ricks.
+
 ## 🛠 Technical Stack
 
 * **Frontend** : Vite, HTML5, CSS3, TypeScript, React
@@ -46,7 +68,7 @@ This project is a massive integration of diverse skills: **Full-stack developmen
 
 ## 👥 Team Information & Contributions
 
-<table data-path-to-node="16"><thead><tr><td><span data-path-to-node="16,0,0,0">Member</span></td><td><span data-path-to-node="16,0,1,0">Role</span></td><td><span data-path-to-node="16,0,2,0">Responsibilities</span></td></tr></thead><tbody><tr><td><span data-path-to-node="16,1,0,0"><b data-path-to-node="16,1,0,0" data-index-in-node="0">ttaquet</b></span></td><td><span data-path-to-node="16,1,1,0">Tech Lead / DevOps</span></td><td><span data-path-to-node="16,1,2,0">Microservices, Docker, Vault, WAF.</span></td></tr><tr><td><span data-path-to-node="16,2,0,0"><b data-path-to-node="16,2,0,0" data-index-in-node="0">(me)</b></span></td><td><span data-path-to-node="16,2,1,0">Lead Frontend</span></td><td><span data-path-to-node="16,2,2,0">React architecture, i18n, Accessibility.</span></td></tr><tr><td><span data-path-to-node="16,3,0,0"><b data-path-to-node="16,3,0,0" data-index-in-node="0">bchedru, agilles & nvadenne</b></span></td><td><span data-path-to-node="16,3,1,0">Games Developer</span></td><td><span data-path-to-node="16,3,2,0">Babylon.js, AI Opponent, Pong logic.</span></td></tr><tr><td><span data-path-to-node="16,4,0,0"><b data-path-to-node="16,4,0,0" data-index-in-node="0">[Member 4]</b></span></td><td><span data-path-to-node="16,4,1,0">ttaquet & (me)</span></td><td><span data-path-to-node="16,4,2,0">OAuth, 2FA, Tournament system, SQLite.</span></td></tr></tbody></table>
+<table data-path-to-node="16"><thead><tr><td><span data-path-to-node="16,0,0,0">Member</span></td><td><span data-path-to-node="16,0,1,0">Role</span></td><td><span data-path-to-node="16,0,2,0">Responsibilities</span></td></tr></thead><tbody><tr><td><span data-path-to-node="16,1,0,0"><b data-path-to-node="16,1,0,0" data-index-in-node="0">ttaquet</b></span></td><td><span data-path-to-node="16,1,1,0">Tech Lead / DevOps</span></td><td><span data-path-to-node="16,1,2,0">Microservices, Docker, Vault, WAF.</span></td></tr><tr><td><span data-path-to-node="16,2,0,0"><b data-path-to-node="16,2,0,0" data-index-in-node="0">(me)</b></span></td><td><span data-path-to-node="16,2,1,0">Lead Frontend</span></td><td><span data-path-to-node="16,2,2,0">React architecture, i18n, Accessibility.</span></td></tr><tr><td><span data-path-to-node="16,3,0,0"><b data-path-to-node="16,3,0,0" data-index-in-node="0">bchedru, agilles & nvadenne</b></span></td><td><span data-path-to-node="16,3,1,0">Games Developer</span></td><td><span data-path-to-node="16,3,2,0">Babylon.js, AI Opponent, Pong logic.</span></td></tr><tr><td><span data-path-to-node="16,4,0,0"><b data-path-to-node="16,4,0,0" data-index-in-node="0">ttaquet & (me)</b></span></td><td><span data-path-to-node="16,4,1,0">Lead Backend</span></td><td><span data-path-to-node="16,4,2,0">OAuth, 2FA, Tournament system, Microservices, SQLite.</span></td></tr></tbody></table>
 
 ## 🗂 Project Management
 
@@ -436,11 +458,15 @@ Here is which modules we chose and how they where divided :
 
 ### Main References
 
+Those main resources are only my concern as a Frontend Developer for the project :
+
 * [React Documentation & Profiler](https://react.dev/learn/adding-interactivity)
+
+* [Requests HTTP Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers)
 
 * [WebSocket API on MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
 
-* [OAuth 2.0 Simplified]()
+* [OAuth 2.0 Explanation](https://developers.google.com/identity/protocols/oauth2)
 
 Asking LLMs such as **Gemini 2.5** & **Claude Sonnet 4.2** about how core concepts works (OAuth, 2FA, AI opponent...)  help us too on this journey.
 
