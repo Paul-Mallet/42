@@ -74,22 +74,30 @@ We use a relational structure with SQLite3 to maintain data integrity across our
 
 ## 🧩 Modules Breakdown (7 Majors + 2 Minors)
 
-The subject contains a MANDATORY part which brings 30 initial points, to pass the evaluation tests, we needed at least 100 points, we get 10 bonuses points which gives us an extra 110/100 points. Here is how modules where divided :
+The subject contains a MANDATORY part which brings 30 initial points. To pass the evaluation tests, we needed at least 100 points, we get 10 bonuses points which gives us an extra 110/100 points.
+
+There was 2 Modules categories : Major (= 10 pts) & Minor (= 5 pts)
+We were enterily free (after completed the MANDATORY part) to choose whatever we wanted.
+
+Here is how modules we chose where divided :
 
 <table data-path-to-node="26">
    <thead>
       <tr>
          <td>
-            <span data-path-to-node="26,0,0,0">Module Type</span>
+            <span data-path-to-node="26,0,0,0">Module</span>
          </td>
          <td>
             <span data-path-to-node="26,0,1,0">Feature Name</span>
          </td>
          <td>
+            <span data-path-to-node="26,0,1,0">Tech Stack</span>
+         </td>
+         <td>
             <span data-path-to-node="26,0,2,0">Points</span>
          </td>
          <td>
-            <span data-path-to-node="26,0,3,0">Team Member</span>
+            <span data-path-to-node="26,0,3,0">Team Member(s)</span>
          </td>
       </tr>
    </thead>
@@ -99,41 +107,241 @@ The subject contains a MANDATORY part which brings 30 initial points, to pass th
             <span data-path-to-node="26,1,0,0"><b data-path-to-node="26,1,0,0" data-index-in-node="0">Web</b></span>
          </td>
          <td>
-            <span data-path-to-node="26,1,1,0">Major: Framework Frontend (React)</span>
+            <span data-path-to-node="26,1,1,0">Use a framework to build the backend.</span>
          </td>
          <td>
-            <span data-path-to-node="26,1,2,0">10</span>
+            <span data-path-to-node="26,1,1,0">NodeJS + Fastify</span>
          </td>
          <td>
-            <span data-path-to-node="26,1,3,0">(me)</span>
+            <span data-path-to-node="26,1,2,0">Major: 10</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,3,0">ttaquet & (me)</span>
          </td>
       </tr>
       <tr>
          <td>
-            <span data-path-to-node="26,2,0,0"><b data-path-to-node="26,2,0,0" data-index-in-node="0">User Mgmt</b></span>
+            <span data-path-to-node="26,2,0,0"><b data-path-to-node="26,2,0,0" data-index-in-node="0">Web</b></span>
          </td>
          <td>
-            <span data-path-to-node="26,2,1,0">Major: Remote Auth (OAuth 2.0) + 2FA</span>
+            <span data-path-to-node="26,2,1,0">Use a framework or a toolkit to build the frontend.</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">TypeScript + React.js</span>
          </td>
          <td>
             <span data-path-to-node="26,2,2,0">10</span>
          </td>
          <td>
-            <span data-path-to-node="26,2,3,0">[Names]</span>
+            <span data-path-to-node="26,2,3,0">(me)</span>
          </td>
       </tr>
       <tr>
          <td>
-            <span data-path-to-node="26,3,0,0"><b data-path-to-node="26,3,0,0" data-index-in-node="0">User Mgmt</b></span>
+            <span data-path-to-node="26,3,0,0"><b data-path-to-node="26,3,0,0" data-index-in-node="0">Web</b></span>
          </td>
          <td>
-            <span data-path-to-node="26,3,1,0">Minor: User Profiles &amp; Stats</span>
+            <span data-path-to-node="26,3,1,0">Use a database for the backend.</span>
          </td>
          <td>
-            <span data-path-to-node="26,3,2,0">1</span>
+            <span data-path-to-node="26,1,1,0">SQLite3</span>
          </td>
          <td>
-            <span data-path-to-node="26,3,3,0">[Names]</span>
+            <span data-path-to-node="26,3,2,0">5</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,3,3,0">ttaquet</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">User Management</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,1,0">Std user management, authentication, users across tournaments.</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">TypeScript + React.js</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,2,0">10</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">(me)</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">User Management</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,1,0">Implementing a remote authentication.</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">TypeScript + React.js + Google Sign In (OAuth 2.0)</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,2,0">10</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">(me)</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">Gameplay & UX</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,1,0">Multiplayer (more than 2 players in the same game).</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">TypeScript + React.js + WebSocket API</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,2,0">10</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">ndavenne, (me)</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">Gameplay & UX</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,1,0">Add another game with user history and matchmaking.</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">Godot Engine</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,2,0">10</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">bchedru</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">AI-Algo</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,1,0">Introduce an AI opponent.</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">TypeScript</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,2,0">10</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">nvadenne</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">AI-Algo</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,1,0">User and game stats dashboards.</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">TypeScript + React.js</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,2,0">5</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">(me)</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">Cybersecurity</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,1,0">
+               Implement WAF/ModSecurity with a hardened configuration and HashiCorp Vault for secrets management.
+            </span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">Vault + NodeJS + Fastify</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,2,0">10</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">ttaquet</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">Cybersecurity</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,1,0">GDPR compliance options with user anonymization, local
+               data management, and Account Deletion.
+            </span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">NodeJS + Fastify + argon2</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,2,0">5</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">ttaquet</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">Cybersecurity</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,1,0">Implement Two-Factor Authentication (2FA) and JWT.</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">TypeScript + React.js + NodeJS + Fastify + otplib + qrcode</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,2,0">10</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">ttaquet & (me)</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">DevOps</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,1,0">Infrastructure setup for log management.</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">Docker</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,2,0">10</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">ttaquet</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">DevOps</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,1,0">Designing the backend as microservices.</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">NodeJS + Fastify</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,2,0">10</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">ttaquet</span>
          </td>
       </tr>
       <tr>
@@ -141,83 +349,69 @@ The subject contains a MANDATORY part which brings 30 initial points, to pass th
             <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">Graphics</b></span>
          </td>
          <td>
-            <span data-path-to-node="26,4,1,0">Major: Babylon.js 3D Graphics</span>
+            <span data-path-to-node="26,4,1,0">Use advanced 3D techniques.</span>
          </td>
          <td>
-            <span data-path-to-node="26,4,2,0">2</span>
+            <span data-path-to-node="26,1,1,0">TypeScript + Babylon.js</span>
          </td>
          <td>
-            <span data-path-to-node="26,4,3,0">[Names]</span>
-         </td>
-      </tr>
-      <tr>
-         <td>
-            <span data-path-to-node="26,5,0,0"><b data-path-to-node="26,5,0,0" data-index-in-node="0">Game</b></span>
+            <span data-path-to-node="26,4,2,0">10</span>
          </td>
          <td>
-            <span data-path-to-node="26,5,1,0">Major: Second Game (Billiards)</span>
-         </td>
-         <td>
-            <span data-path-to-node="26,5,2,0">2</span>
-         </td>
-         <td>
-            <span data-path-to-node="26,5,3,0">[Names]</span>
+            <span data-path-to-node="26,4,3,0">agilles</span>
          </td>
       </tr>
       <tr>
          <td>
-            <span data-path-to-node="26,6,0,0"><b data-path-to-node="26,6,0,0" data-index-in-node="0">Game</b></span>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">Accessibility</b></span>
          </td>
          <td>
-            <span data-path-to-node="26,6,1,0">Minor: Tournament System</span>
+            <span data-path-to-node="26,4,1,0">Support on all devices.</span>
          </td>
          <td>
-            <span data-path-to-node="26,6,2,0">1</span>
+            <span data-path-to-node="26,1,1,0">TypeScript + React.js</span>
          </td>
          <td>
-            <span data-path-to-node="26,6,3,0">[Names]</span>
-         </td>
-      </tr>
-      <tr>
-         <td>
-            <span data-path-to-node="26,7,0,0"><b data-path-to-node="26,7,0,0" data-index-in-node="0">AI</b></span>
+            <span data-path-to-node="26,4,2,0">5</span>
          </td>
          <td>
-            <span data-path-to-node="26,7,1,0">Major: AI Opponent</span>
-         </td>
-         <td>
-            <span data-path-to-node="26,7,2,0">2</span>
-         </td>
-         <td>
-            <span data-path-to-node="26,7,3,0">[Names]</span>
+            <span data-path-to-node="26,4,3,0">(me)</span>
          </td>
       </tr>
       <tr>
          <td>
-            <span data-path-to-node="26,8,0,0"><b data-path-to-node="26,8,0,0" data-index-in-node="0">Security</b></span>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">Accessibility</b></span>
          </td>
          <td>
-            <span data-path-to-node="26,8,1,0">Major: WAF + HashiCorp Vault Secrets</span>
+            <span data-path-to-node="26,4,1,0">Supports multiple languages.</span>
          </td>
          <td>
-            <span data-path-to-node="26,8,2,0">2</span>
+            <span data-path-to-node="26,1,1,0">TypeScript + React.js</span>
          </td>
          <td>
-            <span data-path-to-node="26,8,3,0">[Names]</span>
+            <span data-path-to-node="26,4,2,0">5</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">(me)</span>
          </td>
       </tr>
       <tr>
          <td>
-            <span data-path-to-node="26,9,0,0"><b data-path-to-node="26,9,0,0" data-index-in-node="0">Accessibility</b></span>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">Server-side Pong</b></span>
          </td>
          <td>
-            <span data-path-to-node="26,9,1,0">Minor: i18n (3 Languages)</span>
+            <span data-path-to-node="26,4,1,0">
+               Replace basic Pong with server-side Pong and implement an API.
+            </span>
          </td>
          <td>
-            <span data-path-to-node="26,9,2,0">1</span>
+            <span data-path-to-node="26,1,1,0">TypeScript + React.js</span>
          </td>
          <td>
-            <span data-path-to-node="26,9,3,0">[Names]</span>
+            <span data-path-to-node="26,4,2,0">5</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">ndavenne & (me)</span>
          </td>
       </tr>
    </tbody>
