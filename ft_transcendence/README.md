@@ -74,7 +74,154 @@ We use a relational structure with SQLite3 to maintain data integrity across our
 
 ## 🧩 Modules Breakdown (7 Majors + 2 Minors)
 
-<table data-path-to-node="26"><thead><tr><td><span data-path-to-node="26,0,0,0">Module Type</span></td><td><span data-path-to-node="26,0,1,0">Feature Name</span></td><td><span data-path-to-node="26,0,2,0">Points</span></td><td><span data-path-to-node="26,0,3,0">Team Member</span></td></tr></thead><tbody><tr><td><span data-path-to-node="26,1,0,0"><b data-path-to-node="26,1,0,0" data-index-in-node="0">Web</b></span></td><td><span data-path-to-node="26,1,1,0">Major: Framework Frontend (React)</span></td><td><span data-path-to-node="26,1,2,0">2</span></td><td><span data-path-to-node="26,1,3,0">[Names]</span></td></tr><tr><td><span data-path-to-node="26,2,0,0"><b data-path-to-node="26,2,0,0" data-index-in-node="0">User Mgmt</b></span></td><td><span data-path-to-node="26,2,1,0">Major: Remote Auth (OAuth 2.0) + 2FA</span></td><td><span data-path-to-node="26,2,2,0">2</span></td><td><span data-path-to-node="26,2,3,0">[Names]</span></td></tr><tr><td><span data-path-to-node="26,3,0,0"><b data-path-to-node="26,3,0,0" data-index-in-node="0">User Mgmt</b></span></td><td><span data-path-to-node="26,3,1,0">Minor: User Profiles &amp; Stats</span></td><td><span data-path-to-node="26,3,2,0">1</span></td><td><span data-path-to-node="26,3,3,0">[Names]</span></td></tr><tr><td><span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">Graphics</b></span></td><td><span data-path-to-node="26,4,1,0">Major: Babylon.js 3D Graphics</span></td><td><span data-path-to-node="26,4,2,0">2</span></td><td><span data-path-to-node="26,4,3,0">[Names]</span></td></tr><tr><td><span data-path-to-node="26,5,0,0"><b data-path-to-node="26,5,0,0" data-index-in-node="0">Game</b></span></td><td><span data-path-to-node="26,5,1,0">Major: Second Game (Billiards)</span></td><td><span data-path-to-node="26,5,2,0">2</span></td><td><span data-path-to-node="26,5,3,0">[Names]</span></td></tr><tr><td><span data-path-to-node="26,6,0,0"><b data-path-to-node="26,6,0,0" data-index-in-node="0">Game</b></span></td><td><span data-path-to-node="26,6,1,0">Minor: Tournament System</span></td><td><span data-path-to-node="26,6,2,0">1</span></td><td><span data-path-to-node="26,6,3,0">[Names]</span></td></tr><tr><td><span data-path-to-node="26,7,0,0"><b data-path-to-node="26,7,0,0" data-index-in-node="0">AI</b></span></td><td><span data-path-to-node="26,7,1,0">Major: AI Opponent</span></td><td><span data-path-to-node="26,7,2,0">2</span></td><td><span data-path-to-node="26,7,3,0">[Names]</span></td></tr><tr><td><span data-path-to-node="26,8,0,0"><b data-path-to-node="26,8,0,0" data-index-in-node="0">Security</b></span></td><td><span data-path-to-node="26,8,1,0">Major: WAF + HashiCorp Vault Secrets</span></td><td><span data-path-to-node="26,8,2,0">2</span></td><td><span data-path-to-node="26,8,3,0">[Names]</span></td></tr><tr><td><span data-path-to-node="26,9,0,0"><b data-path-to-node="26,9,0,0" data-index-in-node="0">Accessibility</b></span></td><td><span data-path-to-node="26,9,1,0">Minor: i18n (3 Languages)</span></td><td><span data-path-to-node="26,9,2,0">1</span></td><td><span data-path-to-node="26,9,3,0">[Names]</span></td></tr></tbody></table>
+The subject contains a MANDATORY part which brings 30 initial points, to pass the evaluation tests, we needed at least 100 points, we get 10 bonuses points which gives us an extra 110/100 points. Here is how modules where divided :
+
+<table data-path-to-node="26">
+   <thead>
+      <tr>
+         <td>
+            <span data-path-to-node="26,0,0,0">Module Type</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,0,1,0">Feature Name</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,0,2,0">Points</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,0,3,0">Team Member</span>
+         </td>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td>
+            <span data-path-to-node="26,1,0,0"><b data-path-to-node="26,1,0,0" data-index-in-node="0">Web</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,1,0">Major: Framework Frontend (React)</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,2,0">10</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,1,3,0">(me)</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,2,0,0"><b data-path-to-node="26,2,0,0" data-index-in-node="0">User Mgmt</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,2,1,0">Major: Remote Auth (OAuth 2.0) + 2FA</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,2,2,0">10</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,2,3,0">[Names]</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,3,0,0"><b data-path-to-node="26,3,0,0" data-index-in-node="0">User Mgmt</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,3,1,0">Minor: User Profiles &amp; Stats</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,3,2,0">1</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,3,3,0">[Names]</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,4,0,0"><b data-path-to-node="26,4,0,0" data-index-in-node="0">Graphics</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,1,0">Major: Babylon.js 3D Graphics</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,2,0">2</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,4,3,0">[Names]</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,5,0,0"><b data-path-to-node="26,5,0,0" data-index-in-node="0">Game</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,5,1,0">Major: Second Game (Billiards)</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,5,2,0">2</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,5,3,0">[Names]</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,6,0,0"><b data-path-to-node="26,6,0,0" data-index-in-node="0">Game</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,6,1,0">Minor: Tournament System</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,6,2,0">1</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,6,3,0">[Names]</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,7,0,0"><b data-path-to-node="26,7,0,0" data-index-in-node="0">AI</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,7,1,0">Major: AI Opponent</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,7,2,0">2</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,7,3,0">[Names]</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,8,0,0"><b data-path-to-node="26,8,0,0" data-index-in-node="0">Security</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,8,1,0">Major: WAF + HashiCorp Vault Secrets</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,8,2,0">2</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,8,3,0">[Names]</span>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <span data-path-to-node="26,9,0,0"><b data-path-to-node="26,9,0,0" data-index-in-node="0">Accessibility</b></span>
+         </td>
+         <td>
+            <span data-path-to-node="26,9,1,0">Minor: i18n (3 Languages)</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,9,2,0">1</span>
+         </td>
+         <td>
+            <span data-path-to-node="26,9,3,0">[Names]</span>
+         </td>
+      </tr>
+   </tbody>
+</table>
 
 **Justification** : We chose this combination to maximize points while ensuring a high-security standard (Vault/WAF) and a visually impressive experience (Babylon.js).
 
