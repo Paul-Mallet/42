@@ -14,7 +14,7 @@ This project is a massive integration of diverse skills: **Full-stack developmen
 * **3D Graphics** : Babylon.js (Particle rendering techniques)
 * **Godot Engine** : Used for the second game (Billiards), exported to WebAssembly (WASM) and WebGL
 * **Database** : SQLite3 (Chosen for portability and its "serverless" file-based nature, ideal for containerized microservices)
-* **Security** : HashiCorp Vault (Secrets management), Nginx (Reverse Proxy), WAF/ModSecurity
+* **Security** : HashiCorp Vault (Secrets management), Nginx (Reverse Proxy), WAF/ModSecurity, CORS, argon2
 * **Infrastructure** : Docker & Docker Compose
 
 ## 📥 Instructions (Installation)
@@ -72,14 +72,19 @@ We use a relational structure with SQLite3 to maintain data integrity across our
    * **users_stats** : id, games, wins, losses, versus, versus_wins, versus_losses, versusIa, versusIa_wins, versusIa_losses, tournament, tournament_wins, tournament_losses, billiard, billiard_wins, billiard_losses.
    * **match_history** : id, left_team_A, avatar_left_team_A, left_team_B, avatar_left_team_B, right_team_A, avatar_right_team_A, right_team_B, avatar_right_team_B, mode, left_team_score, right_team_score, winnerId, date
 
-## 🧩 Modules Breakdown (7 Majors + 2 Minors)
+## 🧩 Modules Breakdown
 
 The subject contains a MANDATORY part which brings 30 initial points. To pass the evaluation tests, we needed at least 100 points, we get 10 bonuses points which gives us an extra 110/100 points.
 
-There was 2 Modules categories : Major (= 10 pts) & Minor (= 5 pts)
+There was 2 Modules categories :
+* Major (= 10 pts)
+* Minor (= 5 pts)
+
 We were enterily free (after completed the MANDATORY part) to choose whatever we wanted.
 
-Here is how modules we chose where divided :
+**Justification** : The number of points visible in the array is higher than our final note and its normal ! We tried to implement more modules to have a reserve in case of errors at the evaluation time.
+
+Here is which modules we chose and how they where divided :
 
 <table data-path-to-node="26">
    <thead>
@@ -113,7 +118,7 @@ Here is how modules we chose where divided :
             <span data-path-to-node="26,1,1,0">NodeJS + Fastify</span>
          </td>
          <td>
-            <span data-path-to-node="26,1,2,0">Major: 10</span>
+            <span data-path-to-node="26,1,2,0">10</span>
          </td>
          <td>
             <span data-path-to-node="26,1,3,0">ttaquet & (me)</span>
@@ -335,7 +340,7 @@ Here is how modules we chose where divided :
             <span data-path-to-node="26,4,1,0">Designing the backend as microservices.</span>
          </td>
          <td>
-            <span data-path-to-node="26,1,1,0">NodeJS + Fastify</span>
+            <span data-path-to-node="26,1,1,0">Docker + NodeJS + Fastify</span>
          </td>
          <td>
             <span data-path-to-node="26,4,2,0">10</span>
