@@ -1,104 +1,96 @@
-# cub3D - Project_08
+# Pêch'App - Real World Project_00
 
 ## 📝 Overview
 
-The **cub3D** project is a remarkable introduction to the world of **raycasting**. The objective is to create a dynamic 3D graphical view of a maze from a first-person perspective, inspired by the world-famous 90's game **Wolfenstein 3D**.
+The **pech-app** project is the result of a collaboration between students from 42 and **ESPMer** Le Havre (a group of 10+ students finalizing their maritime studies). The goal was to bridge the gap between complex legal texts and recreational fishers through a modern mobile interface.
 
-This project focuses on the **MiniLibX** graphical library, handling window management, images, and user events. It requires a solid understanding of mathematics (**trigonometry**), parsing complex map configuration files (.cub), and efficient pixel manipulation to render a fluid 3D environment.
+This project focuses on providing a seamless **UI/UX** experience for users on-the-go, ensuring that critical information regarding protected areas is accessible in just a few taps. We chose **Figma** to achieve it.
 
-## 🔍 About Raycasting
+Developed with **React Native** and **Expo**, the application serves as a digital guide through species from the Mediterranean Sea, centralizing regional regulations, biological fish sheets, and localized fishing restrictions using **Google Map API**. By providing clear, real-time information, the app helps preserve marine biodiversity while ensuring fishers stay compliant with the latest laws.
 
-Raycasting is a technique used to render a 3D world from a 2D map. For every vertical line of the screen, the engine "casts" a ray from the player's position in a specific direction.
+Because of the data restriction instaured by ESPMer and my job as a UI/UX designer and Frontend Developer during the project, I've decided to only share the **Frontend part** of it.
 
-1. **Distance Calculation** : The ray travels until it hits a wall.
+## 🔍 Regulation & Biodiversity
 
-2. **Wall Height** : The distance to the wall is used to calculate how tall the vertical line should be drawn on the screen (the closer the wall, the taller the line).
+The application integrates real-world legal data provided by maritime authorities (ESPMer - Le Havre). It currently features:
 
-3. **Texture Mapping** : By determining exactly where the ray hit the wall, we can apply specific textures (North, South, East, or West) to give the maze a realistic look.
+1. **Species Database**: Over **20 different species** recorded with detailed descriptions, size limits, and biological data.
+2. **Porquerolles Regulations**: Management of 9 specific fishing zones (A to R), including seasonal closures and strict "No-Take" zones (F, H, R).
+3. **Marine Reserves**: Specific logic for the Cerbère-Banyuls Natural Reserve, handling the 10-catch daily limit and sunrise/sunset fishing windows.
 
 ---
 
+## 🎨 UI/UX Design & Features
+A complete Figma mockup was realized to define a clean and accessible interface. The following core features were implemented:
+
+### Global Navigation
+
+* Unified Searchbar:
+   * Dynamic filtering of the legislation page.
+   * Interactive History: Quick access to recent fish searches, categories, and fishing methods.
+   * Direct Link: Bridge between fish sheets and their corresponding legal status via a "Legislation" button.
+
+### App Navigation
+
+* /home: Features a horizontal scroll bar displaying the **latest ESPMer legislation updates** and a history of recently viewed fish and laws.
+
+* /fishes: A 2-column grid layout displaying 20 detailed fish cards in a smooth scroll container.
+
+* /legislations: A vertical list of large-format legislation cards for easy reading in the field.
+
+* /settings:
+   * **Visual Themes**: Radio buttons with live previews of the interface.
+   * **Accessibility**: Choice between standard Poppins font and a specialized Dyslexic-friendly font.
+
+###  Accessibility & Settings
+
+The project places a high priority on inclusivity. Within the /settings page, users can toggle:
+* **Dark/Light Mode**: Optimized for high-glare environments (sunny beaches).
+* **OpenDyslexic Font**: To assist users with reading difficulties in deciphering complex legal texts.
+
 ## 📥 Installation
 
-Clone the repository and navigate to the project folder :
+Ensure you have nvm (Node Version Manager) installed to manage the environment easily.
+
+1. Clone the repository:
 
 ```bash
-   git clone https://github.com/Paul-Mallet/42.git repo-name-you-want
-   cd repo-name-you-want
-   cd cub3d
+   git clone https://github.com/votre-user/pech-app-mobile.git
+   cd pech-app-mobile
 ```
 
-Then you must clone the minilibx library on the 42 Paris official repo, build the inner project and backward to your last path working directory :
+2. Setup Node.js Environment:
 
 ```bash
-   git clone git@github.com:42paris/minilibx-linux.git minilibx-linux
-   cd minilibx-linux
-   make
-   cd ..
+   nvm install 23.3.0
+   nvm use 23.3.0
 ```
 
-## Building the Project
-
-<table data-path-to-node="12"><thead><tr><td><span data-path-to-node="12,0,0,0">Command</span></td><td><span data-path-to-node="12,0,1,0">Description</span></td></tr></thead><tbody><tr><td><span data-path-to-node="12,1,0,0"><code data-path-to-node="12,1,0,0" data-index-in-node="0">make</code></span></td><td><span data-path-to-node="12,1,1,0">Compiles mandatory functions and creates <code data-path-to-node="12,1,1,0" data-index-in-node="41">cub3D</code>. <b data-path-to-node="12,1,1,0" data-index-in-node="56">!MANDATORY!</b></span></td></tr><tr><td><span data-path-to-node="12,2,0,0"><code data-path-to-node="12,2,0,0" data-index-in-node="0">make clean</code></span></td><td><span data-path-to-node="12,2,1,0">Removes object files (<code data-path-to-node="12,2,1,0" data-index-in-node="22">.o</code>).</span></td></tr><tr><td><span data-path-to-node="12,3,0,0"><code data-path-to-node="12,3,0,0" data-index-in-node="0">make fclean</code></span></td><td><span data-path-to-node="12,3,1,0">Removes object files.</span></td></tr><tr><td><span data-path-to-node="12,4,0,0"><code data-path-to-node="12,4,0,0" data-index-in-node="0">make re</code></span></td><td><span data-path-to-node="12,4,1,0">Recompiles the entire library from scratch.</span></td></tr></tbody></table>
-
-## 🚀 Usage & Compilation
-
-### 1. To change textures or maps configuration files
-
-The program requires a .cub file as an argument. You can modify these files to change the environment:
-
-* **maps/** : Contains the maze layout (using 0 for empty space, 1 for walls, and <code data-path-to-node="12,3,0,0" data-index-in-node="0">N,S,E,W</code> for player start).
-
-* **textures/** : Path to <code data-path-to-node="12,3,0,0" data-index-in-node="0">.xpm</code> textures for the four cardinal directions.
-
-* **Colors** : Floor and Ceiling colors defined by RGB values.
-
-### 2. Run the programm & Check for Memory Leaks
-
-To ensure your functions handle memory correctly without leaks, run with Valgrind:
+3. Install Dependencies:
 
 ```bash
-   [valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=all] ./cub3D "maps/map.cub"
+   npm install
 ```
 
-If you see those kind of lines at the end of the runtime:
+## 🚀 Usage & Execution
+
+**Important** : As this is an Internal and Private scoped project, I only show screenshots in this readme as examples.
+
+Here was the workflow to build and execute the project :
+
+1. Launching the Backend Server on a remote host (Scalingo, Heroku, Nginx...)
+
+2. Launching the Frontend Server
+
+To start the Expo Metro Bundler:
 
 ```bash
-HEAP SUMMARY:
-==172076==     in use at exit: 0 bytes in 0 blocks
-==172076==   total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated
-==172076== 
-==172076== All heap blocks were freed -- no leaks are possible
+   npm run start
 ```
 
-It means the programm ran properly without leaks, well done !
+3. Testing on Physical Devices
+To see the UI/UX in action with real-time updates:
 
-### 3. Interactive Controls
-
-Once the window is open, you can use the following commands :
-
-**<-,-> keys**: Rotate current user.
-
-**W,A,S,D keys**: Move Up,Left,Down,Right across the map.
-
-**ESC**: Exit the program cleanly.
-
-**Window cross**: Exit the program cleanly.
-
-## 🔍 Installing Valgrind
-
-Valgrind is an instrumentation framework for building dynamic analysis tools. It is essential for detecting memory leaks and memory management bugs.
-
-* Linux/Windows(WSL2) :
-```bash
-   sudo apt update && sudo apt install -y valgrind
-```
-
-* macOS :
-```bash
-   brew install valgrind
-```
-
-### ⚠️ If not working !
-
-You can directly download the latest stable version in the official website: [Valgrind Current Releases](https://valgrind.org/downloads/current.html#current)
+* Download the Expo Go app on your phone (iOS/Android).
+* Ensure your phone and computer are on the same Wi-Fi network.
+* Scan the QR Code displayed in your terminal (after running the frontend service).
