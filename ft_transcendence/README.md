@@ -46,7 +46,7 @@ This project is a massive integration of diverse skills: **Full-stack developmen
 
 ## 👥 Team Information & Contributions
 
-<table data-path-to-node="16"><thead><tr><td><span data-path-to-node="16,0,0,0">Member</span></td><td><span data-path-to-node="16,0,1,0">Role</span></td><td><span data-path-to-node="16,0,2,0">Responsibilities</span></td></tr></thead><tbody><tr><td><span data-path-to-node="16,1,0,0"><b data-path-to-node="16,1,0,0" data-index-in-node="0">ttaquet</b></span></td><td><span data-path-to-node="16,1,1,0">Tech Lead / DevOps</span></td><td><span data-path-to-node="16,1,2,0">Microservices, Docker, Vault, WAF.</span></td></tr><tr><td><span data-path-to-node="16,2,0,0"><b data-path-to-node="16,2,0,0" data-index-in-node="0">(me)</b></span></td><td><span data-path-to-node="16,2,1,0">Lead Frontend</span></td><td><span data-path-to-node="16,2,2,0">React architecture, i18n, Accessibility.</span></td></tr><tr><td><span data-path-to-node="16,3,0,0"><b data-path-to-node="16,3,0,0" data-index-in-node="0">bchedru, agilles & nvadenne</b></span></td><td><span data-path-to-node="16,3,1,0">Game Developer</span></td><td><span data-path-to-node="16,3,2,0">Babylon.js, AI Opponent, Pong logic.</span></td></tr><tr><td><span data-path-to-node="16,4,0,0"><b data-path-to-node="16,4,0,0" data-index-in-node="0">[Member 4]</b></span></td><td><span data-path-to-node="16,4,1,0">ttaquet & (me)</span></td><td><span data-path-to-node="16,4,2,0">OAuth, 2FA, Tournament system, SQLite.</span></td></tr></tbody></table>
+<table data-path-to-node="16"><thead><tr><td><span data-path-to-node="16,0,0,0">Member</span></td><td><span data-path-to-node="16,0,1,0">Role</span></td><td><span data-path-to-node="16,0,2,0">Responsibilities</span></td></tr></thead><tbody><tr><td><span data-path-to-node="16,1,0,0"><b data-path-to-node="16,1,0,0" data-index-in-node="0">ttaquet</b></span></td><td><span data-path-to-node="16,1,1,0">Tech Lead / DevOps</span></td><td><span data-path-to-node="16,1,2,0">Microservices, Docker, Vault, WAF.</span></td></tr><tr><td><span data-path-to-node="16,2,0,0"><b data-path-to-node="16,2,0,0" data-index-in-node="0">(me)</b></span></td><td><span data-path-to-node="16,2,1,0">Lead Frontend</span></td><td><span data-path-to-node="16,2,2,0">React architecture, i18n, Accessibility.</span></td></tr><tr><td><span data-path-to-node="16,3,0,0"><b data-path-to-node="16,3,0,0" data-index-in-node="0">bchedru, agilles & nvadenne</b></span></td><td><span data-path-to-node="16,3,1,0">Games Developer</span></td><td><span data-path-to-node="16,3,2,0">Babylon.js, AI Opponent, Pong logic.</span></td></tr><tr><td><span data-path-to-node="16,4,0,0"><b data-path-to-node="16,4,0,0" data-index-in-node="0">[Member 4]</b></span></td><td><span data-path-to-node="16,4,1,0">ttaquet & (me)</span></td><td><span data-path-to-node="16,4,2,0">OAuth, 2FA, Tournament system, SQLite.</span></td></tr></tbody></table>
 
 ## 🗂 Project Management
 
@@ -92,9 +92,9 @@ We use a relational structure with SQLite3 to maintain data integrity across our
 
 * [React Documentation & Profiler](https://react.dev/learn/adding-interactivity)
 
-* Fastify Framework Guide
+* [WebSocket API on MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
 
-* OAuth 2.0 Simplified
+* [OAuth 2.0 Simplified]()
 
 Asking LLMs such as **Gemini 2.5** & **Claude Sonnet 4.2** about how core concepts works (OAuth, 2FA, AI opponent...)  help us too on this journey.
 
