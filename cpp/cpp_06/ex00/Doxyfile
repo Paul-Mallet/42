@@ -1,5 +1,5 @@
 # --- Informations sur le projet ---
-PROJECT_NAME           = "Scalar Converter - 42"
+PROJECT_NAME           = "AForm - 42"
 PROJECT_NUMBER         = 1.0
 OUTPUT_DIRECTORY       = docs
 
@@ -14,6 +14,7 @@ HTML_OUTPUT            = .
 GENERATE_LATEX         = NO
 
 # --- Comportement de parsing ---
+# Pour 42, on veut souvent documenter même si le code n'est pas parfait
 EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = YES
 EXTRACT_STATIC         = YES

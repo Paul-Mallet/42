@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/13 10:35:20 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/14 11:41:31 by paul_mallet      ###   ########.fr       */
+/*   Created: 2026/01/16 22:57:58 by paul_mallet       #+#    #+#             */
+/*   Updated: 2026/01/17 12:08:59 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,21 @@
 
 # include <iostream>
 # include <string>
-# include <exception>
+# include <typeinfo>
 
-/**
- * @brief 
- * Must not be instanciable by user !
- */
 class ScalarConverter {
 
 	public:
 		ScalarConverter( void );
 		ScalarConverter( ScalarConverter const &src );
-		virtual ~ScalarConverter();
+		~ScalarConverter();
 
 		ScalarConverter &operator=( ScalarConverter const &rhs );
 
-		/**
-		 * @brief 
-		 * non displayable chars < 32 (ascii) -> info message
-		 * 
-		 */
-		static void convert( std::string literal );
+		void convert( std::string literal );
 
-		class NonDisplayableCharException : public std::exception {
-			public:
-				virtual const char* what( void ) const throw();
-		};
 };
 
-class ScalarConverterDerived : public ScalarConverter {
-	public:
-		~ScalarConverterDerived();
-};
+std::ostream &operator<<( std::ostream &o, ScalarConverter const &i );
 
 #endif

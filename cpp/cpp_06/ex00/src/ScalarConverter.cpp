@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/13 13:48:04 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/14 11:41:51 by paul_mallet      ###   ########.fr       */
+/*   Created: 2026/01/17 10:49:38 by paul_mallet       #+#    #+#             */
+/*   Updated: 2026/01/17 12:09:21 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ ScalarConverter::ScalarConverter( void ) {
 }
 
 ScalarConverter::ScalarConverter( ScalarConverter const &src ) {
-	std::cout << "Copy Constructor - ScalarConverter" << std::endl;
+	std::cout << "Copy constructor - ScalarConverter" << std::endl;
 	(void)src;
 }
 
@@ -26,45 +26,27 @@ ScalarConverter::~ScalarConverter() {
 }
 
 ScalarConverter &ScalarConverter::operator=( ScalarConverter const &rhs ) {
-	std::cout << "Copy Assignment - ScalarConverter" << std::endl;
+	std::cout << "Copy Assignment Operator - ScalarConverter" << std::endl;
 	(void)rhs;
 	return (*this);
 }
 
 void ScalarConverter::convert( std::string literal ) {
-	// cannot throw here, will stop other prints !
-	(void)literal;
+	// void* type;
 
-	// authorized headers which handle numeric limits and special values
+	// 1. detect literal type
+	std::cout << typeid(literal).name() << std::endl;
+	// type = typeid(literal).name();
 
-	// 1. detect type of the literal
-	// ex: 42.0f = float, 42 = int, 42.0 = double, 'a' = char
-	// if contains no digits + '.', but can have 'f' = char
-	// if contains no '.' + 'f' = int
-	// if contains '.' + 'f' = float
-	// if contains '.' only = double
+	// 2. convert literal type to its actual detected
+	// int i = static_cast<int> (literal);
 
-	// 2. convert it to its actual type
-	// if conversion does not make any sense or overflows, display "impossible"
+	// 3. convert explicitly(4 operators) in 3 others
 
-	// 3. convert it explicitly to its 3 other types
-	// if conversion does not make any sense or overflows, display "impossible"
-
-	// 4. display results in correct order
-	// float -> -inff, +inff, nanf
-	// double -> -inf, +inf, nan
-	std::cout << "char: " << std::endl;
-	std::cout << "int: " << std::endl;
-	std::cout << "float: " << std::endl;
-	std::cout << "double: " << std::endl;
+	// 4. display results in correct way
 }
 
-// see where to implement it, if possible
-const char* ScalarConverter::NonDisplayableCharException::what( void ) const throw() {
-	return ("Non displayable");
-}
-
-// test
-ScalarConverterDerived::~ScalarConverterDerived() {
-	std::cout << "Destructor - ScalarConverterDerived" << std::endl;
-};
+// std::ostream &operator<<( std::ostream &o, ScalarConverter &i ) {
+// 	o << i.convert( "test" ) << std::endl; // convert() must not return void
+// 	return (o);
+// }

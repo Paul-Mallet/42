@@ -1,8 +1,10 @@
-# documentation
+# docs
 docs/
 
 # objs
 obj/
 
-# execute file
-./converter
+# exec
+converter
+*.a
+*.out

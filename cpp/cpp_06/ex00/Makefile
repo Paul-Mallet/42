@@ -1,40 +1,41 @@
 CPP=c++
-FLAGS=-Wall -Wextra -Werror -g -std=c++98
+FLAGS=-Wall -Wextra -Werror -std=c++98
 INCLUDES=-I includes/
-OBJ_DIR=obj/
-OBJ=$(patsubst $(SRC_DIR)%.cpp, $(OBJ_DIR)%.o, $(SRC))
-SRC_DIR=src/
-SRC=$(addprefix $(SRC_DIR),\
+OBJS_DIR=objs/
+OBJS=$(patsubst $(SRCS_DIR)%.cpp, $(OBJS_DIR)%.o, $(SRCS))
+SRCS_DIR=src/
+SRCS=$(addprefix $(SRCS_DIR),\
 		ScalarConverter.cpp\
 		main.cpp)
-DOC_DIR=docs/
+DOCS_DIR=docs/
 VALID=\033[1;32m
 INFO=\033[0;33m
-NAME=converter
+NAME=convert
 
 all: $(NAME)
+	@echo "$(VALID)✔ convert compiled"
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJS)
 	@$(CPP) $(FLAGS) $(INCLUDES) -o $@ $^
-	@echo "$(VALID)✔ converter compiled"
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp
 	@mkdir -p $(dir $@)
 	@$(CPP) $(FLAGS) $(INCLUDES) -c $< -o $@
 
-doc:
+docs:
 	@doxygen Doxyfile
-	@echo "$(VALID)✔ documentation compiled"
+	@echo "$(VALID)documentation compiled"
 
 clean:
-	@rm -rf $(DOC_DIR)
-	@rm -rf $(OBJ_DIR)
-	@echo "$(INFO)Documentation, objects and _shrubbery files cleaned"
+	@rm -rf $(DOCS_DIR)
+	@rm -rf $(OBJS_DIR)
+	@rm -f $(SHRUB_FILES)
+	@echo "$(INFO)documentation and objects files cleaned"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(INFO)Executive file cleaned"
+	@echo "$(INFO)executive file cleaned"
 
 re: fclean all
 
-.PHONY: all doc clean fclean re
+.PHONY: all docs clean fclean re
