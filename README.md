@@ -171,7 +171,7 @@ Advanced polymorphism. Understanding virtual functions, pure virtual functions, 
 The main purpose of those days is to discover a more flexible and robust way to code objects by using : errors handling, type casting, templates and STL containers.
 
 <details>
-<summary><h4>🟤 CPP_05: Exceptions Scopes</h4></summary>
+<summary><h4>🟤 CPP_05: Exceptions Blocks</h4></summary>
 <br>
 Introduction to professional error handling. Learning the <b>try/throw/catch</b> mechanism to manage exceptional states. Deepening class hierarchies with abstract base classes.
 </details>
