@@ -2,7 +2,9 @@
 
 ## 📝 Resume (TL;DR)
 
-This module is about C++(98) Type Casting, introducing **implicit** VS **explicit** casts, the 4 explicit **operators**, dynamic type resolution mechanism, and to how to properly determine a type based on a std::string.
+This module is about C++(98) Type Casting, introducing **implicit** VS **explicit** casts, the 4 explicit **operators**, dynamic type resolution mechanism, and to how to properly determine a type based on a std::string by **parsing** it.
+
+**Little news** : Private Constructor / Destructor = non instanciable in C++
 
 ## 💻 Implicit Cast
 
