@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 10:49:38 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/18 16:09:30 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/19 18:27:31 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void displayInt( std::string literal ) {
 	// isDoubleOverflow()
 	long double val = strtold(literal.c_str(), NULL);
 
-	if (val < std::numeric_limits<double>::min() || val > std::numeric_limits<double>::max())
+	if (val < -std::numeric_limits<double>::max() || val > std::numeric_limits<double>::max())
 		return impossible();
 
 	int i = val;
@@ -94,7 +94,7 @@ static void displayInt( std::string literal ) {
 	else
 		std::cout << "int: " << i << std::endl;
 	// isFloatOverflow()
-	if (val < std::numeric_limits<float>::min() || val > std::numeric_limits<float>::max())
+	if (val < -std::numeric_limits<float>::max() || val > std::numeric_limits<float>::max())
 		std::cout << "float: impossible" << std::endl;
 	else
 		std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(val) << 'f' << std::endl;
@@ -118,7 +118,7 @@ static void displayChar(std::string literal, int idx, bool displayable) {
 static void displayFloat( std::string literal ) {
 	long double val = strtold(literal.c_str(), NULL);
 
-	if (val < std::numeric_limits<double>::min() || val > std::numeric_limits<double>::max())
+	if (val < -std::numeric_limits<double>::max() || val > std::numeric_limits<double>::max())
 		return impossible();
 
 	float f = val;
@@ -134,7 +134,7 @@ static void displayFloat( std::string literal ) {
 	else
 		std::cout << "int: " << static_cast<int>(f) << std::endl;
 
-	if (f < std::numeric_limits<float>::min() || f > std::numeric_limits<float>::max())
+	if (f < -std::numeric_limits<float>::max() || f > std::numeric_limits<float>::max())
 		std::cout << "float: impossible" << std::endl;
 	else
 		std::cout << "float: " << std::fixed << std::setprecision(1) << f << 'f' << std::endl;
@@ -144,7 +144,7 @@ static void displayFloat( std::string literal ) {
 static void displayDouble( std::string literal ) {
 	long double val = strtold(literal.c_str(), NULL);
 
-	if (val < std::numeric_limits<double>::min() || val > std::numeric_limits<double>::max())
+	if (val < -std::numeric_limits<double>::max() || val > std::numeric_limits<double>::max())
 		return impossible();
 
 	double	d = val;
@@ -160,7 +160,7 @@ static void displayDouble( std::string literal ) {
 	else
 		std::cout << "int: " << static_cast<int>(d) << std::endl;
 
-	if (d < std::numeric_limits<float>::min() || d > std::numeric_limits<float>::max())
+	if (d < -std::numeric_limits<float>::max() || d > std::numeric_limits<float>::max())
 		std::cout << "float: impossible" << std::endl;
 	else
 		std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(d) << 'f' << std::endl;
@@ -174,8 +174,13 @@ void ScalarConverter::convert( std::string literal ) {
 		return ; // todo
 
 	if ((literal[idx] == '0' && literal[idx + 1] != '.' && literal.length() > 1)
-		|| literal.length() == 0)
-		return impossible();
+		|| (literal[idx] == '-' && literal[idx + 1] == '0' && literal[idx + 2] != '.' && literal.length() > 2)
+		|| literal.length() == 0) {
+			return impossible();
+		}
+
+	if (literal[idx] == '-')
+		idx++;
 
 	while (isdigit(literal[idx]))
 		idx++;
