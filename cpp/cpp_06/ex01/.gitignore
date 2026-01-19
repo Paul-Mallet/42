@@ -1,0 +1,10 @@
+# docs
+docs/
+
+# objs
+obj/
+
+# exec
+converter
+*.a
+*.out
