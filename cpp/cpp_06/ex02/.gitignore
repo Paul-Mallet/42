@@ -5,6 +5,6 @@ docs/
 obj/
 
 # exec
-serialize
+real_type
 *.a
 *.out
