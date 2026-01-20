@@ -48,8 +48,6 @@ interface ValidationMsg2FAProps {
     message: string;
 }
 
-const portUserProfile = import.meta.env.USER_PROFILE_PORT;
-
 export async function createStatsRow(id: number) {
 		try {
 			const res = await fetch(`http://localhost:3002/users_stats/init/${id}`, {
@@ -114,7 +112,7 @@ export default function Form(props: FormProps) {
 			return;
 		}
 		try {
-			const res = await fetch(`http://localhost:${portUserProfile}/users/${user.id}/${fieldName}`, {
+			const res = await fetch(`http://localhost:3001/users/${user.id}/${fieldName}`, {
 				method: 'PUT',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ [fieldName]: value })
@@ -146,7 +144,7 @@ export default function Form(props: FormProps) {
 		e.preventDefault();
 		if (register) {
 			try {
-				const res = await fetch(`http://localhost:${portUserProfile}/register`, {
+				const res = await fetch("http://localhost:3001/register", {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify( userData )

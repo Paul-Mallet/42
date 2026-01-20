@@ -1,11 +1,13 @@
 import fp from "fastify-plugin";
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
+import config from "../config.js";
 import { getVaultSecret } from "./vault.js";
 
 async function dbPlugin(fastify) {
 
 	const DB_PATH = await getVaultSecret("USER_PROFILE_DB_PATH");
+	console.log("CHEMIN VAULT: ", DB_PATH);
 
 	const db = await open({
 		filename: DB_PATH,
@@ -19,7 +21,8 @@ async function dbPlugin(fastify) {
 	// 	DROP TABLE IF EXISTS friend_requests;
 	// 	DROP TABLE IF EXISTS accepted_friends;
 	// `);
-
+	
+	// Création tables
 	await db.exec(`
 		CREATE TABLE IF NOT EXISTS users (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -74,7 +74,7 @@ services:
       - backend
     volumes:
       - ../services/user-profile/src:/usr/src/app/src   # monte ton code
-      - ../services/user-profile/src/data/user-profile.sqlite:/data/user-profile.sqlite  # monte la DB
+      # - ../services/user-profile/src/data/user-profile.sqlite:/data/user-profile.sqlite  # monte la DB
     depends_on:
       vault:
         condition: service_healthy
@@ -93,7 +93,7 @@ services:
       - backend
     volumes:
       - ../services/game/src:/usr/src/app/src   # monte ton code
-      - ../services/game/src/data/game.sqlite:/data/game.sqlite  # monte la DB
+      # - ../services/game/src/data/game.sqlite:/data/game.sqlite  # monte la DB
     depends_on:
       vault:
         condition: service_healthy

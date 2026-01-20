@@ -8,34 +8,30 @@ This project is a massive integration of diverse skills: **Full-stack developmen
 
 ## 🎨 Visual Identity
 
-We decided to break away from standard minimalist designs and adopted a **Rick and Morty multiversal theme**. This choice influenced every part of the user experience:
+We decided to break away from standard minimalist designs and adopted a **Rick and Morty multiversal theme**. This choice influenced every part of the user interface (UI) & experience (UX):
 
 <p align="center">
   <img src="https://static.thcdn.com/images/v2/wp-content/uploads/sites/499/2018/09/24160403/rick-and-morty.jpeg?width=700"
  width="800" alt="Rick and Morty Portal Aesthetic">
 </p>
 
-Visuals:
+**Visuals** : The color palette uses the iconic "Portal Green" and "Council of Ricks Blue" to only mentionned those references.
+* Warning Red : #B23521;  ![ ](https://img.shields.io/badge/-B23521?style=flat-square&color=B23521)
+* Infos Yellow : #F3F58F;  ![ ](https://img.shields.io/badge/-F3F58F?style=flat-square&color=F3F58F)
+* Hologram Green : #80FF00;  ![ ](https://img.shields.io/badge/-80FF00?style=flat-square&color=80FF00)
+* Computer Blue Light : #00FFF7;  ![ ](https://img.shields.io/badge/-00FFF7?style=flat-square&color=00FFF7)
+* Hologram Blue : #007AFF;  ![ ](https://img.shields.io/badge/-007AFF?style=flat-square&color=007AFF)
 
-The color palette uses the iconic "Portal Green" and "Council of Ricks Blue" to only mentionned those references.
-
-* **Warning Red** : #B23521;  ![ ](https://img.shields.io/badge/-B23521?style=flat-square&color=B23521)
-* **Infos Yellow** : #F3F58F;  ![ ](https://img.shields.io/badge/-F3F58F?style=flat-square&color=F3F58F)
-* **Hologram Green** : #80FF00;  ![ ](https://img.shields.io/badge/-80FF00?style=flat-square&color=80FF00)
-* **Computer Blue Light** : #00FFF7;  ![ ](https://img.shields.io/badge/-00FFF7?style=flat-square&color=00FFF7)
-* **Hologram Blue** : #007AFF;  ![ ](https://img.shields.io/badge/-007AFF?style=flat-square&color=007AFF)
-
-Immersive Elements:
-
+**Immersive Elements** :
 * The Loading screens feature portal animations.
-* The AI Opponent is represented as a "Meeseeks," programmed to help you practice... or not.
+* The AI Opponent is represented as a "Mr. Goldenfold," programmed to help you practice... or not.
 * User Avatars and default profiles are based on various characters from the Citadel of Ricks.
 
 ## 🛠 Technical Stack
 
 * **Frontend** : Vite, HTML5, CSS3, TypeScript, React
 * **Backend** : Node.js, Fastify (Microservices architecture)
-* **Real-time** : WebSockets
+* **Real-time** : WebSockets API
 * **3D Graphics** : Babylon.js (Particle rendering techniques)
 * **Godot Engine** : Used for the second game (Billiards), exported to WebAssembly (WASM) and WebGL
 * **Database** : SQLite3 (Chosen for portability and its "serverless" file-based nature, ideal for containerized microservices)
@@ -46,79 +42,90 @@ Immersive Elements:
 
 ### Prerequisites
 
-Before running the project, ensure you have the following installed and running:
+Before running the project, ensure you have the following tools installed with their correct version:
 
-1. **Docker Desktop** setup :
+1. **Docker Desktop, Compose & CLI** :
    * Windows/macOS: Download and install Docker Desktop.
-      * You must launch the app and wait for the "whale" icon on your OS bottom bar to indicate it is running before executing any commands.
-   * Linux: Install docker and docker-compose. Ensure the daemon is active with :
+      a. Go to the official website and download the version that fit your OS: [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+      b. Run the installer and follow the instructions.
+      c. Launch the app.
+      **⚠️ Important**: Once the installation is complete, launch the Docker Desktop application. Docker will not function until the small "whale" icon in the task/menu bar is stable.
+   * Linux: Install **docker** and **docker-compose**.
+      a. Uninstall **old versions** :
+      ```bash
+         sudo apt-get remove docker docker-engine docker.io containerd runc
+      ```
+      b. Install **new version** from the official **script** (most faster) :
+      ```bash
+         curl -fsSL https://get.docker.com -o get-docker.sh
+         sudo sh get-docker.sh
+      ```
+      c. Use Docker **without sudo** everytime (Optionnal but recommended) :
+      ```bash
+         sudo usermod -aG docker $USER
+      ```
+      d. Ensure the Docker **daemon** is active with :
+      ```bash
+         sudo systemctl start docker
+      ```
+      Then check the installation must have been a success !
+2. **OpenSSL** :
+   * Usually pre-installed, used for generating **security salts**.
+3. **Web Browser** :
+   * Chrome
+   * Firefox
+   (recommended for better compatibility)
+4. **nvm, NodeJS & npm** :
+   * The best way to manage Node.js versions is by using nvm (Node Version Manager). This ensures all developers use the same environment.
    ```bash
-      sudo systemctl start docker
+      # Install nvm
+      curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
+      source ~/.bashrc
+
+      # Install and use the required Node version for this project
+      nvm install 23.3.0
+      nvm use 23.3.0
+
+      # Check current NodeJS & npm versions
+      node -v
+      npm -v
    ```
-
-2. OpenSSL : Usually pre-installed, used for generating security salts.
-3. A Web Browser : (Firefox recommended for compatibility).
-
-4. **Docker CLI** and **Docker Compose** installed on your environment:
-
-1. . Windows and macOS (Recommended Method)
-For these two systems, the all-in-one tool is called Docker Desktop. It installs the Docker Engine (Daemon), the graphical user interface, and Docker Compose simultaneously.
-
-a. Go to the official website and download the version that fit your OS: [Docker Desktop](https://www.docker.com/products/docker-desktop/).
-b. Run the installer and follow the instructions.
-
-**⚠️ Important**: Once the installation is complete, launch the Docker Desktop application. Docker will not function until the small "whale" icon in the taskbar/menu bar is stable.
-
-2. Linux (Ubuntu/Debian)
-On Linux, we often install accross the terminal (tty). Docker Compose is now integrated as a plugin of the docker command (we use docker compose without the '-').
-
-Step 1 : Uninstall old versions
-Bash
-
-```bash
-   sudo apt-get remove docker docker-engine docker.io containerd runc
-```
-
-Step 2 : Install Docker from the official script (most faster)
-
-```bash
-   curl -fsSL https://get.docker.com -o get-docker.sh
-   sudo sh get-docker.sh
-```
-
-Step 3 : Use Docker without sudo (Optionnal but recommended)
-To avoid typing sudo on every commands :
-
-```bash
-   sudo usermod -aG docker $USER
-```
-
-5. A Google Cloud Console account (*see **ℹ️ Justification** below)
-6. Two .env files within the root structure (*see .env files below)
+5. **Google Cloud Console** account :
+To enable **OAuth 2.0** (Google Login), you need to:
+   a. Create a project on the [Google Cloud Console](https://console.cloud.google.com/).
+   b. Configure your OAuth Consent Screen.
+   c. Create Credentials -> OAuth Client ID (Web Application).
+   d. Add https://localhost:8443 to the Authorized Redirect URIs.
+   e. Copy your Client ID to use it in the .env file.
+6. **File .env** in ./infra/ (*see **Setup .env file** below)
 
 ### Step-by-Step Run
 
-1. Clone the project:
+#### 1. Clone the project :
 
 ```bash
    git clone https://github.com/Paul-Mallet/42.git
    cd ft_transcendence
 ```
 
-2. Setup Secrets: You will need to configure your environment variables in two .env files at different places in the project structure. (API keys, Vault tokens...).
+#### 2. Install Frontend dependencies :
 
-* The first one is within the **./infra/.** folder, behind the docker-compose.yml file and must have the following variables set to your local environment values :
+```bash
+   # Go to the App frontend (client part)
+   cd ./services/frontend
 
-```typescript
+   # Change for the project current version
+   nvm use 23.3.0
+   npm i
 
+   # Come back at the root directory
+   cd ../..
 ```
 
-**ℹ️ Justification** : To get your ENV_VARS, you must :
-a. ...
-b. ...
-c. ...
+#### 3. Setup .env file :
 
-* The second one must be created at **./services/frontend/.** with the following inner structure, where React components will need some URLs and Client_IDs to doing their own work properly :
+In your **./infra/.** folder, you'll need to configure your environment variables (API keys, Vault tokens...) in a .env file.
+It must have the following inner structure and variables set to your local environment values :
 
 ```typescript
 # --- DATABASE PATHS ---
@@ -145,28 +152,45 @@ SECRET_SALT="your_generated_salt_here"
 GOOGLE_CLIENT_ID="your_google_client_id_here"
 ```
 
-**ℹ️ Justification** : To get your GOOGLE_CLIENT_ID, you must :
+**ℹ️ Justification** : To get your SECRET_SALT, you must generate a cryptographically secure random string.
+* Run the following command in your terminal and copy/paste the output :
 
-a. Go to the Google Cloud Console.
-b. Create a project and set up an OAuth 2.0 Client ID.
-c. Add https://localhost:8443 to the Authorized Redirect URIs.
-d. Copy the GOOGLE_CLIENT_ID into your .env.
+```bash
+   openssl rand -base64 32
+```
 
-Once your 2 .env files are fully completed, go back into ./intra/. to run the docker container.
+#### 4. Build and Launch (it will takes **~2min** to fully build the 1rst time)
 
-3. Build and Launch (it will takes 2min to fully build it the 1rst time):
+Once your .env file are fully completed, you can run the following command :
 
 ```bash
    docker-compose up --build
 ```
 
-4. Then the project must successfully be built, well done 🎉 !
+#### 5. Then the project must successfully be built, well done 🎉 !
 
-You can access the app by clicking on the URL https://localhost your IDE shares to you (Nginx handles the HTTPS/WAF layer).
+You can now access the app by clicking on the URL https://localhost:8443.
+It will redirect you on your default browser (Nginx handles the HTTPS/WAF layer).
+
+**⚠️ Important** : Since we use self-signed SSL certificates, your browser will display a **security warning**. Click **"Advanced"** and then **"Proceed to localhost (unsafe)"**.
+
+#### 6. Stop the project.
+
+To stop the services without deleting the data:
+
+```bash
+   docker compose stop
+```
+
+To wipe all Docker containers and networks:
+
+```bash
+   docker compose down -v
+```
 
 ## 👥 Team Information & Contributions
 
-<table data-path-to-node="16"><thead><tr><td><span data-path-to-node="16,0,0,0">Member</span></td><td><span data-path-to-node="16,0,1,0">Role</span></td><td><span data-path-to-node="16,0,2,0">Responsibilities</span></td></tr></thead><tbody><tr><td><span data-path-to-node="16,1,0,0"><b data-path-to-node="16,1,0,0" data-index-in-node="0">ttaquet</b></span></td><td><span data-path-to-node="16,1,1,0">Tech Lead / DevOps</span></td><td><span data-path-to-node="16,1,2,0">Microservices, Docker, Vault, WAF.</span></td></tr><tr><td><span data-path-to-node="16,2,0,0"><b data-path-to-node="16,2,0,0" data-index-in-node="0">(me)</b></span></td><td><span data-path-to-node="16,2,1,0">Lead Frontend</span></td><td><span data-path-to-node="16,2,2,0">React architecture, i18n, Accessibility.</span></td></tr><tr><td><span data-path-to-node="16,3,0,0"><b data-path-to-node="16,3,0,0" data-index-in-node="0">bchedru, agilles & nvadenne</b></span></td><td><span data-path-to-node="16,3,1,0">Games Developer</span></td><td><span data-path-to-node="16,3,2,0">Babylon.js, AI Opponent, Pong logic.</span></td></tr><tr><td><span data-path-to-node="16,4,0,0"><b data-path-to-node="16,4,0,0" data-index-in-node="0">ttaquet & (me)</b></span></td><td><span data-path-to-node="16,4,1,0">Lead Backend</span></td><td><span data-path-to-node="16,4,2,0">OAuth, 2FA, Tournament system, Microservices, SQLite.</span></td></tr></tbody></table>
+<table data-path-to-node="16"><thead><tr><td><span data-path-to-node="16,0,0,0">Member</span></td><td><span data-path-to-node="16,0,1,0">Role</span></td><td><span data-path-to-node="16,0,2,0">Responsibilities</span></td></tr></thead><tbody><tr><td><span data-path-to-node="16,1,0,0"><b data-path-to-node="16,1,0,0" data-index-in-node="0">ttaquet</b></span></td><td><span data-path-to-node="16,1,1,0">Tech Lead / DevOps</span></td><td><span data-path-to-node="16,1,2,0">Microservices, Docker, Vault, WAF.</span></td></tr><tr><td><span data-path-to-node="16,2,0,0"><b data-path-to-node="16,2,0,0" data-index-in-node="0">(me)</b></span></td><td><span data-path-to-node="16,2,1,0">Lead Frontend</span></td><td><span data-path-to-node="16,2,2,0">React architecture, i18n, Accessibility.</span></td></tr><tr><td><span data-path-to-node="16,3,0,0"><b data-path-to-node="16,3,0,0" data-index-in-node="0">agilles, nvadenne & bchedru</b></span></td><td><span data-path-to-node="16,3,1,0">Games Developer</span></td><td><span data-path-to-node="16,3,2,0">Babylon.js, AI Opponent & Billiards Godot.</span></td></tr><tr><td><span data-path-to-node="16,4,0,0"><b data-path-to-node="16,4,0,0" data-index-in-node="0">ttaquet & (me)</b></span></td><td><span data-path-to-node="16,4,1,0">Lead Backend</span></td><td><span data-path-to-node="16,4,2,0">OAuth, 2FA, Tournament system, Microservices, SQLite.</span></td></tr></tbody></table>
 
 ## 🗂 Project Management
 
@@ -176,11 +200,11 @@ You can access the app by clicking on the URL https://localhost your IDE shares 
    * GitHub Issues/Projects: For Kanban task tracking.
    * Discord: For daily syncs and instant communication.
 
-* **Workflow** : We used a "Feature Branch" strategy on Git, with Pull Requests required for any merge into the main branch.
+* **Workflow** : We used a "Feature Branch" strategy on Git, with Pull Requests required for any **rebase** into the main branch.
 
 ## 📊 Database Tables
 
-We use a relational structure with SQLite3 to maintain data integrity across our microservices.
+We use a relational structure with **SQLite3** to maintain data integrity across our microservices.
 
 * **User-Profile**:
    * **users** : id, name, email, password, species, planet, dimension, avatar, status, two_factor_secret, two_factor, googleId
