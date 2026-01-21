@@ -1,0 +1,23 @@
+# --- Informations sur le projet ---
+PROJECT_NAME           = "AForm - 42"
+PROJECT_NUMBER         = 1.0
+OUTPUT_DIRECTORY       = doc
+
+# --- Entrées du code ---
+INPUT                  = . includes/ src/
+FILE_PATTERNS          = *.hpp *.cpp
+RECURSIVE              = YES
+
+# --- Format de sortie (HTML uniquement) ---
+GENERATE_HTML          = YES
+HTML_OUTPUT            = .
+GENERATE_LATEX         = NO
+
+# --- Comportement de parsing ---
+# Pour 42, on veut souvent documenter même si le code n'est pas parfait
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+
+# --- Mise en page ---
+QUIET                  = YES

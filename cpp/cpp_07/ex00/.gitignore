@@ -1,0 +1,9 @@
+# objs
+obj/
+
+# docs
+doc/
+
+# executable
+func_template
+*.out
