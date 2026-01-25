@@ -1,0 +1,10 @@
+#object files
+objs/
+obj/
+
+#documentation
+docs/
+doc/
+
+#test runner
+test_templates
