@@ -7,7 +7,7 @@ docs/
 doc/
 
 # exec
-templates
+iter
 
 # test runner
-test_templates
+test_iter

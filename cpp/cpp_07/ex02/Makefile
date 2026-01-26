@@ -1,4 +1,4 @@
-NAME=iter
+NAME=array
 CPP=c++
 FLAGS=-Wall -Wextra -Werror -std=c++98 -g
 INCLUDES=-I ./includes
@@ -13,7 +13,7 @@ FILES=main
 OBJS=$(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))
 SRC=$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(FILES)))
 
-TEST_FILES=test_main test_iter
+TEST_FILES=test_main test_array
 TEST=$(addprefix $(TEST_DIR), $(addsuffix .cpp, $(TEST_FILES)))
 TEST_EXEC=./test_$(NAME)
 
