@@ -6,11 +6,11 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 15:34:45 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/26 15:55:14 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/26 16:10:21 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <catch2/catch.hpp>
+#include "../../catch.hpp"
 #include "../includes/iter.hpp"
 
 /**

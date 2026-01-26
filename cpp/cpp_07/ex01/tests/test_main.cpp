@@ -6,9 +6,9 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 15:34:11 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/25 18:32:52 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/26 16:10:38 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #define CATCH_CONFIG_MAIN
-#include "../includes/catch.hpp"
+#include "../../catch.hpp"
