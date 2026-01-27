@@ -13,7 +13,7 @@ FILES=main
 OBJS=$(addprefix $(OBJ_DIR), $(addsuffix .o, $(FILES)))
 SRC=$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(FILES)))
 
-TEST_FILES=test_main test_array
+TEST_FILES=test_main test_Array
 TEST=$(addprefix $(TEST_DIR), $(addsuffix .cpp, $(TEST_FILES)))
 TEST_EXEC=./test_$(NAME)
 
@@ -22,37 +22,38 @@ VALID=\033[0;32m
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CPP) $(FLAGS) $(INCLUDES) -o $@ $^
-	@echo "$(VALID)exec compiled as: $(NAME)"
+	$(CPP) $(FLAGS) $(INCLUDES) -o $@ $^
+	echo "$(VALID)exec compiled as: $(NAME)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
-	@mkdir -p $(OBJ_DIR)
-	@$(CPP) $(FLAGS) $(INCLUDES) -c $< -o $@
-	@echo "$(VALID)objs compiled"
+	mkdir -p $(OBJ_DIR)
+	$(CPP) $(FLAGS) $(INCLUDES) -c $< -o $@
+	echo "$(VALID)objs compiled"
 
 doc:
-	@doxygen Doxyfile
-	@echo "$(VALID)doc generated"
+	doxygen Doxyfile
+	echo "$(VALID)doc generated"
 
 test: $(TEST)
-	@$(CPP) $(FLAGS) $(INCLUDES) $(TEST) -o $(TEST_EXEC)
-	@$(TEST_EXEC) || (echo "Tests failed!" && exit 0)
+	$(CPP) $(FLAGS) $(INCLUDES) $(TEST) -o $(TEST_EXEC)
+	$(TEST_EXEC) || (echo "Tests failed!" && exit 0)
 
 debug:
-	@gdb $(NAME)
+	gdb $(NAME)
 
 clean:
-	@rm -rf $(OBJ_DIR)
-	@echo "objs cleaned"
+	rm -rf $(OBJ_DIR)
+	echo "objs cleaned"
 
 fclean: clean
-	@rm -rf $(DOC_DIR)
-	@echo "doc cleaned"
-	@rm -f $(TEST_EXEC)
-	@echo "test cleaned"
-	@rm -f $(NAME)
-	@echo "exec cleaned"
+	rm -rf $(DOC_DIR)
+	echo "doc cleaned"
+	rm -f $(TEST_EXEC)
+	echo "test cleaned"
+	rm -f $(NAME)
+	echo "exec cleaned"
 
 re: fclean all
 
 .PHONY: all doc test debug clean fclean re
+.SILENT:
