@@ -13,29 +13,30 @@ INFO=\033[0;33m
 NAME=real_type
 
 all: $(NAME)
-	@echo "$(VALID)✔ real_type compiled"
 
 $(NAME): $(OBJS)
-	@$(CPP) $(FLAGS) $(INCLUDES) -o $@ $^
+	$(CPP) $(FLAGS) $(INCLUDES) -o $@ $^
+	echo "$(VALID)✔ real_type compiled"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp
-	@mkdir -p $(dir $@)
-	@$(CPP) $(FLAGS) $(INCLUDES) -c $< -o $@
+	mkdir -p $(dir $@)
+	$(CPP) $(FLAGS) $(INCLUDES) -c $< -o $@
 
 docs:
-	@doxygen Doxyfile
-	@echo "$(VALID)documentation compiled"
+	doxygen Doxyfile
+	echo "$(VALID)documentation compiled"
 
 clean:
-	@rm -rf $(DOCS_DIR)
-	@rm -rf $(OBJS_DIR)
-	@rm -f $(SHRUB_FILES)
-	@echo "$(INFO)documentation and objects files cleaned"
+	rm -rf $(DOCS_DIR)
+	rm -rf $(OBJS_DIR)
+	rm -f $(SHRUB_FILES)
+	echo "$(INFO)documentation and objects files cleaned"
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo "$(INFO)executive file cleaned"
+	rm -f $(NAME)
+	echo "$(INFO)executive file cleaned"
 
 re: fclean all
 
 .PHONY: all docs clean fclean re
+.SILENT:
