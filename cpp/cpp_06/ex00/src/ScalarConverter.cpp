@@ -6,11 +6,11 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 10:49:38 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/19 18:27:31 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/28 23:05:28 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ScalarConverter.hpp"
+#include "ScalarConverter.hpp"
 
 ScalarConverter::ScalarConverter( void ) {
 	std::cout << "Default Constructor - ScalarConverter" << std::endl;
@@ -31,8 +31,6 @@ ScalarConverter &ScalarConverter::operator=( ScalarConverter const &rhs ) {
 	return (*this);
 }
 
-// is it psdliteral?
-// if yes, what do we do? display, compute???
 static bool ispsdliteral( std::string literal ) {
 	int					idx = -1;
 	const std::string	psd_literals[MAX_PSD_LITERALS] = { "nan", "nanf", "+inf", "+inff", "-inf", "-inff" };
@@ -171,7 +169,7 @@ void ScalarConverter::convert( std::string literal ) {
 	int idx = 0;
 
 	if (ispsdliteral(literal))
-		return ; // todo
+		return ;
 
 	if ((literal[idx] == '0' && literal[idx + 1] != '.' && literal.length() > 1)
 		|| (literal[idx] == '-' && literal[idx + 1] == '0' && literal[idx + 2] != '.' && literal.length() > 2)
@@ -185,7 +183,7 @@ void ScalarConverter::convert( std::string literal ) {
 	while (isdigit(literal[idx]))
 		idx++;
 	if ((size_t)idx == literal.length())
-		return displayInt(literal); // todo
+		return displayInt(literal);
 
 	if (!isprint(literal[idx]) && literal.length() == 1)
 		return displayChar(literal, idx, false);
