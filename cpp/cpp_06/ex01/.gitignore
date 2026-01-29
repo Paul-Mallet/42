@@ -1,7 +1,11 @@
 # docs
 docs/
 
+# tests
+catch.hpp
+
 # objs
+objs/
 obj/
 
 # exec

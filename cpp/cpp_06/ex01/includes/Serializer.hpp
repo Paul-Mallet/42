@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 16:14:49 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/19 10:00:35 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/29 09:36:40 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <stdint.h>
+# include "Data.hpp"
 
 struct Data;
 
