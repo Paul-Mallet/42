@@ -38,7 +38,7 @@ docs:
 
 test:
 	$(CPP) $(FLAGS) $(INCLUDES) $(SRC) $(TEST) -o $(TEST_EXEC)
-	$(TEST_EXEC) --order rand
+	$(TEST_EXEC) -s
 
 debug:
 	gdb -tui $(NAME)
