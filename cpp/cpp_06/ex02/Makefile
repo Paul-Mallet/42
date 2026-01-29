@@ -1,24 +1,34 @@
+NAME=convert
 CPP=c++
-FLAGS=-Wall -Wextra -Werror -g -std=c++98
+FLAGS=-Wall -Wextra -Werror -std=c++98 -g
 INCLUDES=-I includes/
+
 OBJS_DIR=objs/
-OBJS=$(patsubst $(SRCS_DIR)%.cpp, $(OBJS_DIR)%.o, $(SRCS))
-SRCS_DIR=src/
-SRCS=$(addprefix $(SRCS_DIR),\
-		Base.cpp\
-		main.cpp)
-DOCS_DIR=docs/
+SRC_DIR=src/
+DOC_DIR=doc/
+TEST_DIR=tests/
+
+MAIN=src/main.cpp
+MAIN_OBJ=$(OBJS_DIR)main.o
+
+FILES=Base
+
+OBJS=$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
+SRC=$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(FILES)))
+
+TEST_FILES=test_Base
+TEST=$(addprefix $(TEST_DIR), $(addsuffix .cpp, $(TEST_FILES)))
+TEST_EXEC=./tests/tester_$(NAME)
+
 VALID=\033[1;32m
-INFO=\033[0;33m
-NAME=real_type
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(MAIN_OBJ)
 	$(CPP) $(FLAGS) $(INCLUDES) -o $@ $^
-	echo "$(VALID)✔ real_type compiled"
+	echo "$(VALID)✔ $(NAME) compiled"
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.cpp
+$(OBJS_DIR)%.o: $(SRC_DIR)%.cpp
 	mkdir -p $(dir $@)
 	$(CPP) $(FLAGS) $(INCLUDES) -c $< -o $@
 
@@ -26,17 +36,25 @@ docs:
 	doxygen Doxyfile
 	echo "$(VALID)documentation compiled"
 
+test:
+	$(CPP) $(FLAGS) $(INCLUDES) $(SRC) $(TEST) -o $(TEST_EXEC)
+	$(TEST_EXEC) -s
+
+debug:
+	gdb -tui $(NAME)
+
 clean:
-	rm -rf $(DOCS_DIR)
+	rm -rf $(DOC_DIR)
 	rm -rf $(OBJS_DIR)
-	rm -f $(SHRUB_FILES)
-	echo "$(INFO)documentation and objects files cleaned"
+	echo "documentation and objects files cleaned"
 
 fclean: clean
 	rm -f $(NAME)
-	echo "$(INFO)executive file cleaned"
+	rm -f $(TEST_EXEC)
+	echo "executive files cleaned"
 
 re: fclean all
 
-.PHONY: all docs clean fclean re
+.PHONY: all docs test debug clean fclean re
 .SILENT:
+.DELETE_ON_ERROR:

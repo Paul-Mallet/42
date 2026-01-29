@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 10:19:39 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/19 11:19:23 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/29 10:48:51 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <ctime>
 # include <exception>
 
+/**
+ * @brief Base class, that generate random types and then identify them (typeinfo)
+ * It doesn't have to be designed in Orthodox Canonical Form
+*/
 class Base {
 
 	public:

@@ -6,20 +6,22 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 12:05:01 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/19 11:48:53 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/29 10:43:08 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Base.hpp"
-#include "../includes/A.hpp"
-#include "../includes/B.hpp"
-#include "../includes/C.hpp"
+#include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 // #include <typeinfo>
 
 int	main( int ac, char **av )
 {
-	if (ac != 1)
+	if (ac != 1) {
+		std::cout << "" << std::endl;
 		return (1);
+	}
 	(void)av;
 
 	Base* pbb = new Base;
@@ -65,6 +67,10 @@ int	main( int ac, char **av )
 
 	std::cout << std::endl;
 
+	/**
+	 * @brief Check each object type as compared to identify Base method
+	 * * Not allowed by the subject to solve the exercise
+	 */
 	// std::cout << typeid(pr).name() << std::endl;
 	// std::cout << typeid(pr2).name() << std::endl;
 	// std::cout << typeid(pbb).name() << std::endl;

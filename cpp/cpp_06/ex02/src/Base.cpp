@@ -6,19 +6,20 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 10:31:09 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/19 11:37:27 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/29 10:52:52 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Base.hpp"
-#include "../includes/A.hpp"
-#include "../includes/B.hpp"
-#include "../includes/C.hpp"
+#include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 
-Base::~Base() {
-	std::cout << "Destructor - Base" << std::endl;
-}
+Base::~Base() {}
 
+/**
+ * @brief After generate the seed based on current time, used to randomly generate one of the 3 types A, B or C
+ */
 Base* Base::generate( void ) {
 	int		random = std::rand() % 3;
 
@@ -30,6 +31,9 @@ Base* Base::generate( void ) {
 		return (new C);
 }
 
+/**
+ * @brief Invalid type pointer return NULL and will print an empty string
+ */
 void Base::identify( Base* p ) {
 	if (dynamic_cast<A*>(p))
 		std::cout << "A" << std::endl;
@@ -39,6 +43,9 @@ void Base::identify( Base* p ) {
 		std::cout << "C" << std::endl;
 }
 
+/**
+ * @brief Invalid ref (&) throw an exception of type bad_cast which it needs to be catch
+ */
 void Base::identify( Base& p ) {
 	try {
 		A& a = dynamic_cast<A&>(p);

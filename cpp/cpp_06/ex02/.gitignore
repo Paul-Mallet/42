@@ -1,7 +1,12 @@
 # docs
 docs/
 
+# tests
+catch.hpp
+tests/tester_real_type
+
 # objs
+objs/
 obj/
 
 # exec
