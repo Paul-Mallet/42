@@ -6,24 +6,22 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 12:05:01 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/28 23:05:01 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/29 10:55:35 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
-#include <typeinfo>
 
 int	main( int ac, char **av )
 {
-	if (ac != 2)
+	if (ac != 2) {
+		std::cout << "Invalid args number\nex: ./convert \"-42.f\"" << std::endl;
 		return (1);
+	}
 
 	/**
-	 * @brief never let some code without explanation
+	 * @brief All tests done in tests/
 	 */
-	// ScalarConverter scalar;
-	// ScalarConverter* scal2 = new ScalarConverter;
-
 	ScalarConverter::convert(av[1]);
 
 	return (0);

@@ -1,10 +1,15 @@
 # docs
 docs/
 
+# tests
+catch.hpp
+tests/tester_convert
+
 # objs
+objs/
 obj/
 
 # exec
-converter
+convert
 *.a
 *.out
