@@ -6,13 +6,16 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 10:40:28 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/24 16:11:31 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/01/30 09:01:43 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/whatever.hpp"
 #include <string>
+#include "whatever.hpp"
 
+/**
+ * @brief See more tests in tests/
+ */
 int main( int ac, char** av )
 {
 	if (ac != 1)
@@ -38,5 +41,6 @@ int main( int ac, char** av )
 	std::cout << "c = " << c << ", d = " << d << std::endl;
 	std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
 	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+
 	return (0);
 }
