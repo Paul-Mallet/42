@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   test_iter.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 15:34:45 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/26 16:10:21 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/02 18:30:10 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../catch.hpp"
-#include "../includes/iter.hpp"
+#define CATCH_CONFIG_MAIN
+#include "../../../catch.hpp"
+#include "iter.hpp"
 
 /**
  * @brief Use a template function to iterate through random type array values to apply modifications on them.
@@ -61,5 +62,3 @@ SCENARIO("iter handles any type of array", "[templates][]") {
 		}
 	}
 }
-
-// 

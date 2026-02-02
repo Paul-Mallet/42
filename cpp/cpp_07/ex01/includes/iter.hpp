@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 16:13:56 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/26 15:43:34 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/02 18:32:06 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 # include <iostream>
 
 /**
+ * @brief Iterate through a typed array to applying a specific function
+ * 
  * Code bloat: gonflement inutile binaire du code
  * ex: <typename T, unsigned int, typename C> WRONG !!!
- * 
- * type deduction: explicit <type> -> || implicit
- * * if <typename T> -> must be same type everywhere
- * * 
+ * Type deduction: explicit <type> -> || implicit
  */
 template<typename T, typename F>
 void iter( T* array, unsigned int const len, F f ) {
