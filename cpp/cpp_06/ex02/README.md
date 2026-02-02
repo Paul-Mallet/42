@@ -26,5 +26,7 @@ Also can add : <code>... + 5</code>, to shift the begin range by the chosen amou
 
 ## dynamic_cast<new_type>(expression)
 
+
+
 **Remainder** :
 * exception of type bad_cast is thrown on ref type convertion failure.
