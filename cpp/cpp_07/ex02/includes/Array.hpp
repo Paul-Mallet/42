@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 16:17:46 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/27 11:13:17 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/02 18:17:20 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ class Array {
 
 };
 
-# include "../src/Array.tpp"
+# include "Array.tpp"
 
 #endif

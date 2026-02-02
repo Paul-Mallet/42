@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 16:27:03 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/27 11:13:17 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/02 18:25:51 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ARRAY_TPP
 # define ARRAY_TPP
-
-# include "./Array.hpp"
 
 /**
  * @brief Construction with no parameter: Creates an empty array.
@@ -47,7 +45,6 @@ Array<T>::Array( Array<T> const & src ): _elements(NULL), _size(src._size) {
 
 /**
  * @brief Destruction with delete dynamic allocation memory.
- * [] 
  */
 template<typename T>
 Array<T>::~Array() {
