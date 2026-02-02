@@ -6,7 +6,7 @@
 /*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 12:05:01 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/02 17:26:27 by pamallet         ###   ########.fr       */
+/*   Updated: 2026/02/02 17:30:40 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main( int ac, char **av )
 	ptr->f = -42.0f;
 	ptr->str = "pamallet";
 
+	std::cout << "===== Serialization round-trip validation tests =====" << std::endl;
 	std::cout << "ptr: " << ptr << std::endl;
 	std::cout << "ptr->i: " << ptr->i << std::endl;
 	std::cout << "ptr->f: " << ptr->f << std::endl;
@@ -39,6 +40,7 @@ int	main( int ac, char **av )
 	/**
 	 * @brief Serialization serialize tests
 	 */
+	std::cout << "===== Serialization serialize tests =====" << std::endl;
 	raw = Serializer::serialize(ptr);
 	std::cout << "raw: " << raw << std::endl;
 	std::cout << std::endl;
@@ -46,6 +48,7 @@ int	main( int ac, char **av )
 	/**
 	 * @brief Serialization deserialize tests
 	 */
+	std::cout << "===== Serialization deserialize tests =====" << std::endl;
 	ptr = Serializer::deserialize(raw);
 	std::cout << "ptr: " << ptr << std::endl;
 	std::cout << "ptr->i: " << ptr->i << std::endl;
