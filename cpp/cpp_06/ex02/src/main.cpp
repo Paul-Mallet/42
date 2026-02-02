@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pamallet <pamallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 12:05:01 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/01/29 10:43:08 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/02 17:58:08 by pamallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int	main( int ac, char **av )
 {
 	if (ac != 1) {
-		std::cout << "" << std::endl;
+		std::cout << "Invalid arguments\nex: ./convert" << std::endl;
 		return (1);
 	}
 	(void)av;
@@ -32,59 +32,62 @@ int	main( int ac, char **av )
 	Base* pr2;
 	time_t	rawtime;
 
+	std::cout << "===== Get current time to generate random seed =====" << std::endl;
 	std::cout << std::time(&rawtime) << std::endl;
 	std::srand(std::time(&rawtime));
-
-	pr = Base::generate();
-	pr2 = Base::generate();
-
 	std::cout << std::endl;
 
-	Base::identify(pr);
-	Base::identify(pr2);
+	/**
+	 * @brief Randomizer between A, B, and C
+	 */
+	std::cout << "===== Randomizer between A, B, and C =====" << std::endl;
+	pr = Base::generate();
+	pr2 = Base::generate();
+	std::cout << pr << std::endl;
+	std::cout << pr2 << std::endl;
+	std::cout << std::endl;
+
+	/**
+	 * @brief Identify pointers
+	 */
+	std::cout << "===== Identify Pointers =====" << std::endl;
 	Base::identify(pbb);
 	Base::identify(pa);
 	Base::identify(pb);
 	Base::identify(pc);
-
+	Base::identify(pr);
+	Base::identify(pr2);
 	std::cout << std::endl;
 
-	std::cout << &pr << std::endl;
-	std::cout << &pr2 << std::endl;
+	/**
+	 * @brief Identify references
+	 */
 	std::cout << &pbb << std::endl;
 	std::cout << &pa << std::endl;
 	std::cout << &pb << std::endl;
 	std::cout << &pc << std::endl;
-
+	std::cout << &pr << std::endl;
+	std::cout << &pr2 << std::endl;
 	std::cout << std::endl;
 
-	Base::identify(*pr);
-	Base::identify(*pr2);
+	/**
+	 * @brief References tests
+	 */
+	std::cout << "===== Identify References =====" << std::endl;
 	Base::identify(*pbb);
 	Base::identify(*pa);
 	Base::identify(*pb);
 	Base::identify(*pc);
+	Base::identify(*pr);
+	Base::identify(*pr2);
 
 	std::cout << std::endl;
 
-	/**
-	 * @brief Check each object type as compared to identify Base method
-	 * * Not allowed by the subject to solve the exercise
-	 */
-	// std::cout << typeid(pr).name() << std::endl;
-	// std::cout << typeid(pr2).name() << std::endl;
-	// std::cout << typeid(pbb).name() << std::endl;
-	// std::cout << typeid(pa).name() << std::endl;
-	// std::cout << typeid(pb).name() << std::endl;
-	// std::cout << typeid(pc).name() << std::endl;
-
-	// std::cout << std::endl;
-
-	delete pr;
-	delete pr2;
 	delete pbb;
 	delete pa;
 	delete pb;
 	delete pc;
+	delete pr;
+	delete pr2;
 	return (0);
 }
