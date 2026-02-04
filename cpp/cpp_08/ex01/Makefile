@@ -1,4 +1,4 @@
-NAME=easyfind
+NAME=span
 CPP=c++
 FLAGS=-Wall -Wextra -Werror -std=c++98 -g
 INCLUDES=-I ./includes
@@ -8,12 +8,12 @@ SRC_DIR=src/
 DOC_DIR=doc/
 TEST_DIR=tests/
 
-SRC_FILES=main
+SRC_FILES=main Span
 
 SRC=$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC_FILES)))
 OBJ=$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
-TEST_FILES=easyfind
+TEST_FILES=Span
 TESTS=$(addprefix $(TEST_DIR)test_, $(addsuffix .cpp, $(TEST_FILES)))
 TEST_NAME=tester_$(NAME)
 
@@ -22,7 +22,7 @@ VALID=\033[0;32m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CPP) $(FLAGS) $(INCLUDES) $< -o $@
+	$(CPP) $(FLAGS) $(INCLUDES) $^ -o $@
 	echo "$(VALID)$(NAME) built"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
