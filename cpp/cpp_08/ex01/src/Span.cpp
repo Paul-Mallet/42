@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 19:54:32 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/04 12:01:44 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/05 11:16:32 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ unsigned int Span::getCapacity( void ) const {
 	return (this->_n);
 };
 
-std::vector<unsigned int> Span::getStorage( void ) const {
+std::vector<int> Span::getStorage( void ) const {
 	return (this->_storage);
 };
 
-void Span::addNumber( unsigned int number ) {
+void Span::addNumber( int number ) {
 	if (this->_storage.size() >= this->_n) {
 		throw (SpanStorageIsFullException());
 	}
@@ -54,12 +54,12 @@ unsigned int Span::shortestSpan( void ) const {
 	if (this->_storage.size() <= 1)
 		throw (NotEnoughNumbersStoredException());
 
-	std::vector<unsigned int> vec_tmp = this->_storage;
+	std::vector<int> vec_tmp = this->_storage;
 	std::sort(vec_tmp.begin(), vec_tmp.end());
 
 	unsigned int min_dist = *(vec_tmp.begin() + 1) - *vec_tmp.begin();
-	for (std::vector<unsigned int>::iterator it = vec_tmp.begin(); it != (vec_tmp.end() - 1); ++it) {
-		unsigned int dist = *(it + 1) - *it;
+	for(unsigned int i = 0; i < static_cast<unsigned int>(vec_tmp.size() - 1) ; ++i) {
+		unsigned int dist = vec_tmp[i + 1] - vec_tmp[i];
 		if (dist < min_dist)
 			min_dist = dist;
 	}
@@ -74,5 +74,3 @@ unsigned int Span::longestSpan( void ) const {
 				- *std::min_element(this->_storage.begin(), this->_storage.end());
 	return (max_dist);
 };
-
-// 10k addNumbers, use of std::vector::insert()
