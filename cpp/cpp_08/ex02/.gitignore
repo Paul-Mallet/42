@@ -1,0 +1,13 @@
+# objects
+*.o
+obj/
+obj/*.o
+
+# documentation
+doc/
+
+# tester
+tests/tester_mutant_stack
+
+# exec
+mutant_stack

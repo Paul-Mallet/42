@@ -1,4 +1,4 @@
-# ex00 - Sequence Containers, Iterators & Algorithms
+# ex02 - Stack
 
 ...
 
@@ -14,8 +14,6 @@
 	make re
 ```
 
-## Containers
+## Sources
 
-## Iterators
-
-## <algorithm>
+[]()
