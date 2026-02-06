@@ -8,7 +8,7 @@ SRC_DIR=src/
 DOC_DIR=doc/
 TEST_DIR=tests/
 
-SRC_FILES=main MutantStack
+SRC_FILES=main
 
 SRC=$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC_FILES)))
 OBJ=$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
