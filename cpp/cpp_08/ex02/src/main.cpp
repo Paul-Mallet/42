@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:31:53 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/06 10:18:43 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/06 10:23:23 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ int main( void ) {
 	MutantStack<int> mstack2(mstack);
 	std::cout << "mstack2.size(): " << mstack2.size() << std::endl;
 
-	MutantStack<int>::iterator it2 = mstack2.begin();
-	MutantStack<int>::iterator ite2 = mstack2.end();
-	display_container(it2, ite2);
+	MutantStack<int>::reverse_iterator cit2 = mstack2.rbegin();
+	MutantStack<int>::reverse_iterator cite2 = mstack2.rend();
+	display_container(cit2, cite2);
 
 	// ===== MutantStack tests 3 =====
 	std::cout << "\n===== Copy assignment between 2 MutantStacks tests =====" << std::endl;
@@ -84,6 +84,7 @@ int main( void ) {
 	std::cout << "\n===== Base std::stack copy constructor tests =====" << std::endl;
 	std::stack<int> s(mstack);
 	std::cout << "s.size(): " << s.size() << std::endl;
+
 
 	// ===== An other Base std::list tests =====
 	std::cout << "\n===== Base std::list tests =====" << std::endl;

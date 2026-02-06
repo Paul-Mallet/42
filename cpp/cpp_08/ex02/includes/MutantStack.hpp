@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:21:06 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/06 10:12:23 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/06 10:21:57 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,12 @@ class MutantStack: public std::stack<T> {
 		};
 
 		typedef typename std::stack<T>::container_type::iterator				iterator;
-		typedef typename std::stack<T>::container_type::const_iterator			const_iterator;
 		typedef typename std::stack<T>::container_type::reverse_iterator		reverse_iterator;
-		typedef typename std::stack<T>::container_type::const_reverse_iterator	const_reverse_iterator;
 
 		iterator				begin() { return (this->c.begin()); };
 		iterator				end() { return (this->c.end()); };
-		const_iterator			cbegin() const { return (this->c.cbegin()); };
-		const_iterator			cend() const { return (this->c.cend()); };
 		reverse_iterator 		rbegin() { return (this->c.rbegin()); };
 		reverse_iterator 		rend() { return (this->c.rend()); };
-		const_reverse_iterator	crbegin() const { return (this->c.crbegin()); };
-		const_reverse_iterator	crend() const { return (this->c.crend()); };
 
 };
 
