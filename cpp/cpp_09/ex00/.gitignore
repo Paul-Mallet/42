@@ -1,0 +1,21 @@
+# comma-separated value
+data/*.csv
+*.csv
+
+# text files
+txt/*.txt
+*.txt
+
+# objects
+*.o
+obj/
+obj/*.o
+
+# documentation
+doc/
+
+# tester
+tests/tester_btc
+
+# exec
+btc
