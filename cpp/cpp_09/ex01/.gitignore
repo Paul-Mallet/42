@@ -1,0 +1,13 @@
+# objects
+*.o
+obj/
+obj/*.o
+
+# documentation
+doc/
+
+# tester
+tests/tester_RPN
+
+# exec
+RPN
