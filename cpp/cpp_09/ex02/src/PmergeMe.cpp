@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 12:17:46 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/10 13:57:11 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/10 14:01:22 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,12 @@ void PmergeMe::evaluate( int ac, char ** av ) {
 	 * @brief Wrap fordJohnson while recording time to sort with a vector and deque containers.
 	 */
 	this->_vectorChrono = this->processTimeVector();
+	// isSorted = true;
+	// displayProcessTime(); //template
+	// isSorted = false;
 	this->_dequeChrono = this->processTimeDeque();
+	// isSorted = true;
+	// displayProcessTime();
 	this->_isSorted = true;
 
 	/**
