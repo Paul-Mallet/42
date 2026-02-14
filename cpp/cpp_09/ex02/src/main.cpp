@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 12:08:03 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/10 13:42:20 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/14 11:40:55 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,13 @@ int main( int ac, char** av ) {
 
 	PmergeMe pmrg;
 	try {
+		std::cout << pmrg << std::endl;
+
+		std::cout << std::endl;
 		pmrg.evaluate( ac, av );
+		std::cout << std::endl;
+
+		std::cout << pmrg << std::endl;
 	} catch(std::exception & e) {
 		std::cout << e.what() << std::endl;
 	}

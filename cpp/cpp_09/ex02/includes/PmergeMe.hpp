@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 12:13:17 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/10 13:52:12 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/14 11:39:01 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ class PmergeMe {
 
 		std::vector<int>	getVectorNumbers( void ) const;
 		std::deque<int>		getDequeNumbers( void ) const;
-		// double				getVectorChrono( void ) const;
-		// double				getDequeChrono( void ) const;
+		double				getVectorChrono( void ) const;
+		double				getDequeChrono( void ) const;
+		bool				getSorted( void ) const;
 
 		void				evaluate( int ac, char ** av );
 		double				processTimeVector( void );
@@ -56,8 +57,7 @@ class PmergeMe {
 
 		std::vector<int>	generateInsertionOrder( int n );
 
-		void				displayVector( std::vector<int> ctnr );
-		// void				displayDeque( std::deque<int> ctnr );
+		void				display( std::vector<int> ctnr );
 		void				displayVectorProcessTime( void );
 		void				displayDequeProcessTime( void );
 
@@ -71,5 +71,7 @@ class PmergeMe {
 		};
 
 };
+
+std::ostream & operator<<( std::ostream & o, PmergeMe const & p );
 
 #endif

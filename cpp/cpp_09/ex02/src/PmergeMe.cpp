@@ -6,26 +6,20 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 12:17:46 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/10 14:01:22 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/14 11:41:25 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe( void ) : _vectorChrono(0), _dequeChrono(0), _isSorted(false) {
-	std::cout << "PmergeMe - Default Constructor" << std::endl;
-}
+PmergeMe::PmergeMe( void ) : _vectorChrono(0), _dequeChrono(0), _isSorted(false) {}
 
 PmergeMe::PmergeMe( PmergeMe const & src ):
 	_vectorChrono(src._vectorChrono),
 	_dequeChrono(src._dequeChrono),
-	_isSorted(src._isSorted) {
-	std::cout << "PmergeMe - Copy Constructor" << std::endl;
-}
+	_isSorted(src._isSorted) {}
 
-PmergeMe::~PmergeMe() {
-	std::cout << "PmergeMe - Destructor" << std::endl;
-}
+PmergeMe::~PmergeMe() {}
 
 PmergeMe & PmergeMe::operator=( PmergeMe const & rhs ) {
 	if (this != &rhs) {
@@ -43,6 +37,18 @@ std::vector<int> PmergeMe::getVectorNumbers( void ) const {
 
 std::deque<int> PmergeMe::getDequeNumbers( void ) const {
 	return (this->_dequeNumbers);
+}
+
+double PmergeMe::getVectorChrono( void ) const {
+	return (this->_vectorChrono);
+}
+
+double PmergeMe::getDequeChrono( void ) const {
+	return (this->_dequeChrono);
+}
+
+bool PmergeMe::getSorted( void ) const {
+	return (this->_isSorted);
 }
 
 void PmergeMe::evaluate( int ac, char ** av ) {
@@ -77,24 +83,19 @@ void PmergeMe::evaluate( int ac, char ** av ) {
 	/**
 	 * @brief Display unsorted numbers only once.
 	 */
-	this->displayVector(this->_vectorNumbers);
+	this->display(this->_vectorNumbers);
 
 	/**
 	 * @brief Wrap fordJohnson while recording time to sort with a vector and deque containers.
 	 */
 	this->_vectorChrono = this->processTimeVector();
-	// isSorted = true;
-	// displayProcessTime(); //template
-	// isSorted = false;
 	this->_dequeChrono = this->processTimeDeque();
-	// isSorted = true;
-	// displayProcessTime();
 	this->_isSorted = true;
 
 	/**
 	 * @brief Numbers sorted based on the Ford-Johnson main chain.
 	 */
-	this->displayVector(this->_vectorNumbers);
+	this->display(this->_vectorNumbers);
 
 	/**
 	 * @brief Display time spent to compute with each containers.
@@ -136,30 +137,8 @@ double PmergeMe::processTimeDeque( void ) {
 
 /**
  * @brief Display unsorted std::vector.
- *
- * @todo single <int> or pair<int, int> ?
  */
-// static void displayPairsVector( std::vector< std::pair<int, int> > ctnr ) {
-// 	int i = 0;
-// 	int limit = 5;
-
-// 	for (std::vector< std::pair<int, int> >::iterator it = ctnr.begin(); it != ctnr.end(); ++it) {
-// 		if (!(i < limit + 10)) {
-// 			std::cout << "[...]";
-// 			break ;
-// 		}
-// 		std::cout << "(" << it->first << ", " << it->second << ")";
-// 		if (it + 1 != ctnr.end()) 
-// 			std::cout << " ";
-// 		++i;
-// 	}
-// 	std::cout << std::endl;
-// }
-
-/**
- * @brief Display unsorted std::vector.
- */
-void PmergeMe::displayVector( std::vector<int> ctnr ) {
+void PmergeMe::display( std::vector<int> ctnr ) {
 	int i = 0;
 	int limit = 5;
 
@@ -363,7 +342,7 @@ void PmergeMe::fordJohnsonDeque( std::deque<int> & numbers ) {
  * @brief Generate the insertion order of the pend list.
  *
  * @param n this->pend container size.
- * @return An jacobsthal reverse groups dynamic array.
+ * @return A jacobsthal numbers reverse groups dynamic array.
  */
 std::vector<int> PmergeMe::generateInsertionOrder( int n ) {
 	std::vector<int> jacob;
@@ -422,4 +401,11 @@ const char * PmergeMe::NotPositiveIntegerFoundException::what( void ) const thro
 
 const char * PmergeMe::OverflowIntegerException::what( void ) const throw() {
 	return ("Overflow integer");
+}
+
+std::ostream & operator<<( std::ostream & o, PmergeMe const & p ) {
+	o << "vector chrono: " << p.getVectorChrono() << " us"
+		<< "\ndeque chrono: " << p.getDequeChrono() << " us"
+		<< "\nis sorted? : " << p.getSorted();
+	return (o);
 }
