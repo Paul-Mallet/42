@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 10:43:07 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/07 15:20:16 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/18 13:41:59 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ void BitcoinExchange::loadDatabase( const std::string & dbPath ) {
 	ifs.open(dbPath.c_str());
 	if (ifs.is_open()) {
 		std::string line;
-
 		unsigned long size = 0;
 
 		while (getline(ifs, line))
