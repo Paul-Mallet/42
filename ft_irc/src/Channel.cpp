@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 18:59:47 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/28 22:37:37 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/28 22:52:03 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,27 @@ void Channel::addClient( Client * client ) {
     this->_clients[fd] = client;
 }
 
-void Channel::removeClient(int fd) {
+void Channel::removeClient( int fd ) {
     _clients.erase(fd);
     _operators.erase(fd); // On le retire aussi des OPs s'il l'était
 }
 
-void Channel::broadcast(const std::string &msg, Client* exclude) {
+bool Channel::isClientInChannel( int fd ) const {
+    // La méthode find() d'une map retourne un itérateur vers l'élément, 
+    // ou vers end() si la clé n'existe pas.
+    if (this->_clients.find(fd) != this->_clients.end()) {
+        return (true);
+    }
+    return (false);
+}
+
+void Channel::broadcast( const std::string & msg, Client * exclude ) {
     std::string packet = msg + "\r\n";
     std::map<int, Client*>::iterator it;
 
     for (it = this->_clients.begin(); it != this->_clients.end(); ++it) {
+        // Si exclude est NULL, on envoie à tout le monde (ex: pour un JOIN)
+        // Si exclude est défini, on l'évite (ex: pour un PRIVMSG)
         if (exclude && it->second == exclude)
             continue ;
         send(it->first, packet.c_str(), packet.size(), 0);

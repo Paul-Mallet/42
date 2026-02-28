@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 18:53:55 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/28 22:31:20 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/28 22:48:08 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,26 @@ Client* Server::_findClientByNick(const std::string& nick) {
     return (NULL);
 }
 
+void Server::_handleChannelMsg( Client * client, std::string target, std::string msg) {
+    if (this->_channels.find(target) == _channels.end()) {
+        sendReply(client->getFd(), ":localhost 401 " + target + " :No such nick/channel");
+        return;
+    }
+
+    Channel *chan = _channels[target];
+
+    // Optionnel : Vérifier si le client est dans le channel
+    if (!chan->isClientInChannel(client->getFd())) {
+        sendReply(client->getFd(), ":localhost 404 " + target + " :Cannot send to channel");
+        return;
+    }
+
+    // On broadcast à tout le monde SAUF à l'envoyeur
+    std::string fullMsg = ":" + client->getNickname() + "!" + client->getUsername() 
+                        + "@" + client->getHostname() + " PRIVMSG " + target + " :" + msg;
+    chan->broadcast(fullMsg, client);
+}
+
 void Server::_handlePrivmsg( Client * client, std::vector<std::string> args) {
     // 1. Sécurité : Doit être enregistré
     if (!client->getIsRegistered()) {
@@ -295,25 +315,25 @@ void Server::_handlePrivmsg( Client * client, std::vector<std::string> args) {
     }
 
     std::string targetNick = args[0];
-    std::string message = args[1];
+    std::string msg = args[1];
 
-    // 3. Cas particulier : Message à un Channel (on verra ça après)
+    // 3.1. Cas particulier : msg à un Channel (on verra ça après)
     if (targetNick[0] == '#') {
-        // _handleChannelMsg(client, targetNick, message);
+        this->_handleChannelMsg(client, targetNick, msg);
         return ;
     }
 
-    // 4. Message à un utilisateur (Private Message)
+    // 3.2. msg à un utilisateur (Private msg)
     Client * targetClient = this->_findClientByNick(targetNick);
     if (!targetClient) {
         sendReply(client->getFd(), ":localhost 401 " + targetNick + " :No such nick/channel");
         return ;
     }
 
-    // 5. Envoi du message formaté
-    // Format : :Nick!User@Host PRIVMSG Target :Message
+    // 4. Envoi du msg formaté
+    // Format : :Nick!User@Host PRIVMSG Target :msg
     std::string fullMsg = ":" + client->getNickname() + "!" + client->getUsername() 
-                        + "@" + client->getHostname() + " PRIVMSG " + targetNick + " :" + message;
+                        + "@" + client->getHostname() + " PRIVMSG " + targetNick + " :" + msg;
     sendReply(targetClient->getFd(), fullMsg);
 }
 

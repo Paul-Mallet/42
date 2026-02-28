@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:53:16 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/28 22:29:31 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/28 22:46:59 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ class Server {
 		bool	_isNickTaken( const std::string & nick );
 		std::vector<std::string> _splitMessage( std::string msg );
 		void	_checkRegistration( Client * client );
-		Client*	_findClientByNick(const std::string& nick);
+		Client*	_findClientByNick( const std::string & nick );
+		void	_handleChannelMsg( Client * client, std::string target, std::string msg );
 
 	public:
 		Server( void );
