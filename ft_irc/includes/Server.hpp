@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:53:16 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/28 22:46:59 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/28 23:01:35 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,16 @@ class Server {
 		void _handleNick( Client * client, std::vector<std::string> args );
 		void _handleUser( Client * client, std::vector<std::string> args );
 		void _handlePrivmsg( Client * client, std::vector<std::string> args );
-		void _handleJoin(Client *client, std::vector<std::string> args);
+		void _handleJoin( Client * client, std::vector<std::string> args );
+		void _handlePart( Client * client, std::vector<std::string> args );
 
-		bool	_isValidNick( const std::string & nick );
-		bool	_isNickTaken( const std::string & nick );
+		bool		_isValidNick( const std::string & nick );
+		bool		_isNickTaken( const std::string & nick );
 		std::vector<std::string> _splitMessage( std::string msg );
-		void	_checkRegistration( Client * client );
-		Client*	_findClientByNick( const std::string & nick );
-		void	_handleChannelMsg( Client * client, std::string target, std::string msg );
+		void		_checkRegistration( Client * client );
+		Client *	_findClientByNick( const std::string & nick );
+		void		_handleChannelMsg( Client * client, std::string target, std::string msg );
+		std::vector<std::string> _splitByComma(std::string str);
 
 	public:
 		Server( void );

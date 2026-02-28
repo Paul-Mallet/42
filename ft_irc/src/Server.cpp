@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 18:53:55 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/28 22:48:08 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/28 23:10:31 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -381,6 +381,68 @@ void Server::_handleJoin( Client * client, std::vector<std::string> args ) {
     sendReply(client->getFd(), ":localhost 366 " + client->getNickname() + " " + channelName + " :End of /NAMES list.");
 }
 
+std::vector<std::string> Server::_splitByComma( std::string str ) {
+    std::vector<std::string> tokens;
+    std::stringstream ss(str);
+    std::string item;
+    while (std::getline(ss, item, ',')) {
+        if (!item.empty())
+            tokens.push_back(item);
+    }
+    return (tokens);
+}
+
+void Server::_handlePart( Client * client, std::vector<std::string> args ) {
+    if (!client->getIsRegistered()) {
+        sendReply(client->getFd(), ":localhost 451 :You have not registered");
+        return ;
+    }
+
+    if (args.empty()) {
+        sendReply(client->getFd(), ":localhost 461 PART :Not enough parameters");
+        return ;
+    }
+
+    // On sépare les channels par la virgule (si tu gères les multis)
+    std::vector<std::string> channelNames = this->_splitByComma(args[0]);
+    std::string reason = "";
+
+    if (args.size() > 1)
+        reason = args[1];
+    else
+        reason = "Leaving";
+
+    for (size_t i = 0; i < channelNames.size(); ++i) {
+        std::string name = channelNames[i];
+
+        if (_channels.find(name) == _channels.end()) {
+            sendReply(client->getFd(), ":localhost 403 " + name + " :No such channel");
+            continue ;
+        }
+
+        Channel * chan = this->_channels[name];
+        if (!chan->isClientInChannel(client->getFd())) {
+            sendReply(client->getFd(), ":localhost 442 " + name + " :You're not on that channel");
+            continue ;
+        }
+
+        // 1. Notifier tout le monde : :nick!user@host PART #channel :reason
+        std::string partMsg = ":" + client->getNickname() + "!" + client->getUsername() 
+                            + "@" + client->getHostname() + " PART " + name + " :" + reason;
+        chan->broadcast(partMsg); // On broadcast à TOUT LE MONDE, incluant celui qui part
+
+        // 2. Retirer le client du channel
+        chan->removeClient(client->getFd());
+
+        // 3. Si le channel est vide, on le détruit
+        if (chan->getSize() == 0) {
+            std::cout << "Channel " << name << " est vide, suppression." << std::endl;
+            this->_channels.erase(name);
+            delete (chan);
+        }
+    }
+}
+
 void Server::_processCommand( Client * client, std::string cmd ) {
     if (cmd.empty())
         return ;
@@ -428,6 +490,8 @@ void Server::_processCommand( Client * client, std::string cmd ) {
             this->_handleJoin(client, args);
         else if (commandName == "PRIVMSG")
             this->_handlePrivmsg(client, args);
+        else if (commandName == "PART")
+            this->_handlePart(client, args);
         // else ...
     } else {
         // Optionnel : Envoyer une erreur "Not registered"
