@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 19:06:48 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/28 18:26:47 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/28 23:33:31 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class Client {
 		std::string _realname;
 		bool		_hasPassedPassword;
 		bool        _isRegistered; // A passé PASS, NICK et USER
+		bool 		_shouldDisconnect;
 		std::string _buffer;
 
 	public:
@@ -45,11 +46,13 @@ class Client {
 		std::string getHostname( void ) const;
 		std::string getRealname( void ) const;
 		bool		getIsRegistered( void ) const;
+		bool 		getShouldDisconnect( void ) const;
 		bool		getHasPassedPassword( void ) const;
 		void		setNickname( const std::string & newNickname );
 		void		setUsername( const std::string & newUsername );
 		void		setRealname( const std::string & newRealname );
 		void 		setIsRegistered( bool valid );
+		void 		setShouldDisconnect( bool status );
 		void 		setHasPassedPassword( bool valid );
 
 		// Ajoute les octets reçus au buffer

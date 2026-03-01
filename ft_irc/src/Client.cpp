@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:07:44 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/28 19:07:36 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/02/28 23:33:55 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ Client::Client(void) :
 	_realname(""),
 	_hasPassedPassword(false),
 	_isRegistered(false),
+    _shouldDisconnect(false),
 	_buffer("") {}
 
 Client::Client(int fd, std::string host) :
@@ -30,6 +31,7 @@ Client::Client(int fd, std::string host) :
 	_realname(""),
 	_hasPassedPassword(false),
 	_isRegistered(false),
+    _shouldDisconnect(false),
 	_buffer("") {}
 
 Client::Client(Client const & src) {
@@ -50,6 +52,7 @@ Client & Client::operator=(Client const & rhs) {
         this->_realname = rhs._realname;
         this->_hasPassedPassword = rhs._hasPassedPassword;
         this->_isRegistered = rhs._isRegistered;
+        this->_shouldDisconnect = rhs._shouldDisconnect;
         this->_buffer = rhs._buffer;
     }
     return (*this);
@@ -83,6 +86,10 @@ bool Client::getIsRegistered( void ) const {
 	return (this->_isRegistered);
 }
 
+bool Client::getShouldDisconnect() const {
+	return (this->_shouldDisconnect);
+}
+
 void	Client::setNickname( const std::string & newNickname ) {
 	this->_nickname = newNickname;
 }
@@ -101,6 +108,10 @@ void Client::setHasPassedPassword( bool valid ) {
 
 void Client::setIsRegistered( bool valid ) {
     this->_isRegistered = valid;
+}
+
+void Client::setShouldDisconnect(bool status) {
+    this->_shouldDisconnect = status;
 }
 
 void Client::addRawData(const std::string& data) {

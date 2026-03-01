@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:53:16 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/28 23:01:35 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/01 09:36:55 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <cstdlib>
 # include <vector>
 # include <map>
+# include <ctime>
 # include <cerrno>
 
 # include <unistd.h> // close
@@ -55,6 +56,11 @@ class Server {
 		void _handlePrivmsg( Client * client, std::vector<std::string> args );
 		void _handleJoin( Client * client, std::vector<std::string> args );
 		void _handlePart( Client * client, std::vector<std::string> args );
+		void _handleQuit( Client * client, std::vector<std::string> args );
+		void _handleKick( Client * client, std::vector<std::string> args );
+		void _handleTopic( Client * client, std::vector<std::string> args );
+		void _handleInvite( Client * client, std::vector<std::string> args );
+		void _handleMode( Client * client, std::vector<std::string> args );
 
 		bool		_isValidNick( const std::string & nick );
 		bool		_isNickTaken( const std::string & nick );
@@ -63,6 +69,7 @@ class Server {
 		Client *	_findClientByNick( const std::string & nick );
 		void		_handleChannelMsg( Client * client, std::string target, std::string msg );
 		std::vector<std::string> _splitByComma(std::string str);
+		void 		_disconnectClient( int fd );
 
 	public:
 		Server( void );

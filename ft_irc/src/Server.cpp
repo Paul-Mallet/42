@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 18:53:55 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/28 23:10:31 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/01 09:43:51 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,7 +268,7 @@ void Server::_handleUser( Client * client, std::vector<std::string> args ) {
     this->_checkRegistration(client);
 }
 
-Client* Server::_findClientByNick(const std::string& nick) {
+Client* Server::_findClientByNick( const std::string & nick ) {
     std::map<int, Client*>::iterator it;
     for (it = this->_clients.begin(); it != this->_clients.end(); ++it) {
         if (it->second->getNickname() == nick)
@@ -349,6 +349,13 @@ void Server::_handleJoin( Client * client, std::vector<std::string> args ) {
     }
 
     std::string channelName = args[0];
+    std::string providedKey = "";
+
+    if (args.size() > 1)
+        providedKey = args[1];
+    else
+        providedKey = "";
+
     // Un channel doit commencer par #
     if (channelName[0] != '#') {
         sendReply(client->getFd(), ":localhost 403 " + channelName + " :No such channel");
@@ -357,15 +364,41 @@ void Server::_handleJoin( Client * client, std::vector<std::string> args ) {
 
     // 1. Trouver ou créer le channel
     Channel * channel;
+    bool isNew = false;
     if (this->_channels.find(channelName) == this->_channels.end()) {
         channel = new Channel(channelName);
         this->_channels[channelName] = channel;
+        isNew = true;
     } else {
         channel = this->_channels[channelName];
     }
 
+    // --- DÉBUT DES VÉRIFICATIONS DES MODES (uniquement si le chan n'est pas nouveau) ---
+    if (!isNew) {
+        // A. Vérification de l'INVITE ONLY (+i)
+        if (channel->isInviteOnly() && !channel->isInvited(client->getFd())) {
+            sendReply(client->getFd(), ":localhost 473 " + client->getNickname() + " " + channelName + " :Cannot join channel (+i)");
+            return ;
+        }
+
+        // B. Vérification de la CLÉ (+k)
+        if (!channel->getKey().empty() && providedKey != channel->getKey()) {
+            sendReply(client->getFd(), ":localhost 475 " + client->getNickname() + " " + channelName + " :Cannot join channel (+k)");
+            return ;
+        }
+
+        // C. Vérification de la LIMITE (+l)
+        if (channel->getLimit() > 0 && channel->getSize() >= channel->getLimit()) {
+            sendReply(client->getFd(), ":localhost 471 " + client->getNickname() + " " + channelName + " :Cannot join channel (+l)");
+            return ;
+        }
+    }
+
     // 2. Ajouter le client au channel
     channel->addClient(client);
+
+    // 2.1 Delete le client #test
+    channel->removeInvite(client->getFd());
 
     // 3. Notifier tout le monde (format: :nick!user@host JOIN #channel)
     std::string joinMsg = ":" + client->getNickname() + "!" + client->getUsername() 
@@ -443,6 +476,322 @@ void Server::_handlePart( Client * client, std::vector<std::string> args ) {
     }
 }
 
+void Server::_handleKick(Client *client, std::vector<std::string> args) {
+    if (args.size() < 2) {
+        sendReply(client->getFd(), ":localhost 461 KICK :Not enough parameters");
+        return ;
+    }
+
+    std::string channelName = args[0];
+    std::string targetNick = args[1];
+    std::string reason = "";
+    if (args.size() > 2)
+        reason = args[2];
+    else
+        reason = "No reason given";
+
+    // 1. Le channel existe-t-il ?
+    if (this->_channels.find(channelName) == this->_channels.end()) {
+        sendReply(client->getFd(), ":localhost 403 " + channelName + " :No such channel");
+        return ;
+    }
+    Channel *chan = _channels[channelName];
+
+    // 2. L'auteur est-il sur le channel et est-il OP ?
+    if (!chan->isClientInChannel(client->getFd())) {
+        sendReply(client->getFd(), ":localhost 442 " + channelName + " :You're not on that channel");
+        return ;
+    }
+    if (!chan->isOperator(client->getFd())) {
+        sendReply(client->getFd(), ":localhost 482 " + channelName + " :You're not channel operator");
+        return ;
+    }
+
+    // 3. La cible existe-t-elle sur le serveur ?
+    Client *targetClient = this->_findClientByNick(targetNick);
+    if (!targetClient || !chan->isClientInChannel(targetClient->getFd())) {
+        sendReply(client->getFd(), ":localhost 441 " + targetNick + " " + channelName + " :They aren't on that channel");
+        return ;
+    }
+
+    // 4. Tout est OK : on prévient tout le monde avant d'expulser
+    // Format : :Auteur!User@Host KICK #channel Cible :Raison
+    std::string kickMsg = ":" + client->getNickname() + "!" + client->getUsername() 
+                        + "@" + client->getHostname() + " KICK " + channelName 
+                        + " " + targetNick + " :" + reason;
+
+    chan->broadcast(kickMsg); // On prévient tout le monde (y compris la cible)
+
+    // 5. Expulsion physique
+    chan->removeClient(targetClient->getFd());
+
+    // 6. Optionnel : si le channel est vide, on le delete
+    if (chan->getSize() == 0) {
+        this->_channels.erase(channelName);
+        delete chan;
+    }
+}
+
+void Server::_disconnectClient( int fd ) {
+    std::cout << "Déconnexion du client sur le FD " << fd << std::endl;
+
+    // 1. Fermer le socket
+    close(fd);
+
+    // 2. Supprimer de la map des clients
+    if (this->_clients.count(fd)) {
+        delete _clients[fd];
+        this->_clients.erase(fd);
+    }
+
+    // 3. Supprimer du tableau pollfds pour que poll() ne le surveille plus
+    for (std::vector<struct pollfd>::iterator it = this->_pollFds.begin(); it != this->_pollFds.end(); ++it) {
+        if (it->fd == fd) {
+            _pollFds.erase(it);
+            break;
+        }
+    }
+}
+
+void Server::_handleQuit(Client *client, std::vector<std::string> args) {
+    // 1. Préparer le message de raison
+    std::string reason = (args.empty()) ? "Client Quit" : args[0];
+
+    // 2. Si le client était enregistré, on prévient les autres
+    if (client->getIsRegistered()) {
+        std::string quitMsg = ":" + client->getNickname() + "!" + client->getUsername()
+                            + "@" + client->getHostname() + " QUIT :Quit: " + reason;
+
+        // 2. Parcourir tous les channels pour notifier et supprimer
+        std::map<std::string, Channel*>::iterator it = this->_channels.begin();
+        while (it != _channels.end()) {
+            Channel * chan = it->second;
+
+            if (chan->isClientInChannel(client->getFd())) {
+                // Notifier les autres membres du channel
+                chan->broadcast(quitMsg, client);
+                // Retirer le client
+                chan->removeClient(client->getFd());
+                // Si le channel est vide après son départ, on le supprime
+                if (chan->getSize() == 0) {
+                    delete chan;
+                    this->_channels.erase(it++); // it++ pour ne pas invalider l'itérateur
+                    continue ;
+                }
+            }
+            ++it;
+        }
+    }
+    // 3. Envoyer un dernier message au client (optionnel mais propre)
+    // sendReply(client->getFd(), "ERROR :Closing Link: " + client->getNickname() + " (" + reason + ")");
+
+    // 4. Marquer le client pour déconnexion
+    // On ne fait pas "delete client" ici directement car on est en plein milieu 
+    // de la boucle de lecture/poll. On va créer une méthode de nettoyage.
+    // this->_disconnectClient(client->getFd());
+    // Au lieu de _disconnectClient(client->getFd());
+    client->setShouldDisconnect(true);
+}
+
+// date -d @1772351837 to see
+void Server::_handleTopic(Client *client, std::vector<std::string> args) {
+    if (args.empty()) {
+        sendReply(client->getFd(), ":localhost 461 " + client->getNickname() + " TOPIC :Not enough parameters");
+        return ;
+    }
+
+    std::string targetChan = args[0];
+    if (this->_channels.find(targetChan) == this->_channels.end()) {
+        sendReply(client->getFd(), ":localhost 403 " + client->getNickname() + " " + targetChan + " :No such channel");
+        return ;
+    }
+
+    Channel * chan = this->_channels[targetChan];
+
+    // CAS 1 : Consultation du Topic (ex: TOPIC #channel)
+    if (args.size() == 1) {
+        if (chan->getTopic().empty()) {
+            sendReply(client->getFd(), ":localhost 331 " + client->getNickname() + " " + targetChan + " :No topic is set");
+        } else {
+            // 332: Le texte du topic
+            sendReply(client->getFd(), ":localhost 332 " + client->getNickname() + " " + targetChan + " :" + chan->getTopic());
+            // 333: Qui l'a mis et quand (format: nick!user@host timestamp)
+            std::stringstream ss;
+            ss << ":localhost 333 " << client->getNickname() << " " << targetChan << " " << chan->getTopicSetter() << " " << chan->getTopicTime();
+            sendReply(client->getFd(), ss.str());
+        }
+        return ;
+    }
+
+    // CAS 2 : Modification du Topic (ex: TOPIC #channel :nouveau sujet)
+    // Vérifier si le client est dans le channel
+    if (!chan->isClientInChannel(client->getFd())) {
+        sendReply(client->getFd(), ":localhost 442 " + client->getNickname() + " " + targetChan + " :You're not on that channel");
+        return ;
+    }
+
+    // Vérifier les droits si le mode +t est actif
+    if (chan->hasTopicProt() && !chan->isOperator(client->getFd())) {
+        sendReply(client->getFd(), ":localhost 482 " + client->getNickname() + " " + targetChan + " :You're not channel operator");
+        return ;
+    }
+
+    // Mise à jour et Broadcast
+    std::string newTopic = args[1];
+    chan->setTopic(newTopic, client->getNickname());
+
+    std::string topicNotify = ":" + client->getNickname() + "!" + client->getUsername() + "@" + client->getHostname() + " TOPIC " + targetChan + " :" + newTopic;
+    chan->broadcast(topicNotify);
+}
+
+void Server::_handleInvite(Client *client, std::vector<std::string> args) {
+    if (args.size() < 2) {
+        sendReply(client->getFd(), ":localhost 461 " + client->getNickname() + " INVITE :Not enough parameters");
+        return ;
+    }
+
+    std::string targetNick = args[0];
+    std::string channelName = args[1];
+
+    // 1. Le channel existe-t-il ?
+    if (this->_channels.find(channelName) == this->_channels.end()) {
+        sendReply(client->getFd(), ":localhost 403 " + client->getNickname() + " " + channelName + " :No such channel");
+        return ;
+    }
+    Channel * chan = this->_channels[channelName];
+
+    // 2. L'auteur est-il sur le channel ?
+    if (!chan->isClientInChannel(client->getFd())) {
+        sendReply(client->getFd(), ":localhost 442 " + client->getNickname() + " " + channelName + " :You're not on that channel");
+        return ;
+    }
+
+    // 3. Si le mode +i est actif, l'auteur doit être OP
+    if (chan->isInviteOnly() && !chan->isOperator(client->getFd())) {
+        sendReply(client->getFd(), ":localhost 482 " + client->getNickname() + " " + channelName + " :You're not channel operator");
+        return ;
+    }
+
+    // 4. La cible existe-t-elle sur le serveur ?
+    Client * targetClient = _findClientByNick(targetNick);
+    if (!targetClient) {
+        sendReply(client->getFd(), ":localhost 401 " + client->getNickname() + " " + targetNick + " :No such nick/channel");
+        return ;
+    }
+
+    // 5. La cible est-elle déjà sur le channel ?
+    if (chan->isClientInChannel(targetClient->getFd())) {
+        sendReply(client->getFd(), ":localhost 443 " + client->getNickname() + " " + targetNick + " " + channelName + " :is already on channel");
+        return ;
+    }
+
+    // --- TOUT EST OK ---
+    
+    // Ajouter à la liste des invités du channel
+    chan->addInvite(targetClient->getFd());
+
+    // Envoyer la confirmation à l'expéditeur (RPL_INVITING 341)
+    sendReply(client->getFd(), ":localhost 341 " + client->getNickname() + " " + targetNick + " " + channelName);
+
+    // Envoyer l'invitation à la cible (Format : :titi!user@host INVITE toto #channel)
+    std::string inviteMsg = ":" + client->getNickname() + "!" + client->getUsername() + "@" + client->getHostname() + " INVITE " + targetNick + " " + channelName;
+    sendReply(targetClient->getFd(), inviteMsg);
+}
+
+void Server::_handleMode( Client * client, std::vector<std::string> args ) {
+    if (args.size() < 1) {
+        sendReply(client->getFd(), ":localhost 461 MODE :Not enough parameters");
+        return ;
+    }
+
+    std::string target = args[0];
+    // On ne gère que les modes de CHANNEL (#) pour le sujet
+    if (target[0] != '#') return; 
+
+    if (this->_channels.find(target) == this->_channels.end()) {
+        sendReply(client->getFd(), ":localhost 403 " + target + " :No such channel");
+        return ;
+    }
+    Channel *chan = _channels[target];
+
+    // Cas : MODE #channel (Demande d'affichage des modes actuels)
+    if (args.size() == 1) {
+        sendReply(client->getFd(), ":localhost 324 " + client->getNickname() + " " + target + " " + chan->getModesString());
+        return ;
+    }
+
+    // Vérification : Seuls les OPs peuvent changer les modes
+    if (!chan->isOperator(client->getFd())) {
+        sendReply(client->getFd(), ":localhost 482 " + target + " :You're not channel operator");
+        return ;
+    }
+
+    std::string modes = args[1];
+    size_t argIdx = 2; // Index pour les paramètres (+k, +o, +l)
+    bool adding = true;
+    std::string appliedModes = ""; // Pour le broadcast final
+
+    for (size_t i = 0; i < modes.length(); ++i) {
+        char c = modes[i];
+        if (c == '+') {
+            adding = true;
+            appliedModes += "+";
+            continue ;
+        }
+        if (c == '-') {
+            adding = false;
+            appliedModes += "-";
+            continue ;
+        }
+
+        switch (c) {
+            case 'i':
+                chan->setInviteOnly(adding);
+                appliedModes += "i";
+                break ;
+            case 't':
+                chan->setTopicProt(adding);
+                appliedModes += "t";
+                break ;
+            case 'k': // Mode KEY
+                if (adding && argIdx < args.size()) {
+                    chan->setKey(args[argIdx++]);
+                    appliedModes += "k";
+                } else if (!adding) {
+                    chan->setKey(""); 
+                    appliedModes += "k";
+                }
+                break ;
+            case 'l': // Mode LIMIT
+                if (adding && argIdx < args.size()) {
+                    chan->setLimit(std::atoi(args[argIdx++].c_str()));
+                    appliedModes += "l";
+                } else if (!adding) {
+                    chan->setLimit(0);
+                    appliedModes += "l";
+                }
+                break ;
+            case 'o': // Mode OPERATOR
+                if (argIdx < args.size()) {
+                    Client * targetUser = this->_findClientByNick(args[argIdx++]);
+                    if (targetUser && chan->isClientInChannel(targetUser->getFd())) {
+                        if (adding) chan->addOperator(targetUser->getFd());
+                        else chan->removeOperator(targetUser->getFd());
+                        appliedModes += "o";
+                    }
+                }
+                break ;
+            default: // Mode inconnu
+                sendReply(client->getFd(), ":localhost 472 " + std::string(1, c) + " :is unknown mode char");
+                break ;
+        }
+    }
+
+    // Broadcast du changement (très important pour les clients IRC)
+    std::string notify = ":" + client->getNickname() + " MODE " + target + " " + appliedModes;
+    chan->broadcast(notify);
+}
+
 void Server::_processCommand( Client * client, std::string cmd ) {
     if (cmd.empty())
         return ;
@@ -481,9 +830,10 @@ void Server::_processCommand( Client * client, std::string cmd ) {
         this->_handlePass(client, args);
     else if (commandName == "NICK")
         this->_handleNick(client, args);
-    else if (commandName == "USER") {
+    else if (commandName == "USER")
         this->_handleUser(client, args);
-    }
+    else if (commandName == "QUIT")
+        this->_handleQuit(client, args);
     else if (client->getIsRegistered()) {
         // Ces commandes ne sont accessibles que si le client est loggé
         if (commandName == "JOIN")
@@ -492,7 +842,14 @@ void Server::_processCommand( Client * client, std::string cmd ) {
             this->_handlePrivmsg(client, args);
         else if (commandName == "PART")
             this->_handlePart(client, args);
-        // else ...
+        else if (commandName == "KICK")
+            this->_handleKick(client, args);
+        else if (commandName == "TOPIC")
+            this->_handleTopic(client, args);
+        else if (commandName == "INVITE")
+            this->_handleInvite(client, args);
+        else if (commandName == "MODE")
+            this->_handleMode(client, args);
     } else {
         // Optionnel : Envoyer une erreur "Not registered"
     }
@@ -550,15 +907,11 @@ void Server::start( void ) {
 					int bytes_received = recv(fd, buffer, sizeof(buffer) - 1, 0);
 
 					if (bytes_received <= 0) {
-						// Client déconnecté ou erreur
-						std::cout << "Client sur FD " << fd << " déconnecté." << std::endl;
-						close(fd);
-                        delete this->_clients[fd];
-                        this->_clients.erase(fd);
-						this->_pollFds.erase(this->_pollFds.begin() + i); // On le retire du tableau
-						i--; // On ajuste l'index car on a supprimé un élément
-					}
-					else {
+                        _handleQuit(_clients[_pollFds[i].fd], std::vector<std::string>());
+                        _disconnectClient(_pollFds[i].fd);
+                        --i; // TRÈS IMPORTANT : reculer l'index car on a supprimé un élément du vecteur
+                        continue ; // On passe au FD suivant
+                    } else {
 						buffer[bytes_received] = '\0';
                         std::cout << "msg reçu du FD " << fd << " : " << buffer << std::endl; // rm after tests successfully done
 						Client* client = _clients[fd];
@@ -569,9 +922,22 @@ void Server::start( void ) {
 
                             // 2. On récupère TOUTES les commandes complètes présentes dans son buffer
                             std::string cmd;
+                            bool clientDropped = false;
+
                             while (!(cmd = client->getNextCommand()).empty()) {
-                                std::cout << "Commande complète à parser : " << cmd << std::endl;
                                 this->_processCommand(client, cmd);
+
+                                // Si la commande était QUIT, on marque le client
+                                if (client->getShouldDisconnect()) {
+                                    this->_disconnectClient(_pollFds[i].fd);
+                                    clientDropped = true;
+                                    break ; // On sort du WHILE des commandes
+                                }
+                            }
+
+                            if (clientDropped) {
+                                --i; // On recule l'index car le vecteur _pollFds a rétréci
+                                continue ; // On passe au client suivant dans le FOR de poll
                             }
                         } catch (std::exception & e) {
                             // Si addRawData lance une exception (ex: buffer trop gros)
