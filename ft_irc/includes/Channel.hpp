@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 19:10:15 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/03/01 09:43:22 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/07 12:08:06 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ class Channel {
 		bool                _inviteOnly;   // Mode +i
 		std::string         _key;          // Mode +k (vide si pas de pass)
 		size_t              _limit;        // Mode +l (0 si pas de limite)
-		std::vector<int>    _invitedFds;   // Liste des FDs invités (pour +i)
+		std::vector<int>    _invitedFds;   // Liste des FDs invites (pour +i)
 
 		// Listes de pointeurs vers les Clients
 		std::map<int, Client*> _clients;
@@ -69,7 +69,7 @@ class Channel {
 		void		removeInvite( int fd );
 		bool 		isInvited( int fd ) const;
 
-		// Méthode pour le numeric 324 (MODE #chan)
+		// method pour le numeric 324 (MODE #chan)
 		std::string getModesString( void ) const;
 
 		// Gestion des membres(Clients)
@@ -77,7 +77,7 @@ class Channel {
 		void removeClient( int fd );
 		bool isClientInChannel( int fd ) const;
 
-		// Gestion des privilèges
+		// Gestion des privileges
         void addOperator( int fd );
         void removeOperator( int fd );
         bool isOperator( int fd ) const;
@@ -85,7 +85,7 @@ class Channel {
 	    // Communication
         void broadcast( const std::string &msg, Client* exclude = NULL );
 
-        // Utilitaires pour les réponses IRC (ex: liste des noms pour RPL_NAMREPLY)
+        // Utilitaires pour les responses IRC (ex: liste des noms pour RPL_NAMREPLY)
         std::string	getNicknamesList( void ) const;
         size_t		getSize( void ) const;
 

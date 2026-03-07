@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:53:16 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/03/01 09:36:55 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/07 12:34:39 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # include <fcntl.h>
 # include <poll.h>
 
-class Client; 
+class Client;
 class Channel;
 
 class Server {
@@ -64,11 +64,11 @@ class Server {
 
 		bool		_isValidNick( const std::string & nick );
 		bool		_isNickTaken( const std::string & nick );
-		std::vector<std::string> _splitMessage( std::string msg );
-		void		_checkRegistration( Client * client );
 		Client *	_findClientByNick( const std::string & nick );
-		void		_handleChannelMsg( Client * client, std::string target, std::string msg );
+		void		_checkRegistration( Client * client );
+		std::vector<std::string> _splitMessage( std::string msg );
 		std::vector<std::string> _splitByComma(std::string str);
+		void		_handleChannelMsg( Client * client, std::string target, std::string msg );
 		void 		_disconnectClient( int fd );
 
 	public:
@@ -86,6 +86,14 @@ class Server {
 		void	start( void );
 		void	sendReply( int fd, const std::string & msg );
 
+};
+
+long getPort( char ** av );
+
+class BadPortException: public std::exception {
+	virtual const char * what( void ) const throw() {
+		return ("Port must be between 1024 and 65535.");
+	};
 };
 
 class SocketException: public std::exception {

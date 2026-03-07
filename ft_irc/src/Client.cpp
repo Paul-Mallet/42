@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:07:44 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/28 23:33:55 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/07 15:22:45 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ Client::Client(Client const & src) {
 }
 
 Client::~Client() {
-    // Note : On ne ferme pas forcément le _fd ici si le serveur 
-    // s'en occupe déjà, pour éviter des doubles close().
+    // Note : On ne ferme pas forcement le _fd ici si le serveur
+    // s'en occupe deja, pour eviter des doubles close().
 }
 
 Client & Client::operator=(Client const & rhs) {
@@ -114,11 +114,11 @@ void Client::setShouldDisconnect(bool status) {
     this->_shouldDisconnect = status;
 }
 
-void Client::addRawData(const std::string& data) {
+void Client::addRawData(const std::string & data) {
     std::string filteredData;
     // ctrl + D flush output buffer, low bandwidth" ou une "partial data" : le serveur reçoit des petits morceaux de texte sans \n
     for (size_t i = 0; i < data.size(); ++i) {
-        // On ne garde que les caractères imprimables OU le retour à la ligne
+        // On ne garde que les chars imprimables OU le retour ligne
         if (data[i] >= 32 || data[i] == '\n' || data[i] == '\r') {
             filteredData += data[i];
         }
@@ -140,7 +140,7 @@ std::string Client::getNextCommand() {
     if (!cmd.empty() && cmd[cmd.size() - 1] == '\r')
         cmd.erase(cmd.size() - 1);
 
-    // On supprime la cmde traitée du buffer (incluant le \n)
+    // On supprime la cmde treated du buffer (incluant le \n)
     this->_buffer.erase(0, pos + 1);
     return (cmd);
 }

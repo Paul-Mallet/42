@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 19:06:48 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/02/28 23:33:31 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/07 12:08:55 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Client {
 		std::string _hostname;
 		std::string _realname;
 		bool		_hasPassedPassword;
-		bool        _isRegistered; // A passé PASS, NICK et USER
+		bool        _isRegistered; // A passe PASS, NICK et USER
 		bool 		_shouldDisconnect;
 		std::string _buffer;
 
@@ -57,8 +57,8 @@ class Client {
 
 		// Ajoute les octets reçus au buffer
 		void		addRawData(const std::string& data);
-		// Extrait et renvoie la prochaine commande complète (finit par \n)
-        // Renvoie une chaîne vide si aucune commande n'est complète
+		// Extrait et renvoie la prochaine commande complete (finit par \n)
+        // Renvoie une string vide si aucune commande n'est complete
 		std::string	getNextCommand();
 
 };
