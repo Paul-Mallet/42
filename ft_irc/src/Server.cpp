@@ -33,11 +33,20 @@ Server::~Server() {
     }
     this->_clients.clear();
 
-    // 2. Fermer le socket listening du serveur
+    // 2. Fermer les channels
+    std::map<std::string, Channel*>::iterator itc;
+    for (itc = this->_channels.begin(); itc != this->_channels.end(); ++itc) {
+        delete itc->second;
+        std::cout << "Channel " << itc->first << " nettoyé." << std::endl;
+    }
+    this->_channels.clear();
+
+    // 3. Fermer le socket listening du serveur
     if (this->_fd != -1) {
         close(this->_fd);
         std::cout << "Socket serveur FD " << this->_fd << " fermé." << std::endl;
     }
+    std::cout << "\nArrêt du serveur..." << std::endl;
 }
 
 Server & Server::operator=( Server const & rhs ) {
@@ -65,26 +74,35 @@ long getPort( char ** av ) {
 
 void Server::init( void ) {
     // 1. Socket server
-	this->_fd = socket(AF_INET, SOCK_STREAM, 0); //only IPv4 (AF_INET)
+	this->_fd = socket(AF_INET6, SOCK_STREAM, 0); //only IPv4 (AF_INET)
 	if (this->_fd < 0)
 		throw (SocketException()); //-1, errno
 
-	int opt = 1;
-	if (setsockopt(this->_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
+    // 0 accepte v4
+    int enable = 1;
+    if (setsockopt(this->_fd, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(enable))) {
+        throw (SetSocketOptionException());
+    }
+    
+    // 0 accepte v6
+	int opt = 0;
+    // IPPROTO_IPV6, IPV6_V6ONLY
+	if (setsockopt(this->_fd, IPPROTO_IPV6, IPV6_V6ONLY, &opt, sizeof(opt)) < 0) {
 		throw (SetSocketOptionException()); //-1, errno
+    }
 
 	// 2. Set sockaddr_in
-	sockaddr_in	sin = {};
-	sin.sin_family = AF_INET;
-	sin.sin_port = htons(static_cast<uint16_t>(this->_port));	// short 16bytes uint16_t for IPv4
-	sin.sin_addr.s_addr = INADDR_ANY;	// IP address (32-bit)
+	sockaddr_in6	sin6 = {};
+	sin6.sin6_family = AF_INET6;
+	sin6.sin6_port = htons(static_cast<uint16_t>(this->_port));	// short 16bytes uint16_t for IPv4
+	sin6.sin6_addr = in6addr_any;	// IP address (32-bit)
 
 	// 3. fcntl()
 	if (fcntl(this->_fd, F_SETFL, O_NONBLOCK) < 0)
 		throw (FcntlFailedException());
 
 	// 4. bind()
-	if (bind(this->_fd, reinterpret_cast<sockaddr*>(&sin), sizeof(sin)) < 0)
+	if (bind(this->_fd, reinterpret_cast<sockaddr*>(&sin6), sizeof(sin6)) < 0)
 		throw (BindFailedException());
 
 	// 5. listen()
@@ -720,7 +738,7 @@ void Server::_handleMode( Client * client, std::vector<std::string> args ) {
         sendReply(client->getFd(), ":localhost 403 " + target + " :No such channel");
         return ;
     }
-    Channel *chan = _channels[target];
+    Channel *chan = this->_channels[target];
 
     // Cas : MODE #channel (Demande d'affichage des modes actuels)
     if (args.size() == 1) {
@@ -753,11 +771,11 @@ void Server::_handleMode( Client * client, std::vector<std::string> args ) {
         }
 
         switch (c) {
-            case 'i':
+            case 'i': // Mode invite-only
                 chan->setInviteOnly(adding);
                 appliedModes += "i";
                 break ;
-            case 't':
+            case 't': // Mode TOPIC
                 chan->setTopicProt(adding);
                 appliedModes += "t";
                 break ;
@@ -783,8 +801,10 @@ void Server::_handleMode( Client * client, std::vector<std::string> args ) {
                 if (argIdx < args.size()) {
                     Client * targetUser = this->_findClientByNick(args[argIdx++]);
                     if (targetUser && chan->isClientInChannel(targetUser->getFd())) {
-                        if (adding) chan->addOperator(targetUser->getFd());
-                        else chan->removeOperator(targetUser->getFd());
+                        if (adding)
+                            chan->addOperator(targetUser->getFd());
+                        else
+                            chan->removeOperator(targetUser->getFd());
                         appliedModes += "o";
                     }
                 }
@@ -868,7 +888,6 @@ bool isRunning = true;
 void handle_sigint(int sig) {
     (void)sig;
     isRunning = false; // On change le flag global
-    std::cout << "\nArrêt du serveur..." << std::endl;
 }
 
 void Server::start( void ) {
@@ -889,22 +908,33 @@ void Server::start( void ) {
 
 				if (this->_pollFds[i].fd == this->_fd) {
 					// --- CAS A : new connexion, create 1 client ---
-					struct sockaddr_in client_addr = {};
-					socklen_t addr_len = sizeof(client_addr);
-					int client_fd = accept(this->_fd, (struct sockaddr*)&client_addr, &addr_len);
+                    struct sockaddr_storage client_addr = {}; // ipv4 et ipv6
+                    socklen_t addr_len = sizeof(client_addr);
+                    int client_fd = accept(this->_fd, (struct sockaddr*)&client_addr, &addr_len);
 
 					if (client_fd >= 0) {
-						// Mettre le nouveau socket en NON-BLOQUANT
+                        char ip_str[INET6_ADDRSTRLEN]; // Buffer assez grand pour IPv6
+
+                        if (client_addr.ss_family == AF_INET) {
+                            // IPv4
+                            struct sockaddr_in *s = (struct sockaddr_in *)&client_addr;
+                            inet_ntop(AF_INET, &s->sin_addr, ip_str, sizeof(ip_str));
+                        } else {
+                            // IPv6
+                            struct sockaddr_in6 *s = (struct sockaddr_in6 *)&client_addr;
+                            inet_ntop(AF_INET6, &s->sin6_addr, ip_str, sizeof(ip_str));
+                        }
+
+                        // creer l'objet Client et l'ajouter à la map, recup l'IP 127.0.0.1
+                        std::string host = ip_str;
+						// new socket en NON-BLOQUANT
 						fcntl(client_fd, F_SETFL, O_NONBLOCK);
 
-						// L'ajouter au tableau pour poll
+                        // L'ajouter au tableau pour poll
 						struct pollfd client_pfd = {client_fd, POLLIN, 0};
 						this->_pollFds.push_back(client_pfd);
 
-                        // creer l'objet Client et l'ajouter à la map
-                        std::string host = inet_ntoa(client_addr.sin_addr); // recup l'IP 127.0.0.1
                         this->_clients[client_fd] = new Client(client_fd, host);
-
 						std::cout << "Nouveau client connecté sur FD: " << client_fd << std::endl;
 					}
 				}
