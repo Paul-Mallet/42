@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:53:16 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/03/07 12:34:39 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/08 09:45:59 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ class Server {
 		void _handlePass( Client * client, std::vector<std::string> args );
 		void _handleNick( Client * client, std::vector<std::string> args );
 		void _handleUser( Client * client, std::vector<std::string> args );
+		void _handlePing( Client * client, std::vector<std::string> args );
 		void _handlePrivmsg( Client * client, std::vector<std::string> args );
 		void _handleJoin( Client * client, std::vector<std::string> args );
 		void _handlePart( Client * client, std::vector<std::string> args );

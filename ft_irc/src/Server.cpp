@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 18:53:55 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/03/07 14:40:30 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/08 10:31:35 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,57 +73,47 @@ long getPort( char ** av ) {
 }
 
 void Server::init( void ) {
-    // 1. Socket server
-	this->_fd = socket(AF_INET6, SOCK_STREAM, 0); //only IPv4 (AF_INET)
+	this->_fd = socket(AF_INET6, SOCK_STREAM, 0);
 	if (this->_fd < 0)
-		throw (SocketException()); //-1, errno
+		throw (SocketException());
 
-    // 0 accepte v4
     int enable = 1;
     if (setsockopt(this->_fd, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(enable))) {
         throw (SetSocketOptionException());
     }
-    
-    // 0 accepte v6
+
 	int opt = 0;
     // IPPROTO_IPV6, IPV6_V6ONLY
 	if (setsockopt(this->_fd, IPPROTO_IPV6, IPV6_V6ONLY, &opt, sizeof(opt)) < 0) {
-		throw (SetSocketOptionException()); //-1, errno
+		throw (SetSocketOptionException());
     }
 
-	// 2. Set sockaddr_in
 	sockaddr_in6	sin6 = {};
 	sin6.sin6_family = AF_INET6;
-	sin6.sin6_port = htons(static_cast<uint16_t>(this->_port));	// short 16bytes uint16_t for IPv4
-	sin6.sin6_addr = in6addr_any;	// IP address (32-bit)
+	sin6.sin6_port = htons(static_cast<uint16_t>(this->_port));
+	sin6.sin6_addr = in6addr_any;
 
-	// 3. fcntl()
 	if (fcntl(this->_fd, F_SETFL, O_NONBLOCK) < 0)
 		throw (FcntlFailedException());
 
-	// 4. bind()
 	if (bind(this->_fd, reinterpret_cast<sockaddr*>(&sin6), sizeof(sin6)) < 0)
 		throw (BindFailedException());
 
-	// 5. listen()
 	if (listen(this->_fd, 5) < 0)
 		throw (ListenFailedException());
 
-    // C'EST ICI : On prepare le premier elem pour poll
     struct pollfd server_pfd;
     server_pfd.fd = this->_fd;
     server_pfd.events = POLLIN;
-    server_pfd.revents = 0; // Toujours mettre a 0 au début, laisse OS gerer
+    server_pfd.revents = 0;
 
     this->_pollFds.push_back(server_pfd);
 }
 
 void Server::sendReply( int fd, const std::string & msg ) {
-    std::string fullMsg = msg + "\r\n"; // IRC demande toujours \r\n
+    std::string fullMsg = msg + "\r\n";
     send(fd, fullMsg.c_str(), fullMsg.size(), 0);
 }
-
-// === SERVER COMMANDS ===
 
 void Server::_handlePass( Client * client, std::vector<std::string> args ) {
     // 1. verif si deja register
@@ -289,6 +279,18 @@ void Server::_handleUser( Client * client, std::vector<std::string> args ) {
 
     // 5. Tentative d'enregistrement final
     this->_checkRegistration(client);
+}
+
+void Server::_handlePing( Client * client, std::vector<std::string> args ) {
+    if (args.empty()) {
+        std::string errorMsg = ":localhost 461 " + client->getNickname() + " PING :Not enough parameters";
+        sendReply(client->getFd(), errorMsg);
+        return;
+    }
+    std::string pong = ":localhost PONG localhost :" + args[0] + "\r\n";
+    send(client->getFd(), pong.c_str(), pong.length(), 0);
+
+    std::cout << "PONG envoyé au FD " << client->getFd() << std::endl;
 }
 
 Client* Server::_findClientByNick( const std::string & nick ) {
@@ -483,9 +485,13 @@ void Server::_handlePart( Client * client, std::vector<std::string> args ) {
         }
 
         // 1. Notifier tout le monde : :nick!user@host PART #channel :reason
-        std::string partMsg = ":" + client->getNickname() + "!" + client->getUsername() 
+        std::string partMsg = ":" + client->getNickname() + "!" + client->getUsername()
                             + "@" + client->getHostname() + " PART " + name + " :" + reason;
-        chan->broadcast(partMsg); // On broadcast à TOUT LE MONDE, incluant celui qui part
+
+        // std::string kickMsg = ":" + client->getNickname() + "!" + client->getUsername() 
+        //                 + "@" + client->getHostname() + " KICK " + channelName 
+        //                 + " " + targetNick + " :" + reason;
+        chan->broadcast(partMsg);
 
         // 2. Retirer le client du channel
         chan->removeClient(client->getFd());
@@ -825,11 +831,12 @@ void Server::_processCommand( Client * client, std::string cmd ) {
         return ;
 
     // 1. Decoupage de la ligne
+    std::string commandName = ""; 
     std::vector<std::string> args;
-    std::string commandName;
     std::stringstream ss(cmd);
 
-    ss >> commandName; // Le premier mot est la commande
+    if (!(ss >> commandName)) // Si on ne peut même pas lire un mot, on sort
+        return; // Le premier mot est la commande
 
     // On transforme la commande en MAJUSCULES (standard IRC)
     for (size_t i = 0; i < commandName.size(); i++)
@@ -853,13 +860,21 @@ void Server::_processCommand( Client * client, std::string cmd ) {
         std::cout << "[" << args[i] << "] ";
     std::cout << std::endl;
 
+    // irssi handling
+    if (commandName == "CAP") {
+        // On répond que l'on ne supporte aucune extension (LS = List capabilities)
+        sendReply(client->getFd(), ":localhost CAP * LS :"); 
+        return;
+    }
     // 2. Dispatcher (vers les fonctions specifiques)
-    if (commandName == "PASS")
+    else if (commandName == "PASS")
         this->_handlePass(client, args);
     else if (commandName == "NICK")
         this->_handleNick(client, args);
     else if (commandName == "USER")
         this->_handleUser(client, args);
+    else if (commandName == "PING")
+        this->_handlePing(client, args);
     else if (commandName == "QUIT")
         this->_handleQuit(client, args);
     else if (client->getIsRegistered()) {
@@ -927,6 +942,9 @@ void Server::start( void ) {
 
                         // creer l'objet Client et l'ajouter à la map, recup l'IP 127.0.0.1
                         std::string host = ip_str;
+                        if (host.find("::ffff:") == 0) {
+                            host = host.substr(7);
+                        }
 						// new socket en NON-BLOQUANT
 						fcntl(client_fd, F_SETFL, O_NONBLOCK);
 

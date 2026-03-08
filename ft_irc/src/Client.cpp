@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:07:44 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/03/07 15:22:45 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/07 19:43:43 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,19 +128,40 @@ void Client::addRawData(const std::string & data) {
     this->_buffer += filteredData;
 }
 
+// std::string Client::getNextCommand() {
+//     size_t pos = this->_buffer.find("\n");
+
+//     if (pos == std::string::npos)
+//         return (""); // Pas encore de message complet, concat to _buffer until find "\n"
+
+//     // Extraction de la ligne jusqu'au \n
+//     std::string cmd = this->_buffer.substr(0, pos);
+//     // Nettoyage du \r (IRC utilise \r\n, mais certains clients envoient juste \n)
+//     if (!cmd.empty() && cmd[cmd.size() - 1] == '\r')
+//         cmd.erase(cmd.size() - 1);
+
+//     // On supprime la cmde treated du buffer (incluant le \n)
+//     this->_buffer.erase(0, pos + 1);
+//     return (cmd);
+// }
+
 std::string Client::getNextCommand() {
     size_t pos = this->_buffer.find("\n");
 
     if (pos == std::string::npos)
-        return (""); // Pas encore de message complet, concat to _buffer until find "\n"
+        return ("");
 
-    // Extraction de la ligne jusqu'au \n
     std::string cmd = this->_buffer.substr(0, pos);
-    // Nettoyage du \r (IRC utilise \r\n, mais certains clients envoient juste \n)
+    this->_buffer.erase(0, pos + 1);
+
+    // Nettoyage complet du \r et des espaces inutiles aux extrémités
     if (!cmd.empty() && cmd[cmd.size() - 1] == '\r')
         cmd.erase(cmd.size() - 1);
 
-    // On supprime la cmde treated du buffer (incluant le \n)
-    this->_buffer.erase(0, pos + 1);
+    // Si après nettoyage la commande est vide, on cherche la suivante récursivement
+    // ou on renvoie une valeur spéciale. Le mieux est de boucler.
+    if (cmd.empty())
+        return getNextCommand(); 
+
     return (cmd);
 }
