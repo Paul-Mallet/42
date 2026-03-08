@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 18:53:55 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/03/08 10:52:50 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/08 14:47:59 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -747,16 +747,18 @@ void Server::_processCommand( Client * client, std::string cmd ) {
         args.push_back(arg);
     }
 
-    std::cout << "CMD: " << commandName << " | ARGS: ";
-    for(size_t i = 0; i < args.size(); i++) 
-        std::cout << "[" << args[i] << "] ";
-    std::cout << std::endl;
+    /**
+     * @brief debug
+     */
+    // std::cout << "CMD: " << commandName << " | ARGS: ";
+    // for(size_t i = 0; i < args.size(); i++)
+    //     std::cout << "[" << args[i] << "] ";
+    // std::cout << std::endl;
 
     if (commandName == "CAP") {
         sendReply(client->getFd(), ":localhost CAP * LS :");
         return ;
     }
-    // 2. Dispatcher (vers les fonctions specifiques)
     else if (commandName == "PASS")
         this->_handlePass(client, args);
     else if (commandName == "NICK")
@@ -847,7 +849,7 @@ void Server::start( void ) {
                         continue ;
                     } else {
 						buffer[bytes_received] = '\0';
-                        std::cout << "msg reçu du FD " << fd << " : " << buffer << std::endl;
+                        // std::cout << "msg reçu du FD " << fd << " : " << buffer << std::endl;
 						Client* client = this->_clients[fd];
 
                         try {
