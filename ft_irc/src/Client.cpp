@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 20:07:44 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/03/07 19:43:43 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/08 10:53:16 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ Client::Client(Client const & src) {
     *this = src;
 }
 
-Client::~Client() {
-    // Note : On ne ferme pas forcement le _fd ici si le serveur
-    // s'en occupe deja, pour eviter des doubles close().
-}
+Client::~Client() {}
 
 Client & Client::operator=(Client const & rhs) {
     if (this != &rhs) {
@@ -116,9 +113,7 @@ void Client::setShouldDisconnect(bool status) {
 
 void Client::addRawData(const std::string & data) {
     std::string filteredData;
-    // ctrl + D flush output buffer, low bandwidth" ou une "partial data" : le serveur reçoit des petits morceaux de texte sans \n
     for (size_t i = 0; i < data.size(); ++i) {
-        // On ne garde que les chars imprimables OU le retour ligne
         if (data[i] >= 32 || data[i] == '\n' || data[i] == '\r') {
             filteredData += data[i];
         }
@@ -127,23 +122,6 @@ void Client::addRawData(const std::string & data) {
         throw (StuckBufferException());
     this->_buffer += filteredData;
 }
-
-// std::string Client::getNextCommand() {
-//     size_t pos = this->_buffer.find("\n");
-
-//     if (pos == std::string::npos)
-//         return (""); // Pas encore de message complet, concat to _buffer until find "\n"
-
-//     // Extraction de la ligne jusqu'au \n
-//     std::string cmd = this->_buffer.substr(0, pos);
-//     // Nettoyage du \r (IRC utilise \r\n, mais certains clients envoient juste \n)
-//     if (!cmd.empty() && cmd[cmd.size() - 1] == '\r')
-//         cmd.erase(cmd.size() - 1);
-
-//     // On supprime la cmde treated du buffer (incluant le \n)
-//     this->_buffer.erase(0, pos + 1);
-//     return (cmd);
-// }
 
 std::string Client::getNextCommand() {
     size_t pos = this->_buffer.find("\n");
@@ -154,12 +132,9 @@ std::string Client::getNextCommand() {
     std::string cmd = this->_buffer.substr(0, pos);
     this->_buffer.erase(0, pos + 1);
 
-    // Nettoyage complet du \r et des espaces inutiles aux extrémités
     if (!cmd.empty() && cmd[cmd.size() - 1] == '\r')
         cmd.erase(cmd.size() - 1);
 
-    // Si après nettoyage la commande est vide, on cherche la suivante récursivement
-    // ou on renvoie une valeur spéciale. Le mieux est de boucler.
     if (cmd.empty())
         return getNextCommand(); 
 

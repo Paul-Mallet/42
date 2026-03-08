@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 19:10:15 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/03/07 12:08:06 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/08 10:55:03 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,14 @@ class Channel {
 	private:
 		std::string 		_name;
 		std::string 		_topic;
-		std::string 		_topicSetter; // Nickname de celui qui l'a mis
-        time_t      		_topicTime;   // Timestamp du changement
-		bool                _topicProt;    // Mode +t
-		bool                _inviteOnly;   // Mode +i
-		std::string         _key;          // Mode +k (vide si pas de pass)
-		size_t              _limit;        // Mode +l (0 si pas de limite)
-		std::vector<int>    _invitedFds;   // Liste des FDs invites (pour +i)
+		std::string 		_topicSetter;
+        time_t      		_topicTime;
+		bool                _topicProt;
+		bool                _inviteOnly;
+		std::string         _key;
+		size_t              _limit;
+		std::vector<int>    _invitedFds;
 
-		// Listes de pointeurs vers les Clients
 		std::map<int, Client*> _clients;
 		std::map<int, Client*> _operators;
 
@@ -48,7 +47,6 @@ class Channel {
 
 		Channel & operator=( Channel const & rhs );
 
-		// getters/setters
 		std::string	getName( void ) const;
         std::string	getTopic( void ) const;
 		std::string getTopicSetter( void ) const;
@@ -64,28 +62,22 @@ class Channel {
 		void 		setLimit(size_t l);
 		void		setTopic( const std::string & newTopic, const std::string & setter );
 
-		// Gestion des invitations (pour le mode +i)
 		void 		addInvite( int fd );
 		void		removeInvite( int fd );
 		bool 		isInvited( int fd ) const;
 
-		// method pour le numeric 324 (MODE #chan)
 		std::string getModesString( void ) const;
 
-		// Gestion des membres(Clients)
 		void addClient( Client* client );
 		void removeClient( int fd );
 		bool isClientInChannel( int fd ) const;
 
-		// Gestion des privileges
         void addOperator( int fd );
         void removeOperator( int fd );
         bool isOperator( int fd ) const;
 
-	    // Communication
         void broadcast( const std::string &msg, Client* exclude = NULL );
 
-        // Utilitaires pour les responses IRC (ex: liste des noms pour RPL_NAMREPLY)
         std::string	getNicknamesList( void ) const;
         size_t		getSize( void ) const;
 

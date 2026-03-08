@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/22 19:53:16 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/03/08 09:45:59 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/08 10:54:11 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 # include <ctime>
 # include <cerrno>
 
-# include <unistd.h> // close
-# include <sys/socket.h> // socket, setsockopt, listen, accept, send, recv
-# include <sys/types.h> // getaddrinfo, freeaddrinfo
+# include <unistd.h>
+# include <sys/socket.h>
+# include <sys/types.h>
 # include <netdb.h>
-# include <netinet/in.h> // sockaddr_in struct, inet_addr [avoid, use getaddrinfo instead]
-# include <arpa/inet.h> // inet_ntop, ...
-# include <signal.h> // signal, sig, ...
-# include <sys/stat.h> // fstat
+# include <netinet/in.h>
+# include <arpa/inet.h>
+# include <signal.h>
+# include <sys/stat.h>
 # include <fcntl.h>
 # include <poll.h>
 

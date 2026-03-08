@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 18:59:47 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/03/07 12:07:36 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/08 10:53:49 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void Channel::addClient( Client * client ) {
     if (!client) return;
     int fd = client->getFd();
 
-    // Si c'est le tout premier client, il devient automatiquement operator
     if (_clients.empty()) {
         _operators[fd] = client;
         std::cout << "Client " << client->getNickname() << " est le premier : promu OP de " << _name << std::endl;
@@ -51,12 +50,10 @@ void Channel::addClient( Client * client ) {
 
 void Channel::removeClient( int fd ) {
     _clients.erase(fd);
-    _operators.erase(fd); // On le retire aussi des OPs s'il l'etait
+    _operators.erase(fd);
 }
 
 bool Channel::isClientInChannel( int fd ) const {
-    // La metod find() d'une map retourne un iterator vers l'elem,
-    // ou vers end() si la key n'existe pas.
     if (this->_clients.find(fd) != this->_clients.end()) {
         return (true);
     }
@@ -68,8 +65,6 @@ void Channel::broadcast( const std::string & msg, Client * exclude ) {
     std::map<int, Client*>::iterator it;
 
     for (it = this->_clients.begin(); it != this->_clients.end(); ++it) {
-        // Si exclude est NULL, on envoie a tout le monde (ex: pour un JOIN)
-        // Si exclude est defini, on l'evite (ex: pour un PRIVMSG)
         if (exclude && it->second == exclude)
             continue ;
         send(it->first, packet.c_str(), packet.size(), 0);
@@ -95,8 +90,6 @@ std::string Channel::getModesString( void ) const {
     return (modes + params);
 }
 
-// genere la liste des pseudos pour la response 353 (RPL_NAMREPLY)
-// Format : "titi @toto tata" (le @ indique un operator)
 std::string Channel::getNicknamesList() const {
     std::string list = "";
     std::map<int, Client*>::const_iterator it;
@@ -112,7 +105,7 @@ std::string Channel::getNicknamesList() const {
 }
 
 void Channel::addOperator(int fd) {
-    if (_clients.count(fd)) // On ne peut etre OP que si on est dans le channel
+    if (_clients.count(fd))
         this->_operators[fd] = this->_clients[fd];
 }
 
@@ -125,7 +118,6 @@ bool Channel::isOperator( int fd ) const {
 }
 
 void Channel::addInvite( int fd ) {
-    // On verif si deja invite pour eviter les doublons
     for (size_t i = 0; i < this->_invitedFds.size(); ++i) {
         if (_invitedFds[i] == fd)
             return ;
@@ -201,7 +193,7 @@ void Channel::setLimit(size_t l) {
 void Channel::setTopic( const std::string &newTopic, const std::string &setter ) {
     this->_topic = newTopic;
     this->_topicSetter = setter;
-    this->_topicTime = time(NULL); // recup l'heure actuelle
+    this->_topicTime = time(NULL);
 }
 
 size_t Channel::getSize() const {

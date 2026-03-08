@@ -6,7 +6,7 @@
 /*   By: paul_mallet <paul_mallet@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 19:06:48 by paul_mallet       #+#    #+#             */
-/*   Updated: 2026/03/07 12:08:55 by paul_mallet      ###   ########.fr       */
+/*   Updated: 2026/03/08 10:54:25 by paul_mallet      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Client {
 		std::string _hostname;
 		std::string _realname;
 		bool		_hasPassedPassword;
-		bool        _isRegistered; // A passe PASS, NICK et USER
+		bool        _isRegistered;
 		bool 		_shouldDisconnect;
 		std::string _buffer;
 
@@ -39,7 +39,6 @@ class Client {
 
 		Client & operator=(Client const & rhs);
 
-		// Getters / Setters
 		int			getFd( void ) const;
 		std::string getNickname( void ) const;
 		std::string getUsername( void ) const;
@@ -55,10 +54,7 @@ class Client {
 		void 		setShouldDisconnect( bool status );
 		void 		setHasPassedPassword( bool valid );
 
-		// Ajoute les octets reçus au buffer
 		void		addRawData(const std::string& data);
-		// Extrait et renvoie la prochaine commande complete (finit par \n)
-        // Renvoie une string vide si aucune commande n'est complete
 		std::string	getNextCommand();
 
 };
