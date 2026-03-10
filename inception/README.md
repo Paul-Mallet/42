@@ -18,31 +18,50 @@ The project involves creating a multi-container architecture where each service 
 ## 🚀 Instructions
 
 ### Prerequisites
+* **Virtual Box** installed.
 * A Linux-based system (Debian is recommended for the host VM).
-* **Docker** and **Docker Compose** installed.
-* `make` utility.
+* 2GB RAM, 2 vcores, 5GB(depends on Mariadb/WordPress size) storage, 
+* **sudo**, **git**, **vim**, **make** as VM basic packages.
+* **Docker** & **Docker compose** installed via the [debian repo installation](https://docs.docker.com/engine/install/debian/#install-using-the-repository).
 
 ### Installation & Execution
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/inception.git](https://github.com/your-username/inception.git) && cd inception
+    git clone [https://github.com/Paul-Mallet/inception.git](https://github.com/Paul-Mallet/inception.git) && cd inception
     ```
 
 2.  **Setup Environment Variables:**
     Create a `.env` file in the `srcs/` directory with the following variables:
     ```env
+    # ------------------------------------------------------------------------------
+    # CONFIGURATION MARIADB (Base de données)
+    # ------------------------------------------------------------------------------
+    SQL_DATABASE=inception_db
+    SQL_USER=[your_intra_login]
+    SQL_PASSWORD=[...]
+    SQL_ROOT_PASSWORD=[...]
+    
+    # ------------------------------------------------------------------------------
+    # CONFIGURATION WORDPRESS
+    # ------------------------------------------------------------------------------
     DOMAIN_NAME=pamallet.42.fr
-    SQL_DATABASE=inception
-    SQL_USER=[user]
-    SQL_PASSWORD=[password]
-    SQL_ROOT_PASSWORD=[root_password]
+    
+    # Administrateur (Interdiction d'utiliser 'admin' ou 'administrator' !)
+    WP_ADMIN_USER=[...]
+    WP_ADMIN_PASSWORD=[...]
+    WP_ADMIN_EMAIL=[...]
+    
+    # Utilisateur standard (Obligatoire pour le sujet)
+    WP_USER=[...]
+    WP_USER_PASSWORD=[...]
+    WP_USER_EMAIL=[...]
     ```
 
 3.  **Update your Hosts file:**
-    To access the site via the domain name, add this line to your `/etc/hosts` (Linux/Mac) or `C:\Windows\System32\drivers\etc\hosts` (Windows):
+    To access the site via the domain name, add this line to the bottom of your `/etc/hosts` (Linux/Mac) or `C:\Windows\System32\drivers\etc\hosts` (Windows) file:
     ```text
-    127.0.0.1 pamallet.42.fr
+    127.0.0.1 [your_intra_login].42.fr
     ```
 
 4.  **Run the project:**
@@ -52,7 +71,7 @@ The project involves creating a multi-container architecture where each service 
     *This will create the necessary data directories, build the images, and start the containers in detached mode.*
 
 ### Useful Commands
-* `make stop`: Stops the containers.
+* `make down`: Stops the containers.
 * `make clean`: Stops containers and removes images/networks.
 * `make fclean`: Full cleanup, including volumes (data deletion).
 * `make re`: Force a full rebuild.
