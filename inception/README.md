@@ -20,7 +20,8 @@ The project involves creating a multi-container architecture where each service 
 ### Prerequisites
 * **Virtual Box** installed.
 * A Linux-based system (Debian is recommended for the host VM).
-* 2GB RAM, 2 vcores, 5GB(depends on Mariadb/WordPress size) storage, 
+* 2GB RAM, 2 vcores, 5GB minimum(depends on Mariadb/WordPress size) storage.
+* Hostname by dft, Domain name: [your_intra_login]
 * **sudo**, **git**, **vim**, **make** as VM basic packages.
 * **Docker** & **Docker compose** installed via the [debian repo installation](https://docs.docker.com/engine/install/debian/#install-using-the-repository).
 
@@ -45,7 +46,7 @@ The project involves creating a multi-container architecture where each service 
     # ------------------------------------------------------------------------------
     # CONFIGURATION WORDPRESS
     # ------------------------------------------------------------------------------
-    DOMAIN_NAME=pamallet.42.fr
+    DOMAIN_NAME=[your_intra_login].42.fr
     
     # Administrateur (Interdiction d'utiliser 'admin' ou 'administrator' !)
     WP_ADMIN_USER=[...]
@@ -96,7 +97,7 @@ This project relies on **Docker Compose** to orchestrate the infrastructure. Eac
 ## 📚 Resources
 
 ### Documentation & Articles
-* [Usefull Blog about Containerization](https://blog.stephane-robert.info/docs/conteneurisation/)
+* [Useful Blog about Containerization](https://blog.stephane-robert.info/docs/conteneurisation/)
 * [Official Docker Documentation](https://docs.docker.com/)
 * [Docker Compose Specification](https://docs.docker.com/compose/)
 * [Nginx Configuration Guide](https://nginx.org/en/docs/)
