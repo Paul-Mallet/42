@@ -750,10 +750,10 @@ void Server::_processCommand( Client * client, std::string cmd ) {
     /**
      * @brief debug
      */
-    // std::cout << "CMD: " << commandName << " | ARGS: ";
-    // for(size_t i = 0; i < args.size(); i++)
-    //     std::cout << "[" << args[i] << "] ";
-    // std::cout << std::endl;
+    std::cout << "CMD: " << commandName << " | ARGS: ";
+    for(size_t i = 0; i < args.size(); i++)
+        std::cout << "[" << args[i] << "] ";
+    std::cout << std::endl;
 
     if (commandName == "CAP") {
         sendReply(client->getFd(), ":localhost CAP * LS :");
