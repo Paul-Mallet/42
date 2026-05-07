@@ -1,4 +1,4 @@
-# ft_transcendence - Final_Project
+# 👾 ft_transcendence - Final_Project
 
 ## 📝 Overview
 
@@ -157,6 +157,20 @@ GOOGLE_CLIENT_ID="your_google_client_id_here"
 
 ```bash
    openssl rand -base64 32
+```
+
+#### 4. Make data directories
+
+Then after generating your salt, you must create the folders where your data will be stored to via this command :
+
+```bash
+  # Move on all services
+  cd services/game
+  # Make directory named data
+  mkdir data
+  # Repeat the process for every service except frontend
+  cd ../tournament
+  cd ../user-profile
 ```
 
 #### 4. Build and Launch (it will takes **~2min** to fully build the 1rst time)
